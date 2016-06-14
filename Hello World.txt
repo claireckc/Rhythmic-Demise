@@ -1,6 +1,0 @@
-<<<<<<< HEAD
-dudud Claire Added in master
-Change hello world
-=======
-testing satu dua tiga empat lima
->>>>>>> 99c9752d6019989f61ff2ae47b8df03ae6c5a09e
