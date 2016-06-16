@@ -1,10 +1,8 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\MovementHandler.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\UIManager.cs">
     <Files>
-      <File FileName="Assets\MovementHandler.cs" Line="58" Column="1" />
-      <File FileName="Assets\ProjectileController.cs" Line="1" Column="1" />
-      <File FileName="Assets\TowerEventHandler.cs" Line="1" Column="1" />
+      <File FileName="Assets\UIManager.cs" Line="45" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
