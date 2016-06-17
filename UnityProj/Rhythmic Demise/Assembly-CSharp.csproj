@@ -48,7 +48,8 @@
      <Compile Include="Assets\Scripts\MovementHandler.cs" />
      <Compile Include="Assets\Scripts\ProjectileController.cs" />
      <Compile Include="Assets\Scripts\TowerEventHandler.cs" />
-     <Compile Include="Assets\UIManager.cs" />
+     <Compile Include="Assets\Scripts\UIManager_Start.cs" />
+     <Compile Include="Assets\Scripts\UIManager_TroopSel.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class UIManager : MonoBehaviour {
+public class UIManager_Start : MonoBehaviour {
 
 	//Start Canvas
 	public Canvas startCanvas;
@@ -13,6 +13,10 @@ public class UIManager : MonoBehaviour {
 	//Option Canvas
 	public Canvas optionCanvas;
 	public Button eraseButton, backButton, volumeButton, aboutButton;
+
+	//About Canvas
+	public Canvas aboutCanvas;
+	public Button backButton_abt;
 
 	void Awake(){
 		//Start Canvas
@@ -28,10 +32,15 @@ public class UIManager : MonoBehaviour {
 		backButton = backButton.GetComponent<Button> ();
 		volumeButton = volumeButton.GetComponent<Button> ();
 		aboutButton = aboutButton.GetComponent<Button> ();
+
+		//About Canvas
+		aboutCanvas = aboutCanvas.GetComponent<Canvas>();
+		backButton_abt = backButton_abt.GetComponent<Button> ();
 	}
 
 	void Start () {
 		optionCanvas.enabled = false;
+		aboutCanvas.enabled = false;
 		//startText.text = "Start New Game";
 	}
 
@@ -42,7 +51,8 @@ public class UIManager : MonoBehaviour {
 
 	public void StartPress_Start(){
 
-		SceneManager.LoadScene ("TutorialScene");
+		SceneManager.LoadScene ("TroopSelection");
+		Destroy (this);
 	}
 
 	public void OptionPress_Start(){
@@ -67,10 +77,16 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void VolPress_Opt(){
-
+		
 	}
 
 	public void AboutPress_Opt(){
+		optionCanvas.enabled = false;
+		aboutCanvas.enabled = true;
+	}
 
+	public void AboutBackPress(){
+		aboutCanvas.enabled = false;
+		optionCanvas.enabled = true;
 	}
 }
