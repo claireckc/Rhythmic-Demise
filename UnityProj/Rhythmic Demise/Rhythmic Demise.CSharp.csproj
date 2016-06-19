@@ -58,12 +58,6 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -75,13 +69,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CreepAI.cs" />
     <Compile Include="Assets\Scripts\Beat\BeatSpawner.cs" />
     <Compile Include="Assets\Scripts\Beat\NoteControl.cs" />
     <Compile Include="Assets\Scripts\Button.cs" />
     <Compile Include="Assets\Scripts\Controller\GameController.cs" />
+    <Compile Include="Assets\Scripts\Controller\GameInformation.cs" />
+    <Compile Include="Assets\Scripts\Controller\LoadInformation.cs" />
     <Compile Include="Assets\Scripts\Controller\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Controller\SaveInformation.cs" />
     <Compile Include="Assets\Scripts\DebugText.cs" />
+    <Compile Include="Assets\Scripts\Tower and Creep\CreepAI.cs" />
     <Compile Include="Assets\Scripts\Tower and Creep\MovementHandler.cs" />
     <Compile Include="Assets\Scripts\Tower and Creep\ProjectileController.cs" />
     <Compile Include="Assets\Scripts\Tower and Creep\SpawnAI_Tower.cs" />
