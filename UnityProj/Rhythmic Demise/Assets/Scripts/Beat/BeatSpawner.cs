@@ -53,12 +53,13 @@ public class BeatSpawner : MonoBehaviour {
         }
         else if (moveActionTurn)
         {
-            moveBeatCounter++;
+            moveBeatCounter++;  
 
             if (moveBeatCounter >= 4)
             {
                 moveActionTurn = false;
                 moveBeatCounter = 0;
+                gc.player.setCurrentAction("idle");
             }
 
         }

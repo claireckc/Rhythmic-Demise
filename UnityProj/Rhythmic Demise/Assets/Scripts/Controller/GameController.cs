@@ -10,7 +10,9 @@ public class GameController : MonoBehaviour {
     public KeyCode keyLeft;
     public KeyCode keyRight;
 
-    public PlayerController player;
+    public Button[] buttons;
+
+    public Character player;
     public BeatSpawner bs;
 
 	// Use this for initialization
@@ -30,16 +32,16 @@ public class GameController : MonoBehaviour {
             switch (moveSequence)
             {
                 case "AAAA":
-                    player.move(-1, 0);
+                    player.setCurrentAction("moveLeft");
                     break;
                 case "DDDD":
-                    player.move(1, 0);
+                    player.setCurrentAction("moveRight");
                     break;
                 case "WWWW":
-                    player.move(0, 1);
+                    player.setCurrentAction("moveUp");
                     break;
                 case "SSSS":
-                    player.move(0, -1);
+                    player.setCurrentAction("moveDown");
                     break;
             }
 

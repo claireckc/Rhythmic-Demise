@@ -48,6 +48,7 @@
      <Compile Include="Assets\Scripts\Beat\BeatSpawner.cs" />
      <Compile Include="Assets\Scripts\Beat\NoteControl.cs" />
      <Compile Include="Assets\Scripts\Button.cs" />
+     <Compile Include="Assets\Scripts\Character\Character.cs" />
      <Compile Include="Assets\Scripts\Controller\GameController.cs" />
      <Compile Include="Assets\Scripts\Controller\PlayerController.cs" />
      <Compile Include="Assets\Scripts\DebugText.cs" />
