@@ -5,19 +5,22 @@ public class GameController : MonoBehaviour {
 
     public string moveSequence;
 
-    public KeyCode keyUp;
-    public KeyCode keyDown;
-    public KeyCode keyLeft;
-    public KeyCode keyRight;
+    public KeyCode[] buttonsKeyCode;
 
-    public Button[] buttons;
-
-    public Character player;
+    public ArmyController armyController;
+    public Character[] army;
     public BeatSpawner bs;
+
+    void init()
+    {
+        moveSequence = "";
+        armyController = gameObject.AddComponent<ArmyController>();
+        armyController.initArmy(army);
+    }
 
 	// Use this for initialization
 	void Start () {
-        moveSequence = "";
+        init();
 	}
 	
 	// Update is called once per frame
@@ -31,17 +34,24 @@ public class GameController : MonoBehaviour {
         {
             switch (moveSequence)
             {
-                case "AAAA":
-                    player.setCurrentAction("moveLeft");
+                //move left
+                case "1111":
+                    armyController.setCurrentState(Enums.PlayerState.MoveLeft);
                     break;
-                case "DDDD":
-                    player.setCurrentAction("moveRight");
+                //move right
+                case "2222":
+                    armyController.setCurrentState(Enums.PlayerState.MoveRight);
                     break;
-                case "WWWW":
-                    player.setCurrentAction("moveUp");
+                //move up
+                case "3333":
+                    armyController.setCurrentState(Enums.PlayerState.MoveUp);
                     break;
-                case "SSSS":
-                    player.setCurrentAction("moveDown");
+                //move down
+                case "4444":
+                    armyController.setCurrentState(Enums.PlayerState.MoveDown);
+                    break;
+                case "1234":
+                    armyController.setCurrentState(Enums.PlayerState.Attack);
                     break;
             }
 

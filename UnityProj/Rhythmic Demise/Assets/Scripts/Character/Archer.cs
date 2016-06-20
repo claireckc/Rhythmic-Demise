@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerController : MonoBehaviour {
+public class Archer : Character {
 
 	// Use this for initialization
 	void Start () {
-	
+        movementSpeed = 0.5f;
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	new void Update () {
+        base.Update();
 	}
 }
