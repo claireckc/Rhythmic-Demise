@@ -33,7 +33,7 @@ public class ProjectileController : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.tag.Contains("Enemy")) {
 			Debug.Log ("Hit");
-			Destroy (this);
+			Destroy (gameObject);
 		}
 	}
 
