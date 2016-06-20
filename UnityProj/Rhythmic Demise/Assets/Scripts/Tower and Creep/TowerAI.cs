@@ -8,6 +8,7 @@ public class TowerAI : MonoBehaviour {
     public bool shootingTower, spawnTower;
 
     //tower
+    public float health;
 	public float damage;
 	public float cooldown, nextFireTime;
     public float spawnTime, nextSpawnTime;
@@ -23,9 +24,18 @@ public class TowerAI : MonoBehaviour {
 
     //tower inst
     public GameObject arrow, creep;
+
+    public bool IsDead
+    {
+        get
+        {
+            return health <= 0;
+        }
+    }
     
 	// Use this for initialization
 	void Start () {
+        health = 5;
 		enemyList = new List<GameObject> ();
 		closestDist = 1000.0f;
 		cooldown = nextFireTime = 2.0f;
@@ -36,38 +46,48 @@ public class TowerAI : MonoBehaviour {
 	}
     
 	void FixedUpdate(){
-		//start finding the closest enemy
-		if (enemyList.Count > 0) {
-			firstEnemy = enemyList [0];
-			closestDist = Vector2.Distance (this.transform.position, firstEnemy.transform.position);
-			closestEnemy = firstEnemy;
-
-			foreach (GameObject go in enemyList) {
-				float currentDist = Vector2.Distance (this.transform.position, go.transform.position);
-				if (closestDist > currentDist) {
-					closestDist = currentDist;
-					closestEnemy = go;
-					break;
-				}
-			}
-		} else
-			closestEnemy = null;
-
-		if (closestEnemy != null) {
-            //start attacking it
-            if (shootingTower) {
-			    if (Time.time >= nextFireTime) {
-				    AttackEnemy ();
-			    }
-            }
-            else if (spawnTower)
+        if (!IsDead)
+        {
+            //start finding the closest enemy
+            if (enemyList.Count > 0)
             {
-                if(Time.time >= nextSpawnTime)
+                firstEnemy = enemyList[0];
+                closestDist = Vector2.Distance(this.transform.position, firstEnemy.transform.position);
+                closestEnemy = firstEnemy;
+
+                foreach (GameObject go in enemyList)
                 {
-                    SpawnCreep();
+                    float currentDist = Vector2.Distance(this.transform.position, go.transform.position);
+                    if (closestDist > currentDist)
+                    {
+                        closestDist = currentDist;
+                        closestEnemy = go;
+                        break;
+                    }
                 }
             }
-		}
+            else
+                closestEnemy = null;
+
+            if (closestEnemy != null)
+            {
+                //start attacking it
+                if (shootingTower)
+                {
+                    if (Time.time >= nextFireTime)
+                    {
+                        AttackEnemy();
+                    }
+                }
+                else if (spawnTower)
+                {
+                    if (Time.time >= nextSpawnTime)
+                    {
+                        SpawnCreep();
+                    }
+                }
+            }
+        }
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
@@ -81,7 +101,8 @@ public class TowerAI : MonoBehaviour {
 	}
 
 	void OnTriggerExit2D(Collider2D other){
-		Debug.Log ("Exit");
+        Debug.Log("Exit" + other.gameObject);
+        
 		if(other.transform.parent.tag.Contains("Enemy") || other.transform.parent != null){
 			foreach (GameObject go in enemyList) {
 				if (other.transform.parent.gameObject == go) {
@@ -90,12 +111,13 @@ public class TowerAI : MonoBehaviour {
 				}
 			}
 		}
-
+        
 		if (toRemove != null)
 			enemyList.Remove (toRemove);
 		closestEnemy = null;
 
 		printList ();
+        
 	}
 
 	void printList(){
@@ -126,5 +148,10 @@ public class TowerAI : MonoBehaviour {
         GameObject spawn = Instantiate(creep, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
         spawn.SendMessage("Initialize", closestEnemy);
 
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
     }
 }

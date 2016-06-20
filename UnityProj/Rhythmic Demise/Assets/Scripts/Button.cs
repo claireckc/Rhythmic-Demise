@@ -21,29 +21,29 @@ public class Button : MonoBehaviour {
     {
         if (!gc.bs.moveActionTurn)
         {
-            if (Input.GetKeyDown(KeyCode.A) && buttonID == 1)
+            if (Input.GetKeyDown(gc.buttonsKeyCode[0]) && buttonID == 1)
             {
                 Destroy(other.gameObject);
                 particleBurst.Play();
-                gc.addHit("A");
+                gc.addHit("1");
             }
-            else if (Input.GetKeyDown(KeyCode.D) && buttonID == 2)
+            else if (Input.GetKeyDown(gc.buttonsKeyCode[1]) && buttonID == 2)
             {
                 Destroy(other.gameObject);
                 particleBurst.Play();
-                gc.addHit("D");
+                gc.addHit("2");
             }
-            else if (Input.GetKeyDown(KeyCode.W) && buttonID == 3)
+            else if (Input.GetKeyDown(gc.buttonsKeyCode[2]) && buttonID == 3)
             {
                 Destroy(other.gameObject);
                 particleBurst.Play();
-                gc.addHit("W");
+                gc.addHit("3");
             }
-            else if (Input.GetKeyDown(KeyCode.S) && buttonID == 4)
+            else if (Input.GetKeyDown(gc.buttonsKeyCode[3]) && buttonID == 4)
             {
                 Destroy(other.gameObject);
                 particleBurst.Play();
-                gc.addHit("S");
+                gc.addHit("4");
             }
         }
     }

@@ -1,36 +1,44 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Character : MonoBehaviour {
 
     protected float movementSpeed;
     protected float health;
+    protected float damage;
     protected string skill;
+    protected Enums.CharacterType type;
 
-    public string currentAction;
+    public Enums.PlayerState currentAction;
+    public List<GameObject> enemyList;
 
 	// Use this for initialization
 	void Start () {
         movementSpeed = 0.5f;
+        damage = 1;
+        enemyList = new List<GameObject>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        if(currentAction.Equals("moveUp"))
+	protected void Update () {
+        switch (currentAction)
         {
-            moveUp();
-        }
-        else if (currentAction.Equals("moveDown"))
-        {
-            moveDown();
-        }
-        else if (currentAction.Equals("moveLeft"))
-        {
-            moveLeft();
-        }
-        else if (currentAction.Equals("moveRight"))
-        {
-            moveRight();
+            case Enums.PlayerState.MoveUp:
+                moveUp();
+                break;
+            case Enums.PlayerState.MoveDown:
+                moveDown();
+                break;
+            case Enums.PlayerState.MoveLeft:
+                moveLeft();
+                break;
+            case Enums.PlayerState.MoveRight:
+                moveRight();
+                break;
+            case Enums.PlayerState.Attack:
+                attack();
+                break;
         }
 	}
 
@@ -54,8 +62,32 @@ public class Character : MonoBehaviour {
         transform.Translate(Vector2.right * (movementSpeed * Time.deltaTime));
     }
 
-    public void setCurrentAction(string currAct)
+    public void attack()
+    {
+        if (enemyList.Count > 0)
+        {
+            Debug.Log("Attack!");
+            //start attack animation and instatiate projectile
+        }
+        else
+        {
+            Debug.Log("No enemy in range");
+        }
+    }
+
+    public void setCurrentState(Enums.PlayerState currAct)
     {
         currentAction = currAct;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        //Debug.Log ("Enter" + other.gameObject.tag);
+
+        //add enemy to enemyList if in range of player range
+        if (other.gameObject.tag.Contains("Tower"))
+        {
+            enemyList.Add(other.transform.parent.gameObject);
+        }
     }
 }
