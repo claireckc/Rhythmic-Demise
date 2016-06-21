@@ -4,6 +4,7 @@ using System.Collections;
 public class ArmyController : MonoBehaviour {
 
     private Character[] army;
+    private Character leader;
 
 	// Use this for initialization
 	void Start () {
@@ -22,9 +23,29 @@ public class ArmyController : MonoBehaviour {
 
     public void setCurrentState(Enums.PlayerState action)
     {
+        /*if (action == Enums.PlayerState.Skill)
+        {
+            leader.setCurrentState(action);
+        }
+        else
+        {
+            foreach (Character c in army)
+            {
+                c.setCurrentState(action);
+            }
+        }*/
+
         foreach (Character c in army)
         {
             c.setCurrentState(action);
+        }
+    }
+
+    public void reset()
+    {
+        foreach (Character c in army)
+        {
+            c.reset();
         }
     }
 }
