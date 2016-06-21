@@ -9,6 +9,11 @@ public class Character : MonoBehaviour {
     protected float damage;
     protected string skill;
     protected Enums.CharacterType type;
+    protected bool isAttacking;
+
+    public float closestDist;
+    public GameObject firstEnemy;
+    public GameObject closestEnemy;
 
     public Enums.PlayerState currentAction;
     public List<GameObject> enemyList;
@@ -21,26 +26,10 @@ public class Character : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	protected void Update () {
-        switch (currentAction)
-        {
-            case Enums.PlayerState.MoveUp:
-                moveUp();
-                break;
-            case Enums.PlayerState.MoveDown:
-                moveDown();
-                break;
-            case Enums.PlayerState.MoveLeft:
-                moveLeft();
-                break;
-            case Enums.PlayerState.MoveRight:
-                moveRight();
-                break;
-            case Enums.PlayerState.Attack:
-                attack();
-                break;
-        }
-	}
+    protected void Update()
+    {
+
+    }
 
     public void moveUp()
     {
@@ -64,15 +53,6 @@ public class Character : MonoBehaviour {
 
     public void attack()
     {
-        if (enemyList.Count > 0)
-        {
-            Debug.Log("Attack!");
-            //start attack animation and instatiate projectile
-        }
-        else
-        {
-            Debug.Log("No enemy in range");
-        }
     }
 
     public void setCurrentState(Enums.PlayerState currAct)
@@ -89,5 +69,45 @@ public class Character : MonoBehaviour {
         {
             enemyList.Add(other.transform.parent.gameObject);
         }
+    }
+
+    public void findClosestEnemy()
+    {
+        for (int i = 0; i < enemyList.Count; i++)
+        {
+            TowerAI e = enemyList[i].GetComponent<TowerAI>();
+
+            if (e.IsDead)
+            {
+                enemyList.Remove(enemyList[i]);
+
+                Destroy(e.gameObject);
+            }
+        }
+
+        if (enemyList.Count > 0)
+        {
+            firstEnemy = enemyList[0];
+            closestDist = Vector2.Distance(this.transform.position, firstEnemy.transform.position);
+            closestEnemy = firstEnemy;
+
+            foreach (GameObject go in enemyList)
+            {
+                float currentDist = Vector2.Distance(this.transform.position, go.transform.position);
+                if (closestDist > currentDist)
+                {
+                    closestDist = currentDist;
+                    closestEnemy = go;
+                    break;
+                }
+            }
+        }
+        else
+            closestEnemy = null;
+    }
+
+    public void reset()
+    {
+        isAttacking = false;
     }
 }

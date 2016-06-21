@@ -35,7 +35,7 @@ public class TowerAI : MonoBehaviour {
     
 	// Use this for initialization
 	void Start () {
-        health = 5;
+        health = 4;
 		enemyList = new List<GameObject> ();
 		closestDist = 1000.0f;
 		cooldown = nextFireTime = 2.0f;
@@ -94,16 +94,27 @@ public class TowerAI : MonoBehaviour {
 		//Debug.Log ("Enter" + other.gameObject.tag);
 		if (other.gameObject.tag.Contains("Enemy")) {
 			enemyList.Add (other.transform.parent.gameObject);
-		}
+        }
+        else if (other.tag == "PlayerArrow")
+        {
+            TakeDamage(1);
+        }
+        else if (other.tag == "PlayerFocusArrow")
+        {
+            TakeDamage(2);
+        }
+        else if (other.tag == "PlayerOrb")
+        {
+            TakeDamage(0.5f);
+        }
 
-
-		printList ();
+		//printList ();
 	}
 
 	void OnTriggerExit2D(Collider2D other){
-        Debug.Log("Exit" + other.gameObject);
+        //Debug.Log("Exit" + other.gameObject);
         
-		if(other.transform.parent.tag.Contains("Enemy") || other.transform.parent != null){
+		if(other.transform.tag.Contains("Enemy") || other.transform.parent != null){
 			foreach (GameObject go in enemyList) {
 				if (other.transform.parent.gameObject == go) {
 					toRemove = go;
@@ -116,7 +127,7 @@ public class TowerAI : MonoBehaviour {
 			enemyList.Remove (toRemove);
 		closestEnemy = null;
 
-		printList ();
+		//printList ();
         
 	}
 

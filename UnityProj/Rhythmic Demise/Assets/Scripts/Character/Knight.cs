@@ -9,7 +9,7 @@ public class Knight : Character {
 	}
 	
 	// Update is called once per frame
-	new void Update () {
-        base.Update();
+	protected new void Update () {
+
 	}
 }

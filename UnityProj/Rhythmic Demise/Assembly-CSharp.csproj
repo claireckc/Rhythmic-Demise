@@ -49,8 +49,10 @@
      <Compile Include="Assets\Scripts\Beat\NoteControl.cs" />
      <Compile Include="Assets\Scripts\Button.cs" />
      <Compile Include="Assets\Scripts\Character\Archer.cs" />
+     <Compile Include="Assets\Scripts\Character\Arrow.cs" />
      <Compile Include="Assets\Scripts\Character\Character.cs" />
      <Compile Include="Assets\Scripts\Character\Knight.cs" />
+     <Compile Include="Assets\Scripts\Character\Orb.cs" />
      <Compile Include="Assets\Scripts\Character\Priest.cs" />
      <Compile Include="Assets\Scripts\Controller\ArmyController.cs" />
      <Compile Include="Assets\Scripts\Controller\GameController.cs" />

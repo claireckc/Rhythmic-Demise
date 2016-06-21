@@ -50,8 +50,13 @@ public class GameController : MonoBehaviour {
                 case "4444":
                     armyController.setCurrentState(Enums.PlayerState.MoveDown);
                     break;
-                case "1234":
+                //normal attack
+                case "1131":
                     armyController.setCurrentState(Enums.PlayerState.Attack);
+                    break;
+                //use special skill
+                case "3343":
+                    armyController.setCurrentState(Enums.PlayerState.Skill);
                     break;
             }
 
