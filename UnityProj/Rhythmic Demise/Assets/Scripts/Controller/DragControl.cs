@@ -47,7 +47,5 @@ public class DragControl : MonoBehaviour {
 
             previousFrame = currentPos;
         }
-        
-
     }
 }
