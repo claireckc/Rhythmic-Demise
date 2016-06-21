@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\Controller\GameController.cs" />
     <Compile Include="Assets\Scripts\Controller\GameInformation.cs" />
     <Compile Include="Assets\Scripts\Controller\LoadInformation.cs" />
+    <Compile Include="Assets\Scripts\Controller\MainMapManager.cs" />
     <Compile Include="Assets\Scripts\Controller\SaveInformation.cs" />
     <Compile Include="Assets\Scripts\DebugText.cs" />
     <Compile Include="Assets\Scripts\Enums.cs" />
