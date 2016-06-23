@@ -73,8 +73,10 @@
     <Compile Include="Assets\Scripts\Beat\NoteControl.cs" />
     <Compile Include="Assets\Scripts\Button.cs" />
     <Compile Include="Assets\Scripts\Character\Archer.cs" />
+    <Compile Include="Assets\Scripts\Character\Arrow.cs" />
     <Compile Include="Assets\Scripts\Character\Character.cs" />
     <Compile Include="Assets\Scripts\Character\Knight.cs" />
+    <Compile Include="Assets\Scripts\Character\Orb.cs" />
     <Compile Include="Assets\Scripts\Character\Priest.cs" />
     <Compile Include="Assets\Scripts\Controller\ArmyController.cs" />
     <Compile Include="Assets\Scripts\Controller\DragControl.cs" />
@@ -85,11 +87,13 @@
     <Compile Include="Assets\Scripts\Controller\SaveInformation.cs" />
     <Compile Include="Assets\Scripts\DebugText.cs" />
     <Compile Include="Assets\Scripts\Enums.cs" />
+    <Compile Include="Assets\Scripts\Skills.cs" />
     <Compile Include="Assets\Scripts\Tower and Creep\CreepAI.cs" />
     <Compile Include="Assets\Scripts\Tower and Creep\MovementHandler.cs" />
     <Compile Include="Assets\Scripts\Tower and Creep\ProjectileController.cs" />
     <Compile Include="Assets\Scripts\Tower and Creep\SpawnAI_Tower.cs" />
     <Compile Include="Assets\Scripts\Tower and Creep\TowerAI.cs" />
+    <Compile Include="Assets\Scripts\Troops.cs" />
     <Compile Include="Assets\Scripts\User Interface\UIManager_Start.cs" />
     <Compile Include="Assets\Scripts\User Interface\UIManager_TroopSel.cs" />
   </ItemGroup>
