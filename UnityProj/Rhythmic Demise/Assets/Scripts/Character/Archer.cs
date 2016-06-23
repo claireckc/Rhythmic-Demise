@@ -7,7 +7,9 @@ public class Archer : Character {
     public GameObject focusArrow;
 
 	// Use this for initialization
-	void Start () {
+	protected new void Start () {
+        base.Start();
+
         movementSpeed = 0.5f;
         isAttacking = false;
         skill = "FocusArrow";
@@ -15,6 +17,8 @@ public class Archer : Character {
 	
 	// Update is called once per frame
 	protected new void Update () {
+        base.Update();
+
         switch (currentAction)
         {
             case Enums.PlayerState.MoveUp:
@@ -54,6 +58,7 @@ public class Archer : Character {
 
                 GameObject shoot = Instantiate(arrow, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
                 shoot.SendMessage("Initialize", closestEnemy);
+                shoot.SendMessage("initDamage", 1);
 
                 isAttacking = true;
             }
@@ -82,6 +87,7 @@ public class Archer : Character {
 
                     GameObject shoot = Instantiate(focusArrow, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
                     shoot.SendMessage("Initialize", closestEnemy);
+                    shoot.SendMessage("initDamage", 2);
 
                     isAttacking = true;
                 }

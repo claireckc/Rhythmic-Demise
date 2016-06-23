@@ -5,7 +5,8 @@ using System.Collections.Generic;
 public class Character : MonoBehaviour {
 
     protected float movementSpeed;
-    protected float health;
+    protected float currentHealth;
+    protected float maxHealth;
     protected float damage;
     protected string skill;
     protected Enums.CharacterType type;
@@ -18,8 +19,19 @@ public class Character : MonoBehaviour {
     public Enums.PlayerState currentAction;
     public List<GameObject> enemyList;
 
+    public GameObject healthBar;
+
+    public bool IsDead
+    {
+        get
+        {
+            return currentHealth <= 0;
+        }
+    }
+
 	// Use this for initialization
-	void Start () {
+	protected void Start () {
+        currentHealth = maxHealth = 10;
         movementSpeed = 0.5f;
         damage = 1;
         enemyList = new List<GameObject>();
@@ -28,7 +40,11 @@ public class Character : MonoBehaviour {
 	// Update is called once per frame
     protected void Update()
     {
+        if (IsDead)
+        {
+        }
 
+        SetHealthVisual(currentHealth / maxHealth);
     }
 
     public void moveUp()
@@ -65,9 +81,17 @@ public class Character : MonoBehaviour {
         //Debug.Log ("Enter" + other.gameObject.tag);
 
         //add enemy to enemyList if in range of player range
-        if (other.gameObject.tag.Contains("Tower"))
+        if (other.tag == "Tower")
         {
-            enemyList.Add(other.transform.parent.gameObject);
+            enemyList.Add(other.gameObject);
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "Tower")
+        {
+            enemyList.Remove(other.gameObject);
         }
     }
 
@@ -109,5 +133,18 @@ public class Character : MonoBehaviour {
     public void reset()
     {
         isAttacking = false;
+    }
+
+    // Health between [0.0f,1.0f] == (currentHealth / totalHealth)
+    public void SetHealthVisual(float healthNormalized)
+    {
+        healthBar.transform.localScale = new Vector3(healthNormalized,
+                                                     healthBar.transform.localScale.y,
+                                                     healthBar.transform.localScale.z);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
     }
 }
