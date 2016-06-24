@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class ArmyController : MonoBehaviour {
 
-    private Character[] army;
+    private List<Character> army;
     private Character leader;
 
 	// Use this for initialization
 	void Start () {
-	    
 	}
 	
 	// Update is called once per frame
@@ -16,7 +17,7 @@ public class ArmyController : MonoBehaviour {
 	
 	}
 
-    public void initArmy(Character[] a)
+    public void initArmy(List<Character> a)
     {
         army = a;
     }

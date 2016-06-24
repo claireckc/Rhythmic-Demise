@@ -4,7 +4,8 @@ using System.Collections;
 public class Orb : MonoBehaviour {
 
     private float speed;
-    public GameObject enemy;
+    private float damage;
+    private GameObject enemy;
 
     // Use this for initialization
     void Start()
@@ -15,6 +16,11 @@ public class Orb : MonoBehaviour {
     void Initialize(GameObject target)
     {
         enemy = target;
+    }
+
+    void initDamage(float damage)
+    {
+        this.damage = damage;
     }
 
     // Update is called once per frame
@@ -30,6 +36,8 @@ public class Orb : MonoBehaviour {
     {
         if (other.tag == "Tower")
         {
+            TowerAI tower = other.gameObject.GetComponent<TowerAI>();
+            tower.TakeDamage(damage);
             Destroy(gameObject);
         }
     }

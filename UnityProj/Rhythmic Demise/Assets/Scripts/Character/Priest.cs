@@ -6,13 +6,16 @@ public class Priest : Character {
     public GameObject orb;
 
 	// Use this for initialization
-	void Start () {
+	protected new void Start () {
         movementSpeed = 0.5f;
         isAttacking = false;
+        skill = "Hex";
 	}
 	
 	// Update is called once per frame
 	protected new void Update () {
+        findClosestEnemy();
+
         switch (currentAction)
         {
             case Enums.PlayerState.MoveUp:
@@ -38,8 +41,6 @@ public class Priest : Character {
 
     public new void attack()
     {
-        findClosestEnemy();
-
         if (!isAttacking)
         {
             if (enemyList.Count > 0)
@@ -52,6 +53,7 @@ public class Priest : Character {
 
                 GameObject shoot = Instantiate(orb, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
                 shoot.SendMessage("Initialize", closestEnemy);
+                shoot.SendMessage("initDamage", 0.5f);
 
                 isAttacking = true;
             }
@@ -64,6 +66,17 @@ public class Priest : Character {
 
     public void useSkill()
     {
-
+        if(skill.Equals("Hex"))
+        {
+            if (!isAttacking)
+            {
+                if (closestEnemy.tag == "Tower")
+                {
+                    TowerAI tower = closestEnemy.GetComponent<TowerAI>();
+                    tower.nextFireTime += 4;
+                    isAttacking = true;
+                }
+            }
+        }
     }
 }

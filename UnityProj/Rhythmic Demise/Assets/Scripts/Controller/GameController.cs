@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class GameController : MonoBehaviour {
 
@@ -8,14 +10,21 @@ public class GameController : MonoBehaviour {
     public KeyCode[] buttonsKeyCode;
 
     public ArmyController armyController;
-    public Character[] army;
+    public List<Character> army;
     public BeatSpawner bs;
+    
+    //UI
+    public Text archerCountText;
+
+    private int archerCount;
 
     void init()
     {
         moveSequence = "";
         armyController = gameObject.AddComponent<ArmyController>();
         armyController.initArmy(army);
+
+        updateUI();
     }
 
 	// Use this for initialization
@@ -64,6 +73,18 @@ public class GameController : MonoBehaviour {
             bs.moveActionTurn = true;
         }
 	}
+
+    public void updateUI()
+    {
+        archerCount = 0;
+
+        foreach (Archer archer in army)
+        {
+            archerCount++;
+        }
+
+        archerCountText.text = "x" + archerCount;
+    }
 
     public void addHit(string hit)
     {

@@ -8,7 +8,8 @@ public class TowerAI : MonoBehaviour {
     public bool shootingTower, spawnTower;
 
     //tower
-    public float health;
+    public float currentHealth;
+    public float maxHealth;
 	public float damage;
 	public float cooldown, nextFireTime;
     public float spawnTime, nextSpawnTime;
@@ -25,17 +26,19 @@ public class TowerAI : MonoBehaviour {
     //tower inst
     public GameObject arrow, creep;
 
+    public GameObject healthBar;
+
     public bool IsDead
     {
         get
         {
-            return health <= 0;
+            return currentHealth <= 0;
         }
     }
     
 	// Use this for initialization
 	void Start () {
-        health = 4;
+        currentHealth = maxHealth = 2;
 		enemyList = new List<GameObject> ();
 		closestDist = 1000.0f;
 		cooldown = nextFireTime = 2.0f;
@@ -48,9 +51,29 @@ public class TowerAI : MonoBehaviour {
 	void FixedUpdate(){
         if (!IsDead)
         {
-            //start finding the closest enemy
+            //Set health bar
+            SetHealthVisual(currentHealth / maxHealth);
+
+            //update enemy list
+            for (int i = 0; i < enemyList.Count; i++)
+            {
+                Character c = enemyList[i].GetComponent<Character>();
+
+                if (c.IsDead)
+                {
+                    //Need to be re-arrange soon
+                    enemyList.Remove(enemyList[i]);
+                    GameController gc = GameObject.Find("GameController").GetComponent<GameController>();
+                    gc.army.Remove(c);
+                    gc.updateUI();
+
+                    Destroy(c.gameObject);
+                }
+            }
+
             if (enemyList.Count > 0)
             {
+                //start finding the closest enemy
                 firstEnemy = enemyList[0];
                 closestDist = Vector2.Distance(this.transform.position, firstEnemy.transform.position);
                 closestEnemy = firstEnemy;
@@ -91,41 +114,31 @@ public class TowerAI : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
-		//Debug.Log ("Enter" + other.gameObject.tag);
-		if (other.gameObject.tag.Contains("Enemy")) {
-			enemyList.Add (other.transform.parent.gameObject);
-        }
-        else if (other.tag == "PlayerArrow")
-        {
-            TakeDamage(1);
-        }
-        else if (other.tag == "PlayerFocusArrow")
-        {
-            TakeDamage(2);
-        }
-        else if (other.tag == "PlayerOrb")
-        {
-            TakeDamage(0.5f);
+		if (other.tag == "Enemy") {
+			enemyList.Add (other.gameObject);
         }
 
 		//printList ();
 	}
 
-	void OnTriggerExit2D(Collider2D other){
-        //Debug.Log("Exit" + other.gameObject);
-        
-		if(other.transform.tag.Contains("Enemy") || other.transform.parent != null){
+	void OnTriggerExit2D(Collider2D other){    
+		if(other.tag == "Enemy"){
 			foreach (GameObject go in enemyList) {
-				if (other.transform.parent.gameObject == go) {
+				if (other.gameObject == go) {
 					toRemove = go;
 					break;
 				}
 			}
+
+            if (toRemove != null)
+            {
+                enemyList.Remove(toRemove);
+            }
+
+            //closestEnemy = null;
 		}
+
         
-		if (toRemove != null)
-			enemyList.Remove (toRemove);
-		closestEnemy = null;
 
 		//printList ();
         
@@ -163,6 +176,14 @@ public class TowerAI : MonoBehaviour {
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
+        currentHealth -= damage;
+    }
+
+    // Health between [0.0f,1.0f] == (currentHealth / totalHealth)
+    public void SetHealthVisual(float healthNormalized)
+    {
+        healthBar.transform.localScale = new Vector3(healthNormalized,
+                                                     healthBar.transform.localScale.y,
+                                                     healthBar.transform.localScale.z);
     }
 }

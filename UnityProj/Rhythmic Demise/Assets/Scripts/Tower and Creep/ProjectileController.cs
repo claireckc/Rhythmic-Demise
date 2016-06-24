@@ -31,14 +31,16 @@ public class ProjectileController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
-		if (other.tag.Contains("Enemy")) {
-			Debug.Log ("Hit");
+		if (other.tag == "Enemy") {
+			//Debug.Log ("Hit");
+            Character player = other.GetComponent<Character>();
+            player.TakeDamage(1);
 			Destroy (gameObject);
 		}
 	}
 
 	void OnTriggerExit2D(Collider2D other){
-		if(other.tag.Contains("Enemy"))
+		if(other.tag == "Enemy")
 			Destroy (this);
 	}
 }
