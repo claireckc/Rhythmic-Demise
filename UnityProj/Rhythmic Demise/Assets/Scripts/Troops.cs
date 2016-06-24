@@ -4,11 +4,12 @@ using UnityEngine.Serialization;
 
 [System.Serializable]
 public class Troops : MonoBehaviour {
-    
-    struct Stats
+
+    public struct Stats
     {
-        int attack, health;
+        float currentHealth, maxHealth, attack;
         float defenseRating;
+
         /*NOTE: DefenseRating is in a form of %. Damage taken by the unit should be:
             multiplier = towerLevel / troopLevel;
             towerDamage = multiplier * TowerAttack;
@@ -16,42 +17,46 @@ public class Troops : MonoBehaviour {
         */
     }
 
-    Enums.CharacterType charType;
-    Enums.JobType job;
-    int level;      //0 if locked.
-    int resourceNeeded; //resource(suagr or carbon) needed to upgrade level, relative to level
-    Skills[] skills;
-    Stats stats;
+    public Enums.CharacterType charType;
+    public Enums.JobType job;
+    public int level;      //0 if locked.
+    public int resourceNeeded; //resource(suagr or carbon) needed to upgrade level, relative to level
+    public Skills[] skills;
+    public Stats stats;
 
     public void CalculateResource()
     {
-        //use level to update the resource needed to upgrade the unit
+        //use level to update the resource needed(int resourceNeeded) to upgrade the unit
     }
 
-    public void CalculateStats()
+    public void IncreaseStats()
     {
-        //always call this when unit has leveled up to update the stats of unit
-        
-    }
+        if (charType == Enums.CharacterType.Cancer)
+        {
 
-    public bool AbleToLevel(int playerResource)
-    {
-        CalculateResource();
-        if (playerResource > resourceNeeded)
-            return true;
-        else
-            return false;
-    }
+        }
+        else if (charType == Enums.CharacterType.Diabetic)
+        {
 
+        }
+    }
     public bool LevelUp(int playerResource)
     {
         CalculateResource();
         if (playerResource > resourceNeeded)
         {
             //upgrade the stats
+            foreach(Skills sk in skills)
+            {
+                sk.levelUp(charType);
+            }
+            IncreaseStats();
+            //save gameinformation before returning
             return true;
         }
         else
             return false;       //print message to player that they cannot level up
     }
+
+    
 }

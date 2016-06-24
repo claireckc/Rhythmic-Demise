@@ -5,63 +5,43 @@ using UnityEngine.Serialization;
 
 [System.Serializable]
 public class GameInformation : MonoBehaviour {
-    const int RANGENUMBER = 3;
-    static GameInformation gameInfo;    //static is not serialized, this only for loading data
+    public const int RANGENUMBER = 3;
+    public static GameInformation gameInfo;    //static is not serialized, this only for loading data
 
-    struct PlayerSave
-    {
-        /*
-        skills
-            -> skill name
-            -> skill level
-            -> damage or buff value
-
-        troops(array of 3[troopSelected])
-            -> selected troop type
-            -> previously selected troops with count
-
-        other
-            -> total coins
-            -> saved volume (sfx and background)
-            -> button transparency alpha value
-            -> current resource(sugar or carbon)
-            -> troop leader
-            -> current skill selected
-            -> map that is completed
-        */
-
-        int totalCoins;
-        int totalResource; //to summon
-        int totalEnergy;    // to upgrade troops and skills
-    }
-    
-    struct TroopSelected
+    public struct TroopSelected
     {
         Troops troop;
         int troopCount;
     }
 
-    struct Substage
+    public struct PlayerSave
     {
-        int id;
-        int score;
-        int coinsAttained;
-        int topComboCount;
-        int[] stageScoreRange;  //to determine the number of stars for that completed level
+        /*****************************Reource****************************/  
+        int totalResource; //to level up(suagr or carbon)
+        int totalEnergy;    //to summon, map progress
+
+        /*****************************Troop information****************************/
+        Enums.JobType leaderType;
+        Enums.SkillName skillSelected;      //skill is checked with leaderType and skillSelected type
+        Enums.CharacterType chosenUnit; //cancer or diabetic unit, initialize all troops characterType
+        TroopSelected[] troopSelected;  //array of 3
+
+        /*****************************Map****************************/
+        MainMap[] mapProgress;  //contains all the map information
+
+
+        /*****************************Settings****************************/
+        float globalVol, sfxVol;
+        float buttonAlpha;
+        
     }
 
-    struct Mainstage
+    public void Awake()
     {
-        string stageName;
-        Substage[] substages;
+        //begin loading from loadinformation script
     }
 
-    void Awake()
-    {
-
-    }
-
-    void Start()
+    public void Start()
     {
         //game information is a singleton
         if (gameInfo != null)
@@ -71,6 +51,11 @@ public class GameInformation : MonoBehaviour {
             DontDestroyOnLoad(gameObject);
             gameInfo = this;
         }
+    }
+
+    public void Update()
+    {
+
     }
     
     

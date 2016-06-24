@@ -23,4 +23,10 @@ public class Enums : MonoBehaviour {
         PriestHex,
         PriestCurse
     }
+
+    public enum MainMap
+    {
+        Mouth, Larnyx, Trachea, Esophagus, Lung, Heart, Diaphragm, Liver, Spleen, Pancrease,
+        Stomach, Gallbladder, LKidney, RKidney, LIntes, SIntes, SpinalCord, Brain
+    }
 }
