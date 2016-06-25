@@ -7,7 +7,7 @@ public class NoteControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        speed = new Vector3(0, -5, 0);
+        speed = new Vector3(0, -4, 0);
 	}
 	
 	// Update is called once per frame
@@ -21,14 +21,12 @@ public class NoteControl : MonoBehaviour {
 
     }
 
-    void OnTriggerExit2D()
+    void OnTriggerExit2D(Collider2D other)
     {
-        /*if (bs.inputActionTurn)
+        if (other.tag == "Button")
         {
-            bs.inputActionTurn = false;
-        }*/
-
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
     }
 
 }

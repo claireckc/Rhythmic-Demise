@@ -12,11 +12,17 @@ public class GameController : MonoBehaviour {
     public ArmyController armyController;
     public List<Character> army;
     public BeatSpawner bs;
+
+    private float startDelayTime = 1f;
     
     //UI
     public Text archerCountText;
+    public Text priestCountText;
+    public Text knightCountText;
 
     private int archerCount;
+    private int priestCount;
+    private int knightCount;
 
     void init()
     {
@@ -24,7 +30,7 @@ public class GameController : MonoBehaviour {
         armyController = gameObject.AddComponent<ArmyController>();
         armyController.initArmy(army);
 
-        updateUI();
+        Invoke("updateUI", startDelayTime);
     }
 
 	// Use this for initialization
@@ -77,13 +83,28 @@ public class GameController : MonoBehaviour {
     public void updateUI()
     {
         archerCount = 0;
+        priestCount = 0;
+        knightCount = 0;
 
-        foreach (Archer archer in army)
+        foreach(Character character in army)
         {
-            archerCount++;
+            switch (character.getJobType())
+            {
+                case Enums.JobType.Archer:
+                    archerCount++;
+                    break;
+                case Enums.JobType.Knight:
+                    knightCount++;
+                    break;
+                case Enums.JobType.Priest:
+                    priestCount++;
+                    break;
+            }
         }
 
         archerCountText.text = "x" + archerCount;
+        priestCountText.text = "x" + priestCount;
+        knightCountText.text = "x" + knightCount;
     }
 
     public void addHit(string hit)

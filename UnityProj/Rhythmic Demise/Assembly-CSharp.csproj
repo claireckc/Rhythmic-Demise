@@ -63,6 +63,8 @@
      <Compile Include="Assets\Scripts\Controller\SaveInformation.cs" />
      <Compile Include="Assets\Scripts\DebugText.cs" />
      <Compile Include="Assets\Scripts\Enums.cs" />
+     <Compile Include="Assets\Scripts\HealthBar\CameraFacingBillboard.cs" />
+     <Compile Include="Assets\Scripts\HealthBar\ChangeColorByScale.cs" />
      <Compile Include="Assets\Scripts\Skills.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\CreepAI.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\MovementHandler.cs" />

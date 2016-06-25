@@ -9,7 +9,8 @@ public class Character : MonoBehaviour {
     protected float maxHealth;
     protected float damage;
     protected string skill;
-    protected Enums.CharacterType type;
+    protected Enums.CharacterType race;
+    protected Enums.JobType job;
     protected bool isAttacking;
 
     public float closestDist;
@@ -146,5 +147,10 @@ public class Character : MonoBehaviour {
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+    }
+
+    public Enums.JobType getJobType()
+    {
+        return job;
     }
 }

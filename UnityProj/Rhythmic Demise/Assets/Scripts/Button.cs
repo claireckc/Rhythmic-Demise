@@ -19,31 +19,34 @@ public class Button : MonoBehaviour {
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (!gc.bs.moveActionTurn)
+        if (other.tag == "Note")
         {
-            if (Input.GetKeyDown(gc.buttonsKeyCode[0]) && buttonID == 1)
+            if (!gc.bs.moveActionTurn)
             {
-                Destroy(other.gameObject);
-                particleBurst.Play();
-                gc.addHit("1");
-            }
-            else if (Input.GetKeyDown(gc.buttonsKeyCode[1]) && buttonID == 2)
-            {
-                Destroy(other.gameObject);
-                particleBurst.Play();
-                gc.addHit("2");
-            }
-            else if (Input.GetKeyDown(gc.buttonsKeyCode[2]) && buttonID == 3)
-            {
-                Destroy(other.gameObject);
-                particleBurst.Play();
-                gc.addHit("3");
-            }
-            else if (Input.GetKeyDown(gc.buttonsKeyCode[3]) && buttonID == 4)
-            {
-                Destroy(other.gameObject);
-                particleBurst.Play();
-                gc.addHit("4");
+                if (Input.GetKeyDown(gc.buttonsKeyCode[0]) && buttonID == 1)
+                {
+                    Destroy(other.gameObject);
+                    particleBurst.Play();
+                    gc.addHit("1");
+                }
+                else if (Input.GetKeyDown(gc.buttonsKeyCode[1]) && buttonID == 2)
+                {
+                    Destroy(other.gameObject);
+                    particleBurst.Play();
+                    gc.addHit("2");
+                }
+                else if (Input.GetKeyDown(gc.buttonsKeyCode[2]) && buttonID == 3)
+                {
+                    Destroy(other.gameObject);
+                    particleBurst.Play();
+                    gc.addHit("3");
+                }
+                else if (Input.GetKeyDown(gc.buttonsKeyCode[3]) && buttonID == 4)
+                {
+                    Destroy(other.gameObject);
+                    particleBurst.Play();
+                    gc.addHit("4");
+                }
             }
         }
     }
