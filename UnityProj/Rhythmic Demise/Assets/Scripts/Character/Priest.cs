@@ -7,13 +7,18 @@ public class Priest : Character {
 
 	// Use this for initialization
 	protected new void Start () {
-        movementSpeed = 0.5f;
+        base.Start();
+
+        movementSpeed = 1f;
         isAttacking = false;
         skill = "Hex";
+        job = Enums.JobType.Priest;
 	}
 	
 	// Update is called once per frame
 	protected new void Update () {
+        base.Update();
+
         findClosestEnemy();
 
         switch (currentAction)
