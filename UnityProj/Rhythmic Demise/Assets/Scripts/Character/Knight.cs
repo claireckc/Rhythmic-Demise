@@ -5,13 +5,17 @@ public class Knight : Character {
 
 	// Use this for initialization
 	protected new void Start () {
+        base.Start();
+
         movementSpeed = 1f;
+        job = Enums.JobType.Knight;
 	}
 	
 	// Update is called once per frame
 	protected new void Update () {
-        findClosestEnemy();
+        base.Update();
 
+        findClosestEnemy();
         switch (currentAction)
         {
             case Enums.PlayerState.MoveUp:
@@ -61,7 +65,8 @@ public class Knight : Character {
         {
             if (enemyList.Count > 0)
             {
-                Debug.Log("Attack!");
+                TowerAI enemy = closestEnemy.GetComponent<TowerAI>();
+                enemy.TakeDamage(damage);
                 isAttacking = true;
             }
         }
