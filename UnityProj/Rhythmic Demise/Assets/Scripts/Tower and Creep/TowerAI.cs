@@ -176,6 +176,7 @@ public class TowerAI : MonoBehaviour {
 
     public void TakeDamage(float damage)
     {
+        FloatingTextController.CreateFloatingText(damage.ToString(), transform);
         currentHealth -= damage;
     }
 
