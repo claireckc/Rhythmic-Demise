@@ -36,6 +36,8 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         init();
+
+        FloatingTextController.Initialize();
 	}
 	
 	// Update is called once per frame
