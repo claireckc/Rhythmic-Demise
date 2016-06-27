@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class UIManager_Start : MonoBehaviour {
 
     static UIManager_Start instance;
+    public PlayerData playerdata;
 
     //Canvas
     private Canvas optionCanvas, aboutCanvas, volumeCanvas;
@@ -14,6 +15,7 @@ public class UIManager_Start : MonoBehaviour {
 
     void Awake()
     {
+        playerdata = playerdata.GetComponent<PlayerData>();
         startText = startText.GetComponent<Text>();
         aboutCanvas = GameObject.Find("AboutScreen").GetComponent<Canvas>();
         optionCanvas = GameObject.Find("OptionMenu").GetComponent<Canvas>();
@@ -42,15 +44,17 @@ public class UIManager_Start : MonoBehaviour {
 		optionCanvas.enabled = false;
 		aboutCanvas.enabled = false;
         volumeCanvas.enabled = false;
+
+        startText.text = "Start New Game";
         
-        if (GameInformation.gameInfo.playerSave.chosenUnit == Enums.CharacterType.None)
+        /*if (playerdata.pathogenType == Enums.CharacterType.None)
             startText.text = "Start New Game";
         else
-            startText.text = "Resume Game";
+            startText.text = "Resume Game";*/
 
-        sfxSlider.value = GameInformation.gameInfo.playerSave.sfxVol;
-        bgSlider.value = GameInformation.gameInfo.playerSave.globalVol;
-        buttonSlider.value = GameInformation.gameInfo.playerSave.buttonAlpha;
+        sfxSlider.value = playerdata.effectsVolume;
+        bgSlider.value = playerdata.globalVolume;
+        buttonSlider.value = playerdata.buttonAlpha;
     }
 
 	/*******************************Start components******************************/
@@ -78,7 +82,6 @@ public class UIManager_Start : MonoBehaviour {
 
 	public void ErasePress_Opt(){
         //bring out are you sure menu
-        GameInformation.gameInfo.Initialization();
 	}
 
 	public void VolPress_Opt(){
@@ -99,23 +102,23 @@ public class UIManager_Start : MonoBehaviour {
     /*******************************Volume components******************************/
     public void SfxSliderChange()
     {
-        GameInformation.gameInfo.playerSave.sfxVol = sfxSlider.value;
+        playerdata.effectsVolume = sfxSlider.value;
     }
 
     public void BackgroundSliderChange()
     {
-        GameInformation.gameInfo.playerSave.globalVol = bgSlider.value;
+        playerdata.globalVolume = bgSlider.value;
     }
 
     public void ButtonSiderChange()
     {
-        GameInformation.gameInfo.playerSave.buttonAlpha = buttonSlider.value;
+        playerdata.buttonAlpha = buttonSlider.value;
     }
 
     public void OnBackPress_Vol()
     {
         volumeCanvas.enabled = false;
         optionCanvas.enabled = true;
-        SaveLoadManager.SaveAllInformation();
+        AudioListener.volume = bgSlider.value;
     }
 }

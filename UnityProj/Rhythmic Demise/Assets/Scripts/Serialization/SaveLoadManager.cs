@@ -6,38 +6,23 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 
 public static class SaveLoadManager{
-
-    /*public static SaveLoadManager SLMng;
-
-    public void Awake()
-    {
-        System.Environment.SetEnvironmentVariable("MONO_REFLECTION_SERIALIZER", "yes");
-
-        SLMng = this;
-        if (SLMng != null)
-            Destroy(gameObject);
-        else
-        {
-            DontDestroyOnLoad(gameObject);
-            SLMng = this;
-        }
-    }*/
     
-    public static void SaveAllInformation()
+    public static void SaveAllInformation(PlayerData pd)
     {
         Debug.Log("dont exist");
         BinaryFormatter bf = new BinaryFormatter();
+        Debug.Log("1");
         FileStream stream = new FileStream(Application.persistentDataPath + "/player.sav", FileMode.Create);
-        Debug.Log(stream);
-        GameInformation gi = GameInformation.gameInfo;
+        Debug.Log("2");
 
-        bf.Serialize(stream, gi);
+        bf.Serialize(stream, pd);
+        Debug.Log("3");
         stream.Close();
     }
 
-    public static GameInformation LoadInformation()
+    public static PlayerData LoadInformation()
     {
-        GameInformation gi = GameInformation.gameInfo;
+        PlayerData pd = null;
         if (File.Exists(Application.persistentDataPath + "/player.sav"))
         {
             Debug.Log("exist: " + Application.persistentDataPath + "/player.sav");
@@ -46,7 +31,7 @@ public static class SaveLoadManager{
             FileStream stream = new FileStream(Application.persistentDataPath + "/player.sav", FileMode.Open);
             Debug.Log("2");
 
-            gi = bf.Deserialize(stream) as GameInformation;
+            pd = bf.Deserialize(stream) as PlayerData;
             Debug.Log("3");
 
             stream.Close();
@@ -54,7 +39,7 @@ public static class SaveLoadManager{
             
         }
 
-        return gi;
+        return pd;
     }
     
 }
