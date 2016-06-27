@@ -13,7 +13,6 @@ public class TowerAI : MonoBehaviour {
 	public float damage;
 	public float cooldown, nextFireTime;
     public float spawnTime, nextSpawnTime;
-    public float towerWidth, towerHeight;
     public RectTransform size;
 
     //enemy
@@ -43,9 +42,6 @@ public class TowerAI : MonoBehaviour {
 		closestDist = 1000.0f;
 		cooldown = nextFireTime = 2.0f;
         spawnTime = nextSpawnTime = 10.0f;
-        size = (RectTransform)this.transform;
-        towerWidth = size.rect.width;
-        towerHeight = size.rect.height;
 	}
     
 	void FixedUpdate(){
@@ -163,7 +159,6 @@ public class TowerAI : MonoBehaviour {
 
     void SpawnCreep()
     {
-        Debug.Log(towerHeight + " " + towerWidth);
         nextSpawnTime = Time.time + spawnTime;
 
         Vector3 dir = closestEnemy.transform.position - this.transform.position;
