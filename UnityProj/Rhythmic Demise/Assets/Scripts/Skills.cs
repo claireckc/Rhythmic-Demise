@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.Serialization;
 
+
+[System.Serializable]
 public class Skills : MonoBehaviour {
 
     public Enums.SkillName skillName;

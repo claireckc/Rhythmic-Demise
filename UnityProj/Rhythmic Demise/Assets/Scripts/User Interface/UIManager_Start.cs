@@ -14,6 +14,7 @@ public class UIManager_Start : MonoBehaviour {
 
     void Awake()
     {
+        startText = startText.GetComponent<Text>();
         aboutCanvas = GameObject.Find("AboutScreen").GetComponent<Canvas>();
         optionCanvas = GameObject.Find("OptionMenu").GetComponent<Canvas>();
         volumeCanvas = GameObject.Find("VolumeScreen").GetComponent<Canvas>();
@@ -41,8 +42,16 @@ public class UIManager_Start : MonoBehaviour {
 		optionCanvas.enabled = false;
 		aboutCanvas.enabled = false;
         volumeCanvas.enabled = false;
-		//startText.text = "Start New Game";
-	}
+        
+        if (GameInformation.gameInfo.playerSave.chosenUnit == Enums.CharacterType.None)
+            startText.text = "Start New Game";
+        else
+            startText.text = "Resume Game";
+
+        sfxSlider.value = GameInformation.gameInfo.playerSave.sfxVol;
+        bgSlider.value = GameInformation.gameInfo.playerSave.globalVol;
+        buttonSlider.value = GameInformation.gameInfo.playerSave.buttonAlpha;
+    }
 
 	/*******************************Start components******************************/
 	public void ExitPress_Start(){
@@ -50,8 +59,10 @@ public class UIManager_Start : MonoBehaviour {
 	}
 
 	public void StartPress_Start(){
-
-		SceneManager.LoadScene ("TroopSelection");
+        if(startText.text == "Resume Game")
+            Application.LoadLevel("MainMapOverview");
+        else
+            Application.LoadLevel("TroopSelection");
 	}
 
 	public void OptionPress_Start(){
@@ -66,7 +77,8 @@ public class UIManager_Start : MonoBehaviour {
 	}
 
 	public void ErasePress_Opt(){
-
+        //bring out are you sure menu
+        GameInformation.gameInfo.Initialization();
 	}
 
 	public void VolPress_Opt(){
@@ -87,22 +99,23 @@ public class UIManager_Start : MonoBehaviour {
     /*******************************Volume components******************************/
     public void SfxSliderChange()
     {
-        print("Slider: " + sfxSlider.value);
+        GameInformation.gameInfo.playerSave.sfxVol = sfxSlider.value;
     }
 
     public void BackgroundSliderChange()
     {
-        print("Background: " + bgSlider.value);
+        GameInformation.gameInfo.playerSave.globalVol = bgSlider.value;
     }
 
     public void ButtonSiderChange()
     {
-        print("Button: " + buttonSlider.value);
+        GameInformation.gameInfo.playerSave.buttonAlpha = buttonSlider.value;
     }
 
     public void OnBackPress_Vol()
     {
         volumeCanvas.enabled = false;
         optionCanvas.enabled = true;
+        SaveLoadManager.SaveAllInformation();
     }
 }
