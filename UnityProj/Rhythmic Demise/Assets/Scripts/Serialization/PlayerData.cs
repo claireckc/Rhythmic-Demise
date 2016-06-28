@@ -5,15 +5,27 @@ using UnityEngine.Serialization;
 
 [System.Serializable]
 public class PlayerData : MonoBehaviour {
+
     public static PlayerData playerdata;
+
     [System.Serializable] public struct Troop
     {
+        public Enums.JobType job;
+        public int level;
         public float currentHealth, maxHealth, attack, defenseRating;
+        public List<Skills> skills;        //3
+    }
+
+    [System.Serializable] public struct Skills
+    {
+        public Enums.SkillName skillName;
+        public float skillValue;
+        public int skillLevel;      //0 means locked, 1 and above means unlocked
     }
 
     [System.Serializable]public struct TroopSelected
     {
-        public Troop troops;
+        public Troop troop;
         public int count;
     }
 
@@ -40,6 +52,7 @@ public class PlayerData : MonoBehaviour {
     public Enums.JobType leaderType;
     public Enums.SkillName skillSelected;
     public Enums.CharacterType pathogenType;
+    public List<Troop> troopData;       //first is knight then archer and then priest, to store the stats and the level
     public List<TroopSelected> troopSelected;
 
     //Map progress
@@ -57,6 +70,59 @@ public class PlayerData : MonoBehaviour {
         totalResource = 5;
         totalEnergy = 0;
 
+        //for troop data
+        for(int i = 0; i < 3; i++)
+        {
+            Troop tp = new Troop();
+            tp.job = (Enums.JobType)i + 1;
+            if (i == 0)
+                tp.level = i+1;     //first unlock would be the knight
+            else
+                tp.level = 0;
+
+            //MICHAEL SET MAX HEALTH, ATTACK, DEFENSERATING HERE, THIS IS INITIALIZATION
+            for(int j = 0; j < 3; j++)
+            {
+                Skills sk = new Skills();
+                switch (i)
+                {
+                    //if knight
+                    case 0:
+                        sk.skillName = (Enums.SkillName)j + 1;
+                        break;
+                    //if archer
+                    case 1: sk.skillName = (Enums.SkillName)j + 4;
+                        break;
+                    //if priest
+                    case 2: sk.skillName = (Enums.SkillName)j + 7;
+                        break;
+                }
+                if(i == 0)
+                {
+                    sk.skillLevel = 1;
+                    /*sk.skillValue = sk.skilllevel * SOMETHING */    //MICHAEL, SET SKILL VALUE HERE, THIS IS INITIALIZATION! KNIGHT SKILL VALUE
+                }
+                else
+                {
+                    sk.skillLevel = 0;
+                    sk.skillValue = 0;
+                }
+
+                tp.skills.Add(sk);
+                troopData.Add(tp);
+            }
+        }
+
+        //for troop selected
+        for(int i = 0; i < 3; i++)
+        {
+            TroopSelected tp = new TroopSelected();
+            tp.troop = new Troop();
+            tp.count = 0;
+            troopSelected.Add(tp);
+        }
+
+        //for map
         for(int i = 0; i < Enums.MAINMAPCOUNT; i++)
         {
             MainMap newMap = new MainMap();
@@ -94,10 +160,8 @@ public class PlayerData : MonoBehaviour {
         PlayerData pdNew = SaveLoadManager.LoadInformation();
         playerdata = pdNew;
     }*/
-    
-    public void Start()
+    public void Awake()
     {
-        print("Enter start");
         Init();
         if (playerdata != null)
             Destroy(gameObject);
@@ -105,6 +169,14 @@ public class PlayerData : MonoBehaviour {
         {
             DontDestroyOnLoad(gameObject);
             playerdata = this;
+        }
+
+    }
+    public void Start()
+    {
+        foreach(MainMap mp in playerdata.mapProgress)
+        {
+            print(mp.mapName);
         }
     }
 }
