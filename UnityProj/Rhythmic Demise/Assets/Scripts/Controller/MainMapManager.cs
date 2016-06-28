@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
 
 public class MainMapManager : MonoBehaviour {
 
@@ -12,4 +13,9 @@ public class MainMapManager : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    public void MouthSelect()
+    {
+        print("Mouth Click");
+    }
 }

@@ -5,19 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class UIManager_TroopSel : MonoBehaviour {
 
-	public Canvas troopCanvas;
-	public Button backButton, cancerButton, diabetesButton;
+    public PlayerData playerdata;
 
 	void Awake(){
-		troopCanvas = troopCanvas.GetComponent<Canvas> ();
-		backButton = backButton.GetComponent<Button> ();
-		cancerButton = cancerButton.GetComponent<Button> ();
-		diabetesButton = diabetesButton.GetComponent<Button> ();
 	}
 
-	void Start () {
-		troopCanvas.enabled = true;
-	}
+	void Start ()
+    {
+        playerdata = FindObjectOfType<PlayerData>();
+    }
 
 	public void OnBackPress(){
         Application.LoadLevel("StartScreen");
@@ -26,11 +22,20 @@ public class UIManager_TroopSel : MonoBehaviour {
 	}
 
 	public void OnCancerPress(){
-
+        playerdata.pathogenType = Enums.CharacterType.Cancer;
+        MainScreen();
 	}
 
-	public void OnDiabeticPress(){
+	public void OnDiabeticPress()
+    {
+        playerdata.pathogenType = Enums.CharacterType.Diabetic;
+        MainScreen();
 
-	}
+    }
+
+    public void MainScreen()
+    {
+        Application.LoadLevel("MainMapOverview");
+    }
 
 }

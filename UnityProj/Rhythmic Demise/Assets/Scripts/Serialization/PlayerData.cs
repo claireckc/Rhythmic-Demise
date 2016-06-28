@@ -33,7 +33,6 @@ public class PlayerData : MonoBehaviour {
         public int avgStars;
         public bool isComplete;
     }
-
     //Resources
     public int totalResource, totalEnergy;
 
@@ -98,6 +97,7 @@ public class PlayerData : MonoBehaviour {
     
     public void Start()
     {
+        print("Enter start");
         Init();
         if (playerdata != null)
             Destroy(gameObject);
