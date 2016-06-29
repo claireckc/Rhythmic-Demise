@@ -3,33 +3,43 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class UIManager_TroopSel : MonoBehaviour {
+public class UIManager_TroopSel : MonoBehaviour
+{
 
-	public Canvas troopCanvas;
-	public Button backButton, cancerButton, diabetesButton;
+    public PlayerData playerdata;
 
-	void Awake(){
-		troopCanvas = troopCanvas.GetComponent<Canvas> ();
-		backButton = backButton.GetComponent<Button> ();
-		cancerButton = cancerButton.GetComponent<Button> ();
-		diabetesButton = diabetesButton.GetComponent<Button> ();
-	}
+    void Awake()
+    {
+    }
 
-	void Start () {
-		troopCanvas.enabled = true;
-	}
+    void Start()
+    {
+        playerdata = FindObjectOfType<PlayerData>();
+    }
 
-	public void OnBackPress(){
-		//SceneManager.LoadScene ("StartScreen");
-		//Destroy (gameObject);
-	}
+    public void OnBackPress()
+    {
+        Application.LoadLevel("StartScreen");
+        //SceneManager.LoadScene ("StartScreen");
+        Destroy(gameObject);
+    }
 
-	public void OnCancerPress(){
+    public void OnCancerPress()
+    {
+        playerdata.pathogenType = Enums.CharacterType.Cancer;
+        MainScreen();
+    }
 
-	}
+    public void OnDiabeticPress()
+    {
+        playerdata.pathogenType = Enums.CharacterType.Diabetic;
+        MainScreen();
 
-	public void OnDiabeticPress(){
+    }
 
-	}
+    public void MainScreen()
+    {
+        Application.LoadLevel("MainMapOverview");
+    }
 
 }

@@ -74,6 +74,7 @@ public class PlayerData : MonoBehaviour {
         for(int i = 0; i < 3; i++)
         {
             Troop tp = new Troop();
+            tp.skills = new List<Skills>();
             tp.job = (Enums.JobType)i + 1;
             if (i == 0)
                 tp.level = i+1;     //first unlock would be the knight
@@ -174,9 +175,5 @@ public class PlayerData : MonoBehaviour {
     }
     public void Start()
     {
-        foreach(MainMap mp in playerdata.mapProgress)
-        {
-            print(mp.mapName);
-        }
     }
 }
