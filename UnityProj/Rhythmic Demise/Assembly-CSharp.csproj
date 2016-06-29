@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\EventHandler.cs" />
      <Compile Include="Assets\Scripts\Beat\BeatSpawner.cs" />
      <Compile Include="Assets\Scripts\Beat\NoteControl.cs" />
      <Compile Include="Assets\Scripts\Button.cs" />
@@ -57,22 +58,18 @@
      <Compile Include="Assets\Scripts\Controller\ArmyController.cs" />
      <Compile Include="Assets\Scripts\Controller\DragControl.cs" />
      <Compile Include="Assets\Scripts\Controller\GameController.cs" />
-     <Compile Include="Assets\Scripts\Controller\GameInformation.cs" />
      <Compile Include="Assets\Scripts\Controller\MainMapManager.cs" />
-     <Compile Include="Assets\Scripts\Controller\SaveLoadManager.cs" />
-     <Compile Include="Assets\Scripts\Controller\SceneManager.cs" />
      <Compile Include="Assets\Scripts\DebugText.cs" />
      <Compile Include="Assets\Scripts\EndResultManager.cs" />
      <Compile Include="Assets\Scripts\Enums.cs" />
      <Compile Include="Assets\Scripts\HealthBar\CameraFacingBillboard.cs" />
      <Compile Include="Assets\Scripts\HealthBar\ChangeColorByScale.cs" />
-     <Compile Include="Assets\Scripts\MainMap.cs" />
      <Compile Include="Assets\Scripts\MovingPoint.cs" />
      <Compile Include="Assets\Scripts\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\PopupText\FloatingText.cs" />
      <Compile Include="Assets\Scripts\PopupText\FloatingTextController.cs" />
-     <Compile Include="Assets\Scripts\Skills.cs" />
-     <Compile Include="Assets\Scripts\SubMaps.cs" />
+     <Compile Include="Assets\Scripts\Serialization\PlayerData.cs" />
+     <Compile Include="Assets\Scripts\Serialization\SaveLoadManager.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\BaseTower.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\CreepAI.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\Enemy.cs" />
@@ -82,7 +79,6 @@
      <Compile Include="Assets\Scripts\Tower and Creep\SpawnAI_Tower.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\Tower.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\TowerAI.cs" />
-     <Compile Include="Assets\Scripts\Troops.cs" />
      <Compile Include="Assets\Scripts\User Interface\UIManager_Start.cs" />
      <Compile Include="Assets\Scripts\User Interface\UIManager_TroopSel.cs" />
  <Reference Include="UnityEngine.UI">

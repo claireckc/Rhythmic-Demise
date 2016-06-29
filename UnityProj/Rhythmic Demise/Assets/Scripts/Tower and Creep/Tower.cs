@@ -38,7 +38,7 @@ public class Tower : MonoBehaviour {
         currentHealth = maxHealth = 2;
         enemyList = new List<GameObject>();
         closestDist = 1000.0f;
-        cooldown = nextFireTime = 2.0f;
+        cooldown = nextFireTime = 5.0f;
         spawnTime = nextSpawnTime = 10.0f;
 	}
 	
