@@ -34,7 +34,7 @@ public class Arrow : MonoBehaviour {
     {
         if (other.tag == "Tower")
         {
-            TowerAI tower = other.gameObject.GetComponent<TowerAI>();
+            Tower tower = other.gameObject.GetComponent<Tower>();
             tower.TakeDamage(damage);
             Destroy(gameObject);
         }
