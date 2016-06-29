@@ -29,15 +29,15 @@ public class PauseMenu : MonoBehaviour {
             if(!audio.isPlaying)
                 audio.Play();
         }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            isPaused = !isPaused;
-        }
 	}
 
     public void Resume()
     {
         isPaused = false;
+    }
+
+    public void Pause()
+    {
+        isPaused = true;
     }
 }
