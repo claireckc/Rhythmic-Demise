@@ -6,21 +6,22 @@ using UnityEngine.SceneManagement;
 public class UIManager_Start : MonoBehaviour {
 
     static UIManager_Start instance;
+
     //Canvas
-    public Canvas optionCanvas, aboutCanvas, volumeCanvas, startCanvas;
-    public Slider sfxSlider, bgSlider, buttonSlider;
+    private Canvas optionCanvas, aboutCanvas, volumeCanvas;
+    private Slider sfxSlider, bgSlider, buttonSlider;
     public Text startText;
 
     void Awake()
     {
-        startText = startText.GetComponent<Text>();
-        optionCanvas = optionCanvas.GetComponent<Canvas>();
-        aboutCanvas = aboutCanvas.GetComponent<Canvas>();
-        volumeCanvas = volumeCanvas.GetComponent<Canvas>();
+        aboutCanvas = GameObject.Find("AboutScreen").GetComponent<Canvas>();
+        optionCanvas = GameObject.Find("OptionMenu").GetComponent<Canvas>();
+        volumeCanvas = GameObject.Find("VolumeScreen").GetComponent<Canvas>();
 
-        sfxSlider = sfxSlider.GetComponent<Slider>();
-        bgSlider = bgSlider.GetComponent<Slider>();
-        buttonSlider = buttonSlider.GetComponent<Slider>();
+
+        sfxSlider = GameObject.Find("VolumeScreen/sfxSlider").GetComponent<Slider>();
+        bgSlider = GameObject.Find("VolumeScreen/bgSlider").GetComponent<Slider>();
+        buttonSlider = GameObject.Find("VolumeScreen/buttonSlider").GetComponent<Slider>();
 
         sfxSlider.onValueChanged.AddListener(delegate { SfxSliderChange(); });
         bgSlider.onValueChanged.AddListener(delegate { BackgroundSliderChange(); });
@@ -29,100 +30,79 @@ public class UIManager_Start : MonoBehaviour {
     }
 
 	void Start () {
-        print("Start: " + PlayerData.playerdata.pathogenType);
-        startCanvas.enabled = true;
+        if(instance != null)
+            Destroy(gameObject);
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+            instance = this;
+        }
+
 		optionCanvas.enabled = false;
 		aboutCanvas.enabled = false;
         volumeCanvas.enabled = false;
-
-        if (PlayerData.playerdata.pathogenType != Enums.CharacterType.None)
-            startText.text = "Resume Game";
-        else
-            startText.text = "Start New Game";
-
-        sfxSlider.value = PlayerData.playerdata.effectsVolume;
-        bgSlider.value = PlayerData.playerdata.globalVolume;
-        buttonSlider.value = PlayerData.playerdata.buttonAlpha;
-    }
+		//startText.text = "Start New Game";
+	}
 
 	/*******************************Start components******************************/
-    public void Start_ExitPress()
-    {
-        Application.Quit();
-    }
-    public void Start_StartPress()
-    {
-        if (startText.text == "Resume Game")
-            Application.LoadLevel("MainMapOverview");
-        else
-            Application.LoadLevel("TroopSelection");
+	public void ExitPress_Start(){
+		Application.Quit ();
+	}
 
-    }
+	public void StartPress_Start(){
 
-    public void Start_OptionPress()
-    {
-        //disable components in canvas
-       // startCanvas.enabled = false;
-        optionCanvas.enabled = true;
-    }
+		//SceneManager.LoadScene ("TroopSelection");
+	}
+
+	public void OptionPress_Start(){
+        //disable components in canvas 
+		optionCanvas.enabled = true;
+        
+	}
 
     /*******************************Option components******************************/
+    public void BackPress_Opt(){
+		optionCanvas.enabled = false;
+	}
 
-    public void Option_BackPress()
-    {
+	public void ErasePress_Opt(){
+
+	}
+
+	public void VolPress_Opt(){
         optionCanvas.enabled = false;
-    }
-    
-    public void Option_ErasePress()
-    {
-        print("before: " + PlayerData.playerdata.pathogenType);
-        if (PlayerData.playerdata.pathogenType != Enums.CharacterType.None)
-        {
-            PlayerData.playerdata.pathogenType = Enums.CharacterType.None;
-            startText.text = "Start New Game";
-            print("Inside");
-
-        }
-        print("After: " + PlayerData.playerdata.pathogenType);
-    }
-
-    public void Option_VolumePress()
-    {
         volumeCanvas.enabled = true;
-    }
-    
-    public void Option_AboutPress()
-    {
-        aboutCanvas.enabled = true;
-    }
+	}
 
-    /***************************About Component**********************************/
-    public void About_BackPress()
-    {
-        aboutCanvas.enabled = false;
-        optionCanvas.enabled = true;
-    }
-    
+	public void AboutPress_Opt(){
+		optionCanvas.enabled = false;
+		aboutCanvas.enabled = true;
+	}
+
+	public void AboutBackPress(){
+		aboutCanvas.enabled = false;
+		optionCanvas.enabled = true;
+	}
+
     /*******************************Volume components******************************/
     public void SfxSliderChange()
     {
-        PlayerData.playerdata.effectsVolume = sfxSlider.value;
+        print("Slider: " + sfxSlider.value);
     }
 
     public void BackgroundSliderChange()
     {
-        PlayerData.playerdata.globalVolume = bgSlider.value;
+        print("Background: " + bgSlider.value);
     }
 
     public void ButtonSiderChange()
     {
-        PlayerData.playerdata.buttonAlpha = buttonSlider.value;
+        print("Button: " + buttonSlider.value);
     }
 
-    public void Volume_BackPress()
+    public void OnBackPress_Vol()
     {
         volumeCanvas.enabled = false;
         optionCanvas.enabled = true;
-        AudioListener.volume = bgSlider.value;
     }
 }

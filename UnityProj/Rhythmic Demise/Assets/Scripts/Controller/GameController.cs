@@ -14,6 +14,8 @@ public class GameController : MonoBehaviour {
     public BeatSpawner bs;
 
     private float startDelayTime = 1f;
+
+    public MovingPoint currPos;
     
     //UI
     public Text archerCountText;
@@ -29,14 +31,12 @@ public class GameController : MonoBehaviour {
         moveSequence = "";
         armyController = gameObject.AddComponent<ArmyController>();
         armyController.initArmy(army);
-
         Invoke("updateUI", startDelayTime);
     }
 
 	// Use this for initialization
 	void Start () {
         init();
-
         FloatingTextController.Initialize();
 	}
 	
@@ -53,19 +53,33 @@ public class GameController : MonoBehaviour {
             {
                 //move left
                 case "1111":
-                    armyController.setCurrentState(Enums.PlayerState.MoveLeft);
+                    if (currPos.left != null)
+                    {
+                        armyController.setCurrentState(Enums.PlayerState.MoveLeft);
+                    }
                     break;
                 //move right
                 case "2222":
-                    armyController.setCurrentState(Enums.PlayerState.MoveRight);
+                    if (currPos.right != null)
+                    {
+                        armyController.setCurrentState(Enums.PlayerState.Move);
+                        armyController.moveTo(currPos.right);
+                        currPos = currPos.right;
+                    }
                     break;
                 //move up
                 case "3333":
-                    armyController.setCurrentState(Enums.PlayerState.MoveUp);
+                    if (currPos.up != null)
+                    {
+                        armyController.setCurrentState(Enums.PlayerState.MoveUp);
+                    }
                     break;
                 //move down
                 case "4444":
-                    armyController.setCurrentState(Enums.PlayerState.MoveDown);
+                    if (currPos.bottom != null)
+                    {
+                        armyController.setCurrentState(Enums.PlayerState.MoveDown);
+                    }
                     break;
                 //normal attack
                 case "1131":
