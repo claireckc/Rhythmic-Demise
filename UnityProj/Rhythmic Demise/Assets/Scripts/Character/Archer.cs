@@ -10,7 +10,6 @@ public class Archer : Character {
 	protected new void Start () {
         base.Start();
 
-        movementSpeed = 0.5f;
         isAttacking = false;
         skill = "FocusArrow";
         job = Enums.JobType.Archer;

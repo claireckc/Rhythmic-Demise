@@ -20,8 +20,8 @@ public class UIManager_TroopSel : MonoBehaviour {
 	}
 
 	public void OnBackPress(){
-		SceneManager.LoadScene ("StartScreen");
-		Destroy (gameObject);
+		//SceneManager.LoadScene ("StartScreen");
+		//Destroy (gameObject);
 	}
 
 	public void OnCancerPress(){

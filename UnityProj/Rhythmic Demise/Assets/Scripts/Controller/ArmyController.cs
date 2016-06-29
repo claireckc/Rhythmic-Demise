@@ -8,6 +8,8 @@ public class ArmyController : MonoBehaviour {
     private List<Character> army;
     private Character leader;
 
+    public Enums.PlayerState currentAction;
+
 	// Use this for initialization
 	void Start () {
 	}
@@ -24,18 +26,6 @@ public class ArmyController : MonoBehaviour {
 
     public void setCurrentState(Enums.PlayerState action)
     {
-        /*if (action == Enums.PlayerState.Skill)
-        {
-            leader.setCurrentState(action);
-        }
-        else
-        {
-            foreach (Character c in army)
-            {
-                c.setCurrentState(action);
-            }
-        }*/
-
         foreach (Character c in army)
         {
             c.setCurrentState(action);
@@ -47,6 +37,15 @@ public class ArmyController : MonoBehaviour {
         foreach (Character c in army)
         {
             c.reset();
+        }
+    }
+
+    public void moveTo(MovingPoint pos)
+    {
+        foreach (Character c in army)
+        {
+            c.setCurrentState(Enums.PlayerState.Move);
+            c.moveTo(pos);
         }
     }
 }

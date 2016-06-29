@@ -51,7 +51,7 @@ public class UIManager_Start : MonoBehaviour {
 
 	public void StartPress_Start(){
 
-		SceneManager.LoadScene ("TroopSelection");
+		//SceneManager.LoadScene ("TroopSelection");
 	}
 
 	public void OptionPress_Start(){

@@ -117,8 +117,6 @@ public class TowerAI : MonoBehaviour {
 		if (other.tag == "Enemy") {
 			enemyList.Add (other.gameObject);
         }
-
-		//printList ();
 	}
 
 	void OnTriggerExit2D(Collider2D other){    
@@ -136,12 +134,7 @@ public class TowerAI : MonoBehaviour {
             }
 
             //closestEnemy = null;
-		}
-
-        
-
-		//printList ();
-        
+		}    
 	}
 
 	void printList(){

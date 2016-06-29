@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 [System.Serializable]
 public class Enums : MonoBehaviour {
     public enum CharacterType { Cancer, Diabetic };
-    public enum PlayerState { Idle, MoveUp, MoveDown, MoveLeft, MoveRight, Attack, Heal, Skill };
+    public enum PlayerState { Idle, Move, MoveUp, MoveDown, MoveLeft, MoveRight, Attack, Heal, Skill };
 
     public enum JobType {Knight, Archer, Priest}
 
