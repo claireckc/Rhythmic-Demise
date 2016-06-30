@@ -36,6 +36,7 @@ public class PlayerData : MonoBehaviour {
 
         public int topComboCount, resourceAttained, stars;
         public List<int> comboRange;        //size 3
+        public bool isComplete, isCurrent;
     }
 
     [System.Serializable] public class MainMap
@@ -119,7 +120,7 @@ public class PlayerData : MonoBehaviour {
 
                 tp.skills.Add(sk);
             }
-
+           
             playerdata.troopData.Add(tp);
         }
 
@@ -151,6 +152,9 @@ public class PlayerData : MonoBehaviour {
                     stage.comboRange = new List<int>();
                     for (int j = 0; j < 3; j++)
                         stage.comboRange.Add(0);
+                    stage.isComplete = false;
+                    stage.isCurrent = false;
+                    newMap.stages.Add(stage);
                 }
             }
             newMap.avgStars = 0;
