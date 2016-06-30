@@ -14,12 +14,12 @@ public class ShootingTower : Tower {
         {
             base.Update();
 
-            if (closestEnemy != null)
+            if (closestPlayer != null)
             {
                 //start attacking it
                 if (Time.time >= nextFireTime)
                 {
-                    AttackEnemy();
+                    Attack();
                 }
             }
         }

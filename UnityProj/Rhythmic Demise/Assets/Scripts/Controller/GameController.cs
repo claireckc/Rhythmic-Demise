@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class GameController : MonoBehaviour {
+    public static GameController gameController;
 
     public string moveSequence;
 
@@ -16,7 +17,7 @@ public class GameController : MonoBehaviour {
     private float startDelayTime = 1f;
 
     public MovingPoint currPos;
-    
+
     //UI
     public Text archerCountText;
     public Text priestCountText;
@@ -55,7 +56,9 @@ public class GameController : MonoBehaviour {
                 case "1111":
                     if (currPos.left != null)
                     {
-                        armyController.setCurrentState(Enums.PlayerState.MoveLeft);
+                        armyController.setCurrentState(Enums.PlayerState.Move);
+                        armyController.moveTo(currPos.left);
+                        currPos = currPos.left;
                     }
                     break;
                 //move right
@@ -71,14 +74,18 @@ public class GameController : MonoBehaviour {
                 case "3333":
                     if (currPos.up != null)
                     {
-                        armyController.setCurrentState(Enums.PlayerState.MoveUp);
+                        armyController.setCurrentState(Enums.PlayerState.Move);
+                        armyController.moveTo(currPos.up);
+                        currPos = currPos.up;
                     }
                     break;
                 //move down
                 case "4444":
                     if (currPos.bottom != null)
                     {
-                        armyController.setCurrentState(Enums.PlayerState.MoveDown);
+                        armyController.setCurrentState(Enums.PlayerState.Move);
+                        armyController.moveTo(currPos.bottom);
+                        currPos = currPos.bottom;
                     }
                     break;
                 //normal attack
@@ -128,8 +135,18 @@ public class GameController : MonoBehaviour {
         moveSequence += hit;
     }
 
+    public void addScore(int point)
+    {
+        ScoreManager.score += point;
+    }
+
     public void clearSequence()
     {
         moveSequence = "";
+    }
+
+    public void LoadLevel(string level)
+    {
+        Application.LoadLevel(level);
     }
 }

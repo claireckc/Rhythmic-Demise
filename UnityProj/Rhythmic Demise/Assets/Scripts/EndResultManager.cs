@@ -21,7 +21,7 @@ public class EndResultManager : MonoBehaviour {
             audio.Stop();
             anim.SetTrigger("GameOver");
         }
-        else if (gc.currPos.name == "MovingPoint6")
+        else if (gc.currPos.name == "EndPoint")
         {
             audio.Stop();
             anim.SetTrigger("Finish");

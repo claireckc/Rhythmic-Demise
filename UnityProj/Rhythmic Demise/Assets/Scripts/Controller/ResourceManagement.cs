@@ -13,6 +13,7 @@ public class ResourceManagement : MonoBehaviour {
     public Canvas chooseCanvas, mainCanvas;
     public Text resourceText, energyText;
     public Text countText1, countText2, countText3;
+    public UnityEngine.UI.Button playButton;
     private int slotClicked;
     
     private Sprite originalSprite1, originalSprite2, originalSprite3;
@@ -54,6 +55,8 @@ public class ResourceManagement : MonoBehaviour {
         countText1 = countText1.GetComponent<Text>();
         countText2 = countText2.GetComponent<Text>();
         countText3 = countText3.GetComponent<Text>();
+
+        playButton = playButton.GetComponent<UnityEngine.UI.Button>();
         
         originalSprite1 = slot1.sprite;
         originalSprite2 = slot2.sprite;
@@ -151,6 +154,51 @@ public class ResourceManagement : MonoBehaviour {
                     countText3.text = PlayerData.playerdata.troopSelected[i].count.ToString();
             }
         }
+
+        int charCount = 0;
+        for(int i = 0; i < PlayerData.playerdata.troopSelected.Count; i++)
+        {
+            if (PlayerData.playerdata.troopSelected[i].troop.job != Enums.JobType.None)
+                charCount++;
+        }
+
+        if (charCount == 0)
+            playButton.interactable = false;
+        else
+            playButton.interactable = true;
+    }
+
+    public void Main_PlayPress()
+    {
+        for(int i = 0; i < PlayerData.playerdata.mapProgress.Count; i++)
+        {
+            switch (PlayerData.playerdata.mapProgress[i].mapName)
+            {
+                case Enums.MainMap.Mouth:
+
+                    for(int j = 0; j < PlayerData.playerdata.mapProgress[i].stages.Count; j++)
+                    {
+                        if(!PlayerData.playerdata.mapProgress[i].stages[j].isComplete && PlayerData.playerdata.mapProgress[i].stages[j].isCurrent)
+                        {
+                            switch (PlayerData.playerdata.mapProgress[i].stages[j].mapId)
+                            {
+                                case 0:
+                                    Application.LoadLevel("TutorialScene");
+                                    break;
+
+                                case 1:
+                                    Application.LoadLevel("Tutorial2Scene");
+                                    break;
+
+                                case 2:
+                                    Application.LoadLevel("Tutorial3Scene");
+                                    break;
+                            }
+                        }
+                    }
+                    break;
+            }
+        }
     }
 
     public void Slot1_Click()
@@ -175,7 +223,6 @@ public class ResourceManagement : MonoBehaviour {
     {
         if (PlayerData.playerdata.troopSelected[0].troop.job != Enums.JobType.None)
         {
-            print(PlayerData.playerdata.totalResource);
             if (PlayerData.playerdata.totalResource >= PlayerData.playerdata.troopSelected[0].troop.resourceNeeded && PlayerData.playerdata.totalResource != 0)
             {
                 //allow summoning
@@ -554,7 +601,6 @@ public class ResourceManagement : MonoBehaviour {
                 break;
             }
         }
-
         if (PlayerData.playerdata.troopSelected[slotClicked - 1].troop.job != Enums.JobType.Knight && PlayerData.playerdata.troopData[0].level > 0 && allowed)
         {
             PlayerData.playerdata.totalResource += PlayerData.playerdata.troopSelected[slotClicked - 1].troop.resourceNeeded * PlayerData.playerdata.troopSelected.Count;
