@@ -32,10 +32,10 @@ public class Arrow : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Tower")
+        if (other.tag == "Enemy")
         {
-            Tower tower = other.gameObject.GetComponent<Tower>();
-            tower.TakeDamage(damage);
+            Enemy e = other.gameObject.GetComponent<Enemy>();
+            e.TakeDamage(damage);
             Destroy(gameObject);
         }
     }

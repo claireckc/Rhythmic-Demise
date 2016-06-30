@@ -2,43 +2,24 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Tower : MonoBehaviour {
+public class Tower : Enemy {
 
     //tower
-    protected float currentHealth;
-    protected float maxHealth;
-    protected float damage;
-    protected float cooldown, nextFireTime;
     protected float spawnTime, nextSpawnTime;
     protected float towerWidth, towerHeight;
     protected RectTransform size;
-
-    //enemy
-    protected float closestDist;
-    protected GameObject firstEnemy;
-    protected GameObject closestEnemy;
-    protected GameObject toRemove;
-    protected List<GameObject> enemyList;
 
     //tower inst
     public GameObject arrow, creep;
 
     public GameObject healthBar;
 
-    public bool IsDead
-    {
-        get
-        {
-            return currentHealth <= 0;
-        }
-    }
-
 	// Use this for initialization
 	protected void Start () {
         currentHealth = maxHealth = 2;
-        enemyList = new List<GameObject>();
-        closestDist = 1000.0f;
+        playerList = new List<GameObject>();
         cooldown = nextFireTime = 5.0f;
+
         spawnTime = nextSpawnTime = 10.0f;
 	}
 	
@@ -47,15 +28,45 @@ public class Tower : MonoBehaviour {
         //Set health bar
         SetHealthVisual(currentHealth / maxHealth);
 
-        //update enemy list
-        for (int i = 0; i < enemyList.Count; i++)
+        UpdateEnemyList();
+
+        FindClosestEnemy();
+	}
+
+    protected override void FindClosestEnemy()
+    {
+        if (playerList.Count > 0)
         {
-            Character c = enemyList[i].GetComponent<Character>();
+            //start finding the closest enemy
+            firstPlayer = playerList[0];
+            closestDist = Vector2.Distance(this.transform.position, firstPlayer.transform.position);
+            closestPlayer = firstPlayer;
+
+            foreach (GameObject go in playerList)
+            {
+                float currentDist = Vector2.Distance(this.transform.position, go.transform.position);
+                if (closestDist > currentDist)
+                {
+                    closestDist = currentDist;
+                    closestPlayer = go;
+                    break;
+                }
+            }
+        }
+        else
+            closestPlayer = null;
+    }
+
+    protected override void UpdateEnemyList()
+    {
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            Character c = playerList[i].GetComponent<Character>();
 
             if (c.IsDead)
             {
                 //Need to be re-arrange soon
-                enemyList.Remove(enemyList[i]);
+                playerList.Remove(playerList[i]);
                 GameController gc = GameObject.Find("GameController").GetComponent<GameController>();
                 gc.army.Remove(c);
                 gc.updateUI();
@@ -63,42 +74,21 @@ public class Tower : MonoBehaviour {
                 Destroy(c.gameObject);
             }
         }
+    }
 
-        if (enemyList.Count > 0)
-        {
-            //start finding the closest enemy
-            firstEnemy = enemyList[0];
-            closestDist = Vector2.Distance(this.transform.position, firstEnemy.transform.position);
-            closestEnemy = firstEnemy;
-
-            foreach (GameObject go in enemyList)
-            {
-                float currentDist = Vector2.Distance(this.transform.position, go.transform.position);
-                if (closestDist > currentDist)
-                {
-                    closestDist = currentDist;
-                    closestEnemy = go;
-                    break;
-                }
-            }
-        }
-        else
-            closestEnemy = null;
-	}
-
-    void OnTriggerEnter2D(Collider2D other)
+    protected override void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Enemy")
+        if (other.tag == "Player")
         {
-            enemyList.Add(other.gameObject);
+            playerList.Add(other.gameObject);
         }
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    protected override void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Enemy")
+        if (other.tag == "Player")
         {
-            foreach (GameObject go in enemyList)
+            foreach (GameObject go in playerList)
             {
                 if (other.gameObject == go)
                 {
@@ -109,25 +99,25 @@ public class Tower : MonoBehaviour {
 
             if (toRemove != null)
             {
-                enemyList.Remove(toRemove);
+                playerList.Remove(toRemove);
             }
 
             //closestEnemy = null;
         }
     }
 
-    protected void AttackEnemy()
+    protected override void Attack()
     {
         nextFireTime = Time.time + cooldown;
 
-        Vector3 dir = closestEnemy.transform.position - this.transform.position;
+        Vector3 dir = closestPlayer.transform.position - this.transform.position;
         float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
 
         GameObject shoot = Instantiate(arrow, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-        shoot.SendMessage("Initialize", closestEnemy);
+        shoot.SendMessage("Initialize", closestPlayer);
     }
 
-    public void TakeDamage(float damage)
+    public override void TakeDamage(float damage)
     {
         FloatingTextController.CreateFloatingText(damage.ToString(), transform);
         currentHealth -= damage;

@@ -22,16 +22,16 @@ public class Archer : Character {
         switch (currentAction)
         {
             case Enums.PlayerState.MoveUp:
-                moveUp();
+                //moveUp();
                 break;
             case Enums.PlayerState.MoveDown:
-                moveDown();
+                //moveDown();
                 break;
             case Enums.PlayerState.MoveLeft:
-                moveLeft();
+                //moveLeft();
                 break;
             case Enums.PlayerState.MoveRight:
-                moveRight();
+                //moveRight();
                 break;
             case Enums.PlayerState.Attack:
                 attack();

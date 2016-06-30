@@ -48,26 +48,6 @@ public class Character : MonoBehaviour {
         SetHealthVisual(currentHealth / maxHealth);
     }
 
-    public void moveUp()
-    {
-        transform.Translate(Vector2.up * (movementSpeed * Time.deltaTime));
-    }
-
-    public void moveDown()
-    {
-        transform.Translate(Vector2.down * (movementSpeed * Time.deltaTime));
-    }
-
-    public void moveLeft()
-    {
-        transform.Translate(Vector2.left * (movementSpeed * Time.deltaTime));
-    }
-
-    public void moveRight()
-    {
-        transform.Translate(Vector2.right * (movementSpeed * Time.deltaTime));
-    }
-
     public void moveTo(MovingPoint pos)
     {
         StartCoroutine(MoveOverSpeed(gameObject, pos.transform.position, movementSpeed));
@@ -82,12 +62,30 @@ public class Character : MonoBehaviour {
         currentAction = currAct;
     }
 
+    protected void UpdateEnemyList()
+    {
+        for (int i = 0; i < enemyList.Count; i++)
+        {
+            Enemy e = enemyList[i].GetComponent<Enemy>();
+
+            if (e.IsDead)
+            {
+                enemyList.Remove(enemyList[i]);
+
+                Destroy(e.gameObject);
+
+                //add score
+                ScoreManager.score += 10;
+            }
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log ("Enter" + other.gameObject.tag);
 
         //add enemy to enemyList if in range of player range
-        if (other.tag == "Tower")
+        if (other.tag == "Enemy")
         {
             enemyList.Add(other.gameObject);
         }
@@ -95,7 +93,7 @@ public class Character : MonoBehaviour {
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Tower")
+        if (other.tag == "Enemy")
         {
             enemyList.Remove(other.gameObject);
         }
@@ -103,17 +101,7 @@ public class Character : MonoBehaviour {
 
     public void findClosestEnemy()
     {
-        for (int i = 0; i < enemyList.Count; i++)
-        {
-            Tower e = enemyList[i].GetComponent<Tower>();
-
-            if (e.IsDead)
-            {
-                enemyList.Remove(enemyList[i]);
-
-                Destroy(e.gameObject);
-            }
-        }
+        UpdateEnemyList();
 
         if (enemyList.Count > 0)
         {

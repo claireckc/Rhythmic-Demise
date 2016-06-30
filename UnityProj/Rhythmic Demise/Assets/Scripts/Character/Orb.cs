@@ -34,7 +34,7 @@ public class Orb : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Tower")
+        if (other.tag == "Enemy")
         {
             TowerAI tower = other.gameObject.GetComponent<TowerAI>();
             tower.TakeDamage(damage);
