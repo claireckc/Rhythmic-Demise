@@ -46,6 +46,7 @@ public class MouthEventHandler : MonoBehaviour {
             {
                 case "Mouth_1":
                     //go into troop selection screen
+                    Application.LoadLevel("Resource Management");
                     break;
             }
 
