@@ -31,7 +31,7 @@ public class GameController : MonoBehaviour {
     {
         moveSequence = "";
         armyController = gameObject.AddComponent<ArmyController>();
-        armyController.initArmy(army);
+        armyController.initArmy(army, currPos);
         Invoke("updateUI", startDelayTime);
     }
 
@@ -62,7 +62,7 @@ public class GameController : MonoBehaviour {
                     }
                     break;
                 //move right
-                case "2222":
+                case "1143":
                     if (currPos.right != null)
                     {
                         armyController.setCurrentState(Enums.PlayerState.Move);
@@ -71,7 +71,7 @@ public class GameController : MonoBehaviour {
                     }
                     break;
                 //move up
-                case "3333":
+                case "1132":
                     if (currPos.up != null)
                     {
                         armyController.setCurrentState(Enums.PlayerState.Move);
@@ -80,7 +80,7 @@ public class GameController : MonoBehaviour {
                     }
                     break;
                 //move down
-                case "4444":
+                case "1134":
                     if (currPos.bottom != null)
                     {
                         armyController.setCurrentState(Enums.PlayerState.Move);
@@ -89,11 +89,11 @@ public class GameController : MonoBehaviour {
                     }
                     break;
                 //normal attack
-                case "1131":
+                case "3332":
                     armyController.setCurrentState(Enums.PlayerState.Attack);
                     break;
                 //use special skill
-                case "3343":
+                case "1234":
                     armyController.setCurrentState(Enums.PlayerState.Skill);
                     break;
             }

@@ -6,19 +6,40 @@ public class Button : MonoBehaviour {
     public int buttonID;
     public GameController gc;
 
-    private ParticleSystem particleBurst;
+    public bool active;
 
 	// Use this for initialization
 	void Start () {
-        particleBurst = GetComponent<ParticleSystem>();
+        InvokeRepeating("Trigger", 0f, 0.5f);
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
+        
 	}
 
-    void OnTriggerStay2D(Collider2D other)
+    void Trigger()
     {
+        active = true;
+
+        Invoke("Trigger2", 0.3f);
+    }
+
+    void Trigger2()
+    {
+        active = false;
+    }
+
+    public void Hit()
+    {
+        if (active)
+        {
+            Debug.Log("A");
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {/*
         if (other.tag == "Note")
         {
             if (!gc.bs.moveActionTurn)
@@ -48,6 +69,8 @@ public class Button : MonoBehaviour {
                     gc.addHit("4");
                 }
             }
-        }
+        }*/
+
+        
     }
 }
