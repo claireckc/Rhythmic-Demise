@@ -8,28 +8,28 @@ public class PlayerData : MonoBehaviour {
 
     public static PlayerData playerdata;
 
-    [System.Serializable] public struct Troop
+    [System.Serializable] public class Troop
     {
         public Enums.JobType job;
-        public int level;
+        public int level, resourceNeeded;
         public float currentHealth, maxHealth, attack, defenseRating;
         public List<Skills> skills;        //3
     }
 
-    [System.Serializable] public struct Skills
+    [System.Serializable] public class Skills
     {
         public Enums.SkillName skillName;
         public float skillValue;
         public int skillLevel;      //0 means locked, 1 and above means unlocked
     }
 
-    [System.Serializable]public struct TroopSelected
+    [System.Serializable]public class TroopSelected
     {
         public Troop troop;
         public int count;
     }
 
-    [System.Serializable] public struct SubMap
+    [System.Serializable] public class SubMap
     {
         public Enums.MainMap parentMap;
         public int mapId;
@@ -38,7 +38,7 @@ public class PlayerData : MonoBehaviour {
         public List<int> comboRange;        //size 3
     }
 
-    [System.Serializable] public struct MainMap
+    [System.Serializable] public class MainMap
     {
         public Enums.MainMap mapName;
         public List<SubMap> stages;
@@ -61,19 +61,27 @@ public class PlayerData : MonoBehaviour {
     //settings
     public float globalVolume, effectsVolume, buttonAlpha;
 
+    private Troop tp;
+    private Skills sk;
+    private MainMap newMap;
+    private TroopSelected ts;
+    private SubMap stage;
+
     public void Init()
     {
-        leaderType = Enums.JobType.None;
-        skillSelected = Enums.SkillName.None;
-        pathogenType = Enums.CharacterType.None;
-        globalVolume = effectsVolume = buttonAlpha = 1.0f;
-        totalResource = 5;
-        totalEnergy = 0;
+        playerdata.leaderType = Enums.JobType.None;
+        playerdata.skillSelected = Enums.SkillName.None;
+        playerdata.pathogenType = Enums.CharacterType.None;
+        playerdata.globalVolume = effectsVolume = buttonAlpha = 1.0f;
+        playerdata.totalResource = 5;
+        playerdata.totalEnergy = 0;
+        playerdata.troopData = new List<Troop>();
+        playerdata.troopSelected = new List<TroopSelected>();
 
         //for troop data
         for(int i = 0; i < 3; i++)
         {
-            Troop tp = new Troop();
+            tp = new Troop();
             tp.skills = new List<Skills>();
             tp.job = (Enums.JobType)i + 1;
             if (i == 0)
@@ -84,7 +92,7 @@ public class PlayerData : MonoBehaviour {
             //MICHAEL SET MAX HEALTH, ATTACK, DEFENSERATING HERE, THIS IS INITIALIZATION
             for(int j = 0; j < 3; j++)
             {
-                Skills sk = new Skills();
+                sk = new Skills();
                 switch (i)
                 {
                     //if knight
@@ -110,23 +118,24 @@ public class PlayerData : MonoBehaviour {
                 }
 
                 tp.skills.Add(sk);
-                troopData.Add(tp);
             }
+
+            playerdata.troopData.Add(tp);
         }
 
         //for troop selected
         for(int i = 0; i < 3; i++)
         {
-            TroopSelected tp = new TroopSelected();
-            tp.troop = new Troop();
-            tp.count = 0;
-            troopSelected.Add(tp);
+            ts = new TroopSelected();
+            ts.troop = new Troop();
+            ts.count = 0;
+            playerdata.troopSelected.Add(ts);
         }
 
         //for map
         for(int i = 0; i < Enums.MAINMAPCOUNT; i++)
         {
-            MainMap newMap = new MainMap();
+            newMap = new MainMap();
             newMap.mapName = (Enums.MainMap)i;
 
             //initialize the number of substages, when everything is confirmed
@@ -135,7 +144,7 @@ public class PlayerData : MonoBehaviour {
             {
                 for (int k = 0; k < 3; k++) {
 
-                    SubMap stage = new SubMap();
+                    stage = new SubMap();
                     stage.parentMap = newMap.mapName;
                     stage.mapId = k;
                     stage.topComboCount = stage.resourceAttained = stage.stars = 0;
@@ -146,7 +155,7 @@ public class PlayerData : MonoBehaviour {
             }
             newMap.avgStars = 0;
             newMap.isComplete = false;
-            mapProgress.Add(newMap);
+            playerdata.mapProgress.Add(newMap);
 
         }
     }
@@ -163,7 +172,6 @@ public class PlayerData : MonoBehaviour {
     }*/
     public void Awake()
     {
-        Init();
         if (playerdata != null)
             Destroy(gameObject);
         else
@@ -175,5 +183,6 @@ public class PlayerData : MonoBehaviour {
     }
     public void Start()
     {
+        Init();
     }
 }
