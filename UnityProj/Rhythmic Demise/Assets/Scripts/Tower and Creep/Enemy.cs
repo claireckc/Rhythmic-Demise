@@ -2,19 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Enemy : MonoBehaviour {
+public abstract class Enemy : MonoBehaviour {
 
     protected float currentHealth;
     protected float maxHealth;
     protected float damage;
+    protected float cooldown, nextFireTime;
 
     protected float closestDist;
     protected GameObject firstPlayer;
     protected GameObject closestPlayer;
     protected GameObject toRemove;
     protected List<GameObject> playerList;
-
-    public GameObject healthBar;
 
     public bool IsDead
     {
@@ -33,4 +32,11 @@ public class Enemy : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    protected abstract void Attack();
+    protected abstract void FindClosestEnemy();
+    protected abstract void UpdateEnemyList();
+    protected abstract void OnTriggerEnter2D(Collider2D other);
+    protected abstract void OnTriggerExit2D(Collider2D other);
+    public abstract void TakeDamage(float damage);
 }
