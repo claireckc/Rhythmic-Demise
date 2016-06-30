@@ -31,7 +31,7 @@ public class ProjectileController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
-		if (other.tag == "Enemy") {
+		if (other.tag == "Player") {
 			//Debug.Log ("Hit");
             Character player = other.GetComponent<Character>();
             player.TakeDamage(1);
@@ -40,7 +40,7 @@ public class ProjectileController : MonoBehaviour {
 	}
 
 	void OnTriggerExit2D(Collider2D other){
-		if(other.tag == "Enemy")
+		if(other.tag == "Player")
 			Destroy (this);
 	}
 }
