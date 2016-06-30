@@ -19,9 +19,13 @@ public class ArmyController : MonoBehaviour {
 	
 	}
 
-    public void initArmy(List<Character> a)
+    public void initArmy(List<Character> a, MovingPoint currPos)
     {
         army = a;
+        foreach (Character c in army)
+        {
+            c.transform.position = currPos.transform.position;
+        }
     }
 
     public void setCurrentState(Enums.PlayerState action)
