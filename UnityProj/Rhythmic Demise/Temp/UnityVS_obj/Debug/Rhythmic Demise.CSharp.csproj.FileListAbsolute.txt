@@ -1,0 +1,17 @@
+D:\Github\RD_Unity\Rhythmic-Demise\UnityProj\Rhythmic Demise\Temp\UnityVS_bin\Debug\Assembly-CSharp.dll
+D:\Github\RD_Unity\Rhythmic-Demise\UnityProj\Rhythmic Demise\Temp\UnityVS_bin\Debug\Assembly-CSharp.pdb
+D:\Github\RD_Unity\Rhythmic-Demise\UnityProj\Rhythmic Demise\Temp\UnityVS_bin\Debug\UnityEditor.dll
+D:\Github\RD_Unity\Rhythmic-Demise\UnityProj\Rhythmic Demise\Temp\UnityVS_bin\Debug\UnityEditor.iOS.Extensions.Common.dll
+D:\Github\RD_Unity\Rhythmic-Demise\UnityProj\Rhythmic Demise\Temp\UnityVS_bin\Debug\UnityEditor.iOS.Extensions.Xcode.dll
+D:\Github\RD_Unity\Rhythmic-Demise\UnityProj\Rhythmic Demise\Temp\UnityVS_bin\Debug\UnityEngine.dll
+D:\Github\RD_Unity\Rhythmic-Demise\UnityProj\Rhythmic Demise\Temp\UnityVS_bin\Debug\UnityEngine.Networking.dll
+D:\Github\RD_Unity\Rhythmic-Demise\UnityProj\Rhythmic Demise\Temp\UnityVS_bin\Debug\UnityEngine.UI.dll
+D:\Github\RD_Unity\Rhythmic-Demise\UnityProj\Rhythmic Demise\Temp\UnityVS_bin\Debug\UnityEngine.xml
+D:\Github\RD_Unity\Rhythmic-Demise\UnityProj\Rhythmic Demise\Temp\UnityVS_bin\Debug\UnityEngine.UI.xml
+D:\Github\RD_Unity\Rhythmic-Demise\UnityProj\Rhythmic Demise\Temp\UnityVS_bin\Debug\UnityEngine.Networking.xml
+D:\Github\RD_Unity\Rhythmic-Demise\UnityProj\Rhythmic Demise\Temp\UnityVS_bin\Debug\UnityEditor.xml
+D:\Github\RD_Unity\Rhythmic-Demise\UnityProj\Rhythmic Demise\Temp\UnityVS_bin\Debug\UnityEditor.iOS.Extensions.Xcode.xml
+D:\Github\RD_Unity\Rhythmic-Demise\UnityProj\Rhythmic Demise\Temp\UnityVS_bin\Debug\UnityEditor.iOS.Extensions.Common.xml
+D:\Github\RD_Unity\Rhythmic-Demise\UnityProj\Rhythmic Demise\Temp\UnityVS_obj\Debug\Rhythmic Demise.CSharp.csprojResolveAssemblyReference.cache
+D:\Github\RD_Unity\Rhythmic-Demise\UnityProj\Rhythmic Demise\Temp\UnityVS_obj\Debug\Assembly-CSharp.dll
+D:\Github\RD_Unity\Rhythmic-Demise\UnityProj\Rhythmic Demise\Temp\UnityVS_obj\Debug\Assembly-CSharp.pdb
