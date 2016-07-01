@@ -87,7 +87,7 @@ public class GameController : MonoBehaviour {
             switch (moveSequence)
             {
                 //move left
-                case "1111":
+                case "1143":
                     if (currPos.left != null)
                     {
                         armyController.setCurrentState(Enums.PlayerState.Move);
@@ -96,7 +96,7 @@ public class GameController : MonoBehaviour {
                     }
                     break;
                 //move right
-                case "1143":
+                case "1134":
                     if (currPos.right != null)
                     {
                         armyController.setCurrentState(Enums.PlayerState.Move);
@@ -105,7 +105,7 @@ public class GameController : MonoBehaviour {
                     }
                     break;
                 //move up
-                case "1132":
+                case "1144":
                     if (currPos.up != null)
                     {
                         armyController.setCurrentState(Enums.PlayerState.Move);
@@ -114,7 +114,7 @@ public class GameController : MonoBehaviour {
                     }
                     break;
                 //move down
-                case "1134":
+                case "1133":
                     if (currPos.bottom != null)
                     {
                         armyController.setCurrentState(Enums.PlayerState.Move);
