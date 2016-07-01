@@ -13,13 +13,7 @@ public class NoteControl : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         transform.Translate(speed * Time.deltaTime);
-
 	}
-
-    void OnTriggerEnter2D()
-    {
-
-    }
 
     void OnTriggerExit2D(Collider2D other)
     {

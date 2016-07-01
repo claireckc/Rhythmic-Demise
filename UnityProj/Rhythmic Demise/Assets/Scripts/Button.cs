@@ -10,14 +10,14 @@ public class Button : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        InvokeRepeating("Trigger", 0f, 0.5f);
+        //InvokeRepeating("Trigger", 0f, 0.5f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
         
 	}
-
+    /*
     void Trigger()
     {
         active = true;
@@ -36,7 +36,7 @@ public class Button : MonoBehaviour {
         {
             Debug.Log("A");
         }
-    }
+    }*/
 
     void OnTriggerStay2D(Collider2D other)
     {/*
