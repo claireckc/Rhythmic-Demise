@@ -25,27 +25,22 @@ public class EndResultManager : MonoBehaviour {
         }
         else if (gc.currPos.name == "EndPoint")
         {
-            audio.Stop();
-            anim.SetTrigger("Finish");
             isComplete = true;
         }
 
         //Just for prototype, need to be arrange later
-
-        if (GameObject.Find("Uvula"))
+        if (PlayerData.playerdata.mapProgress[0].stages[2].isCurrent)
         {
-            Enemy boss = GameObject.Find("Uvula").GetComponent<Enemy>();
-
-            if (boss.IsDead)
-            {
-                audio.Stop();
-                anim.SetTrigger("Finish");
+            if(!GameObject.Find("Uvula")){
                 isComplete = true;
             }
         }
 
         if (isComplete)
         {
+            audio.Stop();
+            anim.SetTrigger("Finish");
+
             for (int i = 0; i < PlayerData.playerdata.mapProgress.Count; i++)
             {
                 switch (PlayerData.playerdata.mapProgress[i].mapName)
