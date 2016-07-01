@@ -26,8 +26,11 @@ public class PauseMenu : MonoBehaviour {
             pauseMenuCanvas.SetActive(false);
             Time.timeScale = 1f;
 
-            if(!audio.isPlaying)
+            if (!audio.isPlaying)
+            {
                 audio.Play();
+                Debug.Log("A");
+            }
         }
 	}
 
