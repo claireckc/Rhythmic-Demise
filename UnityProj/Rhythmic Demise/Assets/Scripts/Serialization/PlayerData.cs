@@ -68,7 +68,7 @@ public class PlayerData : MonoBehaviour {
     private TroopSelected ts;
     private SubMap stage;
 
-    public void Init()
+    public void Init()  
     {
         playerdata.leaderType = Enums.JobType.None;
         playerdata.skillSelected = Enums.SkillName.None;

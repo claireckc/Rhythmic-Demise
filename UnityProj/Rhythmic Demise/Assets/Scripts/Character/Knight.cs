@@ -34,7 +34,7 @@ public class Knight : Character {
                 if (closestEnemy != null)
                 {
                     float distance = Vector3.Distance(transform.position, closestEnemy.transform.position);
-                    if (distance < 3)
+                    if (distance < 2)
                     {
                         attack();
                     }
@@ -65,7 +65,7 @@ public class Knight : Character {
         {
             if (enemyList.Count > 0)
             {
-                TowerAI enemy = closestEnemy.GetComponent<TowerAI>();
+                Enemy enemy = closestEnemy.GetComponent<Enemy>();
                 enemy.TakeDamage(damage);
                 isAttacking = true;
             }
