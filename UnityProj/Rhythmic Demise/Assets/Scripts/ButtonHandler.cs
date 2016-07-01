@@ -37,7 +37,7 @@ public class ButtonHandler : MonoBehaviour {
     {
         Ray ray = Camera.main.ScreenPointToRay(touchPosition);
         RaycastHit2D rayHit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, 1 << 17);
-
+        
         if (rayHit.collider != null)
         {
             switch (rayHit.collider.name)
