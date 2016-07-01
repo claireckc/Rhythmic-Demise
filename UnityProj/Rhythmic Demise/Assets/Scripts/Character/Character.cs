@@ -50,6 +50,7 @@ public class Character : MonoBehaviour {
 
     public void moveTo(MovingPoint pos)
     {
+        transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);
         StartCoroutine(MoveOverSpeed(gameObject, pos.transform.position, movementSpeed));
     }
 

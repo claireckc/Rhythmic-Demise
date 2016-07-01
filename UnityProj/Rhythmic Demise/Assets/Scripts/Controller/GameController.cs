@@ -27,17 +27,51 @@ public class GameController : MonoBehaviour {
     private int priestCount;
     private int knightCount;
 
+    public Knight knightPrefab;
+    public Archer archerPrefab;
+    public Priest priestPrefab;
+
     void init()
     {
-        moveSequence = "";
+        
         armyController = gameObject.AddComponent<ArmyController>();
-        armyController.initArmy(army, currPos);
-        Invoke("updateUI", startDelayTime);
+        //armyController.initArmy(army, currPos);
+
+        knightCount = PlayerData.playerdata.troopSelected[0].count;
+        for (int i = 0; i < knightCount; i++)
+        {
+            Knight k = Instantiate(knightPrefab, currPos.transform.position, knightPrefab.transform.rotation) as Knight;
+            k.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            army.Add(k);
+        }
+
+        archerCount = PlayerData.playerdata.troopSelected[1].count;
+        for (int i = 0; i < archerCount; i++)
+        {
+            Archer a = Instantiate(archerPrefab, currPos.transform.position, archerPrefab.transform.rotation) as Archer;
+            a.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            army.Add(a);
+        }
+
+        priestCount = PlayerData.playerdata.troopSelected[2].count;
+        for (int i = 0; i < priestCount; i++)
+        {
+            Priest p = Instantiate(priestPrefab, currPos.transform.position, priestPrefab.transform.rotation) as Priest;
+            p.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            army.Add(p);
+        }
+
+        armyController.initArmy(army,currPos);
     }
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         init();
+
+        moveSequence = "";
+        Invoke("updateUI", startDelayTime);
+
         FloatingTextController.Initialize();
 	}
 	
