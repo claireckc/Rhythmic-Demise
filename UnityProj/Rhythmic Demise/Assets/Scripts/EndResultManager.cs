@@ -9,6 +9,8 @@ public class EndResultManager : MonoBehaviour {
 
     Animator anim;
 
+    bool isComplete;
+
 	void Awake () {
         anim = GetComponent<Animator>();
 
@@ -25,6 +27,42 @@ public class EndResultManager : MonoBehaviour {
         {
             audio.Stop();
             anim.SetTrigger("Finish");
+            isComplete = true;
+        }
+
+        //Just for prototype, need to be arrange later
+
+        if (GameObject.Find("Uvula"))
+        {
+            Enemy boss = GameObject.Find("Uvula").GetComponent<Enemy>();
+
+            if (boss.IsDead)
+            {
+                audio.Stop();
+                anim.SetTrigger("Finish");
+                isComplete = true;
+            }
+        }
+
+        if (isComplete)
+        {
+            for (int i = 0; i < PlayerData.playerdata.mapProgress.Count; i++)
+            {
+                switch (PlayerData.playerdata.mapProgress[i].mapName)
+                {
+                    case Enums.MainMap.Mouth:
+
+                        for (int j = 0; j < PlayerData.playerdata.mapProgress[i].stages.Count; j++)
+                        {
+                            if (!PlayerData.playerdata.mapProgress[i].stages[j].isComplete && PlayerData.playerdata.mapProgress[i].stages[j].isCurrent)
+                            {
+                                PlayerData.playerdata.mapProgress[i].stages[j].isComplete = true;
+                                PlayerData.playerdata.mapProgress[i].stages[j].isCurrent = false;
+                            }
+                        }
+                        break;
+                }
+            }
         }
 	}
 }

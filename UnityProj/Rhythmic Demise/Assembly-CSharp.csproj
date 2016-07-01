@@ -76,6 +76,7 @@
      <Compile Include="Assets\Scripts\ScoreManager.cs" />
      <Compile Include="Assets\Scripts\Serialization\PlayerData.cs" />
      <Compile Include="Assets\Scripts\Serialization\SaveLoadManager.cs" />
+     <Compile Include="Assets\Scripts\StageClearManager.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\BaseTower.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\CreepAI.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\Enemy.cs" />

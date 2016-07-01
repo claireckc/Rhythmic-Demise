@@ -9,7 +9,7 @@ public class Uvula : Enemy {
     public GameObject healthBar;
 
 	void Start () {
-        currentHealth = maxHealth = 10;
+        currentHealth = maxHealth = 4;
         playerList = new List<GameObject>();
         cooldown = nextFireTime = 5.0f;
 	}
@@ -56,17 +56,6 @@ public class Uvula : Enemy {
         }
         else
             closestPlayer = null;
-    }
-
-    protected override void Attack()
-    {
-        nextFireTime = Time.time + cooldown;
-
-        Vector3 dir = closestPlayer.transform.position - this.transform.position;
-        float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
-
-        GameObject shoot = Instantiate(slime, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-        shoot.SendMessage("Initialize", closestPlayer);
     }
 
     protected override void UpdateEnemyList()
@@ -118,12 +107,24 @@ public class Uvula : Enemy {
         }
     }
 
+    protected override void Attack()
+    {
+        nextFireTime = Time.time + cooldown;
+
+        Vector3 dir = closestPlayer.transform.position - this.transform.position;
+        float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
+
+        GameObject shoot = Instantiate(slime, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
+        shoot.SendMessage("Initialize", closestPlayer);
+    }
+
     public override void TakeDamage(float damage)
     {
         FloatingTextController.CreateFloatingText(damage.ToString(), transform);
         currentHealth -= damage;
     }
 
+    // Health between [0.0f,1.0f] == (currentHealth / totalHealth)
     public void SetHealthVisual(float healthNormalized)
     {
         healthBar.transform.localScale = new Vector3(healthNormalized,
