@@ -6,40 +6,51 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 
 public static class SaveLoadManager{
+
+    public static BinaryFormatter bf = new BinaryFormatter();
     
     public static void SaveAllInformation(PlayerData pd)
     {
-        Debug.Log("dont exist");
-        BinaryFormatter bf = new BinaryFormatter();
-        Debug.Log("1");
+        PlayerData data = new PlayerData();
+        data = pd;
+        Debug.Log("dont exist: " + data.pathogenType);
+        Debug.Log("1 save");
         FileStream stream = new FileStream(Application.persistentDataPath + "/player.sav", FileMode.Create);
-        Debug.Log("2");
+        Debug.Log("2 save");
 
-        bf.Serialize(stream, pd);
-        Debug.Log("3");
+        bf.Serialize(stream, data);
+        Debug.Log("3 save");
         stream.Close();
     }
 
-    public static PlayerData LoadInformation()
+    public static void LoadInformation()
     {
-        PlayerData pd = null;
         if (File.Exists(Application.persistentDataPath + "/player.sav"))
         {
             Debug.Log("exist: " + Application.persistentDataPath + "/player.sav");
-            BinaryFormatter bf = new BinaryFormatter();
-            Debug.Log("1");
+            Debug.Log("1 load");
             FileStream stream = new FileStream(Application.persistentDataPath + "/player.sav", FileMode.Open);
-            Debug.Log("2");
+            Debug.Log("2 load");
 
-            pd = bf.Deserialize(stream) as PlayerData;
-            Debug.Log("3");
+            PlayerScript.playerdata = bf.Deserialize(stream) as PlayerData;
+            Debug.Log("3 load");
 
             stream.Close();
-            Debug.Log("Finish loading");
+            Debug.Log("Finish loading: " + PlayerScript.playerdata.pathogenType);
             
         }
+    }
 
-        return pd;
+    public static void EraseInformation()
+    {
+        if(File.Exists(Application.persistentDataPath + "/player.sav"))
+        {
+            Debug.Log("File exists!");
+            File.Delete(Application.persistentDataPath + "/player.sav");
+            Debug.Log(File.Exists(Application.persistentDataPath + "/player.sav"));
+        }
+
     }
     
 }
+

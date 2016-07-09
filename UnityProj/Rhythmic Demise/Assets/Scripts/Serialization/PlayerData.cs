@@ -4,48 +4,8 @@ using System.Collections;
 using UnityEngine.Serialization;
 
 [System.Serializable]
-public class PlayerData : MonoBehaviour {
-
-    public static PlayerData playerdata;
-
-    [System.Serializable] public class Troop
-    {
-        public Enums.JobType job;
-        public int level, resourceNeeded;
-        public float currentHealth, maxHealth, attack, defenseRating;
-        public List<Skills> skills;        //3
-    }
-
-    [System.Serializable] public class Skills
-    {
-        public Enums.SkillName skillName;
-        public float skillValue;
-        public int skillLevel;      //0 means locked, 1 and above means unlocked
-    }
-
-    [System.Serializable]public class TroopSelected
-    {
-        public Troop troop;
-        public int count;
-    }
-
-    [System.Serializable] public class SubMap
-    {
-        public Enums.MainMap parentMap;
-        public int mapId;
-
-        public int topComboCount, resourceAttained, stars;
-        public List<int> comboRange;        //size 3
-        public bool isComplete, isCurrent;
-    }
-
-    [System.Serializable] public class MainMap
-    {
-        public Enums.MainMap mapName;
-        public List<SubMap> stages;
-        public int avgStars;
-        public bool isComplete;
-    }
+public class PlayerData {
+    
     //Resources
     public int totalResource, totalEnergy;
 
@@ -68,16 +28,22 @@ public class PlayerData : MonoBehaviour {
     private TroopSelected ts;
     private SubMap stage;
 
+    public PlayerData()
+    {
+        Init();
+    }
+
     public void Init()  
     {
-        playerdata.leaderType = Enums.JobType.None;
-        playerdata.skillSelected = Enums.SkillName.None;
-        playerdata.pathogenType = Enums.CharacterType.None;
-        playerdata.globalVolume = effectsVolume = buttonAlpha = 1.0f;
-        playerdata.totalResource = 5;
-        playerdata.totalEnergy = 0;
-        playerdata.troopData = new List<Troop>();
-        playerdata.troopSelected = new List<TroopSelected>();
+        Debug.Log("call init in playerdata script");
+        leaderType = Enums.JobType.None;
+        skillSelected = Enums.SkillName.None;
+        pathogenType = Enums.CharacterType.None;
+        globalVolume = effectsVolume = buttonAlpha = 1.0f;
+        totalResource = 5;
+        totalEnergy = 0;
+        troopData = new List<Troop>();
+        troopSelected = new List<TroopSelected>();
 
         //for troop data
         for(int i = 0; i < 3; i++)
@@ -121,7 +87,7 @@ public class PlayerData : MonoBehaviour {
                 if(i == 0)
                 {
                     sk.skillLevel = 1;
-                    /*sk.skillValue = sk.skilllevel * SOMETHING */    //MICHAEL, SET SKILL VALUE HERE, THIS IS INITIALIZATION! KNIGHT SKILL VALUE
+                    /*sk.skillValue = sk.skilllevel * SOMETHING    //MICHAEL, SET SKILL VALUE HERE, THIS IS INITIALIZATION! KNIGHT SKILL VALUE*/
                 }
                 else
                 {
@@ -132,7 +98,7 @@ public class PlayerData : MonoBehaviour {
                 tp.skills.Add(sk);
             }
            
-            playerdata.troopData.Add(tp);
+            troopData.Add(tp);
         }
 
         //for troop selected
@@ -141,9 +107,9 @@ public class PlayerData : MonoBehaviour {
             ts = new TroopSelected();
             ts.troop = new Troop();
             ts.count = 0;
-            playerdata.troopSelected.Add(ts);
+            troopSelected.Add(ts);
         }
-
+        mapProgress = new List<MainMap>();
         //for map
         for(int i = 0; i < Enums.MAINMAPCOUNT; i++)
         {
@@ -170,22 +136,12 @@ public class PlayerData : MonoBehaviour {
             }
             newMap.avgStars = 0;
             newMap.isComplete = false;
-            playerdata.mapProgress.Add(newMap);
+            mapProgress.Add(newMap);
 
         }
     }
 
-    /*public void SaveData()
-    {
-        SaveLoadManager.SaveAllInformation(playerdata);
-    }
-
-    public void LoadData()
-    {
-        PlayerData pdNew = SaveLoadManager.LoadInformation();
-        playerdata = pdNew;
-    }*/
-    public void Awake()
+    /*public void Awake()
     {
         if (playerdata != null)
             Destroy(gameObject);
@@ -199,5 +155,5 @@ public class PlayerData : MonoBehaviour {
     public void Start()
     {
         Init();
-    }
+    }*/
 }
