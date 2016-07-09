@@ -18,7 +18,7 @@ public class PlayerScript : MonoBehaviour {
             if (playerScript == null) {
 
                 print("NUll still");
-                playerScript = new playerScript();
+                playerScript = new PlayerScript();
             }
         }
 
