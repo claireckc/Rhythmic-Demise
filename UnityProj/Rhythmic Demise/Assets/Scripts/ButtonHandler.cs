@@ -45,18 +45,22 @@ public class ButtonHandler : MonoBehaviour {
                 case "Note1(Clone)":
                     buttonClickSound.PlayOneShot(buttonClickSound.clip);
                     gc.addHit("1");
+                    Destroy(rayHit.collider.gameObject);
                     break;
                 case "Note2(Clone)":
                     buttonClickSound.PlayOneShot(buttonClickSound.clip);
                     gc.addHit("2");
+                    Destroy(rayHit.collider.gameObject);
                     break;
                 case "Note3(Clone)":
                     buttonClickSound.PlayOneShot(buttonClickSound.clip);
                     gc.addHit("3");
+                    Destroy(rayHit.collider.gameObject);
                     break;
                 case "Note4(Clone)":
                     buttonClickSound.PlayOneShot(buttonClickSound.clip);
                     gc.addHit("4");
+                    Destroy(rayHit.collider.gameObject);
                     break;
             }
         }

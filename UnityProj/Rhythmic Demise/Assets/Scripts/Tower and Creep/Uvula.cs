@@ -6,12 +6,10 @@ public class Uvula : Enemy {
 
     public GameObject slime;
 
-    public GameObject healthBar;
-
 	void Start () {
         currentHealth = maxHealth = 4;
         playerList = new List<GameObject>();
-        cooldown = nextFireTime = 5.0f;
+        cooldown = nextActionTime = 5.0f;
 	}
 	
 	void Update () {
@@ -26,9 +24,9 @@ public class Uvula : Enemy {
             if (closestPlayer != null)
             {
                 //start attacking it
-                if (Time.time >= nextFireTime)
+                if (Time.time >= nextActionTime)
                 {
-                    Attack();
+                    Action();
                 }
             }
         }
@@ -79,7 +77,7 @@ public class Uvula : Enemy {
 
     protected override void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "PlayerColllider")
         {
             playerList.Add(other.gameObject);
         }
@@ -87,7 +85,7 @@ public class Uvula : Enemy {
 
     protected override void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "PlayerCollider")
         {
             foreach (GameObject go in playerList)
             {
@@ -107,9 +105,9 @@ public class Uvula : Enemy {
         }
     }
 
-    protected override void Attack()
+    protected override void Action()
     {
-        nextFireTime = Time.time + cooldown;
+        nextActionTime = Time.time + cooldown;
 
         Vector3 dir = closestPlayer.transform.position - this.transform.position;
         float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;

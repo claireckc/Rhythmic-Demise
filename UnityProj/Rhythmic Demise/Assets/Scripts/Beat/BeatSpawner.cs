@@ -5,6 +5,8 @@ public class BeatSpawner : MonoBehaviour {
 
     private int moveBeatCounter;
     private int inputBeatCounter;
+    private int beatCounter;
+    private int firstInputBeat;
 
     public GameController gc;
 
@@ -21,6 +23,7 @@ public class BeatSpawner : MonoBehaviour {
     {
         moveBeatCounter = 0;
         inputBeatCounter = 0;
+        beatCounter = 0;
         moveActionTurn = false;
         inputActionTurn = false;
         InvokeRepeating("spawnBeat", 0, 0.5f);
@@ -34,6 +37,8 @@ public class BeatSpawner : MonoBehaviour {
 
     void spawnBeat()
     {
+        beatCounter++;
+
         Instantiate(note1, note1.transform.position, note1.transform.rotation);
         Instantiate(note2, note2.transform.position, note2.transform.rotation);
         Instantiate(note3, note3.transform.position, note3.transform.rotation);
@@ -43,6 +48,24 @@ public class BeatSpawner : MonoBehaviour {
         {
             inputBeatCounter++;
 
+            //determine which beat is the first input
+            if (inputBeatCounter == 1)
+            {
+                firstInputBeat = beatCounter;
+            }
+
+            //if miss
+            if (!gc.lastHit)
+            {
+                inputBeatCounter = 0;
+                inputActionTurn = false;
+
+                gc.clearSequence();
+
+                //reset current streak
+                gc.currentStreak = 0;
+            }
+
             if (inputBeatCounter >= 4)
             {
                 inputBeatCounter = 0;
@@ -50,13 +73,17 @@ public class BeatSpawner : MonoBehaviour {
 
                 gc.clearSequence();
             }
+
+            gc.lastHit = false;
         }
         else if (moveActionTurn)
         {
-            moveBeatCounter++;  
+            moveBeatCounter++;
 
             if (moveBeatCounter >= 4)
             {
+                gc.currentStreak++;
+
                 moveActionTurn = false;
                 moveBeatCounter = 0;
                 gc.armyController.setCurrentState(Enums.PlayerState.Idle);
@@ -64,5 +91,22 @@ public class BeatSpawner : MonoBehaviour {
             }
 
         }
+        //manage if miss the next move after completing a move
+        else if (!gc.lastHit)
+        {
+            gc.clearSequence();
+
+            //reset current streak
+            gc.currentStreak = 0;
+        }
+
+        //check if current streak is the highest streak
+        if (gc.currentStreak > gc.highestStreak)
+        {
+            gc.highestStreak = gc.currentStreak;
+        }
+
+        //reset beat counter
+        if (beatCounter >= 8) { beatCounter = 0; }
     }
 }

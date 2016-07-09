@@ -29,7 +29,6 @@ public class PauseMenu : MonoBehaviour {
             if (!audio.isPlaying)
             {
                 audio.Play();
-                Debug.Log("A");
             }
         }
 	}

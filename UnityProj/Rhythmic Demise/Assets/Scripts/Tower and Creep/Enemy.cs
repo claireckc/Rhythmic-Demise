@@ -7,13 +7,15 @@ public abstract class Enemy : MonoBehaviour {
     protected float currentHealth;
     protected float maxHealth;
     protected float damage;
-    protected float cooldown, nextFireTime;
+    protected float cooldown, nextActionTime;
 
     protected float closestDist;
     protected GameObject firstPlayer;
     protected GameObject closestPlayer;
     protected GameObject toRemove;
     protected List<GameObject> playerList;
+
+    public GameObject healthBar;
 
     public bool IsDead
     {
@@ -33,7 +35,7 @@ public abstract class Enemy : MonoBehaviour {
 	
 	}
 
-    protected abstract void Attack();
+    protected abstract void Action();
     protected abstract void FindClosestEnemy();
     protected abstract void UpdateEnemyList();
     protected abstract void OnTriggerEnter2D(Collider2D other);

@@ -78,12 +78,12 @@
      <Compile Include="Assets\Scripts\Serialization\SaveLoadManager.cs" />
      <Compile Include="Assets\Scripts\StageClearManager.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\BaseTower.cs" />
-     <Compile Include="Assets\Scripts\Tower and Creep\CreepAI.cs" />
+     <Compile Include="Assets\Scripts\Tower and Creep\Creep.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\Enemy.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\MovementHandler.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\ProjectileController.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\ShootingTower.cs" />
-     <Compile Include="Assets\Scripts\Tower and Creep\SpawnAI_Tower.cs" />
+     <Compile Include="Assets\Scripts\Tower and Creep\Spawn_Tower.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\Tower.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\TowerAI.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\Uvula.cs" />

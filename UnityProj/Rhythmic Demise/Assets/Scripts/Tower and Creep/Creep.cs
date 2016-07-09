@@ -2,28 +2,63 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Tower : Enemy {
+public class Creep : Enemy {
 
-    //tower
-    protected float towerWidth, towerHeight;
-    protected RectTransform size;
+    private float movementSpeed;
+    private bool stopAndAttack;
 
 	// Use this for initialization
-	protected void Start () {
-        currentHealth = maxHealth = 2;
+	void Start () {
+        currentHealth = maxHealth = 1;
+        cooldown = nextActionTime = 2.0f;
+        movementSpeed = 1.0f;
+        damage = 0.2f;
+
         playerList = new List<GameObject>();
-        cooldown = nextActionTime = 5.0f;
 	}
-	
-	// Update is called once per frame
-	protected void Update () {
-        //Set health bar
-        SetHealthVisual(currentHealth / maxHealth);
 
-        UpdateEnemyList();
+    void Initialize(GameObject target){
+        closestPlayer = target;
+    }
 
-        FindClosestEnemy();
-	}
+    void Update(){
+        if (!IsDead)
+        {
+            SetHealthVisual(currentHealth / maxHealth);
+
+            //UpdateEnemyList();
+
+            //FindClosestEnemy();
+
+            if (stopAndAttack)
+            {
+                if (closestPlayer != null)
+                {
+                    //start attacking it
+                    if (Time.time >= nextActionTime)
+                    {
+                        Action();
+                    }
+                }
+            }
+            else
+            {
+                Vector3 dir = closestPlayer.transform.position - this.transform.position;
+                float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
+                this.transform.rotation = Quaternion.Euler(0, 0, angle);
+                transform.position = Vector2.MoveTowards(transform.position, closestPlayer.transform.position, movementSpeed * Time.deltaTime);
+            }
+        }
+    }
+
+    protected override void Action()
+    {
+        nextActionTime = Time.time + cooldown;
+
+        //Attack animation start
+        Character c = closestPlayer.GetComponent<Character>();
+        c.TakeDamage(damage);
+    }
 
     protected override void FindClosestEnemy()
     {
@@ -72,30 +107,13 @@ public class Tower : Enemy {
     {
         if (other.tag == "Player")
         {
-            playerList.Add(other.gameObject);
+            stopAndAttack = true;
         }
     }
 
     protected override void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Player")
-        {
-            foreach (GameObject go in playerList)
-            {
-                if (other.gameObject == go)
-                {
-                    toRemove = go;
-                    break;
-                }
-            }
-
-            if (toRemove != null)
-            {
-                playerList.Remove(toRemove);
-            }
-
-            //closestEnemy = null;
-        }
+        stopAndAttack = false;
     }
 
     public override void TakeDamage(float damage)
@@ -104,16 +122,10 @@ public class Tower : Enemy {
         currentHealth -= damage;
     }
 
-    // Health between [0.0f,1.0f] == (currentHealth / totalHealth)
     public void SetHealthVisual(float healthNormalized)
     {
         healthBar.transform.localScale = new Vector3(healthNormalized,
                                                      healthBar.transform.localScale.y,
                                                      healthBar.transform.localScale.z);
     }
-
-    protected override void Action()
-    {
-    }
-
 }

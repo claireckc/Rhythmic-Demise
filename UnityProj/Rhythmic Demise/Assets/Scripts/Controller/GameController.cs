@@ -18,6 +18,10 @@ public class GameController : MonoBehaviour {
 
     public MovingPoint currPos;
 
+    public bool lastHit;
+    public int currentStreak;
+    public int highestStreak;
+
     //UI
     public Text archerCountText;
     public Text priestCountText;
@@ -27,21 +31,32 @@ public class GameController : MonoBehaviour {
     private int priestCount;
     private int knightCount;
 
-    public Knight knightPrefab;
-    public Archer archerPrefab;
-    public Priest priestPrefab;
+    private Knight knightPrefab;
+    private Archer archerPrefab;
+    private Priest priestPrefab;
 
     void init()
     {
-        
+        //init prefab
+        if (PlayerData.playerdata.pathogenType == Enums.CharacterType.Cancer)
+        {
+            knightPrefab = Resources.Load<Knight>("Prefabs/CancerKnight");
+            archerPrefab = Resources.Load<Archer>("Prefabs/CancerArcher");
+            priestPrefab = Resources.Load<Priest>("Prefabs/CancerPriest");
+        }
+        else if (PlayerData.playerdata.pathogenType == Enums.CharacterType.Diabetic)
+        {
+            knightPrefab = Resources.Load<Knight>("Prefabs/DiabeticKnight");
+            archerPrefab = Resources.Load<Archer>("Prefabs/DiabeticArcher");
+            priestPrefab = Resources.Load<Priest>("Prefabs/DiabeticPriest");
+        }
+
         armyController = gameObject.AddComponent<ArmyController>();
-        //armyController.initArmy(army, currPos);
 
         knightCount = PlayerData.playerdata.troopSelected[0].count;
         for (int i = 0; i < knightCount; i++)
         {
             Knight k = Instantiate(knightPrefab, currPos.transform.position, knightPrefab.transform.rotation) as Knight;
-            k.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
             army.Add(k);
         }
 
@@ -49,7 +64,6 @@ public class GameController : MonoBehaviour {
         for (int i = 0; i < archerCount; i++)
         {
             Archer a = Instantiate(archerPrefab, currPos.transform.position, archerPrefab.transform.rotation) as Archer;
-            a.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
             army.Add(a);
         }
 
@@ -57,7 +71,6 @@ public class GameController : MonoBehaviour {
         for (int i = 0; i < priestCount; i++)
         {
             Priest p = Instantiate(priestPrefab, currPos.transform.position, priestPrefab.transform.rotation) as Priest;
-            p.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
             army.Add(p);
         }
 
@@ -167,6 +180,7 @@ public class GameController : MonoBehaviour {
     public void addHit(string hit)
     {
         moveSequence += hit;
+        lastHit = true;
     }
 
     public void addScore(int point)

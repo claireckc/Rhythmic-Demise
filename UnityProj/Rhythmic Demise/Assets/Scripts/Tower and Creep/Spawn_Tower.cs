@@ -1,18 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class ShootingTower : Tower {
+public class Spawn_Tower : Tower {
 
     //tower inst
-    public GameObject arrow;
+    public GameObject creep;
 
-	// Use this for initialization
-	new void Start () {
+    // Use this for initialization
+    new void Start()
+    {
         base.Start();
-	}
-	
-	// Update is called once per frame
-	new void Update () {
+    }
+
+    // Update is called once per frame
+    new void Update()
+    {
         if (!IsDead)
         {
             base.Update();
@@ -26,7 +29,11 @@ public class ShootingTower : Tower {
                 }
             }
         }
-	}
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     protected override void Action()
     {
@@ -35,7 +42,10 @@ public class ShootingTower : Tower {
         Vector3 dir = closestPlayer.transform.position - this.transform.position;
         float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
 
-        GameObject shoot = Instantiate(arrow, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-        shoot.SendMessage("Initialize", closestPlayer);
+        GameObject spawn = Instantiate(creep, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
+        spawn.SendMessage("Initialize", closestPlayer);
+
+        //Decreasing the health
+        TakeDamage(1);
     }
 }

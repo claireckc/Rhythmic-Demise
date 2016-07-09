@@ -41,6 +41,9 @@ public class EndResultManager : MonoBehaviour {
             audio.Stop();
             anim.SetTrigger("Finish");
 
+            //update resources
+            PlayerData.playerdata.totalResource += ScoreManager.score;
+
             for (int i = 0; i < PlayerData.playerdata.mapProgress.Count; i++)
             {
                 switch (PlayerData.playerdata.mapProgress[i].mapName)

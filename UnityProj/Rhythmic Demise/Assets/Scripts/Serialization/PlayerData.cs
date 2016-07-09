@@ -99,12 +99,23 @@ public class PlayerData : MonoBehaviour {
                     //if knight
                     case 0:
                         sk.skillName = (Enums.SkillName)j + 1;
+                        tp.currentHealth = tp.maxHealth = 20;
+                        tp.attack = 1.5f;
+                        tp.defenseRating = 1;
                         break;
                     //if archer
-                    case 1: sk.skillName = (Enums.SkillName)j + 4;
+                    case 1: 
+                        sk.skillName = (Enums.SkillName)j + 4;
+                        tp.currentHealth = tp.maxHealth = 10;
+                        tp.attack = 1f;
+                        tp.defenseRating = 1;
                         break;
                     //if priest
-                    case 2: sk.skillName = (Enums.SkillName)j + 7;
+                    case 2: 
+                        sk.skillName = (Enums.SkillName)j + 7;
+                        tp.currentHealth = tp.maxHealth = 15;
+                        tp.attack = 0.5f;
+                        tp.defenseRating = 1;
                         break;
                 }
                 if(i == 0)

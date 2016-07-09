@@ -50,7 +50,7 @@ public class Knight : Character {
                 }
                 else
                 {
-                    Debug.Log("No enemy in range");
+                    //Debug.Log("No enemy in range");
                 }
                 break;
             case Enums.PlayerState.Skill:

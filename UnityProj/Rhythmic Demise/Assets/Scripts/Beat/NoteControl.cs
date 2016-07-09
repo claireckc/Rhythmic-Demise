@@ -13,14 +13,7 @@ public class NoteControl : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         transform.Translate(speed * Time.deltaTime);
+
+        Destroy(gameObject, 0.5f);
 	}
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.tag == "Button")
-        {
-            Destroy(gameObject);
-        }
-    }
-
 }
