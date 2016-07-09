@@ -67,12 +67,12 @@ public class ResourceManagement : MonoBehaviour {
     public void InitMain()
     {
         //check with playerdata and initialize accordingly
-        resourceText.text = PlayerScript.playerdata.totalResource.ToString();
-        energyText.text = PlayerScript.playerdata.totalEnergy.ToString();
+        resourceText.text = PlayerData.playerdata.totalResource.ToString();
+        energyText.text = PlayerData.playerdata.totalEnergy.ToString();
 
-        for(int i = 0; i < PlayerScript.playerdata.troopSelected.Count; i++)
+        for(int i = 0; i < PlayerData.playerdata.troopSelected.Count; i++)
         {
-            if(PlayerScript.playerdata.troopSelected[i].troop.job != Enums.JobType.None)
+            if(PlayerData.playerdata.troopSelected[i].troop.job != Enums.JobType.None)
             {
                 if (i == 0)
                     noneText1.enabled = false;
@@ -81,10 +81,10 @@ public class ResourceManagement : MonoBehaviour {
                 else
                     noneText3.enabled = false;
 
-                switch (PlayerScript.playerdata.troopSelected[i].troop.job)
+                switch (PlayerData.playerdata.troopSelected[i].troop.job)
                 {
                     case Enums.JobType.Knight:
-                        if (PlayerScript.playerdata.pathogenType == Enums.CharacterType.Cancer)
+                        if (PlayerData.playerdata.pathogenType == Enums.CharacterType.Cancer)
                         {
                             if (i == 0)
                                 slot1.sprite = cancerKnightSprite;
@@ -104,7 +104,7 @@ public class ResourceManagement : MonoBehaviour {
                         }
                         break;
                     case Enums.JobType.Archer:
-                        if (PlayerScript.playerdata.pathogenType == Enums.CharacterType.Cancer)
+                        if (PlayerData.playerdata.pathogenType == Enums.CharacterType.Cancer)
                         {
                             if (i == 0)
                                 slot1.sprite = cancerArcherSprite;
@@ -125,7 +125,7 @@ public class ResourceManagement : MonoBehaviour {
                         }
                         break;
                     case Enums.JobType.Priest:
-                        if (PlayerScript.playerdata.pathogenType == Enums.CharacterType.Cancer)
+                        if (PlayerData.playerdata.pathogenType == Enums.CharacterType.Cancer)
                         {
                             if (i == 0)
                                 slot1.sprite = cancerPriestSprite;
@@ -147,18 +147,18 @@ public class ResourceManagement : MonoBehaviour {
                         break;
                 }
                 if (i == 0)
-                    countText1.text = PlayerScript.playerdata.troopSelected[i].count.ToString();
+                    countText1.text = PlayerData.playerdata.troopSelected[i].count.ToString();
                 else if (i == 1)
-                    countText2.text = PlayerScript.playerdata.troopSelected[i].count.ToString();
+                    countText2.text = PlayerData.playerdata.troopSelected[i].count.ToString();
                 else if (i == 2)
-                    countText3.text = PlayerScript.playerdata.troopSelected[i].count.ToString();
+                    countText3.text = PlayerData.playerdata.troopSelected[i].count.ToString();
             }
         }
 
         int charCount = 0;
-        for(int i = 0; i < PlayerScript.playerdata.troopSelected.Count; i++)
+        for(int i = 0; i < PlayerData.playerdata.troopSelected.Count; i++)
         {
-            if (PlayerScript.playerdata.troopSelected[i].troop.job != Enums.JobType.None)
+            if (PlayerData.playerdata.troopSelected[i].troop.job != Enums.JobType.None)
                 charCount++;
         }
 
@@ -170,17 +170,17 @@ public class ResourceManagement : MonoBehaviour {
 
     public void Main_PlayPress()
     {
-        for(int i = 0; i < PlayerScript.playerdata.mapProgress.Count; i++)
+        for(int i = 0; i < PlayerData.playerdata.mapProgress.Count; i++)
         {
-            switch (PlayerScript.playerdata.mapProgress[i].mapName)
+            switch (PlayerData.playerdata.mapProgress[i].mapName)
             {
                 case Enums.MainMap.Mouth:
 
-                    for(int j = 0; j < PlayerScript.playerdata.mapProgress[i].stages.Count; j++)
+                    for(int j = 0; j < PlayerData.playerdata.mapProgress[i].stages.Count; j++)
                     {
-                        if(!PlayerScript.playerdata.mapProgress[i].stages[j].isComplete && PlayerScript.playerdata.mapProgress[i].stages[j].isCurrent)
+                        if(!PlayerData.playerdata.mapProgress[i].stages[j].isComplete && PlayerData.playerdata.mapProgress[i].stages[j].isCurrent)
                         {
-                            switch (PlayerScript.playerdata.mapProgress[i].stages[j].mapId)
+                            switch (PlayerData.playerdata.mapProgress[i].stages[j].mapId)
                             {
                                 case 0:
                                     Application.LoadLevel("TutorialScene");
@@ -221,13 +221,13 @@ public class ResourceManagement : MonoBehaviour {
 
     public void Slot1_Plus()
     {
-        if (PlayerScript.playerdata.troopSelected[0].troop.job != Enums.JobType.None)
+        if (PlayerData.playerdata.troopSelected[0].troop.job != Enums.JobType.None)
         {
-            if (PlayerScript.playerdata.totalResource >= PlayerScript.playerdata.troopSelected[0].troop.resourceNeeded && PlayerScript.playerdata.totalResource != 0)
+            if (PlayerData.playerdata.totalResource >= PlayerData.playerdata.troopSelected[0].troop.resourceNeeded && PlayerData.playerdata.totalResource != 0)
             {
                 //allow summoning
-                PlayerScript.playerdata.totalResource -= PlayerScript.playerdata.troopSelected[0].troop.resourceNeeded;
-                PlayerScript.playerdata.troopSelected[0].count++;
+                PlayerData.playerdata.totalResource -= PlayerData.playerdata.troopSelected[0].troop.resourceNeeded;
+                PlayerData.playerdata.troopSelected[0].count++;
             }
 
             UpdateSelectedSlot(1);
@@ -236,13 +236,13 @@ public class ResourceManagement : MonoBehaviour {
 
     public void Slot2_Plus()
     {
-        if (PlayerScript.playerdata.troopSelected[1].troop.job != Enums.JobType.None)
+        if (PlayerData.playerdata.troopSelected[1].troop.job != Enums.JobType.None)
         {
-            if (PlayerScript.playerdata.totalResource >= PlayerScript.playerdata.troopSelected[1].troop.resourceNeeded && PlayerScript.playerdata.totalResource != 0)
+            if (PlayerData.playerdata.totalResource >= PlayerData.playerdata.troopSelected[1].troop.resourceNeeded && PlayerData.playerdata.totalResource != 0)
             {
                 //allow summoning
-                PlayerScript.playerdata.totalResource -= PlayerScript.playerdata.troopSelected[1].troop.resourceNeeded;
-                PlayerScript.playerdata.troopSelected[1].count++;
+                PlayerData.playerdata.totalResource -= PlayerData.playerdata.troopSelected[1].troop.resourceNeeded;
+                PlayerData.playerdata.troopSelected[1].count++;
             }
 
             UpdateSelectedSlot(2);
@@ -251,13 +251,13 @@ public class ResourceManagement : MonoBehaviour {
 
     public void Slot3_Plus()
     {
-        if(PlayerScript.playerdata.troopSelected[2].troop.job != Enums.JobType.None)
+        if(PlayerData.playerdata.troopSelected[2].troop.job != Enums.JobType.None)
         {
-            if (PlayerScript.playerdata.totalResource >= PlayerScript.playerdata.troopSelected[2].troop.resourceNeeded && PlayerScript.playerdata.totalResource != 0)
+            if (PlayerData.playerdata.totalResource >= PlayerData.playerdata.troopSelected[2].troop.resourceNeeded && PlayerData.playerdata.totalResource != 0)
             {
                 //allow summoning
-                PlayerScript.playerdata.totalResource -= PlayerScript.playerdata.troopSelected[2].troop.resourceNeeded;
-                PlayerScript.playerdata.troopSelected[2].count++;
+                PlayerData.playerdata.totalResource -= PlayerData.playerdata.troopSelected[2].troop.resourceNeeded;
+                PlayerData.playerdata.troopSelected[2].count++;
             }
 
             UpdateSelectedSlot(3);
@@ -266,14 +266,14 @@ public class ResourceManagement : MonoBehaviour {
 
     public void Slot1_Minus()
     {
-        if(PlayerScript.playerdata.troopSelected[0].troop.job != Enums.JobType.None && PlayerScript.playerdata.troopSelected[0].count > 0)
+        if(PlayerData.playerdata.troopSelected[0].troop.job != Enums.JobType.None && PlayerData.playerdata.troopSelected[0].count > 0)
         {
-            PlayerScript.playerdata.totalResource += PlayerScript.playerdata.troopSelected[0].troop.resourceNeeded;
-            PlayerScript.playerdata.troopSelected[0].count--;
+            PlayerData.playerdata.totalResource += PlayerData.playerdata.troopSelected[0].troop.resourceNeeded;
+            PlayerData.playerdata.troopSelected[0].count--;
 
-            if(PlayerScript.playerdata.troopSelected[0].count == 0)
+            if(PlayerData.playerdata.troopSelected[0].count == 0)
             {
-                PlayerScript.playerdata.troopSelected[0].troop = new Troop();
+                PlayerData.playerdata.troopSelected[0].troop = new PlayerData.Troop();
                 slot1.sprite = originalSprite1;
                 noneText1.enabled = true;
             }
@@ -283,14 +283,14 @@ public class ResourceManagement : MonoBehaviour {
 
     public void Slot2_Minus()
     {
-        if (PlayerScript.playerdata.troopSelected[1].troop.job != Enums.JobType.None && PlayerScript.playerdata.troopSelected[1].count > 0)
+        if (PlayerData.playerdata.troopSelected[1].troop.job != Enums.JobType.None && PlayerData.playerdata.troopSelected[1].count > 0)
         {
-            PlayerScript.playerdata.totalResource += PlayerScript.playerdata.troopSelected[1].troop.resourceNeeded;
-            PlayerScript.playerdata.troopSelected[1].count--;
+            PlayerData.playerdata.totalResource += PlayerData.playerdata.troopSelected[1].troop.resourceNeeded;
+            PlayerData.playerdata.troopSelected[1].count--;
 
-            if (PlayerScript.playerdata.troopSelected[1].count == 0)
+            if (PlayerData.playerdata.troopSelected[1].count == 0)
             {
-                PlayerScript.playerdata.troopSelected[1].troop = new Troop();
+                PlayerData.playerdata.troopSelected[1].troop = new PlayerData.Troop();
                 slot2.sprite = originalSprite2;
                 noneText2.enabled = true;
             }
@@ -300,14 +300,14 @@ public class ResourceManagement : MonoBehaviour {
 
     public void Slot3_Minus()
     {
-        if (PlayerScript.playerdata.troopSelected[2].troop.job != Enums.JobType.None && PlayerScript.playerdata.troopSelected[2].count > 0)
+        if (PlayerData.playerdata.troopSelected[2].troop.job != Enums.JobType.None && PlayerData.playerdata.troopSelected[2].count > 0)
         {
-            PlayerScript.playerdata.totalResource += PlayerScript.playerdata.troopSelected[2].troop.resourceNeeded;
-            PlayerScript.playerdata.troopSelected[2].count--;
+            PlayerData.playerdata.totalResource += PlayerData.playerdata.troopSelected[2].troop.resourceNeeded;
+            PlayerData.playerdata.troopSelected[2].count--;
 
-            if (PlayerScript.playerdata.troopSelected[2].count == 0)
+            if (PlayerData.playerdata.troopSelected[2].count == 0)
             {
-                PlayerScript.playerdata.troopSelected[2].troop = new Troop();
+                PlayerData.playerdata.troopSelected[2].troop = new PlayerData.Troop();
                 slot3.sprite = originalSprite3;
                 noneText3.enabled = true;
             }
@@ -324,9 +324,9 @@ public class ResourceManagement : MonoBehaviour {
     {
         if(SlotNumber == 1)
         {
-            if (PlayerScript.playerdata.pathogenType == Enums.CharacterType.Cancer)
+            if (PlayerData.playerdata.pathogenType == Enums.CharacterType.Cancer)
             {
-                switch (PlayerScript.playerdata.troopSelected[0].troop.job)
+                switch (PlayerData.playerdata.troopSelected[0].troop.job)
                 {
                     case Enums.JobType.Knight:
                         slot1.sprite = cancerKnightSprite;
@@ -341,7 +341,7 @@ public class ResourceManagement : MonoBehaviour {
             }
             else
             {
-                switch (PlayerScript.playerdata.troopSelected[0].troop.job)
+                switch (PlayerData.playerdata.troopSelected[0].troop.job)
                 {
                     case Enums.JobType.Knight:
                         slot1.sprite = diabeticKnightSprite;
@@ -354,13 +354,13 @@ public class ResourceManagement : MonoBehaviour {
                         break;
                 }
             }
-            countText1.text = PlayerScript.playerdata.troopSelected[0].count.ToString();
+            countText1.text = PlayerData.playerdata.troopSelected[0].count.ToString();
         }
         else if(SlotNumber == 2)
         {
-            if (PlayerScript.playerdata.pathogenType == Enums.CharacterType.Cancer)
+            if (PlayerData.playerdata.pathogenType == Enums.CharacterType.Cancer)
             {
-                switch (PlayerScript.playerdata.troopSelected[1].troop.job)
+                switch (PlayerData.playerdata.troopSelected[1].troop.job)
                 {
                     case Enums.JobType.Knight:
                         slot2.sprite = cancerKnightSprite;
@@ -375,7 +375,7 @@ public class ResourceManagement : MonoBehaviour {
             }
             else
             {
-                switch (PlayerScript.playerdata.troopSelected[1].troop.job)
+                switch (PlayerData.playerdata.troopSelected[1].troop.job)
                 {
                     case Enums.JobType.Knight:
                         slot2.sprite = diabeticKnightSprite;
@@ -388,13 +388,13 @@ public class ResourceManagement : MonoBehaviour {
                         break;
                 }
             }
-            countText2.text = PlayerScript.playerdata.troopSelected[1].count.ToString();
+            countText2.text = PlayerData.playerdata.troopSelected[1].count.ToString();
         }
         else
         {
-            if (PlayerScript.playerdata.pathogenType == Enums.CharacterType.Cancer)
+            if (PlayerData.playerdata.pathogenType == Enums.CharacterType.Cancer)
             {
-                switch (PlayerScript.playerdata.troopSelected[2].troop.job)
+                switch (PlayerData.playerdata.troopSelected[2].troop.job)
                 {
                     case Enums.JobType.Knight:
                         slot3.sprite = cancerKnightSprite;
@@ -409,7 +409,7 @@ public class ResourceManagement : MonoBehaviour {
             }
             else
             {
-                switch (PlayerScript.playerdata.troopSelected[2].troop.job)
+                switch (PlayerData.playerdata.troopSelected[2].troop.job)
                 {
                     case Enums.JobType.Knight:
                         slot3.sprite = diabeticKnightSprite;
@@ -422,7 +422,7 @@ public class ResourceManagement : MonoBehaviour {
                         break;
                 }
             }
-            countText3.text = PlayerScript.playerdata.troopSelected[2].count.ToString();
+            countText3.text = PlayerData.playerdata.troopSelected[2].count.ToString();
         }
     }
 
@@ -461,81 +461,81 @@ public class ResourceManagement : MonoBehaviour {
         UpdateLeaderButton();
 
         //reflect all troop data
-        if (PlayerScript.playerdata.pathogenType == Enums.CharacterType.Cancer)
+        if (PlayerData.playerdata.pathogenType == Enums.CharacterType.Cancer)
         {
             //set first slot
             chooseKnightSprite.sprite = cancerKnightSprite;
-            if (PlayerScript.playerdata.troopData[0].level > 0)
+            if (PlayerData.playerdata.troopData[0].level > 0)
                 chooseKnightSprite.GetComponentInChildren<Text>().enabled = false;
             else
                 chooseKnightSprite.GetComponentInChildren<Text>().enabled = true;
 
-            knightLevel.text = PlayerScript.playerdata.troopData[0].level.ToString();
-            knightAttack.text = PlayerScript.playerdata.troopData[0].attack.ToString();
-            knightDefense.text = PlayerScript.playerdata.troopData[0].defenseRating.ToString();
-            knightResource.text = PlayerScript.playerdata.troopData[0].resourceNeeded.ToString();
+            knightLevel.text = PlayerData.playerdata.troopData[0].level.ToString();
+            knightAttack.text = PlayerData.playerdata.troopData[0].attack.ToString();
+            knightDefense.text = PlayerData.playerdata.troopData[0].defenseRating.ToString();
+            knightResource.text = PlayerData.playerdata.troopData[0].resourceNeeded.ToString();
 
             //set second slot
             chooseArcherSprite.sprite = cancerArcherSprite;
-            if (PlayerScript.playerdata.troopData[1].level > 0)
+            if (PlayerData.playerdata.troopData[1].level > 0)
                 chooseArcherSprite.GetComponentInChildren<Text>().enabled = false;
             else
                 chooseArcherSprite.GetComponentInChildren<Text>().enabled = true;
 
-            archerLevel.text = PlayerScript.playerdata.troopData[1].level.ToString();
-            archerAttack.text = PlayerScript.playerdata.troopData[1].attack.ToString();
-            archerDefense.text = PlayerScript.playerdata.troopData[1].defenseRating.ToString();
-            archerResource.text = PlayerScript.playerdata.troopData[1].resourceNeeded.ToString();
+            archerLevel.text = PlayerData.playerdata.troopData[1].level.ToString();
+            archerAttack.text = PlayerData.playerdata.troopData[1].attack.ToString();
+            archerDefense.text = PlayerData.playerdata.troopData[1].defenseRating.ToString();
+            archerResource.text = PlayerData.playerdata.troopData[1].resourceNeeded.ToString();
 
             //set third slot
             choosePriestSprite.sprite = cancerPriestSprite;
-            if (PlayerScript.playerdata.troopData[2].level > 0)
+            if (PlayerData.playerdata.troopData[2].level > 0)
                 choosePriestSprite.GetComponentInChildren<Text>().enabled = false;
             else
                 choosePriestSprite.GetComponentInChildren<Text>().enabled = true;
 
-            priestLevel.text = PlayerScript.playerdata.troopData[2].level.ToString();
-            priestAttack.text = PlayerScript.playerdata.troopData[2].attack.ToString();
-            priestDefense.text = PlayerScript.playerdata.troopData[2].defenseRating.ToString();
-            priestResource.text = PlayerScript.playerdata.troopData[2].resourceNeeded.ToString();
+            priestLevel.text = PlayerData.playerdata.troopData[2].level.ToString();
+            priestAttack.text = PlayerData.playerdata.troopData[2].attack.ToString();
+            priestDefense.text = PlayerData.playerdata.troopData[2].defenseRating.ToString();
+            priestResource.text = PlayerData.playerdata.troopData[2].resourceNeeded.ToString();
         }
         else
         {
             //set first slot
             chooseKnightSprite.sprite = diabeticKnightSprite;
-            if (PlayerScript.playerdata.troopData[0].level > 0)
+            if (PlayerData.playerdata.troopData[0].level > 0)
                 chooseKnightSprite.GetComponentInChildren<Text>().enabled = false;
             else
                 chooseKnightSprite.GetComponentInChildren<Text>().enabled = true;
 
-            knightLevel.text = PlayerScript.playerdata.troopData[0].level.ToString();
-            knightAttack.text = PlayerScript.playerdata.troopData[0].attack.ToString();
-            knightDefense.text = PlayerScript.playerdata.troopData[0].defenseRating.ToString();
-            knightResource.text = PlayerScript.playerdata.troopData[0].resourceNeeded.ToString();
+            knightLevel.text = PlayerData.playerdata.troopData[0].level.ToString();
+            knightAttack.text = PlayerData.playerdata.troopData[0].attack.ToString();
+            knightDefense.text = PlayerData.playerdata.troopData[0].defenseRating.ToString();
+            knightResource.text = PlayerData.playerdata.troopData[0].resourceNeeded.ToString();
 
             //set second slot
             chooseArcherSprite.sprite = diabeticArcherSprite;
-            if (PlayerScript.playerdata.troopData[1].level > 0)
+            if (PlayerData.playerdata.troopData[1].level > 0)
                 chooseArcherSprite.GetComponentInChildren<Text>().enabled = false;
             else
                 chooseArcherSprite.GetComponentInChildren<Text>().enabled = true;
 
-            archerLevel.text = PlayerScript.playerdata.troopData[1].level.ToString();
-            archerAttack.text = PlayerScript.playerdata.troopData[1].attack.ToString();
-            archerDefense.text = PlayerScript.playerdata.troopData[1].defenseRating.ToString();
-            archerResource.text = PlayerScript.playerdata.troopData[1].resourceNeeded.ToString();
+            archerLevel.text = PlayerData.playerdata.troopData[1].level.ToString();
+            archerAttack.text = PlayerData.playerdata.troopData[1].attack.ToString();
+            archerDefense.text = PlayerData.playerdata.troopData[1].defenseRating.ToString();
+            archerResource.text = PlayerData.playerdata.troopData[1].resourceNeeded.ToString();
 
             //set third slot
             choosePriestSprite.sprite = diabeticPriestSprite;
-            if (PlayerScript.playerdata.troopData[2].level > 0)
+            if (PlayerData.playerdata.troopData[2].level > 0)
                 choosePriestSprite.GetComponentInChildren<Text>().enabled = false;
             else
                 choosePriestSprite.GetComponentInChildren<Text>().enabled = true;
 
-            priestLevel.text = PlayerScript.playerdata.troopData[2].level.ToString();
-            priestAttack.text = PlayerScript.playerdata.troopData[2].attack.ToString();
-            priestDefense.text = PlayerScript.playerdata.troopData[2].defenseRating.ToString();
-            priestResource.text = PlayerScript.playerdata.troopData[2].resourceNeeded.ToString();
+            priestLevel.text = PlayerData.playerdata.troopData[2].level.ToString();
+            priestAttack.text = PlayerData.playerdata.troopData[2].attack.ToString();
+            priestDefense.text = PlayerData.playerdata.troopData[2].defenseRating.ToString();
+            priestResource.text = PlayerData.playerdata.troopData[2].resourceNeeded.ToString();
         }
     }
 
@@ -548,23 +548,23 @@ public class ResourceManagement : MonoBehaviour {
 
     public void Choose_KnightLeader()
     {
-        PlayerScript.playerdata.leaderType = Enums.JobType.Knight;
+        PlayerData.playerdata.leaderType = Enums.JobType.Knight;
         UpdateLeaderButton();
     }
     public void Choose_ArcherLeader()
     {
-        PlayerScript.playerdata.leaderType = Enums.JobType.Archer;
+        PlayerData.playerdata.leaderType = Enums.JobType.Archer;
         UpdateLeaderButton();
     }
     public void Choose_PriestLeader()
     {
-        PlayerScript.playerdata.leaderType = Enums.JobType.Priest;
+        PlayerData.playerdata.leaderType = Enums.JobType.Priest;
         UpdateLeaderButton();
     }
 
     public void UpdateLeaderButton()
     {
-        switch (PlayerScript.playerdata.leaderType)
+        switch (PlayerData.playerdata.leaderType)
         {
             case Enums.JobType.Knight:
                 knightLeader.interactable = false;
@@ -593,19 +593,19 @@ public class ResourceManagement : MonoBehaviour {
     public void Choose_KnightPress()
     {
         bool allowed = true;
-        for(int i = 0; i < PlayerScript.playerdata.troopSelected.Count; i++)
+        for(int i = 0; i < PlayerData.playerdata.troopSelected.Count; i++)
         {
-            if(PlayerScript.playerdata.troopSelected[i].troop.job == Enums.JobType.Knight)
+            if(PlayerData.playerdata.troopSelected[i].troop.job == Enums.JobType.Knight)
             {
                 allowed = false;
                 break;
             }
         }
-        if (PlayerScript.playerdata.troopSelected[slotClicked - 1].troop.job != Enums.JobType.Knight && PlayerScript.playerdata.troopData[0].level > 0 && allowed)
+        if (PlayerData.playerdata.troopSelected[slotClicked - 1].troop.job != Enums.JobType.Knight && PlayerData.playerdata.troopData[0].level > 0 && allowed)
         {
-            PlayerScript.playerdata.totalResource += PlayerScript.playerdata.troopSelected[slotClicked - 1].troop.resourceNeeded * PlayerScript.playerdata.troopSelected.Count;
-            PlayerScript.playerdata.troopSelected[slotClicked - 1].count = 0;
-            PlayerScript.playerdata.troopSelected[slotClicked - 1].troop = PlayerScript.playerdata.troopData[0];
+            PlayerData.playerdata.totalResource += PlayerData.playerdata.troopSelected[slotClicked - 1].troop.resourceNeeded * PlayerData.playerdata.troopSelected.Count;
+            PlayerData.playerdata.troopSelected[slotClicked - 1].count = 0;
+            PlayerData.playerdata.troopSelected[slotClicked - 1].troop = PlayerData.playerdata.troopData[0];
 
 
             slotClicked = 0;
@@ -618,20 +618,20 @@ public class ResourceManagement : MonoBehaviour {
     {
         bool allowed = true;
 
-        for (int i = 0; i < PlayerScript.playerdata.troopSelected.Count; i++)
+        for (int i = 0; i < PlayerData.playerdata.troopSelected.Count; i++)
         {
-            if (PlayerScript.playerdata.troopSelected[i].troop.job == Enums.JobType.Archer)
+            if (PlayerData.playerdata.troopSelected[i].troop.job == Enums.JobType.Archer)
             {
                 allowed = false;
                 break;
             }
         }
 
-        if (PlayerScript.playerdata.troopSelected[slotClicked - 1].troop.job != Enums.JobType.Archer && PlayerScript.playerdata.troopData[1].level > 0 && allowed)
+        if (PlayerData.playerdata.troopSelected[slotClicked - 1].troop.job != Enums.JobType.Archer && PlayerData.playerdata.troopData[1].level > 0 && allowed)
         {
-            PlayerScript.playerdata.totalResource += PlayerScript.playerdata.troopSelected[slotClicked - 1].troop.resourceNeeded * PlayerScript.playerdata.troopSelected.Count;
-            PlayerScript.playerdata.troopSelected[slotClicked - 1].count = 0;
-            PlayerScript.playerdata.troopSelected[slotClicked - 1].troop = PlayerScript.playerdata.troopData[1];
+            PlayerData.playerdata.totalResource += PlayerData.playerdata.troopSelected[slotClicked - 1].troop.resourceNeeded * PlayerData.playerdata.troopSelected.Count;
+            PlayerData.playerdata.troopSelected[slotClicked - 1].count = 0;
+            PlayerData.playerdata.troopSelected[slotClicked - 1].troop = PlayerData.playerdata.troopData[1];
 
             slotClicked = 0;
             InitMain();
@@ -643,20 +643,20 @@ public class ResourceManagement : MonoBehaviour {
     {
         bool allowed = true;
 
-        for (int i = 0; i < PlayerScript.playerdata.troopSelected.Count; i++)
+        for (int i = 0; i < PlayerData.playerdata.troopSelected.Count; i++)
         {
-            if (PlayerScript.playerdata.troopSelected[i].troop.job == Enums.JobType.Priest)
+            if (PlayerData.playerdata.troopSelected[i].troop.job == Enums.JobType.Priest)
             {
                 allowed = false;
                 break;
             }
         }
 
-        if (PlayerScript.playerdata.troopSelected[slotClicked - 1].troop.job != Enums.JobType.Priest && PlayerScript.playerdata.troopData[2].level > 0 && allowed)
+        if (PlayerData.playerdata.troopSelected[slotClicked - 1].troop.job != Enums.JobType.Priest && PlayerData.playerdata.troopData[2].level > 0 && allowed)
         {
-            PlayerScript.playerdata.totalResource += PlayerScript.playerdata.troopSelected[slotClicked - 1].troop.resourceNeeded * PlayerScript.playerdata.troopSelected.Count;
-            PlayerScript.playerdata.troopSelected[slotClicked - 1].count = 0;
-            PlayerScript.playerdata.troopSelected[slotClicked - 1].troop = PlayerScript.playerdata.troopData[2];
+            PlayerData.playerdata.totalResource += PlayerData.playerdata.troopSelected[slotClicked - 1].troop.resourceNeeded * PlayerData.playerdata.troopSelected.Count;
+            PlayerData.playerdata.troopSelected[slotClicked - 1].count = 0;
+            PlayerData.playerdata.troopSelected[slotClicked - 1].troop = PlayerData.playerdata.troopData[2];
 
 
             slotClicked = 0;

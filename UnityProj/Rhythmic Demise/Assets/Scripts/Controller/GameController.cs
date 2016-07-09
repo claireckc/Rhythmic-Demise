@@ -53,21 +53,21 @@ public class GameController : MonoBehaviour {
 
         armyController = gameObject.AddComponent<ArmyController>();
 
-        knightCount = PlayerScript.playerdata.troopSelected[0].count;
+        knightCount = PlayerData.playerdata.troopSelected[0].count;
         for (int i = 0; i < knightCount; i++)
         {
             Knight k = Instantiate(knightPrefab, currPos.transform.position, knightPrefab.transform.rotation) as Knight;
             army.Add(k);
         }
 
-        archerCount = PlayerScript.playerdata.troopSelected[1].count;
+        archerCount = PlayerData.playerdata.troopSelected[1].count;
         for (int i = 0; i < archerCount; i++)
         {
             Archer a = Instantiate(archerPrefab, currPos.transform.position, archerPrefab.transform.rotation) as Archer;
             army.Add(a);
         }
 
-        priestCount = PlayerScript.playerdata.troopSelected[2].count;
+        priestCount = PlayerData.playerdata.troopSelected[2].count;
         for (int i = 0; i < priestCount; i++)
         {
             Priest p = Instantiate(priestPrefab, currPos.transform.position, priestPrefab.transform.rotation) as Priest;

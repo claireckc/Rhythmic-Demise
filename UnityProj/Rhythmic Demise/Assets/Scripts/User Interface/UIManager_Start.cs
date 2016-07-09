@@ -31,20 +31,20 @@ public class UIManager_Start : MonoBehaviour
 
     void Start()
     {
-        SaveLoadManager.LoadInformation();
+        print("Start: " + PlayerData.playerdata.pathogenType);
         startCanvas.enabled = true;
         optionCanvas.enabled = false;
         aboutCanvas.enabled = false;
         volumeCanvas.enabled = false;
 
-        if (PlayerScript.playerdata.pathogenType != Enums.CharacterType.None)
+        if (PlayerData.playerdata.pathogenType != Enums.CharacterType.None)
             startText.text = "Resume Game";
         else
             startText.text = "Start New Game";
 
-        sfxSlider.value = PlayerScript.playerdata.effectsVolume;
-        bgSlider.value = PlayerScript.playerdata.globalVolume;
-        buttonSlider.value = PlayerScript.playerdata.buttonAlpha;
+        sfxSlider.value = PlayerData.playerdata.effectsVolume;
+        bgSlider.value = PlayerData.playerdata.globalVolume;
+        buttonSlider.value = PlayerData.playerdata.buttonAlpha;
     }
 
     /*******************************Start components******************************/
@@ -80,20 +80,15 @@ public class UIManager_Start : MonoBehaviour
 
     public void Option_ErasePress()
     {
-        /*print("before: " + PlayerScript.playerdata.pathogenType);
-        if (PlayerScript.playerdata.pathogenType != Enums.CharacterType.None)
+        print("before: " + PlayerData.playerdata.pathogenType);
+        if (PlayerData.playerdata.pathogenType != Enums.CharacterType.None)
         {
-            PlayerScript.playerdata.pathogenType = Enums.CharacterType.None;
+            PlayerData.playerdata.pathogenType = Enums.CharacterType.None;
             startText.text = "Start New Game";
             print("Inside");
 
         }
-        print("After: " + PlayerScript.playerdata.pathogenType);*/
-
-        SaveLoadManager.EraseInformation();
-        PlayerScript.playerdata = new PlayerData();
-        startText.text = "Start New Game";
-        SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
+        print("After: " + PlayerData.playerdata.pathogenType);
     }
 
     public void Option_VolumePress()
@@ -119,24 +114,23 @@ public class UIManager_Start : MonoBehaviour
     /*******************************Volume components******************************/
     public void SfxSliderChange()
     {
-        PlayerScript.playerdata.effectsVolume = sfxSlider.value;
+        PlayerData.playerdata.effectsVolume = sfxSlider.value;
     }
 
     public void BackgroundSliderChange()
     {
-        PlayerScript.playerdata.globalVolume = bgSlider.value;
+        PlayerData.playerdata.globalVolume = bgSlider.value;
     }
 
     public void ButtonSiderChange()
     {
-        PlayerScript.playerdata.buttonAlpha = buttonSlider.value;
+        PlayerData.playerdata.buttonAlpha = buttonSlider.value;
     }
 
     public void Volume_BackPress()
     {
         volumeCanvas.enabled = false;
         optionCanvas.enabled = true;
-        //AudioListener.volume = bgSlider.value;
-        SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
+        AudioListener.volume = bgSlider.value;
     }
 }

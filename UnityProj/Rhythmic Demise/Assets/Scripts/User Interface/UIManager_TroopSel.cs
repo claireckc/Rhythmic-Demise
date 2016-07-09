@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class UIManager_TroopSel : MonoBehaviour
 {
 
-    public PlayerScript playerdata;
+    public PlayerData playerdata;
 
     void Awake()
     {
@@ -14,7 +14,7 @@ public class UIManager_TroopSel : MonoBehaviour
 
     void Start()
     {
-        playerdata = FindObjectOfType<PlayerScript>();
+        playerdata = FindObjectOfType<PlayerData>();
     }
 
     public void OnBackPress()
@@ -26,15 +26,13 @@ public class UIManager_TroopSel : MonoBehaviour
 
     public void OnCancerPress()
     {
-        PlayerScript.playerdata.pathogenType = Enums.CharacterType.Cancer;
-        SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
+        playerdata.pathogenType = Enums.CharacterType.Cancer;
         MainScreen();
     }
 
     public void OnDiabeticPress()
     {
-        PlayerScript.playerdata.pathogenType = Enums.CharacterType.Diabetic;
-        SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
+        playerdata.pathogenType = Enums.CharacterType.Diabetic;
         MainScreen();
 
     }

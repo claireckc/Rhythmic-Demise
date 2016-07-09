@@ -4,21 +4,21 @@ using System.Collections.Generic;
 
 public class PlayerScript : MonoBehaviour {
 
-    public static PlayerData playerdata;
+    public static PlayerScript playerScript;
     
     public void Awake()
     {
-        if (playerdata != null)
+        if (playerScript != null)
             Destroy(gameObject);
         else
         {
             print("Null data");
             DontDestroyOnLoad(gameObject);
             SaveLoadManager.LoadInformation();
-            if (playerdata == null) {
+            if (playerScript == null) {
 
                 print("NUll still");
-                playerdata = new PlayerData();
+                playerScript = new playerScript();
             }
         }
 
