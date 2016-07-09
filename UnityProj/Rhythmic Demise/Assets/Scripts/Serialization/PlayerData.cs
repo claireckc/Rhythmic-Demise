@@ -4,48 +4,8 @@ using System.Collections;
 using UnityEngine.Serialization;
 
 [System.Serializable]
-public class PlayerData : MonoBehaviour {
-
-    public static PlayerData playerdata;
-
-    [System.Serializable] public class Troop
-    {
-        public Enums.JobType job;
-        public int level, resourceNeeded;
-        public float currentHealth, maxHealth, attack, defenseRating;
-        public List<Skills> skills;        //3
-    }
-
-    [System.Serializable] public class Skills
-    {
-        public Enums.SkillName skillName;
-        public float skillValue;
-        public int skillLevel;      //0 means locked, 1 and above means unlocked
-    }
-
-    [System.Serializable]public class TroopSelected
-    {
-        public Troop troop;
-        public int count;
-    }
-
-    [System.Serializable] public class SubMap
-    {
-        public Enums.MainMap parentMap;
-        public int mapId;
-
-        public int topComboCount, resourceAttained, stars;
-        public List<int> comboRange;        //size 3
-        public bool isComplete, isCurrent;
-    }
-
-    [System.Serializable] public class MainMap
-    {
-        public Enums.MainMap mapName;
-        public List<SubMap> stages;
-        public int avgStars;
-        public bool isComplete;
-    }
+public class PlayerData {
+    
     //Resources
     public int totalResource, totalEnergy;
 
@@ -62,7 +22,7 @@ public class PlayerData : MonoBehaviour {
     //settings
     public float globalVolume, effectsVolume, buttonAlpha;
 
-    private Troop tp;
+    /*private Troop tp;
     private Skills sk;
     private MainMap newMap;
     private TroopSelected ts;
@@ -110,7 +70,7 @@ public class PlayerData : MonoBehaviour {
                 if(i == 0)
                 {
                     sk.skillLevel = 1;
-                    /*sk.skillValue = sk.skilllevel * SOMETHING */    //MICHAEL, SET SKILL VALUE HERE, THIS IS INITIALIZATION! KNIGHT SKILL VALUE
+                    /*sk.skillValue = sk.skilllevel * SOMETHING    //MICHAEL, SET SKILL VALUE HERE, THIS IS INITIALIZATION! KNIGHT SKILL VALUE
                 }
                 else
                 {
@@ -164,16 +124,6 @@ public class PlayerData : MonoBehaviour {
         }
     }
 
-    /*public void SaveData()
-    {
-        SaveLoadManager.SaveAllInformation(playerdata);
-    }
-
-    public void LoadData()
-    {
-        PlayerData pdNew = SaveLoadManager.LoadInformation();
-        playerdata = pdNew;
-    }*/
     public void Awake()
     {
         if (playerdata != null)
@@ -188,5 +138,5 @@ public class PlayerData : MonoBehaviour {
     public void Start()
     {
         Init();
-    }
+    }*/
 }
