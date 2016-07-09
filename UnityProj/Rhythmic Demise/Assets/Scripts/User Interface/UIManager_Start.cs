@@ -80,7 +80,7 @@ public class UIManager_Start : MonoBehaviour
 
     public void Option_ErasePress()
     {
-        print("before: " + PlayerScript.playerdata.pathogenType);
+        /*print("before: " + PlayerScript.playerdata.pathogenType);
         if (PlayerScript.playerdata.pathogenType != Enums.CharacterType.None)
         {
             PlayerScript.playerdata.pathogenType = Enums.CharacterType.None;
@@ -88,7 +88,12 @@ public class UIManager_Start : MonoBehaviour
             print("Inside");
 
         }
-        print("After: " + PlayerScript.playerdata.pathogenType);
+        print("After: " + PlayerScript.playerdata.pathogenType);*/
+
+        SaveLoadManager.EraseInformation();
+        PlayerScript.playerdata = new PlayerData();
+        startText.text = "Start New Game";
+        SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
     }
 
     public void Option_VolumePress()

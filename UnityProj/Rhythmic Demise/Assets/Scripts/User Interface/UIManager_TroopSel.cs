@@ -27,12 +27,14 @@ public class UIManager_TroopSel : MonoBehaviour
     public void OnCancerPress()
     {
         PlayerScript.playerdata.pathogenType = Enums.CharacterType.Cancer;
+        SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
         MainScreen();
     }
 
     public void OnDiabeticPress()
     {
         PlayerScript.playerdata.pathogenType = Enums.CharacterType.Diabetic;
+        SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
         MainScreen();
 
     }

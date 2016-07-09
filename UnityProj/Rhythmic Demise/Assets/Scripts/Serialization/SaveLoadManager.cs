@@ -40,6 +40,17 @@ public static class SaveLoadManager{
             
         }
     }
+
+    public static void EraseInformation()
+    {
+        if(File.Exists(Application.persistentDataPath + "/player.sav"))
+        {
+            Debug.Log("File exists!");
+            File.Delete(Application.persistentDataPath + "/player.sav");
+            Debug.Log(File.Exists(Application.persistentDataPath + "/player.sav"));
+        }
+
+    }
     
 }
 

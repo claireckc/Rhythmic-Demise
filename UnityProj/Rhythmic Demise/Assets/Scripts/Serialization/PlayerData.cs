@@ -22,22 +22,28 @@ public class PlayerData {
     //settings
     public float globalVolume, effectsVolume, buttonAlpha;
 
-    /*private Troop tp;
+    private Troop tp;
     private Skills sk;
     private MainMap newMap;
     private TroopSelected ts;
     private SubMap stage;
 
+    public PlayerData()
+    {
+        Init();
+    }
+
     public void Init()  
     {
-        playerdata.leaderType = Enums.JobType.None;
-        playerdata.skillSelected = Enums.SkillName.None;
-        playerdata.pathogenType = Enums.CharacterType.None;
-        playerdata.globalVolume = effectsVolume = buttonAlpha = 1.0f;
-        playerdata.totalResource = 5;
-        playerdata.totalEnergy = 0;
-        playerdata.troopData = new List<Troop>();
-        playerdata.troopSelected = new List<TroopSelected>();
+        Debug.Log("call init in playerdata script");
+        leaderType = Enums.JobType.None;
+        skillSelected = Enums.SkillName.None;
+        pathogenType = Enums.CharacterType.None;
+        globalVolume = effectsVolume = buttonAlpha = 1.0f;
+        totalResource = 5;
+        totalEnergy = 0;
+        troopData = new List<Troop>();
+        troopSelected = new List<TroopSelected>();
 
         //for troop data
         for(int i = 0; i < 3; i++)
@@ -70,7 +76,7 @@ public class PlayerData {
                 if(i == 0)
                 {
                     sk.skillLevel = 1;
-                    /*sk.skillValue = sk.skilllevel * SOMETHING    //MICHAEL, SET SKILL VALUE HERE, THIS IS INITIALIZATION! KNIGHT SKILL VALUE
+                    /*sk.skillValue = sk.skilllevel * SOMETHING    //MICHAEL, SET SKILL VALUE HERE, THIS IS INITIALIZATION! KNIGHT SKILL VALUE*/
                 }
                 else
                 {
@@ -81,7 +87,7 @@ public class PlayerData {
                 tp.skills.Add(sk);
             }
            
-            playerdata.troopData.Add(tp);
+            troopData.Add(tp);
         }
 
         //for troop selected
@@ -90,9 +96,9 @@ public class PlayerData {
             ts = new TroopSelected();
             ts.troop = new Troop();
             ts.count = 0;
-            playerdata.troopSelected.Add(ts);
+            troopSelected.Add(ts);
         }
-
+        mapProgress = new List<MainMap>();
         //for map
         for(int i = 0; i < Enums.MAINMAPCOUNT; i++)
         {
@@ -119,12 +125,12 @@ public class PlayerData {
             }
             newMap.avgStars = 0;
             newMap.isComplete = false;
-            playerdata.mapProgress.Add(newMap);
+            mapProgress.Add(newMap);
 
         }
     }
 
-    public void Awake()
+    /*public void Awake()
     {
         if (playerdata != null)
             Destroy(gameObject);
