@@ -3,13 +3,15 @@ using System.Collections;
 
 public class BreathingAI : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    GameObject[] playerObjects;
+
+    public void Start()
+    {
+        //get all the player objects in the scene
+    }
+
+    public void FixedUpdate()
+    {
+
+    }
 }
