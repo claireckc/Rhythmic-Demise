@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MouthEventHandler : MonoBehaviour {
+public class MouthEventHandler : MonoBehaviour
+{
 
     public RuntimePlatform platform;
     public Ray ray;
@@ -46,21 +47,21 @@ public class MouthEventHandler : MonoBehaviour {
             {
                 case "Mouth_1":
                     //go into troop selection screen
-                    PlayerData.playerdata.mapProgress[0].stages[0].isCurrent = true;
+                    PlayerScript.playerdata.mapProgress[0].stages[0].isCurrent = true;
                     Application.LoadLevel("Resource Management");
                     break;
                 case "Mouth_2":
-                    if (PlayerData.playerdata.mapProgress[0].stages[0].isComplete)
+                    if (PlayerScript.playerdata.mapProgress[0].stages[0].isComplete)
                     {
-                        PlayerData.playerdata.mapProgress[0].stages[1].isCurrent = true;
+                        PlayerScript.playerdata.mapProgress[0].stages[1].isCurrent = true;
                         Application.LoadLevel("Resource Management");
                     }
                     break;
 
                 case "Mouth_3":
-                    if (PlayerData.playerdata.mapProgress[0].stages[1].isComplete)
+                    if (PlayerScript.playerdata.mapProgress[0].stages[1].isComplete)
                     {
-                        PlayerData.playerdata.mapProgress[0].stages[2].isCurrent = true;
+                        PlayerScript.playerdata.mapProgress[0].stages[2].isCurrent = true;
                         Application.LoadLevel("Resource Management");
                     }
                     break;

@@ -29,7 +29,7 @@ public class EndResultManager : MonoBehaviour {
         }
 
         //Just for prototype, need to be arrange later
-        if (PlayerData.playerdata.mapProgress[0].stages[2].isCurrent)
+        if (PlayerScript.playerdata.mapProgress[0].stages[2].isCurrent)
         {
             if(!GameObject.Find("Uvula")){
                 isComplete = true;
@@ -42,20 +42,20 @@ public class EndResultManager : MonoBehaviour {
             anim.SetTrigger("Finish");
 
             //update resources
-            PlayerData.playerdata.totalResource += ScoreManager.score;
+            PlayerScript.playerdata.totalResource += ScoreManager.score;
 
-            for (int i = 0; i < PlayerData.playerdata.mapProgress.Count; i++)
+            for (int i = 0; i < PlayerScript.playerdata.mapProgress.Count; i++)
             {
-                switch (PlayerData.playerdata.mapProgress[i].mapName)
+                switch (PlayerScript.playerdata.mapProgress[i].mapName)
                 {
                     case Enums.MainMap.Mouth:
 
-                        for (int j = 0; j < PlayerData.playerdata.mapProgress[i].stages.Count; j++)
+                        for (int j = 0; j < PlayerScript.playerdata.mapProgress[i].stages.Count; j++)
                         {
-                            if (!PlayerData.playerdata.mapProgress[i].stages[j].isComplete && PlayerData.playerdata.mapProgress[i].stages[j].isCurrent)
+                            if (!PlayerScript.playerdata.mapProgress[i].stages[j].isComplete && PlayerScript.playerdata.mapProgress[i].stages[j].isCurrent)
                             {
-                                PlayerData.playerdata.mapProgress[i].stages[j].isComplete = true;
-                                PlayerData.playerdata.mapProgress[i].stages[j].isCurrent = false;
+                                PlayerScript.playerdata.mapProgress[i].stages[j].isComplete = true;
+                                PlayerScript.playerdata.mapProgress[i].stages[j].isCurrent = false;
                             }
                         }
                         break;

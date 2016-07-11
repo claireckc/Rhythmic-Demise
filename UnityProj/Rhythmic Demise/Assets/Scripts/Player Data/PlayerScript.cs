@@ -2,23 +2,25 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerScript : MonoBehaviour {
+public class PlayerScript : MonoBehaviour
+{
 
-    public static PlayerScript playerScript;
-    
+    public static PlayerData playerdata;
+
     public void Awake()
     {
-        if (playerScript != null)
+        if (playerdata != null)
             Destroy(gameObject);
         else
         {
             print("Null data");
             DontDestroyOnLoad(gameObject);
             SaveLoadManager.LoadInformation();
-            if (playerScript == null) {
+            if (playerdata == null)
+            {
 
                 print("NUll still");
-                playerScript = new PlayerScript();
+                playerdata = new PlayerData();
             }
         }
 

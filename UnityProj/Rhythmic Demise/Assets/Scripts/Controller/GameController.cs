@@ -38,13 +38,13 @@ public class GameController : MonoBehaviour {
     void init()
     {
         //init prefab
-        if (PlayerData.playerdata.pathogenType == Enums.CharacterType.Cancer)
+        if(PlayerScript.playerdata.pathogenType == Enums.CharacterType.Cancer)
         {
             knightPrefab = Resources.Load<Knight>("Prefabs/CancerKnight");
             archerPrefab = Resources.Load<Archer>("Prefabs/CancerArcher");
             priestPrefab = Resources.Load<Priest>("Prefabs/CancerPriest");
         }
-        else if (PlayerData.playerdata.pathogenType == Enums.CharacterType.Diabetic)
+        else if (PlayerScript.playerdata.pathogenType == Enums.CharacterType.Diabetic)
         {
             knightPrefab = Resources.Load<Knight>("Prefabs/DiabeticKnight");
             archerPrefab = Resources.Load<Archer>("Prefabs/DiabeticArcher");
@@ -53,21 +53,21 @@ public class GameController : MonoBehaviour {
 
         armyController = gameObject.AddComponent<ArmyController>();
 
-        knightCount = PlayerData.playerdata.troopSelected[0].count;
+        knightCount = PlayerScript.playerdata.troopSelected[0].count;
         for (int i = 0; i < knightCount; i++)
         {
             Knight k = Instantiate(knightPrefab, currPos.transform.position, knightPrefab.transform.rotation) as Knight;
             army.Add(k);
         }
 
-        archerCount = PlayerData.playerdata.troopSelected[1].count;
+        archerCount = PlayerScript.playerdata.troopSelected[1].count;
         for (int i = 0; i < archerCount; i++)
         {
             Archer a = Instantiate(archerPrefab, currPos.transform.position, archerPrefab.transform.rotation) as Archer;
             army.Add(a);
         }
 
-        priestCount = PlayerData.playerdata.troopSelected[2].count;
+        priestCount = PlayerScript.playerdata.troopSelected[2].count;
         for (int i = 0; i < priestCount; i++)
         {
             Priest p = Instantiate(priestPrefab, currPos.transform.position, priestPrefab.transform.rotation) as Priest;
