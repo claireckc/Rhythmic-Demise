@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 public class Troop {
 
     public Enums.JobType job;
-    public int level, resourceNeeded;
+    public int level, energyNeeded;
     public float currentHealth, maxHealth, attack, defenseRating;
     public List<Skills> skills;        //3
 }

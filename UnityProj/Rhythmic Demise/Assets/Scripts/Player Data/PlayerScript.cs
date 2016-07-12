@@ -16,6 +16,7 @@ public class PlayerScript : MonoBehaviour
             print("Null data");
             DontDestroyOnLoad(gameObject);
             SaveLoadManager.LoadInformation();
+
             if (playerdata == null)
             {
 

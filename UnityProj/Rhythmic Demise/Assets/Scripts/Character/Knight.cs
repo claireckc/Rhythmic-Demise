@@ -9,6 +9,10 @@ public class Knight : Character {
 
         movementSpeed = 1f;
         job = Enums.JobType.Knight;
+
+        //0 is knight index
+        currentHealth = maxHealth = PlayerScript.playerdata.troopData[0].maxHealth;
+        damage = PlayerScript.playerdata.troopData[0].attack;
 	}
 	
 	// Update is called once per frame

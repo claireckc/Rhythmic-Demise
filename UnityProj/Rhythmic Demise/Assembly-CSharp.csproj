@@ -45,7 +45,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\PlayerScript.cs" />
      <Compile Include="Assets\Scripts\Beat\BeatSpawner.cs" />
      <Compile Include="Assets\Scripts\Beat\NoteControl.cs" />
      <Compile Include="Assets\Scripts\Button.cs" />
@@ -71,6 +70,7 @@
      <Compile Include="Assets\Scripts\MovingPoint.cs" />
      <Compile Include="Assets\Scripts\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\Player Data\MainMap.cs" />
+     <Compile Include="Assets\Scripts\Player Data\PlayerScript.cs" />
      <Compile Include="Assets\Scripts\Player Data\Skills.cs" />
      <Compile Include="Assets\Scripts\Player Data\SubMap.cs" />
      <Compile Include="Assets\Scripts\Player Data\Troop.cs" />
@@ -84,6 +84,7 @@
      <Compile Include="Assets\Scripts\Serialization\SaveLoadManager.cs" />
      <Compile Include="Assets\Scripts\StageClearManager.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\BaseTower.cs" />
+     <Compile Include="Assets\Scripts\Tower and Creep\BreathingAI.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\Creep.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\Enemy.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\MovementHandler.cs" />

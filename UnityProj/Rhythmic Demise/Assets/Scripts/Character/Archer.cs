@@ -13,6 +13,12 @@ public class Archer : Character {
         isAttacking = false;
         skill = "FocusArrow";
         job = Enums.JobType.Archer;
+
+        movementSpeed = 1f;
+
+        //1 is archer index
+        currentHealth = maxHealth = PlayerScript.playerdata.troopData[1].maxHealth;
+        damage = PlayerScript.playerdata.troopData[1].attack;
 	}
 	
 	// Update is called once per frame

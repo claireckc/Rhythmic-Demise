@@ -42,7 +42,7 @@ public class PlayerData
         pathogenType = Enums.CharacterType.None;
         globalVolume = effectsVolume = buttonAlpha = 1.0f;
         totalResource = 5;
-        totalEnergy = 0;
+        totalEnergy = 5;
         troopData = new List<Troop>();
         troopSelected = new List<TroopSelected>();
 
@@ -58,6 +58,29 @@ public class PlayerData
                 tp.level = 0;
 
             //MICHAEL SET MAX HEALTH, ATTACK, DEFENSERATING HERE, THIS IS INITIALIZATION
+
+            switch (i)
+            {
+                case 0:
+                    tp.currentHealth = tp.maxHealth = 2;
+                    tp.attack = 1;
+                    tp.defenseRating = 1;
+                    tp.energyNeeded = 1;
+                    break;
+                case 1:
+                    tp.currentHealth = tp.maxHealth = 10;
+                    tp.attack = 1;
+                    tp.defenseRating = 1;
+                    tp.energyNeeded = 1;
+                    break;
+                case 2:
+                    tp.currentHealth = tp.maxHealth = 10;
+                    tp.attack = 1;
+                    tp.defenseRating = 1;
+                    tp.energyNeeded = 1;
+                    break;
+            }
+            
             for (int j = 0; j < 3; j++)
             {
                 sk = new Skills();
@@ -101,6 +124,7 @@ public class PlayerData
             ts.count = 0;
             troopSelected.Add(ts);
         }
+
         mapProgress = new List<MainMap>();
         //for map
         for (int i = 0; i < Enums.MAINMAPCOUNT; i++)

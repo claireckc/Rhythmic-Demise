@@ -13,6 +13,10 @@ public class Priest : Character {
         isAttacking = false;
         skill = "Hex";
         job = Enums.JobType.Priest;
+
+        //2 is priest index
+        currentHealth = maxHealth = PlayerScript.playerdata.troopData[2].maxHealth;
+        damage = PlayerScript.playerdata.troopData[2].attack;
 	}
 	
 	// Update is called once per frame

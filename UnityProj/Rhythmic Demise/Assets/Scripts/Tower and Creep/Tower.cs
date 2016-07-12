@@ -12,7 +12,6 @@ public class Tower : Enemy {
 	protected void Start () {
         currentHealth = maxHealth = 2;
         playerList = new List<GameObject>();
-        cooldown = nextActionTime = 5.0f;
 	}
 	
 	// Update is called once per frame

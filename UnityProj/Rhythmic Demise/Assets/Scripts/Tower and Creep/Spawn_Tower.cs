@@ -11,6 +11,8 @@ public class Spawn_Tower : Tower {
     new void Start()
     {
         base.Start();
+
+        cooldown = nextActionTime = 0.5f;
     }
 
     // Update is called once per frame

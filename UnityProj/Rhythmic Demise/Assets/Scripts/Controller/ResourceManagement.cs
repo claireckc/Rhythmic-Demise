@@ -233,10 +233,10 @@ public class ResourceManagement : MonoBehaviour
     {
         if (PlayerScript.playerdata.troopSelected[0].troop.job != Enums.JobType.None)
         {
-            if (PlayerScript.playerdata.totalResource >= PlayerScript.playerdata.troopSelected[0].troop.resourceNeeded && PlayerScript.playerdata.totalResource != 0)
+            if (PlayerScript.playerdata.totalEnergy >= PlayerScript.playerdata.troopSelected[0].troop.energyNeeded && PlayerScript.playerdata.totalEnergy != 0)
             {
                 //allow summoning
-                PlayerScript.playerdata.totalResource -= PlayerScript.playerdata.troopSelected[0].troop.resourceNeeded;
+                PlayerScript.playerdata.totalEnergy -= PlayerScript.playerdata.troopSelected[0].troop.energyNeeded;
                 PlayerScript.playerdata.troopSelected[0].count++;
             }
 
@@ -248,10 +248,10 @@ public class ResourceManagement : MonoBehaviour
     {
         if (PlayerScript.playerdata.troopSelected[1].troop.job != Enums.JobType.None)
         {
-            if (PlayerScript.playerdata.totalResource >= PlayerScript.playerdata.troopSelected[1].troop.resourceNeeded && PlayerScript.playerdata.totalResource != 0)
+            if (PlayerScript.playerdata.totalEnergy >= PlayerScript.playerdata.troopSelected[1].troop.energyNeeded && PlayerScript.playerdata.totalEnergy != 0)
             {
                 //allow summoning
-                PlayerScript.playerdata.totalResource -= PlayerScript.playerdata.troopSelected[1].troop.resourceNeeded;
+                PlayerScript.playerdata.totalEnergy -= PlayerScript.playerdata.troopSelected[1].troop.energyNeeded;
                 PlayerScript.playerdata.troopSelected[1].count++;
             }
 
@@ -263,10 +263,10 @@ public class ResourceManagement : MonoBehaviour
     {
         if (PlayerScript.playerdata.troopSelected[2].troop.job != Enums.JobType.None)
         {
-            if (PlayerScript.playerdata.totalResource >= PlayerScript.playerdata.troopSelected[2].troop.resourceNeeded && PlayerScript.playerdata.totalResource != 0)
+            if (PlayerScript.playerdata.totalEnergy >= PlayerScript.playerdata.troopSelected[2].troop.energyNeeded && PlayerScript.playerdata.totalEnergy != 0)
             {
                 //allow summoning
-                PlayerScript.playerdata.totalResource -= PlayerScript.playerdata.troopSelected[2].troop.resourceNeeded;
+                PlayerScript.playerdata.totalEnergy -= PlayerScript.playerdata.troopSelected[2].troop.energyNeeded;
                 PlayerScript.playerdata.troopSelected[2].count++;
             }
 
@@ -278,7 +278,7 @@ public class ResourceManagement : MonoBehaviour
     {
         if (PlayerScript.playerdata.troopSelected[0].troop.job != Enums.JobType.None && PlayerScript.playerdata.troopSelected[0].count > 0)
         {
-            PlayerScript.playerdata.totalResource += PlayerScript.playerdata.troopSelected[0].troop.resourceNeeded;
+            PlayerScript.playerdata.totalEnergy += PlayerScript.playerdata.troopSelected[0].troop.energyNeeded;
             PlayerScript.playerdata.troopSelected[0].count--;
 
             if (PlayerScript.playerdata.troopSelected[0].count == 0)
@@ -287,6 +287,7 @@ public class ResourceManagement : MonoBehaviour
                 slot1.sprite = originalSprite1;
                 noneText1.enabled = true;
             }
+
             UpdateSelectedSlot(1);
         }
     }
@@ -295,7 +296,7 @@ public class ResourceManagement : MonoBehaviour
     {
         if (PlayerScript.playerdata.troopSelected[1].troop.job != Enums.JobType.None && PlayerScript.playerdata.troopSelected[1].count > 0)
         {
-            PlayerScript.playerdata.totalResource += PlayerScript.playerdata.troopSelected[1].troop.resourceNeeded;
+            PlayerScript.playerdata.totalEnergy += PlayerScript.playerdata.troopSelected[1].troop.energyNeeded;
             PlayerScript.playerdata.troopSelected[1].count--;
 
             if (PlayerScript.playerdata.troopSelected[1].count == 0)
@@ -312,7 +313,7 @@ public class ResourceManagement : MonoBehaviour
     {
         if (PlayerScript.playerdata.troopSelected[2].troop.job != Enums.JobType.None && PlayerScript.playerdata.troopSelected[2].count > 0)
         {
-            PlayerScript.playerdata.totalResource += PlayerScript.playerdata.troopSelected[2].troop.resourceNeeded;
+            PlayerScript.playerdata.totalEnergy += PlayerScript.playerdata.troopSelected[2].troop.energyNeeded;
             PlayerScript.playerdata.troopSelected[2].count--;
 
             if (PlayerScript.playerdata.troopSelected[2].count == 0)
@@ -332,6 +333,8 @@ public class ResourceManagement : MonoBehaviour
 
     public void UpdateSelectedSlot(int SlotNumber)
     {
+        energyText.text = PlayerScript.playerdata.totalEnergy.ToString();
+
         if (SlotNumber == 1)
         {
             if (PlayerScript.playerdata.pathogenType == Enums.CharacterType.Cancer)
@@ -483,7 +486,7 @@ public class ResourceManagement : MonoBehaviour
             knightLevel.text = PlayerScript.playerdata.troopData[0].level.ToString();
             knightAttack.text = PlayerScript.playerdata.troopData[0].attack.ToString();
             knightDefense.text = PlayerScript.playerdata.troopData[0].defenseRating.ToString();
-            knightResource.text = PlayerScript.playerdata.troopData[0].resourceNeeded.ToString();
+            knightResource.text = PlayerScript.playerdata.troopData[0].energyNeeded.ToString();
 
             //set second slot
             chooseArcherSprite.sprite = cancerArcherSprite;
@@ -495,7 +498,7 @@ public class ResourceManagement : MonoBehaviour
             archerLevel.text = PlayerScript.playerdata.troopData[1].level.ToString();
             archerAttack.text = PlayerScript.playerdata.troopData[1].attack.ToString();
             archerDefense.text = PlayerScript.playerdata.troopData[1].defenseRating.ToString();
-            archerResource.text = PlayerScript.playerdata.troopData[1].resourceNeeded.ToString();
+            archerResource.text = PlayerScript.playerdata.troopData[1].energyNeeded.ToString();
 
             //set third slot
             choosePriestSprite.sprite = cancerPriestSprite;
@@ -507,7 +510,7 @@ public class ResourceManagement : MonoBehaviour
             priestLevel.text = PlayerScript.playerdata.troopData[2].level.ToString();
             priestAttack.text = PlayerScript.playerdata.troopData[2].attack.ToString();
             priestDefense.text = PlayerScript.playerdata.troopData[2].defenseRating.ToString();
-            priestResource.text = PlayerScript.playerdata.troopData[2].resourceNeeded.ToString();
+            priestResource.text = PlayerScript.playerdata.troopData[2].energyNeeded.ToString();
         }
         else
         {
@@ -521,7 +524,7 @@ public class ResourceManagement : MonoBehaviour
             knightLevel.text = PlayerScript.playerdata.troopData[0].level.ToString();
             knightAttack.text = PlayerScript.playerdata.troopData[0].attack.ToString();
             knightDefense.text = PlayerScript.playerdata.troopData[0].defenseRating.ToString();
-            knightResource.text = PlayerScript.playerdata.troopData[0].resourceNeeded.ToString();
+            knightResource.text = PlayerScript.playerdata.troopData[0].energyNeeded.ToString();
 
             //set second slot
             chooseArcherSprite.sprite = diabeticArcherSprite;
@@ -533,7 +536,7 @@ public class ResourceManagement : MonoBehaviour
             archerLevel.text = PlayerScript.playerdata.troopData[1].level.ToString();
             archerAttack.text = PlayerScript.playerdata.troopData[1].attack.ToString();
             archerDefense.text = PlayerScript.playerdata.troopData[1].defenseRating.ToString();
-            archerResource.text = PlayerScript.playerdata.troopData[1].resourceNeeded.ToString();
+            archerResource.text = PlayerScript.playerdata.troopData[1].energyNeeded.ToString();
 
             //set third slot
             choosePriestSprite.sprite = diabeticPriestSprite;
@@ -545,7 +548,7 @@ public class ResourceManagement : MonoBehaviour
             priestLevel.text = PlayerScript.playerdata.troopData[2].level.ToString();
             priestAttack.text = PlayerScript.playerdata.troopData[2].attack.ToString();
             priestDefense.text = PlayerScript.playerdata.troopData[2].defenseRating.ToString();
-            priestResource.text = PlayerScript.playerdata.troopData[2].resourceNeeded.ToString();
+            priestResource.text = PlayerScript.playerdata.troopData[2].energyNeeded.ToString();
         }
     }
 
@@ -613,7 +616,7 @@ public class ResourceManagement : MonoBehaviour
         }
         if (PlayerScript.playerdata.troopSelected[slotClicked - 1].troop.job != Enums.JobType.Knight && PlayerScript.playerdata.troopData[0].level > 0 && allowed)
         {
-            PlayerScript.playerdata.totalResource += PlayerScript.playerdata.troopSelected[slotClicked - 1].troop.resourceNeeded * PlayerScript.playerdata.troopSelected.Count;
+            PlayerScript.playerdata.totalResource += PlayerScript.playerdata.troopSelected[slotClicked - 1].troop.energyNeeded * PlayerScript.playerdata.troopSelected.Count;
             PlayerScript.playerdata.troopSelected[slotClicked - 1].count = 0;
             PlayerScript.playerdata.troopSelected[slotClicked - 1].troop = PlayerScript.playerdata.troopData[0];
 
@@ -639,7 +642,7 @@ public class ResourceManagement : MonoBehaviour
 
         if (PlayerScript.playerdata.troopSelected[slotClicked - 1].troop.job != Enums.JobType.Archer && PlayerScript.playerdata.troopData[1].level > 0 && allowed)
         {
-            PlayerScript.playerdata.totalResource += PlayerScript.playerdata.troopSelected[slotClicked - 1].troop.resourceNeeded * PlayerScript.playerdata.troopSelected.Count;
+            PlayerScript.playerdata.totalResource += PlayerScript.playerdata.troopSelected[slotClicked - 1].troop.energyNeeded * PlayerScript.playerdata.troopSelected.Count;
             PlayerScript.playerdata.troopSelected[slotClicked - 1].count = 0;
             PlayerScript.playerdata.troopSelected[slotClicked - 1].troop = PlayerScript.playerdata.troopData[1];
 
@@ -664,7 +667,7 @@ public class ResourceManagement : MonoBehaviour
 
         if (PlayerScript.playerdata.troopSelected[slotClicked - 1].troop.job != Enums.JobType.Priest && PlayerScript.playerdata.troopData[2].level > 0 && allowed)
         {
-            PlayerScript.playerdata.totalResource += PlayerScript.playerdata.troopSelected[slotClicked - 1].troop.resourceNeeded * PlayerScript.playerdata.troopSelected.Count;
+            PlayerScript.playerdata.totalResource += PlayerScript.playerdata.troopSelected[slotClicked - 1].troop.energyNeeded * PlayerScript.playerdata.troopSelected.Count;
             PlayerScript.playerdata.troopSelected[slotClicked - 1].count = 0;
             PlayerScript.playerdata.troopSelected[slotClicked - 1].troop = PlayerScript.playerdata.troopData[2];
 

@@ -9,6 +9,8 @@ public class ShootingTower : Tower {
 	// Use this for initialization
 	new void Start () {
         base.Start();
+
+        cooldown = nextActionTime = 5.0f;
 	}
 	
 	// Update is called once per frame

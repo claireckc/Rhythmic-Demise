@@ -32,9 +32,6 @@ public class Character : MonoBehaviour {
 
 	// Use this for initialization
 	protected void Start () {
-        currentHealth = maxHealth = 10;
-        movementSpeed = 1f;
-        damage = 1;
         enemyList = new List<GameObject>();
 	}
 	
