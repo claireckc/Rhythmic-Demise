@@ -34,8 +34,8 @@ public class Enums : MonoBehaviour {
     [System.Serializable]
     public enum MainMap
     {
-        Mouth, Larnyx, Trachea, Lung, Heart, Liver, Spleen, Pancrease,
-        Kidney, LIntes, SIntes, SpinalCord, Brain
+        Mouth, Larnyx, Trachea, Lung, Heart, Liver, Spleen, Pancreas,
+        Kidney, LIntes, SIntes, Brain
     }
     public const int MAINMAPCOUNT = 17;
 
