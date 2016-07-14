@@ -107,6 +107,7 @@ public class GameController : MonoBehaviour {
                         armyController.moveTo(currPos.left);
                         currPos = currPos.left;
                     }
+                    bs.moveActionTurn = true;
                     break;
                 //move right
                 case "1134":
@@ -116,6 +117,7 @@ public class GameController : MonoBehaviour {
                         armyController.moveTo(currPos.right);
                         currPos = currPos.right;
                     }
+                    bs.moveActionTurn = true;
                     break;
                 //move up
                 case "1144":
@@ -125,6 +127,7 @@ public class GameController : MonoBehaviour {
                         armyController.moveTo(currPos.up);
                         currPos = currPos.up;
                     }
+                    bs.moveActionTurn = true;
                     break;
                 //move down
                 case "1133":
@@ -134,19 +137,21 @@ public class GameController : MonoBehaviour {
                         armyController.moveTo(currPos.bottom);
                         currPos = currPos.bottom;
                     }
+                    bs.moveActionTurn = true;
                     break;
                 //normal attack
                 case "3332":
                     armyController.setCurrentState(Enums.PlayerState.Attack);
+                    bs.moveActionTurn = true;
                     break;
                 //use special skill
                 case "1234":
                     armyController.setCurrentState(Enums.PlayerState.Skill);
+                    bs.moveActionTurn = true;
                     break;
             }
 
             clearSequence();
-            bs.moveActionTurn = true;
         }
 	}
 

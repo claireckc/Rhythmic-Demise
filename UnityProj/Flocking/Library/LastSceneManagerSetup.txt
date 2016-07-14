@@ -1,0 +1,5 @@
+sceneSetups:
+- path: C:/Users/michael/Downloads/Project -v1.0.2 - 4.2.0/Project -v1.0.2 - 4.2.0/Assets/Scenes/Main
+    Menu/MainMenu.unity
+  isLoaded: 1
+  isActive: 1

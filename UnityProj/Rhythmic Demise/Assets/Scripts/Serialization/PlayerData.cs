@@ -62,7 +62,7 @@ public class PlayerData
             switch (i)
             {
                 case 0:
-                    tp.currentHealth = tp.maxHealth = 2;
+                    tp.currentHealth = tp.maxHealth = 10;
                     tp.attack = 1;
                     tp.defenseRating = 1;
                     tp.energyNeeded = 1;

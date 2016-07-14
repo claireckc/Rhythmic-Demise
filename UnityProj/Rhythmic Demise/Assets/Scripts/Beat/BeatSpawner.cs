@@ -18,6 +18,8 @@ public class BeatSpawner : MonoBehaviour {
     public bool moveActionTurn;
     public bool inputActionTurn;
 
+    private Vector3 comboTextPosition;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -26,6 +28,8 @@ public class BeatSpawner : MonoBehaviour {
         beatCounter = 0;
         moveActionTurn = false;
         inputActionTurn = false;
+        comboTextPosition = new Vector3(0, 4, 0);
+
         InvokeRepeating("spawnBeat", 0, 0.5f);
 	}
 	
@@ -79,6 +83,11 @@ public class BeatSpawner : MonoBehaviour {
         else if (moveActionTurn)
         {
             moveBeatCounter++;
+
+            if (moveBeatCounter == 1)
+            {
+                FloatingTextController.CreateFloatingText(gc.currentStreak.ToString() + " Combo!!", comboTextPosition);
+            }
 
             if (moveBeatCounter >= 4)
             {
