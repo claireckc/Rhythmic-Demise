@@ -30,7 +30,7 @@ public class MouthEventHandler : MonoBehaviour
                 }
             }
         }
-        else if (platform == RuntimePlatform.WindowsEditor)
+		else if (platform == RuntimePlatform.WindowsEditor || platform == RuntimePlatform.OSXEditor)
         {
             if (Input.GetMouseButtonDown(0))
                 DetermineTouchPosition(Input.mousePosition);

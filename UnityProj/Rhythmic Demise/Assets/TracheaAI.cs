@@ -1,40 +1,40 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-
-public class TracheaAI : MonoBehaviour {
+public class TracheaAI : Enemy {
 	
-	private float skillTime;
-	private float attackTime;
-
 	// Use this for initialization
 	void Start () {
-		skillTime = attackTime = Random.Range (5.0f, 8.0f);
+		cooldown = nextActionTime = Random.Range (3.0f, 6.0f);
+		playerList = new List<GameObject> ();
 	}
 
 	void FixedUpdate(){
 		
-		if (Time.time >= attackTime) {
-			print ("attack");
-			attackTime = Time.time + skillTime;
-			skillTime = RandomTime ();
-			//attack ();
-		} else
-			print ("dont attack");
+		if (Time.time >= nextActionTime) {
+			Action ();
+		}
 	}
 
 	public float RandomTime(){
-		return Random.Range (3.0f, 5.0f);
+		return Random.Range (3.0f, 6.0f);
 	}
 
 	public void stunAttack(){
 		//stun the players that are not defending
 		print("stun them");
+		for (int i = 0; i < playerList.Count; i++) {
+			Character c = playerList [i].GetComponent<Character> ();
+
+		}
 	}
 
 	public void damageAttack(){
-		print("damage them");
-
+		for (int i = 0; i < playerList.Count; i++) {
+			Character c = playerList [i].GetComponent<Character> ();
+			c.TakeDamage (damage);
+		}
 	}
 
 	public void defenseDropAttack(){
@@ -42,13 +42,15 @@ public class TracheaAI : MonoBehaviour {
 
 	}
 
-	public void attack(){
-		attackTime = Time.time + skillTime;
+	protected override void Action(){
+		nextActionTime = Time.time + cooldown;
 		switch (Random.Range(1, 4)) {
 		case 1:
 			stunAttack ();
 			break;
 		case 2:
+			//damage range
+			damage = Random.Range (4, 8);
 			damageAttack ();
 			break;
 		case 3:
@@ -57,7 +59,42 @@ public class TracheaAI : MonoBehaviour {
 		case 4:
 			break;
 		}
-		skillTime = RandomTime ();
+		cooldown = RandomTime ();
+
+	}
+
+	protected override void FindClosestEnemy(){
+
+	}
+
+	protected override void UpdateEnemyList()
+	{
+		for (int i = 0; i < playerList.Count; i++)
+		{
+			Character c = playerList[i].GetComponent<Character>();
+
+			if (c.IsDead)
+			{
+				//Need to be re-arrange soon
+				playerList.Remove(playerList[i]);
+				GameController gc = GameObject.Find("GameController").GetComponent<GameController>();
+				gc.army.Remove(c);
+				gc.updateUI();
+
+				Destroy(c.gameObject);
+			}
+		}
+	}
+
+	protected override void OnTriggerEnter2D(Collider2D other){
+
+	}
+
+	protected override void OnTriggerExit2D(Collider2D other){
+
+	}
+
+	public override void TakeDamage(float damage){
 
 	}
 }
