@@ -35,60 +35,16 @@ public class Character : MonoBehaviour {
         enemyList = new List<GameObject>();
 	}
 
-    //Temp
-    float dist;
-    float neighbourDistance = 2.0f;
-
 	// Update is called once per frame
     protected void Update()
     {
-        //*****************
-        Vector3 vcentre = Vector3.zero;
-        Vector3 vavoid = Vector3.zero;
-
-        int groupSize = 0;
-        foreach (Character c in ArmyController.army)
-        {
-            if (c.gameObject != this.gameObject)
-            {
-                dist = Vector3.Distance(c.transform.position, this.transform.position);
-                if (dist <= neighbourDistance)
-                {
-                    vcentre += c.transform.position;
-                    groupSize++;
-
-                    if (dist < 0.2f)
-                    {
-                        vavoid = vavoid + (this.transform.position - c.transform.position);
-
-                        if (vavoid == Vector3.zero) vavoid = new Vector3(0.3f, 0.3f, 0);
-                    }
-                }
-            }
-        }
-
-        if (groupSize > 0)
-        {
-            vcentre = vcentre/groupSize + (ArmyController.goalPos.transform.position - this.transform.position);
-            
-            Vector3 direction = (vcentre + vavoid) - transform.position;
-
-            if (direction != Vector3.zero)
-            {
-                //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 4.0f * Time.deltaTime);
-                //StartCoroutine(MoveOverSpeed(gameObject, transform.position + direction, movementSpeed));
-            }
-        }
-
-        //*****************
-
         SetHealthVisual(currentHealth / maxHealth);
     }
 
-    public void moveTo(MovingPoint pos)
+    public void moveTo(Vector3 pos)
     {
         transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);
-        StartCoroutine(MoveOverSpeed(gameObject, pos.transform.position, movementSpeed));
+        StartCoroutine(MoveOverSpeed(gameObject, pos, movementSpeed));
     }
 
     public void attack()
