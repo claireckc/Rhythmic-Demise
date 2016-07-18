@@ -21,15 +21,9 @@ public class ArmyController : MonoBehaviour {
 	void Update () {
 	}
 
-    public void initArmy(List<Character> a, MovingPoint currPos)
+    public void initArmy(List<Character> a)
     {
         army = a;
-        goalPos = currPos;
-
-        foreach (Character c in army)
-        {
-            c.transform.position = currPos.transform.position;
-        }
     }
 
     public void setCurrentState(Enums.PlayerState action)
@@ -55,7 +49,28 @@ public class ArmyController : MonoBehaviour {
         foreach (Character c in army)
         {
             c.setCurrentState(Enums.PlayerState.Move);
-            c.moveTo(pos);
+
+            switch (c.getJobType())
+            {
+                case Enums.JobType.Knight:
+                    float knightY = Random.Range(pos.transform.position.y - 1, pos.transform.position.y + 1);
+                    Vector3 knightTempPos = new Vector3(pos.transform.position.x + 1, knightY);
+
+                    c.moveTo(knightTempPos);
+                    break;
+                case Enums.JobType.Archer:
+                    float archerY = Random.Range(pos.transform.position.y - 1, pos.transform.position.y + 1);
+                    Vector3 archerTempPos = new Vector3(pos.transform.position.x - 1, archerY);
+
+                    c.moveTo(archerTempPos);
+                    break;
+                case Enums.JobType.Priest:
+                    float priestY = Random.Range(pos.transform.position.y - 1, pos.transform.position.y + 1);
+                    Vector3 priestTempPos = new Vector3(pos.transform.position.x, priestY);
+
+                    c.moveTo(priestTempPos);
+                    break;
+            }
         }
     }
 }

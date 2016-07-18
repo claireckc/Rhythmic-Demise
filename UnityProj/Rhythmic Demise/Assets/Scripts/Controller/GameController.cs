@@ -56,25 +56,31 @@ public class GameController : MonoBehaviour {
         knightCount = PlayerScript.playerdata.troopSelected[0].count;
         for (int i = 0; i < knightCount; i++)
         {
-            Knight k = Instantiate(knightPrefab, currPos.transform.position, knightPrefab.transform.rotation) as Knight;
+            float knightY = Random.Range(currPos.transform.position.y - 1, currPos.transform.position.y + 1);
+            Vector3 knightTempPos = new Vector3(currPos.transform.position.x + 1, knightY);
+            Knight k = Instantiate(knightPrefab, knightTempPos, knightPrefab.transform.rotation) as Knight;
             army.Add(k);
         }
 
         archerCount = PlayerScript.playerdata.troopSelected[1].count;
         for (int i = 0; i < archerCount; i++)
         {
-            Archer a = Instantiate(archerPrefab, currPos.transform.position, archerPrefab.transform.rotation) as Archer;
+            float archerY = Random.Range(currPos.transform.position.y - 1, currPos.transform.position.y + 1);
+            Vector3 archerTempPos = new Vector3(currPos.transform.position.x - 1, archerY);
+            Archer a = Instantiate(archerPrefab, archerTempPos, archerPrefab.transform.rotation) as Archer;
             army.Add(a);
         }
 
         priestCount = PlayerScript.playerdata.troopSelected[2].count;
         for (int i = 0; i < priestCount; i++)
         {
-            Priest p = Instantiate(priestPrefab, currPos.transform.position, priestPrefab.transform.rotation) as Priest;
+            float priestY = Random.Range(currPos.transform.position.y - 1, currPos.transform.position.y + 1);
+            Vector3 priestTempPos = new Vector3(currPos.transform.position.x, priestY);
+            Priest p = Instantiate(priestPrefab, priestTempPos, priestPrefab.transform.rotation) as Priest;
             army.Add(p);
         }
 
-        armyController.initArmy(army,currPos);
+        armyController.initArmy(army);
     }
 
     // Use this for initialization
