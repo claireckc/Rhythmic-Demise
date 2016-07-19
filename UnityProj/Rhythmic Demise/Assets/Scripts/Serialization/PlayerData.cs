@@ -136,9 +136,9 @@ public class PlayerData
             newMap.stages = new List<SubMap>();
             if (i == 0) //tutorial stage
             {
+                newMap.isLocked = false;
                 for (int k = 0; k < 3; k++)
                 {
-
                     stage = new SubMap();
                     stage.parentMap = newMap.mapName;
                     stage.mapId = k;
@@ -151,10 +151,12 @@ public class PlayerData
                     newMap.stages.Add(stage);
                 }
             }
+            else
+                newMap.isLocked = true;
+
             newMap.avgStars = 0;
             newMap.isComplete = false;
             mapProgress.Add(newMap);
-
         }
     }
 

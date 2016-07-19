@@ -132,6 +132,7 @@
     <Compile Include="Assets\Scripts\Tower and Creep\Uvula.cs" />
     <Compile Include="Assets\Scripts\User Interface\UIManager_Start.cs" />
     <Compile Include="Assets\Scripts\User Interface\UIManager_TroopSel.cs" />
+    <Compile Include="Assets\TracheaAI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />

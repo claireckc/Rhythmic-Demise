@@ -19,7 +19,6 @@ public class PlayerScript : MonoBehaviour
 
             if (playerdata == null)
             {
-
                 print("NUll still");
                 playerdata = new PlayerData();
             }

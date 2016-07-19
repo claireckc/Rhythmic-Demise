@@ -16,6 +16,10 @@ public class EventHandler : MonoBehaviour {
 
     public Text labelText;
     private int dFontSize, iFontSize;
+
+    private Color whiteColor, lockedColor;
+
+    public SpriteRenderer[] partsSprite;
     
 	// Use this for initialization
 	void Start ()
@@ -23,14 +27,31 @@ public class EventHandler : MonoBehaviour {
         platform = Application.platform;
         labelText = labelText.GetComponent<Text>();
         labelAnim = labelAnim.GetComponent<Animator>();
+        whiteColor = new Color(255f/255f, 255f/255f, 255f/255f);
+        lockedColor = new Color(146f/255f, 146f/255f, 255f/255f);
+
         for (int i = 0; i < partsAnim.Length; i++)
         {
             partsAnim[i].GetComponent<Animator>();
             highlights[i].GetComponent<GameObject>();
         }
-
-        for (int i = 0; i < highlights.Length; i++)
+        
+        for(int i = 0; i < highlights.Length; i++)
+        {
+            highlights[i].GetComponent<GameObject>();
             highlights[i].SetActive(false);
+        }
+
+        for(int i = 0; i < partsSprite.Length; i++)
+        {
+            partsSprite[i].GetComponent<SpriteRenderer>();
+
+            if (PlayerScript.playerdata.mapProgress[i].isLocked)
+                partsSprite[i].color = lockedColor;
+            else
+                partsSprite[i].color = whiteColor;
+        }
+
         dFontSize = 40;
         iFontSize = 32;
         
@@ -65,117 +86,153 @@ public class EventHandler : MonoBehaviour {
             switch (rayHit.collider.gameObject.tag)
             {
                 case "Mouth":
-                    if (partsAnim[0].GetBool("isPending"))
+                    if (!PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Mouth].isLocked)
                     {
-                        partsAnim[0].SetBool("isPending", false);
-                        Application.LoadLevel("MouthStage");
+                        if (partsAnim[(int)Enums.MainMap.Mouth].GetBool("isPending"))
+                        {
+                            partsAnim[(int)Enums.MainMap.Mouth].SetBool("isPending", false);
+                            Application.LoadLevel("MouthStage");
+                        }
                     }
-                    else
-                        SetNewAnimation(0);
+
+                    SetNewAnimation((int)Enums.MainMap.Mouth, PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Mouth].isLocked);
+
 
                     break;
                 case "Larnyx":
-                    if (partsAnim[1].GetBool("isPending"))
+                    if (!PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Larnyx].isLocked)
                     {
-                        partsAnim[1].SetBool("isPending", false);
-                        Application.LoadLevel("LarnyxStage");
+                        if (partsAnim[(int)Enums.MainMap.Larnyx].GetBool("isPending"))
+                        {
+                            partsAnim[(int)Enums.MainMap.Larnyx].SetBool("isPending", false);
+                            Application.LoadLevel("LarnyxStage");
+                        }
                     }
-                    else
-                        SetNewAnimation(1);
+                    SetNewAnimation((int)Enums.MainMap.Larnyx, PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Larnyx].isLocked);
 
-                        break;
+
+                    break;
                 case "Trachea":
-                    if (partsAnim[2].GetBool("isPending"))
+                    if (!PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Trachea].isLocked)
                     {
-                        partsAnim[2].SetBool("isPending", false);
-                        Application.LoadLevel("LungStage");
+                        if (partsAnim[(int)Enums.MainMap.Trachea].GetBool("isPending"))
+                        {
+                            partsAnim[(int)Enums.MainMap.Trachea].SetBool("isPending", false);
+                            Application.LoadLevel("LungStage");
+                        }
                     }
-                    else
-                        SetNewAnimation(2);
+                    SetNewAnimation((int)Enums.MainMap.Trachea, PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Trachea].isLocked);
+
                     break;
                 case "Lungs":
-                    if (partsAnim[3].GetBool("isPending"))
+                    if (!PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Lung].isLocked)
                     {
-                        partsAnim[3].SetBool("isPending", false);
-                        Application.LoadLevel("HeartStage");
+                        if (partsAnim[(int)Enums.MainMap.Lung].GetBool("isPending"))
+                        {
+                            partsAnim[(int)Enums.MainMap.Lung].SetBool("isPending", false);
+                            Application.LoadLevel("HeartStage");
+                        }
                     }
-                    else
-                        SetNewAnimation(3);
+                    SetNewAnimation((int)Enums.MainMap.Lung, PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Lung].isLocked);
+
                     break;
 
                 case "Heart":
-                    if (partsAnim[4].GetBool("isPending"))
+                    if (!PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Heart].isLocked)
                     {
-                        partsAnim[4].SetBool("isPending", false);
-                        Application.LoadLevel("LiverStage");
+                        if (partsAnim[(int)Enums.MainMap.Heart].GetBool("isPending"))
+                        {
+                            partsAnim[(int)Enums.MainMap.Heart].SetBool("isPending", false);
+                            Application.LoadLevel("LiverStage");
+                        }
                     }
-                    else
-                        SetNewAnimation(4);
+                    SetNewAnimation((int)Enums.MainMap.Heart, PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Heart].isLocked);
+
                     break;
                 case "Liver":
-                    if (partsAnim[5].GetBool("isPending"))
+                    if (!PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Liver].isLocked)
                     {
-                        partsAnim[5].SetBool("isPending", false);
-                        Application.LoadLevel("SpleenStage");
+                        if (partsAnim[(int)Enums.MainMap.Liver].GetBool("isPending"))
+                        {
+                            partsAnim[(int)Enums.MainMap.Liver].SetBool("isPending", false);
+                            Application.LoadLevel("SpleenStage");
+                        }
                     }
-                    else
-                        SetNewAnimation(5);
+                    SetNewAnimation((int)Enums.MainMap.Liver, PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Liver].isLocked);
+
                     break;
                 case "Spleen":
-                    if (partsAnim[6].GetBool("isPending"))
+                    if (!PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Spleen].isLocked)
                     {
-                        partsAnim[6].SetBool("isPending", false);
-                        Application.LoadLevel("PancreasStage");
+                        if (partsAnim[(int)Enums.MainMap.Spleen].GetBool("isPending"))
+                        {
+                            partsAnim[(int)Enums.MainMap.Spleen].SetBool("isPending", false);
+                            Application.LoadLevel("PancreasStage");
+                        }
                     }
-                    else
-                        SetNewAnimation(6);
+                    SetNewAnimation((int)Enums.MainMap.Spleen, PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Spleen].isLocked);
+
                     break;
                 case "Pancreas":
-                    if (partsAnim[7].GetBool("isPending"))
+                    if (!PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Pancreas].isLocked)
                     {
-                        partsAnim[7].SetBool("isPending", false);
-                        Application.LoadLevel("KidneyStage");
+                        if (partsAnim[(int)Enums.MainMap.Pancreas].GetBool("isPending"))
+                        {
+                            partsAnim[(int)Enums.MainMap.Pancreas].SetBool("isPending", false);
+                            Application.LoadLevel("KidneyStage");
+                        }
                     }
-                    else
-                        SetNewAnimation(7);
+                    SetNewAnimation((int)Enums.MainMap.Pancreas, PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Pancreas].isLocked);
+
                     break;
                 case "Kidney":
-                    if (partsAnim[8].GetBool("isPending"))
+                    if (!PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Kidney].isLocked)
                     {
-                        partsAnim[8].SetBool("isPending", false);
-                        Application.LoadLevel("LargeIntesStage");
+                        if (partsAnim[(int)Enums.MainMap.Kidney].GetBool("isPending"))
+                        {
+                            partsAnim[(int)Enums.MainMap.Kidney].SetBool("isPending", false);
+                            Application.LoadLevel("LargeIntesStage");
+                        }
                     }
-                    else
-                        SetNewAnimation(8);
+                    SetNewAnimation((int)Enums.MainMap.Kidney, PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Kidney].isLocked);
+
                     break;
                 case "Lintes":
-                    if (partsAnim[9].GetBool("isPending"))
+                    if (!PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.LIntes].isLocked)
                     {
-                        partsAnim[9].SetBool("isPending", false);
-                        Application.LoadLevel("SmallIntesStage");
+                        if (partsAnim[(int)Enums.MainMap.LIntes].GetBool("isPending"))
+                        {
+                            partsAnim[(int)Enums.MainMap.LIntes].SetBool("isPending", false);
+                            Application.LoadLevel("SmallIntesStage");
+                        }
                     }
-                    else
-                        SetNewAnimation(9);
+                    SetNewAnimation((int)Enums.MainMap.LIntes, PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.LIntes].isLocked);
+
                     break;
                 case "Sintes":
-                    if (partsAnim[10].GetBool("isPending"))
+                    if (!PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.SIntes].isLocked)
                     {
-                        partsAnim[10].SetBool("isPending", false);
-                        Application.LoadLevel("BrainStage");
+                        if (partsAnim[(int)Enums.MainMap.SIntes].GetBool("isPending"))
+                        {
+                            partsAnim[(int)Enums.MainMap.SIntes].SetBool("isPending", false);
+                            Application.LoadLevel("BrainStage");
+                        }
                     }
-                    else
-                        SetNewAnimation(10);
+                    SetNewAnimation((int)Enums.MainMap.SIntes, PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.SIntes].isLocked);
+
                     break;
                 case "Brain":
-                    if (partsAnim[10].GetBool("isPending"))
+                    if (!PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Brain].isLocked)
                     {
-                        partsAnim[10].SetBool("isPending", false);
-                        Application.LoadLevel("BrainStage");
+                        if (partsAnim[(int)Enums.MainMap.Brain].GetBool("isPending"))
+                        {
+                            partsAnim[(int)Enums.MainMap.Brain].SetBool("isPending", false);
+                            Application.LoadLevel("BrainStage");
+                        }
                     }
-                    else
-                        SetNewAnimation(11);
-                    break;
+                    SetNewAnimation((int)Enums.MainMap.Brain, PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Brain].isLocked);
 
+                    break;
             }
 
         }
@@ -204,197 +261,233 @@ public class EventHandler : MonoBehaviour {
             labelText.fontSize = dFontSize;
     }
 
-    public void SetNewAnimation(int index)
+    public void SetNewAnimation(int index, bool status)
     {
-        StopAllAnim();
-        partsAnim[index].SetBool("isPending", true);
-        highlights[index].SetActive(true);
-        UpdateText(index);
+        if (!status)
+        {
+            StopAllAnim();
+            partsAnim[index].SetBool("isPending", true);
+            highlights[index].SetActive(true);
+            UpdateText(index, "");
+        }
+        else
+            UpdateText(index, "Locked: ");
     }
 
-    public void UpdateText(int index)
+    public void UpdateText(int index, string addon)
     {
-
         switch (index)
         {
             case 0:
-                if(labelText.text != "Mouth" && labelText.text != "Parts")
+                if (labelText.text != "Mouth")
                 {
-                    labelAnim.ResetTrigger("newSelection");
-                    labelText.text = "Mouth";
-                    labelAnim.Play("NewLabelAnimation", -1, 0.0f);
-                    
-                }
-                else if(labelText.text != "Mouth" && labelText.text == "Parts")
-                {
-                    labelText.text = "Mouth";
-                    labelAnim.SetTrigger("newSelection");
+                    if (labelText.text == "Parts")
+                        labelAnim.SetTrigger("newSelection");
+                    else
+                    {
+                        labelAnim.ResetTrigger("newSelection");
+                        labelAnim.Play("NewLabelAnimation", -1, 0.0f);
+                    }
+                    if (addon == "")
+                        labelText.text = "Mouth";
+                    else
+                        labelText.text = "";
                 }
 
                 SetFontSize("Mouth");
                 break;
             case 1:
-                if (labelText.text != "Larnyx" && labelText.text != "Parts")
+                if (labelText.text != "Larnyx")
                 {
-                    labelAnim.ResetTrigger("newSelection");
-                    labelText.text = "Larnyx";
-                    labelAnim.Play("NewLabelAnimation", -1, 0.0f);
-
-                }
-                else if (labelText.text != "Larnyx" && labelText.text == "Parts")
-                {
-                    labelText.text = "Larnyx";
-                    labelAnim.SetTrigger("newSelection");
+                    if (labelText.text == "Parts")
+                        labelAnim.SetTrigger("newSelection");
+                    else
+                    {
+                        labelAnim.ResetTrigger("newSelection");
+                        labelAnim.Play("NewLabelAnimation", -1, 0.0f);
+                    }
+                    if (addon == "")
+                        labelText.text = "Larnyx";
+                    else
+                        labelText.text = "Locked";
                 }
                 SetFontSize("Larnyx");
                 break;
             case 2:
-                if (labelText.text != "Trachea" && labelText.text != "Parts")
+                if (labelText.text != "Trachea")
                 {
-                    labelAnim.ResetTrigger("newSelection");
-                    labelText.text = "Trachea";
-                    labelAnim.Play("NewLabelAnimation", -1, 0.0f);
-
-                }
-                else if (labelText.text != "Trachea" && labelText.text == "Parts")
-                {
-                    labelText.text = "Trachea";
-                    labelAnim.SetTrigger("newSelection");
+                    if (labelText.text == "Parts")
+                        labelAnim.SetTrigger("newSelection");
+                    else
+                    {
+                        labelAnim.ResetTrigger("newSelection");
+                        labelAnim.Play("NewLabelAnimation", -1, 0.0f);
+                    }
+                    if (addon == "")
+                        labelText.text = "Trachea";
+                    else
+                        labelText.text = "Locked";
                 }
                 SetFontSize("Trachea");
                 break;
             case 3:
-                if (labelText.text != "Lungs" && labelText.text != "Parts")
+                if (labelText.text != "Lungs")
                 {
-                    labelAnim.ResetTrigger("newSelection");
-                    labelText.text = "Lungs";
-                    labelAnim.Play("NewLabelAnimation", -1, 0.0f);
-
-                }
-                else if (labelText.text != "Lungs" && labelText.text == "Parts")
-                {
-                    labelText.text = "Lungs";
-                    labelAnim.SetTrigger("newSelection");
+                    if (labelText.text == "Parts")
+                        labelAnim.SetTrigger("newSelection");
+                    else
+                    {
+                        labelAnim.ResetTrigger("newSelection");
+                        labelAnim.Play("NewLabelAnimation", -1, 0.0f);
+                    }
+                    if (addon == "")
+                        labelText.text = "Lungs";
+                    else
+                        labelText.text = "Locked";
                 }
                 SetFontSize("Lungs");
                 break;
             case 4:
-                if (labelText.text != "Heart" && labelText.text != "Parts")
+                if (labelText.text != "Heart")
                 {
-                    labelAnim.ResetTrigger("newSelection");
-                    labelText.text = "Heart";
-                    labelAnim.Play("NewLabelAnimation", -1, 0.0f);
+                    if (labelText.text == "Parts")
+                        labelAnim.SetTrigger("newSelection");
+                    else
+                    {
+                        labelAnim.ResetTrigger("newSelection");
+                        labelAnim.Play("NewLabelAnimation", -1, 0.0f);
+                    }
+                    if (addon == "")
+                        labelText.text = "Heart";
+                    else
+                        labelText.text = "Locked";
+                }
 
-                }
-                else if (labelText.text != "Heart" && labelText.text == "Parts")
-                {
-                    labelText.text = "Heart";
-                    labelAnim.SetTrigger("newSelection");
-                }
                 SetFontSize("Heart");
                 break;
             case 5:
-                if (labelText.text != "Liver" && labelText.text != "Parts")
+                if (labelText.text != "Liver")
                 {
-                    labelAnim.ResetTrigger("newSelection");
-                    labelText.text = "Liver";
-                    labelAnim.Play("NewLabelAnimation", -1, 0.0f);
-
+                    if (labelText.text == "Parts")
+                    {
+                        labelText.text = "Liver";
+                        labelAnim.SetTrigger("newSelection");
+                    }
+                    else
+                    {
+                        labelAnim.ResetTrigger("newSelection");
+                        labelText.text = "Liver";
+                        labelAnim.Play("NewLabelAnimation", -1, 0.0f);
+                    }
+                    if (addon == "")
+                        labelText.text = "Liver";
+                    else
+                        labelText.text = "Locked";
                 }
-                else if (labelText.text != "Liver" && labelText.text == "Parts")
-                {
-                    labelText.text = "Liver";
-                    labelAnim.SetTrigger("newSelection");
-                }
-                break;
                 SetFontSize("Liver");
+                break;
             case 6:
-                if (labelText.text != "Spleen" && labelText.text != "Parts")
+                if (labelText.text != "Spleen")
                 {
-                    labelAnim.ResetTrigger("newSelection");
-                    labelText.text = "Spleen";
-                    labelAnim.Play("NewLabelAnimation", -1, 0.0f);
-
+                    if (labelText.text == "Parts")
+                        labelAnim.SetTrigger("newSelection");
+                    else
+                    {
+                        labelAnim.ResetTrigger("newSelection");
+                        labelAnim.Play("NewLabelAnimation", -1, 0.0f);
+                    }
+                    if (addon == "")
+                        labelText.text = "Spleen";
+                    else
+                        labelText.text = "Locked";
                 }
-                else if (labelText.text != "Spleen" && labelText.text == "Parts")
-                {
-                    labelText.text = "Spleen";
-                    labelAnim.SetTrigger("newSelection");
-                }
+       
                 SetFontSize("Spleen");
                 break;
             case 7:
-                if (labelText.text != "Pancreas" && labelText.text != "Parts")
+                if (labelText.text != "Pancreas")
                 {
-                    labelAnim.ResetTrigger("newSelection");
-                    labelText.text = "Pancreas";
-                    labelAnim.Play("NewLabelAnimation", -1, 0.0f);
-
-                }
-                else if (labelText.text != "Pancreas" && labelText.text == "Parts")
-                {
-                    labelText.text = "Pancreas";
-                    labelAnim.SetTrigger("newSelection");
+                    if (labelText.text == "Parts")
+                        labelAnim.SetTrigger("newSelection");
+                    else
+                    {
+                        labelAnim.ResetTrigger("newSelection");
+                        labelAnim.Play("NewLabelAnimation", -1, 0.0f);
+                    }
+                    if (addon == "")
+                        labelText.text = "Pancreas";
+                    else
+                        labelText.text = "Locked";
                 }
                 SetFontSize("Pancreas");
                 break;
             case 8:
-                if (labelText.text != "Kidney" && labelText.text != "Parts")
+                if (labelText.text != "Kidney")
                 {
-                    labelAnim.ResetTrigger("newSelection");
-                    labelText.text = "Kidney";
-                    labelAnim.Play("NewLabelAnimation", -1, 0.0f);
-
-                }
-                else if (labelText.text != "Kidney" && labelText.text == "Parts")
-                {
-                    labelText.text = "Kidney";
-                    labelAnim.SetTrigger("newSelection");
+                    if (labelText.text == "Parts")
+                        labelAnim.SetTrigger("newSelection");
+                    else
+                    {
+                        labelAnim.ResetTrigger("newSelection");
+                        labelAnim.Play("NewLabelAnimation", -1, 0.0f);
+                    }
+                    if (addon == "")
+                        labelText.text = "Kidney";
+                    else
+                        labelText.text = "Locked";
                 }
                 SetFontSize("Kidney");
                 break;
             case 9:
-                if (labelText.text != "Large Intestine" && labelText.text != "Parts")
+                if (labelText.text != "Large Intestine")
                 {
-                    labelAnim.ResetTrigger("newSelection");
-                    labelText.text = "Large Intestine";
-                    labelAnim.Play("NewLabelAnimation", -1, 0.0f);
+                    if (labelText.text == "Parts")
+                        labelAnim.SetTrigger("newSelection");
+                    else
+                    {
+                        labelAnim.ResetTrigger("newSelection");
+                        labelAnim.Play("NewLabelAnimation", -1, 0.0f);
+                    }
+                    if (addon == "")
+                        labelText.text = "Large Intestine";
+                    else
+                        labelText.text = "Locked";
 
-                }
-                else if (labelText.text != "Large Intestine" && labelText.text == "Parts")
-                {
-                    labelText.text = "Large Intestine";
-                    labelAnim.SetTrigger("newSelection");
                 }
                 SetFontSize("Large Intestine");
                 break;
             case 10:
-                if (labelText.text != "Small Intestine" && labelText.text != "Parts")
+                if (labelText.text != "Small Intestine")
                 {
-                    labelAnim.ResetTrigger("newSelection");
-                    labelText.text = "Small Intestine";
-                    labelAnim.Play("NewLabelAnimation", -1, 0.0f);
-
-                }
-                else if (labelText.text != "Small Intestine" && labelText.text == "Parts")
-                {
-                    labelText.text = "Small Intestine";
-                    labelAnim.SetTrigger("newSelection");
+                    if (labelText.text == "Parts")
+                        labelAnim.SetTrigger("newSelection");
+                    else
+                    {
+                        labelAnim.ResetTrigger("newSelection");
+                        labelAnim.Play("NewLabelAnimation", -1, 0.0f);
+                    }
+                    if (addon == "")
+                        labelText.text = "Small Intestine";
+                    else
+                        labelText.text = "Locked";
                 }
                 SetFontSize("Small Intestine");
                 break;
             case 11:
-                if (labelText.text != "Brain" && labelText.text != "Parts")
+                if(labelText.text != "Brain")
                 {
-                    labelAnim.ResetTrigger("newSelection");
-                    labelText.text = "Brain";
-                    labelAnim.Play("NewLabelAnimation", -1, 0.0f);
+                    if (labelText.text == "Parts")
+                        labelAnim.SetTrigger("newSelection");
+                    else
+                    {
+                        labelAnim.ResetTrigger("newSelection");
+                        labelAnim.Play("NewLabelAnimation", -1, 0.0f);
+                    }
+                    if (addon == "")
+                        labelText.text = "Brain";
+                    else
+                        labelText.text = "Locked";
 
-                }
-                else if (labelText.text != "Brain" && labelText.text == "Parts")
-                {
-                    labelText.text = "Brain";
-                    labelAnim.SetTrigger("newSelection");
                 }
                 SetFontSize("Brain");
                 break;

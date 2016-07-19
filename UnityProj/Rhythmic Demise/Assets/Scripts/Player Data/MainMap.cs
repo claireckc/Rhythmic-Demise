@@ -10,4 +10,5 @@ public class MainMap {
     public List<SubMap> stages;
     public int avgStars;
     public bool isComplete;
+    public bool isLocked;
 }
