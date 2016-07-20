@@ -20,6 +20,7 @@ public class EventHandler : MonoBehaviour {
     private Color whiteColor, lockedColor;
 
     public SpriteRenderer[] partsSprite;
+    public GameObject stars;
     
 	// Use this for initialization
 	void Start ()
@@ -274,6 +275,12 @@ public class EventHandler : MonoBehaviour {
             UpdateText(index, "Locked: ");
     }
 
+    public void DisplayStars(Enums.MainMap mapName)
+    {
+        GameObject starObj = Instantiate(stars, stars.transform.position, stars.transform.rotation) as GameObject;
+        starObj.SendMessage("Init", mapName);
+    }
+
     public void UpdateText(int index, string addon)
     {
         switch (index)
@@ -293,7 +300,7 @@ public class EventHandler : MonoBehaviour {
                     else
                         labelText.text = "";
                 }
-
+                DisplayStars(Enums.MainMap.Mouth);
                 SetFontSize("Mouth");
                 break;
             case 1:
@@ -311,6 +318,7 @@ public class EventHandler : MonoBehaviour {
                     else
                         labelText.text = "Locked";
                 }
+                DisplayStars(Enums.MainMap.Larnyx);
                 SetFontSize("Larnyx");
                 break;
             case 2:
@@ -328,6 +336,7 @@ public class EventHandler : MonoBehaviour {
                     else
                         labelText.text = "Locked";
                 }
+                DisplayStars(Enums.MainMap.Trachea);
                 SetFontSize("Trachea");
                 break;
             case 3:
@@ -345,6 +354,7 @@ public class EventHandler : MonoBehaviour {
                     else
                         labelText.text = "Locked";
                 }
+                DisplayStars(Enums.MainMap.Lung);
                 SetFontSize("Lungs");
                 break;
             case 4:
@@ -362,6 +372,7 @@ public class EventHandler : MonoBehaviour {
                     else
                         labelText.text = "Locked";
                 }
+                DisplayStars(Enums.MainMap.Heart);
 
                 SetFontSize("Heart");
                 break;
@@ -384,6 +395,7 @@ public class EventHandler : MonoBehaviour {
                     else
                         labelText.text = "Locked";
                 }
+                DisplayStars(Enums.MainMap.Liver);
                 SetFontSize("Liver");
                 break;
             case 6:
@@ -401,7 +413,8 @@ public class EventHandler : MonoBehaviour {
                     else
                         labelText.text = "Locked";
                 }
-       
+                DisplayStars(Enums.MainMap.Spleen);
+
                 SetFontSize("Spleen");
                 break;
             case 7:
@@ -419,6 +432,7 @@ public class EventHandler : MonoBehaviour {
                     else
                         labelText.text = "Locked";
                 }
+                DisplayStars(Enums.MainMap.Pancreas);
                 SetFontSize("Pancreas");
                 break;
             case 8:
@@ -436,6 +450,7 @@ public class EventHandler : MonoBehaviour {
                     else
                         labelText.text = "Locked";
                 }
+                DisplayStars(Enums.MainMap.Kidney);
                 SetFontSize("Kidney");
                 break;
             case 9:
@@ -454,6 +469,7 @@ public class EventHandler : MonoBehaviour {
                         labelText.text = "Locked";
 
                 }
+                DisplayStars(Enums.MainMap.LIntes);
                 SetFontSize("Large Intestine");
                 break;
             case 10:
@@ -471,6 +487,7 @@ public class EventHandler : MonoBehaviour {
                     else
                         labelText.text = "Locked";
                 }
+                DisplayStars(Enums.MainMap.SIntes);
                 SetFontSize("Small Intestine");
                 break;
             case 11:
@@ -489,6 +506,7 @@ public class EventHandler : MonoBehaviour {
                         labelText.text = "Locked";
 
                 }
+                DisplayStars(Enums.MainMap.Brain);
                 SetFontSize("Brain");
                 break;
         }
