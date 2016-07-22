@@ -6,6 +6,8 @@ public class Arrow : MonoBehaviour {
     private float speed;
     private float damage;
     private GameObject enemy;
+    private Vector3 direction;
+    private Vector3 goal;
 
 	// Use this for initialization
 	void Start () {
@@ -15,6 +17,8 @@ public class Arrow : MonoBehaviour {
     void Initialize(GameObject target)
     {
         enemy = target;
+        direction = enemy.transform.position - this.transform.position;
+        goal = enemy.transform.position;
     }
 
     void initDamage(float damage)
@@ -24,10 +28,14 @@ public class Arrow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        Vector3 dir = enemy.transform.position - this.transform.position;
-        float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(-direction.y, -direction.x) * Mathf.Rad2Deg;
         this.transform.rotation = Quaternion.Euler(0, 0, angle);
-        transform.position = Vector2.Lerp(transform.position, enemy.transform.position, speed * Time.deltaTime);
+        transform.position = Vector2.Lerp(transform.position, goal, speed * Time.deltaTime);
+
+        if (transform.position == goal)
+        {
+            Destroy(gameObject);
+        }
 	}
 
     void OnTriggerEnter2D(Collider2D other)

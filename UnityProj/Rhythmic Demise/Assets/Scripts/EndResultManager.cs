@@ -2,9 +2,6 @@
 using System.Collections;
 
 public class EndResultManager : MonoBehaviour {
-
-    public GameController gc;
-
     AudioSource audio;
 
     Animator anim;
@@ -18,12 +15,12 @@ public class EndResultManager : MonoBehaviour {
 	}
 	
 	void Update () {
-        if (gc.army.Count <= 0)
+        if (ArmyController.armyController.army.Count <= 0)
         {
             audio.Stop();
             anim.SetTrigger("GameOver");
         }
-        else if (gc.currPos.name == "EndPoint")
+        else if (ArmyController.armyController.currPos.name == "EndPoint")
         {
             isComplete = true;
         }

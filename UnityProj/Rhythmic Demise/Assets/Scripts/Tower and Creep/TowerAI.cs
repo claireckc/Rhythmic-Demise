@@ -60,7 +60,7 @@ public class TowerAI : MonoBehaviour {
                     //Need to be re-arrange soon
                     enemyList.Remove(enemyList[i]);
                     GameController gc = GameObject.Find("GameController").GetComponent<GameController>();
-                    gc.army.Remove(c);
+                    ArmyController.armyController.army.Remove(c);
                     gc.updateUI();
 
                     Destroy(c.gameObject);

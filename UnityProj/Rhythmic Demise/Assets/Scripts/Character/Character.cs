@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Character : MonoBehaviour {
+public abstract class Character : MonoBehaviour {
 
     protected float movementSpeed;
     protected float currentHealth;
@@ -12,13 +12,9 @@ public class Character : MonoBehaviour {
     protected Enums.CharacterType race;
     protected Enums.JobType job;
     protected bool isAttacking;
-
-    public float closestDist;
-    public GameObject firstEnemy;
-    public GameObject closestEnemy;
+    protected Vector3 goalPos;
 
     public Enums.PlayerState currentAction;
-    public List<GameObject> enemyList;
 
     public GameObject healthBar;
 
@@ -32,7 +28,7 @@ public class Character : MonoBehaviour {
 
 	// Use this for initialization
 	protected void Start () {
-        enemyList = new List<GameObject>();
+        movementSpeed = 2f;
 	}
 
 	// Update is called once per frame
@@ -44,44 +40,23 @@ public class Character : MonoBehaviour {
     public void moveTo(Vector3 pos)
     {
         transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);
-        StartCoroutine(MoveOverSpeed(gameObject, pos, movementSpeed));
+        transform.position = Vector3.MoveTowards(transform.position, pos, movementSpeed * Time.deltaTime);
     }
 
-    public void attack()
-    {
-    }
+    public abstract void attack();
+    public abstract void useSkill();
 
     public void setCurrentState(Enums.PlayerState currAct)
     {
         currentAction = currAct;
     }
 
-    protected void UpdateEnemyList()
-    {
-        for (int i = 0; i < enemyList.Count; i++)
-        {
-            Enemy e = enemyList[i].GetComponent<Enemy>();
-
-            if (e.IsDead)
-            {
-                enemyList.Remove(enemyList[i]);
-
-                Destroy(e.gameObject);
-
-                //add score
-                ScoreManager.score += 10;
-            }
-        }
-    }
-
     void OnTriggerEnter2D(Collider2D other)
     {
-        //Debug.Log ("Enter" + other.gameObject.tag);
-
         //add enemy to enemyList if in range of player range
         if (other.tag == "Enemy")
         {
-            enemyList.Add(other.gameObject);
+            ArmyController.addEnemyList(other.gameObject);
         }
     }
 
@@ -89,33 +64,8 @@ public class Character : MonoBehaviour {
     {
         if (other.tag == "Enemy")
         {
-            enemyList.Remove(other.gameObject);
+            ArmyController.removeEnemyList(other.gameObject);
         }
-    }
-
-    public void findClosestEnemy()
-    {
-        UpdateEnemyList();
-
-        if (enemyList.Count > 0)
-        {
-            firstEnemy = enemyList[0];
-            closestDist = Vector2.Distance(this.transform.position, firstEnemy.transform.position);
-            closestEnemy = firstEnemy;
-
-            foreach (GameObject go in enemyList)
-            {
-                float currentDist = Vector2.Distance(this.transform.position, go.transform.position);
-                if (closestDist > currentDist)
-                {
-                    closestDist = currentDist;
-                    closestEnemy = go;
-                    break;
-                }
-            }
-        }
-        else
-            closestEnemy = null;
     }
 
     public void reset()
@@ -123,7 +73,6 @@ public class Character : MonoBehaviour {
         isAttacking = false;
     }
 
-    // Health between [0.0f,1.0f] == (currentHealth / totalHealth)
     public void SetHealthVisual(float healthNormalized)
     {
         healthBar.transform.localScale = new Vector3(healthNormalized,
@@ -142,6 +91,16 @@ public class Character : MonoBehaviour {
         return job;
     }
 
+    public Vector3 getGoalPos()
+    {
+        return goalPos;
+    }
+
+    public void setGoalPos(Vector3 pos)
+    {
+        goalPos = pos;
+    }
+    /*
   public IEnumerator MoveOverSpeed (GameObject objectToMove, Vector3 end, float speed){
      // speed should be 1 unit per second
      while (objectToMove.transform.position != end)
@@ -163,4 +122,5 @@ public class Character : MonoBehaviour {
      }
      objectToMove.transform.position = end;
  }
+    */
 }
