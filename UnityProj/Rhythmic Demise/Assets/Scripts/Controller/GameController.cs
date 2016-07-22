@@ -10,13 +10,9 @@ public class GameController : MonoBehaviour {
 
     public KeyCode[] buttonsKeyCode;
 
-    public ArmyController armyController;
-    public List<Character> army;
     public BeatSpawner bs;
 
     private float startDelayTime = 1f;
-
-    public MovingPoint currPos;
 
     public bool lastHit;
     public int currentStreak;
@@ -31,64 +27,11 @@ public class GameController : MonoBehaviour {
     private int priestCount;
     private int knightCount;
 
-    private Knight knightPrefab;
-    private Archer archerPrefab;
-    private Priest priestPrefab;
-
-    void init()
-    {
-        //init prefab
-        if(PlayerScript.playerdata.pathogenType == Enums.CharacterType.Cancer)
-        {
-            knightPrefab = Resources.Load<Knight>("Prefabs/CancerKnight");
-            archerPrefab = Resources.Load<Archer>("Prefabs/CancerArcher");
-            priestPrefab = Resources.Load<Priest>("Prefabs/CancerPriest");
-        }
-        else if (PlayerScript.playerdata.pathogenType == Enums.CharacterType.Diabetic)
-        {
-            knightPrefab = Resources.Load<Knight>("Prefabs/DiabeticKnight");
-            archerPrefab = Resources.Load<Archer>("Prefabs/DiabeticArcher");
-            priestPrefab = Resources.Load<Priest>("Prefabs/DiabeticPriest");
-        }
-
-        armyController = gameObject.AddComponent<ArmyController>();
-
-        knightCount = PlayerScript.playerdata.troopSelected[0].count;
-        for (int i = 0; i < knightCount; i++)
-        {
-            float knightY = Random.Range(currPos.transform.position.y - 1, currPos.transform.position.y + 1);
-            Vector3 knightTempPos = new Vector3(currPos.transform.position.x + 1, knightY);
-            Knight k = Instantiate(knightPrefab, knightTempPos, knightPrefab.transform.rotation) as Knight;
-            army.Add(k);
-        }
-
-        archerCount = PlayerScript.playerdata.troopSelected[1].count;
-        for (int i = 0; i < archerCount; i++)
-        {
-            float archerY = Random.Range(currPos.transform.position.y - 1, currPos.transform.position.y + 1);
-            Vector3 archerTempPos = new Vector3(currPos.transform.position.x - 1, archerY);
-            Archer a = Instantiate(archerPrefab, archerTempPos, archerPrefab.transform.rotation) as Archer;
-            army.Add(a);
-        }
-
-        priestCount = PlayerScript.playerdata.troopSelected[2].count;
-        for (int i = 0; i < priestCount; i++)
-        {
-            float priestY = Random.Range(currPos.transform.position.y - 1, currPos.transform.position.y + 1);
-            Vector3 priestTempPos = new Vector3(currPos.transform.position.x, priestY);
-            Priest p = Instantiate(priestPrefab, priestTempPos, priestPrefab.transform.rotation) as Priest;
-            army.Add(p);
-        }
-
-        armyController.initArmy(army);
-    }
-
     // Use this for initialization
     void Start()
     {
-        init();
-
         moveSequence = "";
+
         Invoke("updateUI", startDelayTime);
 
         FloatingTextController.Initialize();
@@ -107,52 +50,44 @@ public class GameController : MonoBehaviour {
             {
                 //move left
                 case "1143":
-                    if (currPos.left != null)
+                    if (ArmyController.armyController.currPos.left != null)
                     {
-                        armyController.setCurrentState(Enums.PlayerState.Move);
-                        armyController.moveTo(currPos.left);
-                        currPos = currPos.left;
+                        ArmyController.armyController.setCurrentState(Enums.PlayerState.MoveLeft);
                     }
                     bs.moveActionTurn = true;
                     break;
                 //move right
                 case "1134":
-                    if (currPos.right != null)
+                    if (ArmyController.armyController.currPos.right != null)
                     {
-                        armyController.setCurrentState(Enums.PlayerState.Move);
-                        armyController.moveTo(currPos.right);
-                        currPos = currPos.right;
+                        ArmyController.armyController.setCurrentState(Enums.PlayerState.MoveRight);
                     }
                     bs.moveActionTurn = true;
                     break;
                 //move up
                 case "1144":
-                    if (currPos.up != null)
+                    if (ArmyController.armyController.currPos.up != null)
                     {
-                        armyController.setCurrentState(Enums.PlayerState.Move);
-                        armyController.moveTo(currPos.up);
-                        currPos = currPos.up;
+                        ArmyController.armyController.setCurrentState(Enums.PlayerState.MoveUp);
                     }
                     bs.moveActionTurn = true;
                     break;
                 //move down
                 case "1133":
-                    if (currPos.bottom != null)
+                    if (ArmyController.armyController.currPos.bottom != null)
                     {
-                        armyController.setCurrentState(Enums.PlayerState.Move);
-                        armyController.moveTo(currPos.bottom);
-                        currPos = currPos.bottom;
+                        ArmyController.armyController.setCurrentState(Enums.PlayerState.MoveDown);
                     }
                     bs.moveActionTurn = true;
                     break;
                 //normal attack
                 case "3332":
-                    armyController.setCurrentState(Enums.PlayerState.Attack);
+                    ArmyController.armyController.setCurrentState(Enums.PlayerState.Attack);
                     bs.moveActionTurn = true;
                     break;
                 //use special skill
                 case "1234":
-                    armyController.setCurrentState(Enums.PlayerState.Skill);
+                    ArmyController.armyController.setCurrentState(Enums.PlayerState.Skill);
                     bs.moveActionTurn = true;
                     break;
             }
@@ -167,7 +102,7 @@ public class GameController : MonoBehaviour {
         priestCount = 0;
         knightCount = 0;
 
-        foreach(Character character in army)
+        foreach(Character character in ArmyController.armyController.army)
         {
             switch (character.getJobType())
             {

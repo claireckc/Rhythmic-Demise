@@ -95,8 +95,8 @@ public class BeatSpawner : MonoBehaviour {
 
                 moveActionTurn = false;
                 moveBeatCounter = 0;
-                gc.armyController.setCurrentState(Enums.PlayerState.Idle);
-                gc.armyController.reset();
+                ArmyController.armyController.setCurrentState(Enums.PlayerState.Idle);
+                ArmyController.armyController.reset();
             }
 
         }
