@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EndResultManager : MonoBehaviour {
     AudioSource audio;
-
+    const int STARS = 3;
     Animator anim;
 
     bool isComplete;
@@ -50,9 +50,25 @@ public class EndResultManager : MonoBehaviour {
                         for (int j = 0; j < PlayerScript.playerdata.mapProgress[i].stages.Count; j++)
                         {
                             if (!PlayerScript.playerdata.mapProgress[i].stages[j].isComplete && PlayerScript.playerdata.mapProgress[i].stages[j].isCurrent)
-                            {
+                            {   
                                 PlayerScript.playerdata.mapProgress[i].stages[j].isComplete = true;
                                 PlayerScript.playerdata.mapProgress[i].stages[j].isCurrent = false;
+                                
+                                //check if the current saved map score is higher than newly achieved map score
+                                if(PlayerScript.playerdata.mapProgress[i].stages[i].topComboCount < ScoreManager.score)
+                                {
+                                    int gotStars = 0;
+                                    PlayerScript.playerdata.mapProgress[i].stages[i].topComboCount = ScoreManager.score;
+                                    for (int k = 0; k < STARS; k++)
+                                    {
+                                        if (PlayerScript.playerdata.mapProgress[i].stages[i].comboRange[k] < ScoreManager.score)
+                                            gotStars++;
+                                    }
+                                    //update stars
+                                    if (PlayerScript.playerdata.mapProgress[i].stages[i].stars < gotStars)
+                                        PlayerScript.playerdata.mapProgress[i].stages[i].stars = gotStars;
+                                }
+                                break;
                             }
                         }
                         break;
