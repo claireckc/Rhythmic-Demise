@@ -17,6 +17,10 @@ public class PlayerData
     public List<Troop> troopData;       //first is knight then archer and then priest, to store the stats and the level
     public List<TroopSelected> troopSelected;
 
+    //multiplier
+    public float attackMultiplier;
+    public float defenseMultiplier;
+
     //Map progress
     public List<MainMap> mapProgress;
 
@@ -46,6 +50,9 @@ public class PlayerData
         troopData = new List<Troop>();
         troopSelected = new List<TroopSelected>();
 
+        attackMultiplier = 1;
+        defenseMultiplier = 1;
+
         //for troop data
         for (int i = 0; i < 3; i++)
         {
@@ -55,28 +62,28 @@ public class PlayerData
             if (i == 0)
                 tp.level = i + 1;     //first unlock would be the knight
             else
-                tp.level = i + 1;//0;
+                tp.level = i + 1;//should be 0, set temp for debug;
 
             //MICHAEL SET MAX HEALTH, ATTACK, DEFENSERATING HERE, THIS IS INITIALIZATION
 
             switch (i)
             {
-                case 0:
-                    tp.currentHealth = tp.maxHealth = 10;
-                    tp.attack = 1;
-                    tp.defenseRating = 1;
+                case 0: //knight
+                    tp.currentHealth = tp.maxHealth = 15;
+                    tp.attack = 3 * attackMultiplier;
+                    tp.defenseRating = 2 * defenseMultiplier;
+                    tp.energyNeeded = 2;
+                    break;
+                case 1: //archer
+                    tp.currentHealth = tp.maxHealth = 8;
+                    tp.attack = 2 * attackMultiplier;
+                    tp.defenseRating = 1 * defenseMultiplier;
                     tp.energyNeeded = 1;
                     break;
-                case 1:
+                case 2: //priest
                     tp.currentHealth = tp.maxHealth = 10;
-                    tp.attack = 1;
-                    tp.defenseRating = 1;
-                    tp.energyNeeded = 1;
-                    break;
-                case 2:
-                    tp.currentHealth = tp.maxHealth = 10;
-                    tp.attack = 1;
-                    tp.defenseRating = 1;
+                    tp.attack = 1 * attackMultiplier;
+                    tp.defenseRating = 1.2f * defenseMultiplier;
                     tp.energyNeeded = 1;
                     break;
             }

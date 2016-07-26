@@ -6,17 +6,13 @@ using System.Collections.Generic;
 public class GameController : MonoBehaviour {
     public static GameController gameController;
 
-    public string moveSequence;
-
-    public KeyCode[] buttonsKeyCode;
-
-    public BeatSpawner bs;
+    private string moveSequence;
 
     private float startDelayTime = 1f;
 
-    public bool lastHit;
-    public int currentStreak;
-    public int highestStreak;
+    private bool lastHit;
+    private int currentStreak;
+    private int highestStreak;
 
     //UI
     public Text archerCountText;
@@ -27,21 +23,53 @@ public class GameController : MonoBehaviour {
     private int priestCount;
     private int knightCount;
 
+    //beat spawner
+    private int moveBeatCounter;
+    private int inputBeatCounter;
+    private int beatCounter;
+    private NoteControl note1;
+    private NoteControl note2;
+    private NoteControl note3;
+    private NoteControl note4;
+    private bool moveActionTurn;
+    private bool inputActionTurn;
+    private Vector3 comboTextPosition;
+
     // Use this for initialization
     void Start()
     {
+        if (gameController == null) gameController = this;
+
+        init();
+
         moveSequence = "";
+        FloatingTextController.Initialize();
+
+        InvokeRepeating("spawnBeat", 0, 0.5f);
 
         Invoke("updateUI", startDelayTime);
-
-        FloatingTextController.Initialize();
 	}
+
+    void init()
+    {
+        moveBeatCounter = 0;
+        inputBeatCounter = 0;
+        beatCounter = 0;
+        moveActionTurn = false;
+        inputActionTurn = false;
+        comboTextPosition = new Vector3(0, 4, 0);
+
+        note1 = Resources.Load<NoteControl>("Prefabs/UI/Note1");
+        note2 = Resources.Load<NoteControl>("Prefabs/UI/Note2");
+        note3 = Resources.Load<NoteControl>("Prefabs/UI/Note3");
+        note4 = Resources.Load<NoteControl>("Prefabs/UI/Note4");
+    }
 	
 	// Update is called once per frame
 	void Update () {
         if (moveSequence.Length == 1)
         {
-            bs.inputActionTurn = true;
+            inputActionTurn = true;
         }
 
         if (moveSequence.Length >= 4)
@@ -54,7 +82,7 @@ public class GameController : MonoBehaviour {
                     {
                         ArmyController.armyController.setCurrentState(Enums.PlayerState.MoveLeft);
                     }
-                    bs.moveActionTurn = true;
+                    moveActionTurn = true;
                     break;
                 //move right
                 case "1134":
@@ -62,7 +90,7 @@ public class GameController : MonoBehaviour {
                     {
                         ArmyController.armyController.setCurrentState(Enums.PlayerState.MoveRight);
                     }
-                    bs.moveActionTurn = true;
+                    moveActionTurn = true;
                     break;
                 //move up
                 case "1144":
@@ -70,7 +98,7 @@ public class GameController : MonoBehaviour {
                     {
                         ArmyController.armyController.setCurrentState(Enums.PlayerState.MoveUp);
                     }
-                    bs.moveActionTurn = true;
+                    moveActionTurn = true;
                     break;
                 //move down
                 case "1133":
@@ -78,23 +106,97 @@ public class GameController : MonoBehaviour {
                     {
                         ArmyController.armyController.setCurrentState(Enums.PlayerState.MoveDown);
                     }
-                    bs.moveActionTurn = true;
+                    moveActionTurn = true;
                     break;
                 //normal attack
                 case "3332":
                     ArmyController.armyController.setCurrentState(Enums.PlayerState.Attack);
-                    bs.moveActionTurn = true;
+                    moveActionTurn = true;
                     break;
                 //use special skill
                 case "1234":
                     ArmyController.armyController.setCurrentState(Enums.PlayerState.Skill);
-                    bs.moveActionTurn = true;
+                    moveActionTurn = true;
                     break;
             }
 
             clearSequence();
         }
 	}
+
+    void spawnBeat()
+    {
+        beatCounter++;
+
+        Instantiate(note1, note1.transform.position, note1.transform.rotation);
+        Instantiate(note2, note2.transform.position, note2.transform.rotation);
+        Instantiate(note3, note3.transform.position, note3.transform.rotation);
+        Instantiate(note4, note4.transform.position, note4.transform.rotation);
+
+        if (inputActionTurn)
+        {
+            inputBeatCounter++;
+
+            //if miss
+            if (!lastHit)
+            {
+                inputBeatCounter = 0;
+                inputActionTurn = false;
+
+                clearSequence();
+
+                //reset current streak
+                currentStreak = 0;
+            }
+
+            if (inputBeatCounter >= 4)
+            {
+                inputBeatCounter = 0;
+                inputActionTurn = false;
+
+                clearSequence();
+            }
+
+            lastHit = false;
+        }
+        else if (moveActionTurn)
+        {
+            moveBeatCounter++;
+
+            if (moveBeatCounter == 1)
+            {
+                FloatingTextController.CreateFloatingText(currentStreak.ToString() + " Combo!!", comboTextPosition);
+            }
+
+            if (moveBeatCounter >= 4)
+            {
+                currentStreak++;
+
+                moveActionTurn = false;
+                moveBeatCounter = 0;
+                ArmyController.armyController.setCurrentState(Enums.PlayerState.Idle);
+                ArmyController.armyController.reset();
+            }
+
+        }
+        //manage if miss the next move after completing a move
+        else if (!lastHit)
+        {
+            clearSequence();
+
+            //reset current streak
+            currentStreak = 0;
+        }
+
+        //check if current streak is the highest streak
+        if (currentStreak > highestStreak)
+        {
+            highestStreak = currentStreak;
+        }
+
+        //reset beat counter
+        if (beatCounter >= 8) { beatCounter = 0; }
+    }
 
     public void updateUI()
     {

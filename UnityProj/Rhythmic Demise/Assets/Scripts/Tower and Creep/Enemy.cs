@@ -7,7 +7,8 @@ public abstract class Enemy : MonoBehaviour {
     protected float currentHealth;
     protected float maxHealth;
     protected float damage;
-    protected float cooldown, nextActionTime;
+    protected float cooldown;
+    protected float nextActionTime;
 
     protected float closestDist;
     protected GameObject firstPlayer;
@@ -24,7 +25,7 @@ public abstract class Enemy : MonoBehaviour {
             return currentHealth <= 0;
         }
     }
-
+ 
 	// Use this for initialization
 	void Start () {
 	
@@ -41,4 +42,5 @@ public abstract class Enemy : MonoBehaviour {
     protected abstract void OnTriggerEnter2D(Collider2D other);
     protected abstract void OnTriggerExit2D(Collider2D other);
     public abstract void TakeDamage(float damage);
+    public abstract void disabled(float duration);
 }

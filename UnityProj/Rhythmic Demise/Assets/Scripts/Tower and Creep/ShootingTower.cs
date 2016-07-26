@@ -10,6 +10,7 @@ public class ShootingTower : Tower {
 	new void Start () {
         base.Start();
 
+        currentHealth = maxHealth = 8;
         cooldown = nextActionTime = 5.0f;
 	}
 	
