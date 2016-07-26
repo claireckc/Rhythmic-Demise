@@ -180,7 +180,9 @@ public class ArmyController : MonoBehaviour {
                         knightTempPos = new Vector3(pos.transform.position.x + 1, knightY);
                         c.setGoalPos(knightTempPos);
                     }
-                    c.moveTo(c.getGoalPos());
+
+                    if(c.getInPath())
+                        c.moveTo(c.getGoalPos());
                     break;
                 case Enums.JobType.Archer:
                     if (!isRandomOnce)
@@ -189,7 +191,9 @@ public class ArmyController : MonoBehaviour {
                         archerTempPos = new Vector3(pos.transform.position.x - 1, archerY);
                         c.setGoalPos(archerTempPos);
                     }
-                    c.moveTo(c.getGoalPos());
+
+                    if (c.getInPath())
+                        c.moveTo(c.getGoalPos());
                     break;
                 case Enums.JobType.Priest:
                     if (!isRandomOnce)
@@ -198,7 +202,9 @@ public class ArmyController : MonoBehaviour {
                         priestTempPos = new Vector3(pos.transform.position.x, priestY);
                         c.setGoalPos(priestTempPos);
                     }
-                    c.moveTo(c.getGoalPos());
+
+                    if (c.getInPath())
+                        c.moveTo(c.getGoalPos());
                     break;
             }
         }

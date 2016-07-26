@@ -78,7 +78,7 @@ public class TracheaAI : Enemy {
 				//Need to be re-arrange soon
 				playerList.Remove(playerList[i]);
 				GameController gc = GameObject.Find("GameController").GetComponent<GameController>();
-				gc.army.Remove(c);
+                ArmyController.armyController.army.Remove(c);
 				gc.updateUI();
 
 				Destroy(c.gameObject);
@@ -97,4 +97,9 @@ public class TracheaAI : Enemy {
 	public override void TakeDamage(float damage){
 
 	}
+
+    public override void disabled(float duration)
+    {
+        nextActionTime += duration;
+    }
 }

@@ -122,6 +122,11 @@ public class Creep : Enemy {
         currentHealth -= damage;
     }
 
+    public override void disabled(float duration)
+    {
+        nextActionTime += duration;
+    }
+
     public void SetHealthVisual(float healthNormalized)
     {
         healthBar.transform.localScale = new Vector3(healthNormalized,

@@ -10,7 +10,6 @@ public class Tower : Enemy {
 
 	// Use this for initialization
 	protected void Start () {
-        currentHealth = maxHealth = 2;
         playerList = new List<GameObject>();
 	}
 	
@@ -101,6 +100,11 @@ public class Tower : Enemy {
     {
         FloatingTextController.CreateFloatingText(damage.ToString(), transform);
         currentHealth -= damage;
+    }
+
+    public override void disabled(float duration)
+    {
+        nextActionTime += duration;
     }
 
     // Health between [0.0f,1.0f] == (currentHealth / totalHealth)

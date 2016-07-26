@@ -4,6 +4,7 @@ using System.Collections;
 public class Priest : Character {
 
     public GameObject orb;
+    private int hexDuration;
 
 	// Use this for initialization
 	protected new void Start () {
@@ -16,6 +17,7 @@ public class Priest : Character {
         //2 is priest index
         currentHealth = maxHealth = PlayerScript.playerdata.troopData[2].maxHealth;
         damage = PlayerScript.playerdata.troopData[2].attack;
+        hexDuration = 3;
 	}
 	
 	// Update is called once per frame
@@ -54,10 +56,10 @@ public class Priest : Character {
         {
             if (!isAttacking)
             {
-                if (ArmyController.closestEnemy.tag == "Tower")
+                if (ArmyController.closestEnemy.tag == "Enemy")
                 {
-                    TowerAI tower = ArmyController.closestEnemy.GetComponent<TowerAI>();
-                    tower.nextFireTime += 4;
+                    Enemy enemy = ArmyController.closestEnemy.GetComponent<Enemy>();
+                    enemy.disabled(hexDuration);
                     isAttacking = true;
                 }
             }

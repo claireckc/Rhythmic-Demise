@@ -122,6 +122,11 @@ public class Uvula : Enemy {
         currentHealth -= damage;
     }
 
+    public override void disabled(float duration)
+    {
+        nextActionTime += duration;
+    }
+
     // Health between [0.0f,1.0f] == (currentHealth / totalHealth)
     public void SetHealthVisual(float healthNormalized)
     {

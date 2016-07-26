@@ -2,9 +2,6 @@
 using System.Collections;
 
 public class PauseMenu : MonoBehaviour {
-
-    public bool isPaused;
-
     public GameObject pauseMenuCanvas;
 
     AudioSource audio;
@@ -15,31 +12,23 @@ public class PauseMenu : MonoBehaviour {
     }
 
 	void Update () {
-        if (isPaused)
-        {
-            pauseMenuCanvas.SetActive(true);
-            Time.timeScale = 0f;
-            audio.Pause();
-        }
-        else
-        {
-            pauseMenuCanvas.SetActive(false);
-            Time.timeScale = 1f;
-
-            if (!audio.isPlaying)
-            {
-                audio.Play();
-            }
-        }
 	}
 
     public void Resume()
     {
-        isPaused = false;
+        pauseMenuCanvas.SetActive(false);
+        Time.timeScale = 1f;
+
+        if (!audio.isPlaying)
+        {
+            audio.Play();
+        }
     }
 
     public void Pause()
     {
-        isPaused = true;
+        pauseMenuCanvas.SetActive(true);
+        Time.timeScale = 0f;
+        audio.Pause();
     }
 }

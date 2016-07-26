@@ -6,7 +6,7 @@ public class EndResultManager : MonoBehaviour {
 
     Animator anim;
 
-    bool isComplete;
+    bool isComplete, done;
 
 	void Awake () {
         anim = GetComponent<Animator>();
@@ -33,11 +33,11 @@ public class EndResultManager : MonoBehaviour {
             }
         }
 
-        if (isComplete)
+        if (isComplete && !done)
         {
             audio.Stop();
             anim.SetTrigger("Finish");
-
+            
             //update resources
             PlayerScript.playerdata.totalResource += ScoreManager.score;
 
@@ -58,6 +58,8 @@ public class EndResultManager : MonoBehaviour {
                         break;
                 }
             }
+
+            done = true;
         }
 	}
 }

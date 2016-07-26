@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class BeatSpawner : MonoBehaviour {
+    /*
+    public static BeatSpawner beatSpawner;
 
     private int moveBeatCounter;
     private int inputBeatCounter;
@@ -117,5 +119,5 @@ public class BeatSpawner : MonoBehaviour {
 
         //reset beat counter
         if (beatCounter >= 8) { beatCounter = 0; }
-    }
+    }*/
 }

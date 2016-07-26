@@ -13,6 +13,7 @@ public abstract class Character : MonoBehaviour {
     protected Enums.JobType job;
     protected bool isAttacking;
     protected Vector3 goalPos;
+    protected bool inPath;
 
     public Enums.PlayerState currentAction;
 
@@ -29,6 +30,7 @@ public abstract class Character : MonoBehaviour {
 	// Use this for initialization
 	protected void Start () {
         movementSpeed = 2f;
+        inPath = true;
 	}
 
 	// Update is called once per frame
@@ -43,14 +45,11 @@ public abstract class Character : MonoBehaviour {
         transform.position = Vector3.MoveTowards(transform.position, pos, movementSpeed * Time.deltaTime);
     }
 
-    public abstract void attack();
-    public abstract void useSkill();
-
     public void setCurrentState(Enums.PlayerState currAct)
     {
         currentAction = currAct;
     }
-
+    
     void OnTriggerEnter2D(Collider2D other)
     {
         //add enemy to enemyList if in range of player range
@@ -71,6 +70,7 @@ public abstract class Character : MonoBehaviour {
     public void reset()
     {
         isAttacking = false;
+        inPath = true;
     }
 
     public void SetHealthVisual(float healthNormalized)
@@ -96,31 +96,21 @@ public abstract class Character : MonoBehaviour {
         return goalPos;
     }
 
+    public bool getInPath()
+    {
+        return inPath;
+    }
+
     public void setGoalPos(Vector3 pos)
     {
         goalPos = pos;
     }
-    /*
-  public IEnumerator MoveOverSpeed (GameObject objectToMove, Vector3 end, float speed){
-     // speed should be 1 unit per second
-     while (objectToMove.transform.position != end)
-     {
-         objectToMove.transform.position = Vector3.MoveTowards(objectToMove.transform.position, end, speed * Time.deltaTime);
 
-         yield return new WaitForEndOfFrame ();
-     }
- }
- public IEnumerator MoveOverSeconds (GameObject objectToMove, Vector3 end, float seconds)
- {
-     float elapsedTime = 0;
-     Vector3 startingPos = objectToMove.transform.position;
-     while (elapsedTime < seconds)
-     {
-         objectToMove.transform.position = Vector3.Lerp(startingPos, end, (elapsedTime / seconds));
-         elapsedTime += Time.deltaTime;
-         yield return new WaitForEndOfFrame();
-     }
-     objectToMove.transform.position = end;
- }
-    */
+    public void setInPath(bool p)
+    {
+        inPath = p;
+    }
+
+    public abstract void attack();
+    public abstract void useSkill();
 }
