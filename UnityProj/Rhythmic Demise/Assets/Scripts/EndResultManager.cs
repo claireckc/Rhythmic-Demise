@@ -77,5 +77,6 @@ public class EndResultManager : MonoBehaviour {
 
             done = true;
         }
+        SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
 	}
 }
