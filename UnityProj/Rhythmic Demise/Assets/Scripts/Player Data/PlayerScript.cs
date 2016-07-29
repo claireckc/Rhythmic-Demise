@@ -13,15 +13,11 @@ public class PlayerScript : MonoBehaviour
             Destroy(gameObject);
         else
         {
-            print("Null data");
             DontDestroyOnLoad(gameObject);
             SaveLoadManager.LoadInformation();
 
             if (playerdata == null)
-            {
-                print("NUll still");
                 playerdata = new PlayerData();
-            }
         }
 
     }

@@ -18,6 +18,7 @@ public class StageRateHandler : MonoBehaviour {
 
     public int InstantiateFullStar(float stageStars)
     {
+        //position is the last position that has a full star
         int position = 0;
         for (int i = 0; i < stageStars; i++)
         {
@@ -57,7 +58,7 @@ public class StageRateHandler : MonoBehaviour {
                         case 1: Instantiate(emptyStar, secondStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f));
                             Instantiate(emptyStar, thirdStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f));
                             break;
-                        case 2: Instantiate(emptyStar, secondStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f));
+                        case 2: Instantiate(emptyStar, thirdStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f));
                             break;
                         default: Instantiate(emptyStar, firstStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f));
                             Instantiate(emptyStar, secondStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f));
@@ -99,6 +100,7 @@ public class StageRateHandler : MonoBehaviour {
         else
         {
             //check if locked or poor score
+            print("locked damit");
         }
         print("Total map " + GetMainStars(mapName));
     }

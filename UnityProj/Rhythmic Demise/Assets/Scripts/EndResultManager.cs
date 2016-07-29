@@ -3,16 +3,15 @@ using System.Collections;
 
 public class EndResultManager : MonoBehaviour {
     AudioSource audio;
-    const int STARS = 3;
     Animator anim;
-    GameObject endStage;
+    GameObject endStageClone;
 
     bool isComplete, done;
 
 	void Awake () {
         anim = GetComponent<Animator>();
         audio = GameObject.Find("Audio Source").GetComponent<AudioSource>();
-        endStage = GameObject.Find("End Stage").GetComponent<GameObject>();
+        endStageClone = Instantiate(Resources.Load<GameObject>("Prefabs/End Stage"));
 	}
 	
 	void Update () {
@@ -36,45 +35,17 @@ public class EndResultManager : MonoBehaviour {
 
         if (isComplete && !done)
         {
-            audio.Stop();
-            anim.SetTrigger("Finish");
-            
-            //update resources
-            PlayerScript.playerdata.totalResource += ScoreManager.score;
-
-            for (int i = 0; i < PlayerScript.playerdata.mapProgress.Count; i++)
-            {
-                switch (PlayerScript.playerdata.mapProgress[i].mapName)
-                {
-                    case Enums.MainMap.Mouth:
-
-                        for (int j = 0; j < PlayerScript.playerdata.mapProgress[i].stages.Count; j++)
-                        {
-                            if (!PlayerScript.playerdata.mapProgress[i].stages[j].IsComplete() && PlayerScript.playerdata.mapProgress[i].stages[j].isCurrent(PlayerScript.playerdata.clickedStageNumber))
-                            {   
-                                //check if the current saved map score is higher than newly achieved map score
-                                if(PlayerScript.playerdata.mapProgress[i].stages[i].topComboCount < ScoreManager.score)
-                                {
-                                    int gotStars = 0;
-                                    PlayerScript.playerdata.mapProgress[i].stages[i].topComboCount = ScoreManager.score;
-                                    for (int k = 0; k < STARS; k++)
-                                    {
-                                        if (PlayerScript.playerdata.mapProgress[i].stages[i].comboRange[k] < ScoreManager.score)
-                                            gotStars++;
-                                    }
-                                    //update stars
-                                    if (PlayerScript.playerdata.mapProgress[i].stages[i].stars < gotStars)
-                                        PlayerScript.playerdata.mapProgress[i].stages[i].stars = gotStars;
-                                }
-                                break;
-                            }
-                        }
-                        break;
-                }
-            }
-
-            done = true;
+            StopGame();
         }
-        SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
 	}
+
+    void StopGame()
+    {
+        audio.Stop();
+        anim.SetTrigger("Finish");
+
+        //update resources
+        endStageClone.SendMessage("UpdateData");
+        done = true;
+    }
 }
