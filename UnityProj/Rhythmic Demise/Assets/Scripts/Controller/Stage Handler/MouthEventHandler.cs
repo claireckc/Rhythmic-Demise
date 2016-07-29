@@ -52,7 +52,7 @@ public class MouthEventHandler : MonoBehaviour
                     Application.LoadLevel("Resource Management");
                     break;
                 case "Mouth_2":
-                    if (PlayerScript.playerdata.mapProgress[0].stages[0].topComboCount >= 0 || PlayerScript.playerdata.mapProgress[0].stages[0].isComplete)
+                    if (PlayerScript.playerdata.mapProgress[0].stages[0].topComboCount >= 0 || PlayerScript.playerdata.mapProgress[0].stages[0].IsComplete())
                     {
                         PlayerScript.playerdata.clickedMap = Enums.MainMap.Mouth;
                         PlayerScript.playerdata.clickedStageNumber = 2;
@@ -61,7 +61,7 @@ public class MouthEventHandler : MonoBehaviour
                     break;
 
                 case "Mouth_3":
-                    if (PlayerScript.playerdata.mapProgress[0].stages[1].topComboCount >= 0 || PlayerScript.playerdata.mapProgress[0].stages[1].isComplete)
+                    if (PlayerScript.playerdata.mapProgress[0].stages[1].topComboCount >= 0 || PlayerScript.playerdata.mapProgress[0].stages[1].IsComplete())
                     {
                         PlayerScript.playerdata.clickedMap = Enums.MainMap.Mouth;
                         PlayerScript.playerdata.clickedStageNumber = 3;
