@@ -5,13 +5,14 @@ public class EndResultManager : MonoBehaviour {
     AudioSource audio;
     const int STARS = 3;
     Animator anim;
+    GameObject endStage;
 
     bool isComplete, done;
 
 	void Awake () {
         anim = GetComponent<Animator>();
-
         audio = GameObject.Find("Audio Source").GetComponent<AudioSource>();
+        endStage = GameObject.Find("End Stage").GetComponent<GameObject>();
 	}
 	
 	void Update () {
@@ -26,7 +27,7 @@ public class EndResultManager : MonoBehaviour {
         }
 
         //Just for prototype, need to be arrange later
-        if (PlayerScript.playerdata.mapProgress[0].stages[2].isCurrent)
+        if (PlayerScript.playerdata.mapProgress[0].stages[2].isCurrent(PlayerScript.playerdata.clickedStageNumber))
         {
             if(!GameObject.Find("Uvula")){
                 isComplete = true;
@@ -49,11 +50,8 @@ public class EndResultManager : MonoBehaviour {
 
                         for (int j = 0; j < PlayerScript.playerdata.mapProgress[i].stages.Count; j++)
                         {
-                            if (!PlayerScript.playerdata.mapProgress[i].stages[j].isComplete && PlayerScript.playerdata.mapProgress[i].stages[j].isCurrent)
+                            if (!PlayerScript.playerdata.mapProgress[i].stages[j].IsComplete() && PlayerScript.playerdata.mapProgress[i].stages[j].isCurrent(PlayerScript.playerdata.clickedStageNumber))
                             {   
-                                PlayerScript.playerdata.mapProgress[i].stages[j].isComplete = true;
-                                PlayerScript.playerdata.mapProgress[i].stages[j].isCurrent = false;
-                                
                                 //check if the current saved map score is higher than newly achieved map score
                                 if(PlayerScript.playerdata.mapProgress[i].stages[i].topComboCount < ScoreManager.score)
                                 {
