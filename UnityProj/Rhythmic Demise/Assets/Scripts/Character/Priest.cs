@@ -29,16 +29,16 @@ public class Priest : Character {
     {
         if (!isAttacking)
         {
-            if (ArmyController.enemyList.Count > 0)
+            if (ArmyController.armyController.enemyList.Count > 0)
             {
                 //Debug.Log("Attack!");
                 //start attack animation and instatiate projectile
 
-                Vector3 dir = ArmyController.closestEnemy.transform.position - this.transform.position;
+                Vector3 dir = ArmyController.armyController.closestEnemy.transform.position - this.transform.position;
                 float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
 
                 GameObject shoot = Instantiate(orb, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-                shoot.SendMessage("Initialize", ArmyController.closestEnemy);
+                shoot.SendMessage("Initialize", ArmyController.armyController.closestEnemy);
                 shoot.SendMessage("initDamage", 0.5f);
 
                 isAttacking = true;
@@ -56,9 +56,9 @@ public class Priest : Character {
         {
             if (!isAttacking)
             {
-                if (ArmyController.closestEnemy.tag == "Enemy")
+                if (ArmyController.armyController.closestEnemy.tag == "Enemy")
                 {
-                    Enemy enemy = ArmyController.closestEnemy.GetComponent<Enemy>();
+                    Enemy enemy = ArmyController.armyController.closestEnemy.GetComponent<Enemy>();
                     enemy.disabled(hexDuration);
                     isAttacking = true;
                 }

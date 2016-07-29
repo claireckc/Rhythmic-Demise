@@ -55,7 +55,7 @@ public abstract class Character : MonoBehaviour {
         //add enemy to enemyList if in range of player range
         if (other.tag == "Enemy")
         {
-            ArmyController.addEnemyList(other.gameObject);
+            ArmyController.armyController.addEnemyList(other.gameObject);
         }
     }
 
@@ -63,7 +63,7 @@ public abstract class Character : MonoBehaviour {
     {
         if (other.tag == "Enemy")
         {
-            ArmyController.removeEnemyList(other.gameObject);
+            ArmyController.armyController.removeEnemyList(other.gameObject);
         }
     }
 
