@@ -38,6 +38,18 @@ public class Enums : MonoBehaviour {
         Kidney, LIntes, SIntes, Brain
     }
     public const int MAINMAPCOUNT = 17;
-
     public const int MOUTHSTAGE = 3;
+
+    public static string[] MapName =
+    {
+        "Mouth", "Larnyx", "Trachea", "Lungs", "Heart", "Liver",
+        "Spleen", "Pancreas", "Kidney", "Lintes", "Sintes", "Brain"
+    };
+
+    public static string[] StageName =
+    {
+        "MouthStage", "LarnyxStage", "TracheaStage", "LungStage", "HeartStage", 
+        "LiverStage", "SpleenStage", "PancreasStage", "KidneyStage", "LargeIntesStage",
+        "SmallIntesStage", "BrainStage"
+    };
 }

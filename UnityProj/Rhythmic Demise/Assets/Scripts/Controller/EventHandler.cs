@@ -18,7 +18,7 @@ public class EventHandler : MonoBehaviour {
     private Color whiteColor, lockedColor;
 
     public SpriteRenderer[] partsSprite;
-    public GameObject starObj;
+    GameObject stageRate;
 
     // Use this for initialization
     void Start ()
@@ -26,6 +26,8 @@ public class EventHandler : MonoBehaviour {
         platform = Application.platform;
         labelText = labelText.GetComponent<Text>();
         labelAnim = labelAnim.GetComponent<Animator>();
+        stageRate = GameObject.Find("Map Rating");
+        print(stageRate);
         whiteColor = new Color(255f/255f, 255f/255f, 255f/255f);
         lockedColor = new Color(146f/255f, 146f/255f, 255f/255f);
 
@@ -53,7 +55,6 @@ public class EventHandler : MonoBehaviour {
 
         dFontSize = 40;
         iFontSize = 32;
-        Debug.Log(starObj);
     }
 	
 	// Update is called once per frame
@@ -76,164 +77,42 @@ public class EventHandler : MonoBehaviour {
         }
 	}
 
+    public void SetAccess(string mapTag)
+    {
+        int index = GetTagIndex(mapTag);
+        if (index != -1)
+        {
+            if (!PlayerScript.playerdata.mapProgress[index].isLocked)
+            {
+                if (partsAnim[index].GetBool("isPending"))
+                {
+                    partsAnim[index].SetBool("isPending", false);
+                    PlayerScript.playerdata.clickedMap = (Enums.MainMap)index;
+                    Application.LoadLevel(Enums.StageName[index]);
+                }
+            }
+            SetNewAnimation(index, PlayerScript.playerdata.mapProgress[index].isLocked);
+        }
+
+    }
+
+    public int GetTagIndex(string mapTag)
+    {
+       for(int i = 0; i < Enums.MapName.Length; i++)
+        {
+            if (Enums.MapName[i].Equals(mapTag))
+                return i;
+        }
+        return -1;
+    }
+
     public void DetermineTouchPosition(Vector2 touchPosition)
     {
         ray = Camera.main.ScreenPointToRay(touchPosition);
         rayHit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, 1 << 13);
        if(rayHit.collider != null)
         {
-            switch (rayHit.collider.gameObject.tag)
-            {
-                case "Mouth":
-                    if (!PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Mouth].isLocked)
-                    {
-                        if (partsAnim[(int)Enums.MainMap.Mouth].GetBool("isPending"))
-                        {
-                            partsAnim[(int)Enums.MainMap.Mouth].SetBool("isPending", false);
-                            Application.LoadLevel("MouthStage");
-                        }
-                    }
-
-                    SetNewAnimation((int)Enums.MainMap.Mouth, PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Mouth].isLocked);
-
-
-                    break;
-                case "Larnyx":
-                    if (!PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Larnyx].isLocked)
-                    {
-                        if (partsAnim[(int)Enums.MainMap.Larnyx].GetBool("isPending"))
-                        {
-                            partsAnim[(int)Enums.MainMap.Larnyx].SetBool("isPending", false);
-                            Application.LoadLevel("LarnyxStage");
-                        }
-                    }
-                    SetNewAnimation((int)Enums.MainMap.Larnyx, PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Larnyx].isLocked);
-
-
-                    break;
-                case "Trachea":
-                    if (!PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Trachea].isLocked)
-                    {
-                        if (partsAnim[(int)Enums.MainMap.Trachea].GetBool("isPending"))
-                        {
-                            partsAnim[(int)Enums.MainMap.Trachea].SetBool("isPending", false);
-                            Application.LoadLevel("LungStage");
-                        }
-                    }
-                    SetNewAnimation((int)Enums.MainMap.Trachea, PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Trachea].isLocked);
-
-                    break;
-                case "Lungs":
-                    if (!PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Lung].isLocked)
-                    {
-                        if (partsAnim[(int)Enums.MainMap.Lung].GetBool("isPending"))
-                        {
-                            partsAnim[(int)Enums.MainMap.Lung].SetBool("isPending", false);
-                            Application.LoadLevel("HeartStage");
-                        }
-                    }
-                    SetNewAnimation((int)Enums.MainMap.Lung, PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Lung].isLocked);
-
-                    break;
-
-                case "Heart":
-                    if (!PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Heart].isLocked)
-                    {
-                        if (partsAnim[(int)Enums.MainMap.Heart].GetBool("isPending"))
-                        {
-                            partsAnim[(int)Enums.MainMap.Heart].SetBool("isPending", false);
-                            Application.LoadLevel("LiverStage");
-                        }
-                    }
-                    SetNewAnimation((int)Enums.MainMap.Heart, PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Heart].isLocked);
-
-                    break;
-                case "Liver":
-                    if (!PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Liver].isLocked)
-                    {
-                        if (partsAnim[(int)Enums.MainMap.Liver].GetBool("isPending"))
-                        {
-                            partsAnim[(int)Enums.MainMap.Liver].SetBool("isPending", false);
-                            Application.LoadLevel("SpleenStage");
-                        }
-                    }
-                    SetNewAnimation((int)Enums.MainMap.Liver, PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Liver].isLocked);
-
-                    break;
-                case "Spleen":
-                    if (!PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Spleen].isLocked)
-                    {
-                        if (partsAnim[(int)Enums.MainMap.Spleen].GetBool("isPending"))
-                        {
-                            partsAnim[(int)Enums.MainMap.Spleen].SetBool("isPending", false);
-                            Application.LoadLevel("PancreasStage");
-                        }
-                    }
-                    SetNewAnimation((int)Enums.MainMap.Spleen, PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Spleen].isLocked);
-
-                    break;
-                case "Pancreas":
-                    if (!PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Pancreas].isLocked)
-                    {
-                        if (partsAnim[(int)Enums.MainMap.Pancreas].GetBool("isPending"))
-                        {
-                            partsAnim[(int)Enums.MainMap.Pancreas].SetBool("isPending", false);
-                            Application.LoadLevel("KidneyStage");
-                        }
-                    }
-                    SetNewAnimation((int)Enums.MainMap.Pancreas, PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Pancreas].isLocked);
-
-                    break;
-                case "Kidney":
-                    if (!PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Kidney].isLocked)
-                    {
-                        if (partsAnim[(int)Enums.MainMap.Kidney].GetBool("isPending"))
-                        {
-                            partsAnim[(int)Enums.MainMap.Kidney].SetBool("isPending", false);
-                            Application.LoadLevel("LargeIntesStage");
-                        }
-                    }
-                    SetNewAnimation((int)Enums.MainMap.Kidney, PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Kidney].isLocked);
-
-                    break;
-                case "Lintes":
-                    if (!PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.LIntes].isLocked)
-                    {
-                        if (partsAnim[(int)Enums.MainMap.LIntes].GetBool("isPending"))
-                        {
-                            partsAnim[(int)Enums.MainMap.LIntes].SetBool("isPending", false);
-                            Application.LoadLevel("SmallIntesStage");
-                        }
-                    }
-                    SetNewAnimation((int)Enums.MainMap.LIntes, PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.LIntes].isLocked);
-
-                    break;
-                case "Sintes":
-                    if (!PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.SIntes].isLocked)
-                    {
-                        if (partsAnim[(int)Enums.MainMap.SIntes].GetBool("isPending"))
-                        {
-                            partsAnim[(int)Enums.MainMap.SIntes].SetBool("isPending", false);
-                            Application.LoadLevel("BrainStage");
-                        }
-                    }
-                    SetNewAnimation((int)Enums.MainMap.SIntes, PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.SIntes].isLocked);
-
-                    break;
-                case "Brain":
-                    if (!PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Brain].isLocked)
-                    {
-                        if (partsAnim[(int)Enums.MainMap.Brain].GetBool("isPending"))
-                        {
-                            partsAnim[(int)Enums.MainMap.Brain].SetBool("isPending", false);
-                            Application.LoadLevel("BrainStage");
-                        }
-                    }
-                    SetNewAnimation((int)Enums.MainMap.Brain, PlayerScript.playerdata.mapProgress[(int)Enums.MainMap.Brain].isLocked);
-
-                    break;
-            }
-
+            SetAccess(rayHit.collider.gameObject.tag);
         }
     }
 
@@ -271,13 +150,15 @@ public class EventHandler : MonoBehaviour {
             highlights[index].SetActive(true);
             UpdateText(index, "");
         }
-        else
+        else {
             UpdateText(index, "Locked: ");
+            stageRate.SendMessage("Init", (Enums.MainMap)index);
+        }
     }
 
     public void DisplayStars(Enums.MainMap mapName)
     {
-        starObj.SendMessage("Init", mapName);
+        stageRate.SendMessage("Init", mapName);
     }
 
     public void UpdateText(int index, string addon)

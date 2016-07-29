@@ -20,7 +20,7 @@ public static class SaveLoadManager
         Debug.Log("2 save");
 
         bf.Serialize(stream, data);
-        Debug.Log("3 save");
+       Debug.Log("3 save");
         stream.Close();
     }
 
@@ -28,7 +28,7 @@ public static class SaveLoadManager
     {
         if (File.Exists(Application.persistentDataPath + "/player.sav"))
         {
-            Debug.Log("exist: " + Application.persistentDataPath + "/player.sav");
+           Debug.Log("exist: " + Application.persistentDataPath + "/player.sav");
             Debug.Log("1 load");
             FileStream stream = new FileStream(Application.persistentDataPath + "/player.sav", FileMode.Open);
             Debug.Log("2 load");
@@ -37,7 +37,7 @@ public static class SaveLoadManager
             Debug.Log("3 load");
 
             stream.Close();
-            Debug.Log("Finish loading: " + PlayerScript.playerdata.pathogenType);
+           Debug.Log("Finish loading: " + PlayerScript.playerdata.pathogenType);
 
         }
     }
