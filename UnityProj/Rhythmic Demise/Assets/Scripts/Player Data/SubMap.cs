@@ -13,5 +13,14 @@ public class SubMap {
 
     public int topComboCount, resourceAttained;
     public List<int> comboRange;        //size 3
-    public bool isComplete, isCurrent;
+
+    public bool IsComplete()
+    {
+        return (topComboCount > 0);
+    }
+
+    public bool isCurrent(int clicked)
+    {
+        return (clicked == (mapId + 1));
+    }
 }

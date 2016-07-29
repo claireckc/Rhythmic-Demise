@@ -10,4 +10,5 @@ public class Troop {
     public int level, energyNeeded;
     public float currentHealth, maxHealth, attack, defenseRating;
     public List<Skills> skills;        //3
+
 }

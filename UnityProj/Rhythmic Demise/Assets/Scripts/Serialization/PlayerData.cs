@@ -156,8 +156,6 @@ public class PlayerData
                     stage.comboRange = new List<int>();
                     for (int j = 0; j < 3; j++)
                         stage.comboRange.Add(0);
-                    stage.isComplete = false;
-                    stage.isCurrent = false;
                     newMap.stages.Add(stage);
                 }
             }
@@ -165,7 +163,6 @@ public class PlayerData
                 newMap.isLocked = true;
 
             newMap.avgStars = 0;
-            newMap.isComplete = false;
             mapProgress.Add(newMap);
         }
     }
