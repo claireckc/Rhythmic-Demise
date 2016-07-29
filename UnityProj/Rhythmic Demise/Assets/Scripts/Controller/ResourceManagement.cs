@@ -180,32 +180,20 @@ public class ResourceManagement : MonoBehaviour
 
     public void Main_PlayPress()
     {
-        for (int i = 0; i < PlayerScript.playerdata.mapProgress.Count; i++)
+        if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
         {
-            switch (PlayerScript.playerdata.mapProgress[i].mapName)
+            switch (PlayerScript.playerdata.clickedStageNumber)
             {
-                case Enums.MainMap.Mouth:
+                case 1:
+                    Application.LoadLevel("TutorialScene");
+                    break;
 
-                    for (int j = 0; j < PlayerScript.playerdata.mapProgress[i].stages.Count; j++)
-                    {
-                        if (!PlayerScript.playerdata.mapProgress[i].stages[j].isComplete && PlayerScript.playerdata.mapProgress[i].stages[j].isCurrent)
-                        {
-                            switch (PlayerScript.playerdata.mapProgress[i].stages[j].mapId)
-                            {
-                                case 0:
-                                    Application.LoadLevel("TutorialScene");
-                                    break;
+                case 2:
+                    Application.LoadLevel("Tutorial2Scene");
+                    break;
 
-                                case 1:
-                                    Application.LoadLevel("Tutorial2Scene");
-                                    break;
-
-                                case 2:
-                                    Application.LoadLevel("Tutorial3Scene");
-                                    break;
-                            }
-                        }
-                    }
+                case 3:
+                    Application.LoadLevel("Tutorial3Scene");
                     break;
             }
         }

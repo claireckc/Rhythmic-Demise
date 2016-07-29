@@ -16,6 +16,8 @@ public class PlayerData
     public Enums.CharacterType pathogenType;
     public List<Troop> troopData;       //first is knight then archer and then priest, to store the stats and the level
     public List<TroopSelected> troopSelected;
+    public Enums.MainMap clickedMap;
+    public int clickedStageNumber;
 
     //multiplier
     public float attackMultiplier;
@@ -149,13 +151,11 @@ public class PlayerData
                     stage = new SubMap();
                     stage.parentMap = newMap.mapName;
                     stage.mapId = k;
-                    stage.topComboCount = stage.resourceAttained = 0;
+                    stage.topComboCount = stage.resourceAttained = -1;
                     stage.stars = 0f;
                     stage.comboRange = new List<int>();
                     for (int j = 0; j < 3; j++)
                         stage.comboRange.Add(0);
-                    stage.isComplete = false;
-                    stage.isCurrent = false;
                     newMap.stages.Add(stage);
                 }
             }
@@ -163,7 +163,6 @@ public class PlayerData
                 newMap.isLocked = true;
 
             newMap.avgStars = 0;
-            newMap.isComplete = false;
             mapProgress.Add(newMap);
         }
     }

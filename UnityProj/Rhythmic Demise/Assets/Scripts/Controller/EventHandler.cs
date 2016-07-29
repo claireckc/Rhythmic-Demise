@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.Events;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class EventHandler : MonoBehaviour {
 
@@ -20,10 +18,10 @@ public class EventHandler : MonoBehaviour {
     private Color whiteColor, lockedColor;
 
     public SpriteRenderer[] partsSprite;
-    public GameObject stars;
-    
-	// Use this for initialization
-	void Start ()
+    public GameObject starObj;
+
+    // Use this for initialization
+    void Start ()
     {
         platform = Application.platform;
         labelText = labelText.GetComponent<Text>();
@@ -55,7 +53,7 @@ public class EventHandler : MonoBehaviour {
 
         dFontSize = 40;
         iFontSize = 32;
-        
+        Debug.Log(starObj);
     }
 	
 	// Update is called once per frame
@@ -241,7 +239,9 @@ public class EventHandler : MonoBehaviour {
 
     public void Map_ReturnClick()
     {
-        Application.LoadLevel("StartScreen");
+        //Application.LoadLevel("StartScreen");
+        Debug.Log("Pressed!");
+        SceneManager.LoadScene("StartScreen");
     }
 
     public void StopAllAnim()
@@ -277,7 +277,6 @@ public class EventHandler : MonoBehaviour {
 
     public void DisplayStars(Enums.MainMap mapName)
     {
-        GameObject starObj = Instantiate(stars, stars.transform.position, stars.transform.rotation) as GameObject;
         starObj.SendMessage("Init", mapName);
     }
 
