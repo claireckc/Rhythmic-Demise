@@ -28,16 +28,16 @@ public class Archer : Character {
     {
         if (!isAttacking)
         {
-            if (ArmyController.enemyList.Count > 0)
+            if (ArmyController.armyController.enemyList.Count > 0)
             {
                 //Debug.Log("Attack!");
                 //start attack animation and instatiate projectile
 
-                Vector3 dir = ArmyController.closestEnemy.transform.position - this.transform.position;
+                Vector3 dir = ArmyController.armyController.closestEnemy.transform.position - this.transform.position;
                 float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
 
                 GameObject shoot = Instantiate(arrow, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-                shoot.SendMessage("Initialize", ArmyController.closestEnemy);
+                shoot.SendMessage("Initialize", ArmyController.armyController.closestEnemy);
                 shoot.SendMessage("initDamage", 1);
 
                 isAttacking = true;
@@ -55,16 +55,16 @@ public class Archer : Character {
         {
             if (!isAttacking)
             {
-                if (ArmyController.enemyList.Count > 0)
+                if (ArmyController.armyController.enemyList.Count > 0)
                 {
                     //Debug.Log("Attack!");
                     //start attack animation and instatiate projectile
 
-                    Vector3 dir = ArmyController.closestEnemy.transform.position - this.transform.position;
+                    Vector3 dir = ArmyController.armyController.closestEnemy.transform.position - this.transform.position;
                     float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
 
                     GameObject shoot = Instantiate(focusArrow, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-                    shoot.SendMessage("Initialize", ArmyController.closestEnemy);
+                    shoot.SendMessage("Initialize", ArmyController.armyController.closestEnemy);
                     shoot.SendMessage("initDamage", 2);
 
                     isAttacking = true;

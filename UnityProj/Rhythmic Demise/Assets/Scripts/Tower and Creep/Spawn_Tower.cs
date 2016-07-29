@@ -12,6 +12,7 @@ public class Spawn_Tower : Tower {
     {
         base.Start();
 
+        currentHealth = maxHealth = 3;
         cooldown = nextActionTime = 0.5f;
     }
 

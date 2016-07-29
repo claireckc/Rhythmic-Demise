@@ -18,4 +18,9 @@ public class ScoreManager : MonoBehaviour {
 	void Update () {
         text.text = "X" + score;
 	}
+
+    public static void addScore()
+    {
+        score = score + (10 * comboMultiplier);
+    }
 }

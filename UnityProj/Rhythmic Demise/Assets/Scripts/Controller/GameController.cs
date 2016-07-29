@@ -78,7 +78,7 @@ public class GameController : MonoBehaviour {
             {
                 //move left
                 case "1143":
-                    if (ArmyController.armyController.currPos.left != null)
+                    if (ArmyController.armyController.currPos.left != null && ArmyController.armyController.enemyList.Count == 0)
                     {
                         ArmyController.armyController.setCurrentState(Enums.PlayerState.MoveLeft);
                     }
@@ -86,7 +86,7 @@ public class GameController : MonoBehaviour {
                     break;
                 //move right
                 case "1134":
-                    if (ArmyController.armyController.currPos.right != null)
+                    if (ArmyController.armyController.currPos.right != null && ArmyController.armyController.enemyList.Count == 0)
                     {
                         ArmyController.armyController.setCurrentState(Enums.PlayerState.MoveRight);
                     }
@@ -94,7 +94,7 @@ public class GameController : MonoBehaviour {
                     break;
                 //move up
                 case "1144":
-                    if (ArmyController.armyController.currPos.up != null)
+                    if (ArmyController.armyController.currPos.up != null && ArmyController.armyController.enemyList.Count == 0)
                     {
                         ArmyController.armyController.setCurrentState(Enums.PlayerState.MoveUp);
                     }
@@ -102,7 +102,7 @@ public class GameController : MonoBehaviour {
                     break;
                 //move down
                 case "1133":
-                    if (ArmyController.armyController.currPos.bottom != null)
+                    if (ArmyController.armyController.currPos.bottom != null && ArmyController.armyController.enemyList.Count == 0)
                     {
                         ArmyController.armyController.setCurrentState(Enums.PlayerState.MoveDown);
                     }
@@ -147,6 +147,7 @@ public class GameController : MonoBehaviour {
 
                 //reset current streak
                 currentStreak = 0;
+                ScoreManager.comboMultiplier = 1;
             }
 
             if (inputBeatCounter >= 4)
@@ -166,11 +167,15 @@ public class GameController : MonoBehaviour {
             if (moveBeatCounter == 1)
             {
                 FloatingTextController.CreateFloatingText(currentStreak.ToString() + " Combo!!", comboTextPosition);
+
+                currentStreak++;
+
+                //calculate combo multiplier
+                ScoreManager.comboMultiplier += 1;
             }
 
             if (moveBeatCounter >= 4)
             {
-                currentStreak++;
 
                 moveActionTurn = false;
                 moveBeatCounter = 0;
@@ -186,6 +191,7 @@ public class GameController : MonoBehaviour {
 
             //reset current streak
             currentStreak = 0;
+            ScoreManager.comboMultiplier = 1;
         }
 
         //check if current streak is the highest streak

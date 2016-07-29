@@ -15,10 +15,10 @@ public class ArmyController : MonoBehaviour {
 
     public Enums.PlayerState currentAction;
 
-    public static List<GameObject> enemyList;
-    public static float closestDist;
-    public static GameObject firstEnemy;
-    public static GameObject closestEnemy;
+    public List<GameObject> enemyList;
+    public float closestDist;
+    public GameObject firstEnemy;
+    public GameObject closestEnemy;
 
     private int archerCount;
     private int priestCount;
@@ -212,7 +212,7 @@ public class ArmyController : MonoBehaviour {
         isRandomOnce = true;
     }
 
-    public static void addEnemyList(GameObject enemy)
+    public void addEnemyList(GameObject enemy)
     {
         if (!enemyList.Contains(enemy))
         {
@@ -220,7 +220,7 @@ public class ArmyController : MonoBehaviour {
         }
     }
 
-    public static void removeEnemyList(GameObject enemy)
+    public void removeEnemyList(GameObject enemy)
     {
         enemyList.Remove(enemy);
     }
@@ -238,7 +238,7 @@ public class ArmyController : MonoBehaviour {
                 Destroy(e.gameObject);
                 
                 //add score
-                ScoreManager.score += 10;
+                ScoreManager.addScore();
             }
         }
     }

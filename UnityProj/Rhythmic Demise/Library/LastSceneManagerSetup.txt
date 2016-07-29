@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/Game Scene/No1.Mouth(Tutorial)/TutorialScene.unity
-=======
-- path: Assets/Scenes/Maps/MainMapOverview.unity
->>>>>>> 24fd714f4a93e180bb120da97704b96174808fa5
+- path: Assets/Scenes/StartScreen.unity
   isLoaded: 1
   isActive: 1

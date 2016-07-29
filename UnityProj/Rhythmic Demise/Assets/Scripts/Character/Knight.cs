@@ -21,16 +21,16 @@ public class Knight : Character {
 
     public override void attack()
     {
-        if (ArmyController.closestEnemy != null)
+        if (ArmyController.armyController.closestEnemy != null)
         {
-            float distance = Vector3.Distance(transform.position, ArmyController.closestEnemy.transform.position);
+            float distance = Vector3.Distance(transform.position, ArmyController.armyController.closestEnemy.transform.position);
             if (distance < 2)
             {
                 if (!isAttacking)
                 {
-                    if (ArmyController.enemyList.Count > 0)
+                    if (ArmyController.armyController.enemyList.Count > 0)
                     {
-                        Enemy enemy = ArmyController.closestEnemy.GetComponent<Enemy>();
+                        Enemy enemy = ArmyController.armyController.closestEnemy.GetComponent<Enemy>();
                         enemy.TakeDamage(damage);
                         isAttacking = true;
                     }
@@ -38,7 +38,7 @@ public class Knight : Character {
             }
             else
             {
-                Vector3 dir = ArmyController.closestEnemy.transform.position - transform.position;
+                Vector3 dir = ArmyController.armyController.closestEnemy.transform.position - transform.position;
                 float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
