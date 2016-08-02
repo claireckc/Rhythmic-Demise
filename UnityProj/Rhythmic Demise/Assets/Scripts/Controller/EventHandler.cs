@@ -334,25 +334,6 @@ public class EventHandler : MonoBehaviour {
                 SetFontSize("Kidney");
                 break;
             case 9:
-                if (labelText.text != "Large Intestine")
-                {
-                    if (labelText.text == "Parts")
-                        labelAnim.SetTrigger("newSelection");
-                    else
-                    {
-                        labelAnim.ResetTrigger("newSelection");
-                        labelAnim.Play("NewLabelAnimation", -1, 0.0f);
-                    }
-                    if (addon == "")
-                        labelText.text = "Large Intestine";
-                    else
-                        labelText.text = "Locked";
-
-                }
-                DisplayStars(Enums.MainMap.LIntes);
-                SetFontSize("Large Intestine");
-                break;
-            case 10:
                 if (labelText.text != "Small Intestine")
                 {
                     if (labelText.text == "Parts")
@@ -364,6 +345,28 @@ public class EventHandler : MonoBehaviour {
                     }
                     if (addon == "")
                         labelText.text = "Small Intestine";
+                    else
+                        labelText.text = "Locked";
+
+                }
+                DisplayStars(Enums.MainMap.LIntes);
+                SetFontSize("Large Intestine");
+                break;
+            case 10:
+                if (labelText.text != "Large Intestine")
+                {
+                    if (labelText.text == "Parts")
+                        labelAnim.SetTrigger("newSelection");
+                    else
+                    {
+                        labelAnim.ResetTrigger("newSelection");
+                        labelAnim.Play("NewLabelAnimation", -1, 0.0f);
+                    }
+                    if (addon == "")
+                    {
+                        labelText.text = "Small Intestine";
+                        SetFontSize("Large Intestine");
+                    }
                     else
                         labelText.text = "Locked";
                 }

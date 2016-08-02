@@ -3,10 +3,11 @@ using System.Collections;
 
 public class StageRateHandler : MonoBehaviour {
 
-    private GameObject fullStar, halfStar, emptyStar;
+    const int RATE = 3;
+    private GameObject fullStar, halfStar, emptyStar, nothing, locked;
     public GameObject firstStarPos, secondStarPos, thirdStarPos;
-    public GameObject locked;
     public float MAXSTARS = 3.0f;
+    private GameObject[] RatingObjectArray;
 
     public void Start()
     {
@@ -14,6 +15,10 @@ public class StageRateHandler : MonoBehaviour {
         fullStar = Resources.Load<GameObject>("Prefabs/FullStar");
         halfStar = Resources.Load<GameObject>("Prefabs/HalfStar");
         emptyStar = Resources.Load<GameObject>("Prefabs/EmptyStar");
+        nothing = Resources.Load<GameObject>("Prefabs/EmptySprite");
+        locked = Resources.Load<GameObject>("Prefabs/Lock");
+
+        RatingObjectArray = new GameObject[RATE];
     }
 
     public int InstantiateFullStar(float stageStars)
@@ -24,26 +29,36 @@ public class StageRateHandler : MonoBehaviour {
         {
             if (i == 0)
             {
-                Instantiate(fullStar, firstStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f));
+                RatingObjectArray[0] = Instantiate(fullStar, firstStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
                 position++;
             }
             else if (i == 1)
             {
-                Instantiate(fullStar, secondStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f));
+                RatingObjectArray[1] = Instantiate(fullStar, secondStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
                 position++;
 
             }
             else if (i == 2)
             {
-                Instantiate(fullStar, thirdStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f));
+                RatingObjectArray[2] = Instantiate(fullStar, thirdStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
                 position++;
             }
         }
         return position;    //return 3 is all full stars
     }
+
+    public void ClearIcons()
+    {
+        for(int i = 0; i < RATE; i++)
+        {
+            Destroy(RatingObjectArray[i]);
+        }
+
+    }
     
     public void Init(Enums.MainMap mapName)
     {
+        ClearIcons();
         float stageStars = GetMainStars(mapName);
         if (stageStars > 0f)
         {
@@ -55,14 +70,17 @@ public class StageRateHandler : MonoBehaviour {
                 {
                     switch (position)
                     {
-                        case 1: Instantiate(emptyStar, secondStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f));
-                            Instantiate(emptyStar, thirdStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f));
+                        case 1:
+                            RatingObjectArray[1] = Instantiate(emptyStar, secondStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
+                            RatingObjectArray[2] = Instantiate(emptyStar, thirdStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
                             break;
-                        case 2: Instantiate(emptyStar, thirdStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f));
+                        case 2:
+                            RatingObjectArray[2] = Instantiate(emptyStar, thirdStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
                             break;
-                        default: Instantiate(emptyStar, firstStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f));
-                            Instantiate(emptyStar, secondStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f));
-                            Instantiate(emptyStar, thirdStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f));
+                        default:
+                            RatingObjectArray[0] = Instantiate(emptyStar, firstStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
+                            RatingObjectArray[1] = Instantiate(emptyStar, secondStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
+                            RatingObjectArray[2] = Instantiate(emptyStar, thirdStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
                             break; 
                     }
                 }
@@ -75,21 +93,22 @@ public class StageRateHandler : MonoBehaviour {
                 {
                     switch (position)
                     {
-                        case 0: Instantiate(halfStar, firstStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f));
-                                Instantiate(emptyStar, secondStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f));
-                                Instantiate(emptyStar, thirdStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f));
+                        case 0:
+                            RatingObjectArray[0] = Instantiate(halfStar, firstStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
+                            RatingObjectArray[1] = Instantiate(emptyStar, secondStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
+                            RatingObjectArray[2] = Instantiate(emptyStar, thirdStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
                             break;
                         case 1:
-                            Instantiate(halfStar, secondStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f));
-                            Instantiate(emptyStar, thirdStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f));
+                            RatingObjectArray[0] = Instantiate(halfStar, secondStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
+                            RatingObjectArray[1] = Instantiate(emptyStar, thirdStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
                             break;
                         case 2:
-                            Instantiate(halfStar, secondStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f));
+                            RatingObjectArray[0] = Instantiate(halfStar, secondStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
                             break;
                         default:
-                            Instantiate(emptyStar, firstStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f));
-                            Instantiate(emptyStar, secondStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f));
-                            Instantiate(emptyStar, thirdStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f));
+                            RatingObjectArray[0] = Instantiate(emptyStar, firstStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
+                            RatingObjectArray[1] = Instantiate(emptyStar, secondStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
+                            RatingObjectArray[2] = Instantiate(emptyStar, thirdStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
                             break;
                     }
 
@@ -100,7 +119,9 @@ public class StageRateHandler : MonoBehaviour {
         else
         {
             //check if locked or poor score
-            print("locked damit");
+            RatingObjectArray[0] = Instantiate(nothing, firstStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
+            RatingObjectArray[1] = Instantiate(locked, secondStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
+            RatingObjectArray[2] = Instantiate(nothing, secondStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
         }
         print("Total map " + GetMainStars(mapName));
     }

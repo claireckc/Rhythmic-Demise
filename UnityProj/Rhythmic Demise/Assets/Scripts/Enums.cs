@@ -43,13 +43,13 @@ public class Enums : MonoBehaviour {
     public static string[] MapName =
     {
         "Mouth", "Larnyx", "Trachea", "Lungs", "Heart", "Liver",
-        "Spleen", "Pancreas", "Kidney", "Lintes", "Sintes", "Brain"
+        "Spleen", "Pancreas", "Kidney", "Sintes","Lintes", "Brain"
     };
 
     public static string[] StageName =
     {
         "MouthStage", "LarnyxStage", "TracheaStage", "LungStage", "HeartStage", 
-        "LiverStage", "SpleenStage", "PancreasStage", "KidneyStage", "LargeIntesStage",
-        "SmallIntesStage", "BrainStage"
+        "LiverStage", "SpleenStage", "PancreasStage", "KidneyStage", 
+        "SmallIntesStage", "LargeIntesStage", "BrainStage"
     };
 }
