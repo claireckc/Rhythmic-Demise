@@ -202,18 +202,21 @@ public class ResourceManagement : MonoBehaviour
     public void Slot1_Click()
     {
         chooseCanvas.enabled = true;
+        playButton.interactable = false;
         slotClicked = 1;
     }
 
     public void Slot2_Click()
     {
         chooseCanvas.enabled = true;
+        playButton.interactable = false;
         slotClicked = 2;
     }
 
     public void Slot3_Click()
     {
         chooseCanvas.enabled = true;
+        playButton.interactable = false;
         slotClicked = 3;
     }
 
@@ -544,6 +547,7 @@ public class ResourceManagement : MonoBehaviour
     {
         slotClicked = 0;
         InitMain();
+        playButton.interactable = true;
         chooseCanvas.enabled = false;
     }
 
