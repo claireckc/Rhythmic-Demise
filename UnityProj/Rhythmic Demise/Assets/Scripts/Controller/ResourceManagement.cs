@@ -17,6 +17,8 @@ public class ResourceManagement : MonoBehaviour
     public Text countText1, countText2, countText3;
     public UnityEngine.UI.Button playButton;
     private int slotClicked;
+    public Text messageText;
+    public Animator textAnim;
 
     private Sprite originalSprite1, originalSprite2, originalSprite3;
 
@@ -67,6 +69,8 @@ public class ResourceManagement : MonoBehaviour
         originalSprite2 = slot2.sprite;
         originalSprite3 = slot3.sprite;
 
+        messageText = messageText.GetComponent<Text>();
+        textAnim = textAnim.GetComponent<Animator>();
     }
 
     public void InitMain()
@@ -178,25 +182,62 @@ public class ResourceManagement : MonoBehaviour
             playButton.interactable = true;
     }
 
+    public bool HasLeader()
+    {
+        if (PlayerScript.playerdata.leaderType != Enums.JobType.None)
+            return true;
+        return false;
+    }
+
+    public bool HasTeam()
+    {
+        for(int i = 0; i < PlayerScript.playerdata.troopSelected.Count; i++)
+        {
+            if (PlayerScript.playerdata.troopSelected[i].troop.job != Enums.JobType.None)
+                return true;
+        }
+
+        return false;
+    }
+    
     public void Main_PlayPress()
     {
-        if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
+        if (HasTeam() && HasLeader())
         {
-            switch (PlayerScript.playerdata.clickedStageNumber)
+            if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
             {
-                case 1:
-                    Application.LoadLevel("TutorialScene");
-                    break;
+                switch (PlayerScript.playerdata.clickedStageNumber)
+                {
+                    case 1:
+                        Application.LoadLevel("TutorialScene");
+                        break;
 
-                case 2:
-                    Application.LoadLevel("Tutorial2Scene");
-                    break;
+                    case 2:
+                        Application.LoadLevel("Tutorial2Scene");
+                        break;
 
-                case 3:
-                    Application.LoadLevel("Tutorial3Scene");
-                    break;
+                    case 3:
+                        Application.LoadLevel("Tutorial3Scene");
+                        break;
+                }
             }
         }
+        else if(!HasTeam())
+        {
+            //print out a messsage to tell them to select a unit first
+            PrintMessage("Select units first.");
+        }
+        else if (!HasLeader())
+        {
+            PrintMessage("Select your leader first.");
+        }
+    }
+
+    public void PrintMessage(string msg)
+    {
+        messageText.text = msg;
+        textAnim.Play("ResourceTextAnimation", -1, 0f);
+
     }
 
     public void Slot1_Click()
