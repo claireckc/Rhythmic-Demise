@@ -15,7 +15,7 @@ public class UIManager_Start : MonoBehaviour
     void Awake()
     {
         startText = startText.GetComponent<Text>();
-        optionCanvas = optionCanvas.GetComponent<Canvas>();
+        //optionCanvas = optionCanvas.GetComponent<Canvas>();
         aboutCanvas = aboutCanvas.GetComponent<Canvas>();
         volumeCanvas = volumeCanvas.GetComponent<Canvas>();
 
@@ -33,7 +33,7 @@ public class UIManager_Start : MonoBehaviour
     {
         print("Start: " + PlayerScript.playerdata.pathogenType);
         startCanvas.enabled = true;
-        optionCanvas.enabled = false;
+        //optionCanvas.enabled = false;
         aboutCanvas.enabled = false;
         volumeCanvas.enabled = false;
 

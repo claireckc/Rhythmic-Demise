@@ -62,13 +62,13 @@
      <Compile Include="Assets\Scripts\Controller\DragControl.cs" />
      <Compile Include="Assets\Scripts\Controller\EventHandler.cs" />
      <Compile Include="Assets\Scripts\Controller\GameController.cs" />
+     <Compile Include="Assets\Scripts\Controller\HealthBar\CameraFacingBillboard.cs" />
+     <Compile Include="Assets\Scripts\Controller\HealthBar\ChangeColorByScale.cs" />
      <Compile Include="Assets\Scripts\Controller\MainMapManager.cs" />
      <Compile Include="Assets\Scripts\Controller\ResourceManagement.cs" />
      <Compile Include="Assets\Scripts\Controller\Stage Handler\MouthEventHandler.cs" />
      <Compile Include="Assets\Scripts\EndResultManager.cs" />
      <Compile Include="Assets\Scripts\Enums.cs" />
-     <Compile Include="Assets\Scripts\HealthBar\CameraFacingBillboard.cs" />
-     <Compile Include="Assets\Scripts\HealthBar\ChangeColorByScale.cs" />
      <Compile Include="Assets\Scripts\MovingPoint.cs" />
      <Compile Include="Assets\Scripts\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\Player Data\MainMap.cs" />

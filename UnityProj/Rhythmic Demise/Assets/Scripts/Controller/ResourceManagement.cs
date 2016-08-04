@@ -69,8 +69,8 @@ public class ResourceManagement : MonoBehaviour
         originalSprite2 = slot2.sprite;
         originalSprite3 = slot3.sprite;
 
-        messageText = messageText.GetComponent<Text>();
-        textAnim = textAnim.GetComponent<Animator>();
+        //messageText = messageText.GetComponent<Text>();
+        //textAnim = textAnim.GetComponent<Animator>();
     }
 
     public void InitMain()
