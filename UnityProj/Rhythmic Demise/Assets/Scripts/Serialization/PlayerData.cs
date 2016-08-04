@@ -64,7 +64,7 @@ public class PlayerData
             if (i == 0)
                 tp.level = i + 1;     //first unlock would be the knight
             else
-                tp.level = i + 1;//should be 0, set temp for debug;
+                tp.level = i + 1;//should be 0, set temp for debug mode;
 
             //MICHAEL SET MAX HEALTH, ATTACK, DEFENSERATING HERE, THIS IS INITIALIZATION
 

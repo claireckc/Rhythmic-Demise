@@ -12,6 +12,7 @@ public class ShootingTower : Tower {
 
         currentHealth = maxHealth = 8;
         cooldown = nextActionTime = 5.0f;
+
 	}
 	
 	// Update is called once per frame

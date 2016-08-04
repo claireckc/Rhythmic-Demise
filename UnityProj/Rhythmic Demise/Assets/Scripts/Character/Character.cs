@@ -8,6 +8,7 @@ public abstract class Character : MonoBehaviour {
     protected float currentHealth;
     protected float maxHealth;
     protected float damage;
+    protected float armor;
     protected string skill;
     protected Enums.CharacterType race;
     protected Enums.JobType job;
@@ -81,9 +82,13 @@ public abstract class Character : MonoBehaviour {
     }
 
     public void TakeDamage(float damage)
-    {
-        FloatingTextController.CreateFloatingText(damage.ToString(), transform);
-        currentHealth -= damage;
+    {   
+        float damageMultiplier = 1 - 0.06f * armor / (1 + (0.06f * Mathf.Abs(armor)));
+        float finalDamage = damage * damageMultiplier;
+        finalDamage = Mathf.Round(finalDamage * 100f) / 100f;
+        currentHealth -= finalDamage;
+
+        FloatingTextController.CreateFloatingText(finalDamage.ToString(), transform);
     }
 
     public Enums.JobType getJobType()
@@ -101,6 +106,21 @@ public abstract class Character : MonoBehaviour {
         return inPath;
     }
 
+    public float getDamage()
+    {
+        return damage;
+    }
+
+    public float getArmor()
+    {
+        return armor;
+    }
+
+    public float getHealth()
+    {
+        return currentHealth;
+    }
+
     public void setGoalPos(Vector3 pos)
     {
         goalPos = pos;
@@ -109,6 +129,24 @@ public abstract class Character : MonoBehaviour {
     public void setInPath(bool p)
     {
         inPath = p;
+    }
+
+    public void setDamage(float d)
+    {
+        damage = d;
+    }
+
+    public void setArmor(float a)
+    {
+        armor = a;
+    }
+
+    public void addHealth(float h)
+    {
+        currentHealth += h;
+
+        if (currentHealth >= maxHealth)
+            currentHealth = maxHealth;
     }
 
     public abstract void attack();
