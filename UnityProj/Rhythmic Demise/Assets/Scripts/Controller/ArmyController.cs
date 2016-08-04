@@ -104,6 +104,12 @@ public class ArmyController : MonoBehaviour {
             float knightY = Random.Range(currPos.transform.position.y - 1, currPos.transform.position.y + 1);
             Vector3 knightTempPos = new Vector3(currPos.transform.position.x + 1, knightY);
             Knight k = Instantiate(knightPrefab, knightTempPos, knightPrefab.transform.rotation) as Knight;
+
+            if (PlayerScript.playerdata.leaderType == Enums.JobType.Knight && i == 0)
+            {
+                leader = k;
+            }
+
             army.Add(k);
         }
 
@@ -113,6 +119,12 @@ public class ArmyController : MonoBehaviour {
             float archerY = Random.Range(currPos.transform.position.y - 1, currPos.transform.position.y + 1);
             Vector3 archerTempPos = new Vector3(currPos.transform.position.x - 1, archerY);
             Archer a = Instantiate(archerPrefab, archerTempPos, archerPrefab.transform.rotation) as Archer;
+
+            if (PlayerScript.playerdata.leaderType == Enums.JobType.Archer && i == 0)
+            {
+                leader = a;
+            }
+
             army.Add(a);
         }
 
@@ -122,8 +134,16 @@ public class ArmyController : MonoBehaviour {
             float priestY = Random.Range(currPos.transform.position.y - 1, currPos.transform.position.y + 1);
             Vector3 priestTempPos = new Vector3(currPos.transform.position.x, priestY);
             Priest p = Instantiate(priestPrefab, priestTempPos, priestPrefab.transform.rotation) as Priest;
+
+            if (PlayerScript.playerdata.leaderType == Enums.JobType.Priest && i == 0)
+            {
+                leader = p;
+            }
+
             army.Add(p);
         }
+
+        Invoke("initLeaderBonus", 1);
     }
 
     public void initArmy(List<Character> a)
@@ -159,10 +179,7 @@ public class ArmyController : MonoBehaviour {
 
     public void useSkill()
     {
-        foreach (Character c in army)
-        {
-            c.useSkill();
-        }
+        leader.useSkill();
     }
 
     public void moveTo(MovingPoint pos)
@@ -284,5 +301,46 @@ public class ArmyController : MonoBehaviour {
         }
         else
             closestEnemy = null;
+    }
+
+    void initLeaderBonus()
+    {
+        //init leader bonus buff
+        switch (PlayerScript.playerdata.leaderType)
+        {
+            case Enums.JobType.Knight:
+                foreach (Character c in army)
+                {
+                    //increase defense by 20%
+                    c.setArmor(c.getArmor() * 1.2f);
+                }
+                break;
+            case Enums.JobType.Archer:
+                foreach (Character c in army)
+                {
+                    //increase damage by 20%
+                    c.setDamage(c.getDamage() * 1.2f);
+                }
+                break;
+            case Enums.JobType.Priest:
+                foreach (Character c in army)
+                {
+                    //increase heal power by 50%
+                    if (c.getJobType() == Enums.JobType.Priest)
+                    {
+                        Priest p = c as Priest;
+                        p.setHealPower(p.getHealPower() * 1.5f);
+                    }
+                }
+                break;
+        }
+    }
+
+    public void healArmy(float hp)
+    {
+        foreach (Character c in army)
+        {
+            c.addHealth(hp);
+        }
     }
 }

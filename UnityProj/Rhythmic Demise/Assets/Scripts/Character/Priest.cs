@@ -5,6 +5,7 @@ public class Priest : Character {
 
     public GameObject orb;
     private int hexDuration;
+    private float healPower;
 
 	// Use this for initialization
 	protected new void Start () {
@@ -17,7 +18,9 @@ public class Priest : Character {
         //2 is priest index
         currentHealth = maxHealth = PlayerScript.playerdata.troopData[2].maxHealth;
         damage = PlayerScript.playerdata.troopData[2].attack;
+        armor = PlayerScript.playerdata.troopData[2].defenseRating;
         hexDuration = 3;
+        healPower = 2;
 	}
 	
 	// Update is called once per frame
@@ -56,7 +59,7 @@ public class Priest : Character {
         {
             if (!isAttacking)
             {
-                if (ArmyController.armyController.closestEnemy.tag == "Enemy")
+                if (ArmyController.armyController.enemyList.Count > 0)
                 {
                     Enemy enemy = ArmyController.armyController.closestEnemy.GetComponent<Enemy>();
                     enemy.disabled(hexDuration);
@@ -64,5 +67,26 @@ public class Priest : Character {
                 }
             }
         }
+        else if (skill.Equals("Heal"))
+        {
+            if (!isAttacking)
+            {
+                if (ArmyController.armyController.enemyList.Count > 0)
+                {
+                    ArmyController.armyController.healArmy(healPower);
+                    isAttacking = true;
+                }
+            }
+        }
+    }
+
+    public float getHealPower()
+    {
+        return healPower;
+    }
+
+    public void setHealPower(float hp)
+    {
+        healPower = hp;
     }
 }

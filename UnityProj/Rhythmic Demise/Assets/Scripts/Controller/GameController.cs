@@ -42,7 +42,6 @@ public class GameController : MonoBehaviour {
 
         init();
 
-        moveSequence = "";
         FloatingTextController.Initialize();
 
         InvokeRepeating("spawnBeat", 0, 0.5f);
@@ -63,6 +62,8 @@ public class GameController : MonoBehaviour {
         note2 = Resources.Load<NoteControl>("Prefabs/UI/Note2");
         note3 = Resources.Load<NoteControl>("Prefabs/UI/Note3");
         note4 = Resources.Load<NoteControl>("Prefabs/UI/Note4");
+
+        moveSequence = "";
     }
 	
 	// Update is called once per frame
@@ -245,6 +246,13 @@ public class GameController : MonoBehaviour {
     public void clearSequence()
     {
         moveSequence = "";
+    }
+
+    public void levelUp(int tIndex)
+    {
+        PlayerScript.playerdata.troopData[tIndex].attack += 1;
+        PlayerScript.playerdata.troopData[tIndex].maxHealth += 2;
+        PlayerScript.playerdata.troopData[tIndex].defenseRating += 0.5f;
     }
 
     public void LoadLevel(string level)
