@@ -23,9 +23,13 @@ public class SkillsManager : MonoBehaviour {
     UnityEngine.UI.Button knightSel1, knightSel2, knightSel3;
     UnityEngine.UI.Button archerSel1, archerSel2, archerSel3;
     UnityEngine.UI.Button priestSel1, priestSel2, priestSel3;
+
+    GameObject resourceManagement;
     
     // Use this for initialization
     void Start () {
+        resourceManagement = GameObject.Find("UI Manager");
+
         skillCanvas = GameObject.Find("LeaderSkillsCanvas").GetComponent<Canvas>();
         chooseCanvas = GameObject.Find("LeaderSkillsCanvas").GetComponent<Canvas>();
 
@@ -137,45 +141,54 @@ public class SkillsManager : MonoBehaviour {
     public void KnightSel1_Press()
     {
         PlayerScript.playerdata.skillSelected = Enums.SkillName.KnightHigh;
+        resourceManagement.SendMessage("PrintMessage", "KnightHigh Selected");
     }
 
     public void KnightSel2_Press()
     {
         PlayerScript.playerdata.skillSelected = Enums.SkillName.KnightDefbuff;
+        resourceManagement.SendMessage("PrintMessage", "KnightDebuff Selected");
     }
 
     public void KnightSel3_Press()
     {
         PlayerScript.playerdata.skillSelected = Enums.SkillName.KnightCharge;
+        resourceManagement.SendMessage("PrintMessage", "KnightCharge Selected");
     }
 
     public void ArcherSel1_Press()
     {
         PlayerScript.playerdata.skillSelected = Enums.SkillName.ArcherAOE;
+        resourceManagement.SendMessage("PrintMessage", "ArcherAoe Selected");
     }
 
     public void ArcherSel2_Press()
     {
         PlayerScript.playerdata.skillSelected = Enums.SkillName.ArcherAtkBuff;
+        resourceManagement.SendMessage("PrintMessage", "ArcherAtkBuff Selected");
     }
 
     public void ArcherSel3_Press()
     {
         PlayerScript.playerdata.skillSelected = Enums.SkillName.ArcherHigh;
+        resourceManagement.SendMessage("PrintMessage", "ArcherHigh Selected");
     }
 
     public void PriestSel1_Press()
     {
         PlayerScript.playerdata.skillSelected = Enums.SkillName.PriestHealBuff;
+        resourceManagement.SendMessage("PrintMessage", "PriestHealBuff Selected");
     }
 
     public void PriestSel2_Press()
     {
         PlayerScript.playerdata.skillSelected = Enums.SkillName.PriestHex;
+        resourceManagement.SendMessage("PrintMessage", "PriestHex Selected");
     }
 
     public void PriestSel3_Press()
     {
         PlayerScript.playerdata.skillSelected = Enums.SkillName.PriestCurse;
+        resourceManagement.SendMessage("PrintMessage", "PriestCurse Selected");
     }
 }

@@ -87,6 +87,7 @@
     <Compile Include="Assets\Scripts\Character\Knight.cs" />
     <Compile Include="Assets\Scripts\Character\Orb.cs" />
     <Compile Include="Assets\Scripts\Character\Priest.cs" />
+    <Compile Include="Assets\Scripts\Character\SwordWave.cs" />
     <Compile Include="Assets\Scripts\Controller\ArmyController.cs" />
     <Compile Include="Assets\Scripts\Controller\DragControl.cs" />
     <Compile Include="Assets\Scripts\Controller\EventHandler.cs" />
