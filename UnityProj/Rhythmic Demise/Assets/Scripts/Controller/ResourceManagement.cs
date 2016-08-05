@@ -19,6 +19,7 @@ public class ResourceManagement : MonoBehaviour
     private int slotClicked;
     public Text messageText;
     public Animator textAnim;
+    GameObject skillManager;
 
     private Sprite originalSprite1, originalSprite2, originalSprite3;
 
@@ -38,6 +39,8 @@ public class ResourceManagement : MonoBehaviour
         InitMain();
         InitChoose();
         chooseCanvas.enabled = false;
+
+        skillManager = GameObject.Find("SkillsManager");
     }
 
     public void StartMain()
@@ -69,8 +72,8 @@ public class ResourceManagement : MonoBehaviour
         originalSprite2 = slot2.sprite;
         originalSprite3 = slot3.sprite;
 
-        //messageText = messageText.GetComponent<Text>();
-        //textAnim = textAnim.GetComponent<Animator>();
+        messageText = messageText.GetComponent<Text>();
+        textAnim = textAnim.GetComponent<Animator>();
     }
 
     public void InitMain()
@@ -595,16 +598,19 @@ public class ResourceManagement : MonoBehaviour
     public void Choose_KnightLeader()
     {
         PlayerScript.playerdata.leaderType = Enums.JobType.Knight;
+        PrintMessage("Knight is now the leader.");
         UpdateLeaderButton();
     }
     public void Choose_ArcherLeader()
     {
         PlayerScript.playerdata.leaderType = Enums.JobType.Archer;
+        PrintMessage("Archer is now the leader.");
         UpdateLeaderButton();
     }
     public void Choose_PriestLeader()
     {
         PlayerScript.playerdata.leaderType = Enums.JobType.Priest;
+        PrintMessage("Priest is now the leader.");
         UpdateLeaderButton();
     }
 
@@ -709,5 +715,10 @@ public class ResourceManagement : MonoBehaviour
             InitMain();
             chooseCanvas.enabled = false;
         }
+    }
+
+    public void SkillPress()
+    {
+        skillManager.SendMessage("Show", null);
     }
 }

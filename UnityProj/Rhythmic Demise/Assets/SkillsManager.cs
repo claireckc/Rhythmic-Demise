@@ -23,15 +23,47 @@ public class SkillsManager : MonoBehaviour {
     UnityEngine.UI.Button knightSel1, knightSel2, knightSel3;
     UnityEngine.UI.Button archerSel1, archerSel2, archerSel3;
     UnityEngine.UI.Button priestSel1, priestSel2, priestSel3;
+    UnityEngine.UI.Button SkillBackButton;
+
+    UnityEngine.UI.Button choose_SkillButton, choose_backButton;
+    UnityEngine.UI.Button choose_KnightLeaderButton, choose_ArcherLeaderButton, choose_PriestLeaderButton;
 
     GameObject resourceManagement;
     
     // Use this for initialization
     void Start () {
         resourceManagement = GameObject.Find("UI Manager");
+        GetChooseCanvasComponents();
+        GetSkillCanvasComponents();
+        DisableSkillCanvasComponents();
+        skillCanvas.enabled = false;
+    }
+    void EnabledChooseCanvasComponents()
+    {
+        choose_KnightLeaderButton.interactable = choose_ArcherLeaderButton.interactable = choose_PriestLeaderButton.interactable = true;
+        choose_SkillButton.interactable = choose_backButton.interactable = true;
+    }
 
+    void DisableChooseCanvasComponents()
+    {
+        choose_KnightLeaderButton.interactable = choose_ArcherLeaderButton.interactable = choose_PriestLeaderButton.interactable = false;
+        choose_SkillButton.interactable = choose_backButton.interactable = false;
+    }
+    void GetChooseCanvasComponents()
+    {
+        chooseCanvas = GameObject.Find("ChooseCanvas").GetComponent<Canvas>();
+        choose_SkillButton = chooseCanvas.transform.Find("SkillButton").GetComponent<UnityEngine.UI.Button>();
+        choose_backButton = chooseCanvas.transform.Find("BackButton").GetComponent<UnityEngine.UI.Button>();
+
+        choose_KnightLeaderButton = chooseCanvas.transform.Find("KnightPanel/KnightLeaderButton").GetComponent<UnityEngine.UI.Button>();
+        choose_ArcherLeaderButton = chooseCanvas.transform.Find("ArcherPanel/ArcherLeaderButton").GetComponent<UnityEngine.UI.Button>();
+        choose_PriestLeaderButton = chooseCanvas.transform.Find("PriestPanel/PriestLeaderButton").GetComponent<UnityEngine.UI.Button>();
+    }
+
+    void GetSkillCanvasComponents()
+    {
         skillCanvas = GameObject.Find("LeaderSkillsCanvas").GetComponent<Canvas>();
-        chooseCanvas = GameObject.Find("LeaderSkillsCanvas").GetComponent<Canvas>();
+        SkillBackButton = skillCanvas.transform.Find("BackButton").GetComponent<UnityEngine.UI.Button>();
 
         knightPanel = GameObject.Find("KnightSkillsPanel");
         knightIcon1 = knightPanel.transform.Find("Content Grid/Skill 1/Skill Icon").GetComponent<Image>();
@@ -83,6 +115,14 @@ public class SkillsManager : MonoBehaviour {
         priestSel1 = priestPanel.transform.Find("Content Grid/Skill 1/Select Button").GetComponent<UnityEngine.UI.Button>();
         priestSel2 = priestPanel.transform.Find("Content Grid/Skill 2/Select Button").GetComponent<UnityEngine.UI.Button>();
         priestSel3 = priestPanel.transform.Find("Content Grid/Skill 3/Select Button").GetComponent<UnityEngine.UI.Button>();
+
+    }
+    void DisableSkillCanvasComponents()
+    {
+        knightSel1.interactable = knightSel2.interactable = knightSel3.interactable = false;
+        archerSel1.interactable = archerSel2.interactable = archerSel3.interactable = false;
+        priestSel1.interactable = priestSel2.interactable = priestSel3.interactable = false;
+        SkillBackButton.interactable = false;
     }
 
     void UpdateContent()
@@ -98,20 +138,22 @@ public class SkillsManager : MonoBehaviour {
 
         //check what is the selected leader type
         Enums.JobType leaderType = PlayerScript.playerdata.leaderType;
-
         switch (leaderType)
         {
             case Enums.JobType.Knight:
                 archerSel1.interactable = archerSel2.interactable = archerSel3.interactable = false;
                 priestSel1.interactable = priestSel2.interactable = priestSel3.interactable = false;
+                knightSel1.interactable = knightSel2.interactable = knightSel3.interactable = true;;
                 break;
             case Enums.JobType.Archer:
                 knightSel1.interactable = knightSel2.interactable = knightSel3.interactable = false;
                 priestSel1.interactable = priestSel2.interactable = priestSel3.interactable = false;
+                archerSel1.interactable = archerSel2.interactable = archerSel3.interactable = true;;
                 break;
             case Enums.JobType.Priest:
                 archerSel1.interactable = archerSel2.interactable = archerSel3.interactable = false;
                 knightSel1.interactable = knightSel2.interactable = knightSel3.interactable = false;
+                priestSel1.interactable = priestSel2.interactable = priestSel3.interactable = true;
                 break;
             default:    //no leader selected, so all disabled
                 knightSel1.interactable = knightSel2.interactable = knightSel3.interactable = false;
@@ -124,17 +166,17 @@ public class SkillsManager : MonoBehaviour {
     void Show()
     {
         skillCanvas.enabled = true;
+        SkillBackButton.interactable = true;
+        DisableChooseCanvasComponents();
         UpdateContent();
     }
 
-    void Hide_BackPress()
+    public void Hide_BackPress()
     {
-        //disable all interactable in skill canvas
-        knightSel1.interactable = knightSel2.interactable = knightSel3.interactable = false;
-        archerSel1.interactable = archerSel2.interactable = archerSel3.interactable = false;
-        priestSel1.interactable = priestSel2.interactable = priestSel3.interactable = false;
-        //activate interactable in choose canvas
-
+        print("PRessed");
+        DisableSkillCanvasComponents();
+        EnabledChooseCanvasComponents();
+        resourceManagement.SendMessage("UpdateLeaderButton", null);
         skillCanvas.enabled = false;
     }
 
@@ -191,4 +233,5 @@ public class SkillsManager : MonoBehaviour {
         PlayerScript.playerdata.skillSelected = Enums.SkillName.PriestCurse;
         resourceManagement.SendMessage("PrintMessage", "PriestCurse Selected");
     }
+    
 }
