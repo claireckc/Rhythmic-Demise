@@ -6,19 +6,29 @@ public class EndStage : MonoBehaviour {
     MainMap currentMap;
     SubMap currentStage;
     
-    public void UpdateData()
+    public void UpdateData(int stage)
     {
         currentMap = PlayerScript.playerdata.mapProgress[(int)PlayerScript.playerdata.clickedMap];
         currentStage = currentMap.stages[PlayerScript.playerdata.clickedStageNumber - 1];
         PlayerScript.playerdata.totalResource += ScoreManager.score;
         UpdateMap();
         UpdateStars();
+        UnlockNextMap(stage);
         SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
         
         for(int i = 0; i < currentMap.stages.Count; i++)
         {
             print("Combo: " + currentMap.stages[i].topComboCount);
             print("Stars: " + currentMap.stages[i].stars);
+        }
+    }
+
+    void UnlockNextMap(int currentMap)
+    {
+        if (currentMap < Enums.StageName.Length)
+        {
+            PlayerScript.playerdata.mapProgress[currentMap + 1].isLocked = false;
+            PlayerScript.playerdata.mapProgress[currentMap + 1].stages[0].topComboCount = 0;
         }
     }
 

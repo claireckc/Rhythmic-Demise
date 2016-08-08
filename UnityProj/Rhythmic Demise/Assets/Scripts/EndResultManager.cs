@@ -45,7 +45,7 @@ public class EndResultManager : MonoBehaviour {
         anim.SetTrigger("Finish");
 
         //update resources
-        endStageClone.SendMessage("UpdateData");
+        endStageClone.SendMessage("UpdateData", (int)PlayerScript.playerdata.clickedMap);
         done = true;
     }
 }

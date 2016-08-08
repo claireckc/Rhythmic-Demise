@@ -118,10 +118,24 @@ public class StageRateHandler : MonoBehaviour {
         }
         else
         {
-            //check if locked or poor score
-            RatingObjectArray[0] = Instantiate(nothing, firstStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
-            RatingObjectArray[1] = Instantiate(locked, secondStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
-            RatingObjectArray[2] = Instantiate(nothing, secondStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
+            for(int i =0; i < PlayerScript.playerdata.mapProgress.Count; i++)
+            {
+                if(mapName == PlayerScript.playerdata.mapProgress[i].mapName)
+                {
+                    if (PlayerScript.playerdata.mapProgress[i].isLocked)
+                    {
+                        RatingObjectArray[0] = Instantiate(nothing, firstStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
+                        RatingObjectArray[1] = Instantiate(locked, secondStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
+                        RatingObjectArray[2] = Instantiate(nothing, secondStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
+                    }
+                    else
+                    {
+                        RatingObjectArray[0] = Instantiate(emptyStar, firstStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
+                        RatingObjectArray[1] = Instantiate(emptyStar, secondStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
+                        RatingObjectArray[2] = Instantiate(emptyStar, thirdStarPos.transform.position, Quaternion.Euler(0f, 0f, 0f)) as GameObject;
+                    }
+                }
+            }
         }
         print("Total map " + GetMainStars(mapName));
     }
