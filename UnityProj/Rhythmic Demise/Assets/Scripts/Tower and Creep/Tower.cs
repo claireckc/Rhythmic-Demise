@@ -57,9 +57,8 @@ public class Tower : Enemy {
             {
                 //Need to be re-arrange soon
                 playerList.Remove(playerList[i]);
-                GameController gc = GameObject.Find("GameController").GetComponent<GameController>();
                 ArmyController.armyController.army.Remove(c);
-                gc.updateUI();
+                GameController.gameController.updateUI();
 
                 Destroy(c.gameObject);
             }
@@ -107,8 +106,7 @@ public class Tower : Enemy {
         nextActionTime += duration;
     }
 
-    // Health between [0.0f,1.0f] == (currentHealth / totalHealth)
-    public void SetHealthVisual(float healthNormalized)
+    public override void SetHealthVisual(float healthNormalized)
     {
         healthBar.transform.localScale = new Vector3(healthNormalized,
                                                      healthBar.transform.localScale.y,

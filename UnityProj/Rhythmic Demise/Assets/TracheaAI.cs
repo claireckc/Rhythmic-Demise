@@ -102,4 +102,11 @@ public class TracheaAI : Enemy {
     {
         nextActionTime += duration;
     }
+
+    public override void SetHealthVisual(float healthNormalized)
+    {
+        healthBar.transform.localScale = new Vector3(healthNormalized,
+                                                     healthBar.transform.localScale.y,
+                                                     healthBar.transform.localScale.z);
+    }
 }

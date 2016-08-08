@@ -160,7 +160,7 @@ public class PlayerData
                 }
             }
             else
-                newMap.isLocked = true;
+                newMap.isLocked = true; //true - set FALSE for DEBUG
 
             newMap.avgStars = 0;
             mapProgress.Add(newMap);

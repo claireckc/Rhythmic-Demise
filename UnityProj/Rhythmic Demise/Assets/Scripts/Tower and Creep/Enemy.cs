@@ -26,16 +26,6 @@ public abstract class Enemy : MonoBehaviour {
         }
     }
  
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
     protected abstract void Action();
     protected abstract void FindClosestEnemy();
     protected abstract void UpdateEnemyList();
@@ -43,4 +33,5 @@ public abstract class Enemy : MonoBehaviour {
     protected abstract void OnTriggerExit2D(Collider2D other);
     public abstract void TakeDamage(float damage);
     public abstract void disabled(float duration);
+    public abstract void SetHealthVisual(float healthNormalized);
 }
