@@ -23,6 +23,21 @@ public class EndStage : MonoBehaviour {
         }
     }
 
+    void UpdatePlayerExp(int stage)
+    {
+        /*
+        1. Get player unit's level
+        2. Get stage (level) and form multiplier (player level / stage number)
+        3. call function to level up
+        */
+        for(int i = 0; i < PlayerScript.playerdata.troopSelected.Count; i++)
+        {
+            PlayerScript.playerdata.expMultiplier = (float)PlayerScript.playerdata.troopSelected[i].troop.level / stage;
+            float baseExp = 1f;//get base experience from level completion, NOT COMPLETE
+            PlayerScript.playerdata.troopSelected[i].troop.LevelUp(baseExp * PlayerScript.playerdata.expMultiplier);
+        }
+    }
+
     void UnlockNextMap(int currentMap)
     {
         if (currentMap < Enums.StageName.Length)

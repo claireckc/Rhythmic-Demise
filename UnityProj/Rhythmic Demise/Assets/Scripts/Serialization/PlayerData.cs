@@ -22,6 +22,7 @@ public class PlayerData
     //multiplier
     public float attackMultiplier;
     public float defenseMultiplier;
+    public float expMultiplier;     //base on stage number and player unit level
 
     //Map progress
     public List<MainMap> mapProgress;
@@ -52,8 +53,9 @@ public class PlayerData
         troopData = new List<Troop>();
         troopSelected = new List<TroopSelected>();
 
-        attackMultiplier = 1;
-        defenseMultiplier = 1;
+        attackMultiplier = 1f;
+        defenseMultiplier = 1f;
+        expMultiplier = 1f;
 
         //for troop data
         for (int i = 0; i < 3; i++)
@@ -130,6 +132,7 @@ public class PlayerData
         {
             ts = new TroopSelected();
             ts.troop = new Troop();
+            ts.troop.level = 1;
             ts.count = 0;
             troopSelected.Add(ts);
         }
