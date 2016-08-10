@@ -224,6 +224,7 @@ public class ResourceManagement : MonoBehaviour
                         break;
                 }
             }
+            //EDIT THIS
         }
         else if(!HasTeam())
         {
