@@ -110,6 +110,9 @@
     <Compile Include="Assets\Scripts\Serialization\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Serialization\SaveLoadManager.cs" />
     <Compile Include="Assets\Scripts\StageClearManager.cs" />
+    <Compile Include="Assets\Scripts\Tower and Creep\Boss.cs" />
+    <Compile Include="Assets\Scripts\Tower and Creep\BossHeart.cs" />
+    <Compile Include="Assets\Scripts\Tower and Creep\BossSpleen.cs" />
     <Compile Include="Assets\Scripts\Tower and Creep\BreathingAI.cs" />
     <Compile Include="Assets\Scripts\Tower and Creep\Creep.cs" />
     <Compile Include="Assets\Scripts\Tower and Creep\Enemy.cs" />
