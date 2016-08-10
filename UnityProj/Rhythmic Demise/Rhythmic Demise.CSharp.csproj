@@ -69,12 +69,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Rhythmic Demise.CSharp.Plugins.csproj">
-      <Project>{BF54B6CA-B22C-08C1-67BD-8B037D3280BD}</Project>
-      <Name>Rhythmic Demise.CSharp.Plugins</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Assets\EndStage.cs" />
     <Compile Include="Assets\PathColliderController.cs" />
     <Compile Include="Assets\Scripts\Beat\BeatSpawner.cs" />
@@ -96,7 +90,7 @@
     <Compile Include="Assets\Scripts\Controller\HealthBar\ChangeColorByScale.cs" />
     <Compile Include="Assets\Scripts\Controller\MainMapManager.cs" />
     <Compile Include="Assets\Scripts\Controller\ResourceManagement.cs" />
-    <Compile Include="Assets\Scripts\Controller\Stage Handler\MouthEventHandler.cs" />
+    <Compile Include="Assets\Scripts\Controller\Stage Handler\SubStageHandler.cs" />
     <Compile Include="Assets\Scripts\EndResultManager.cs" />
     <Compile Include="Assets\Scripts\Enums.cs" />
     <Compile Include="Assets\Scripts\MovingPoint.cs" />
@@ -128,9 +122,7 @@
     <Compile Include="Assets\SkillsManager.cs" />
     <Compile Include="Assets\StageRateHandler.cs" />
     <Compile Include="Assets\TracheaAI.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
+    <Compile Include="Assets\TutorialManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
