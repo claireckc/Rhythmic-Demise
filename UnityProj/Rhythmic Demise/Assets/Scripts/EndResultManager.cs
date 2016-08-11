@@ -28,7 +28,7 @@ public class EndResultManager : MonoBehaviour {
         //Just for prototype, need to be arrange later
         if (PlayerScript.playerdata.mapProgress[0].stages[2].isCurrent(PlayerScript.playerdata.clickedStageNumber))
         {
-            if(!GameObject.Find("Uvula")){
+            if(!GameObject.Find("Boss")){
                 isComplete = true;
             }
         }

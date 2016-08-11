@@ -88,6 +88,8 @@
      <Compile Include="Assets\Scripts\StageClearManager.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\Boss.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\BossHeart.cs" />
+     <Compile Include="Assets\Scripts\Tower and Creep\BossKidney.cs" />
+     <Compile Include="Assets\Scripts\Tower and Creep\BossPancreas.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\BossSpleen.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\BreathingAI.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\Creep.cs" />
@@ -98,6 +100,7 @@
      <Compile Include="Assets\Scripts\Tower and Creep\Uvula.cs" />
      <Compile Include="Assets\Scripts\User Interface\UIManager_Start.cs" />
      <Compile Include="Assets\Scripts\User Interface\UIManager_TroopSel.cs" />
+     <Compile Include="Assets\SkillsManager.cs" />
      <Compile Include="Assets\StageRateHandler.cs" />
      <Compile Include="Assets\TracheaAI.cs" />
      <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />

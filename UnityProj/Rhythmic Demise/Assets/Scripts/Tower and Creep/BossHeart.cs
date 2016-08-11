@@ -8,9 +8,9 @@ public class BossHeart : Boss{
     public GameObject troopPrefab; //rbc
 
 	void Start () {
+        currentHealth = maxHealth = 20;
         playerList = new List<GameObject>();
         cooldown = nextActionTime = 5.0f;
-        currentHealth = maxHealth = 20;
 	}
 	
 	void Update () {
@@ -25,7 +25,9 @@ public class BossHeart : Boss{
                 //start attacking it
                 if (Time.time >= nextActionTime)
                 {
-                    int tempNum = Random.Range(1, 100);
+                    nextActionTime = Time.time + cooldown;
+
+                    int tempNum = Random.Range(1, 101);
                     if (tempNum <= 85)
                         Action();
                     else
@@ -37,15 +39,19 @@ public class BossHeart : Boss{
 
     protected override void specialAction()
     {
-        Instantiate(troopPrefab, this.transform.position, this.transform.rotation);
-        Instantiate(troopPrefab, this.transform.position, this.transform.rotation);
-        Instantiate(troopPrefab, this.transform.position, this.transform.rotation);
+        for (int i = 0; i <= 2; i++)
+        {
+            Vector3 dir = closestPlayer.transform.position - this.transform.position;
+            float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
+
+            GameObject spawn = Instantiate(troopPrefab, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
+            
+            spawn.SendMessage("Initialize", closestPlayer);
+        }
     }
 
     protected override void Action()
     {
-        nextActionTime = Time.time + cooldown;
-
         Vector3 dir = closestPlayer.transform.position - this.transform.position;
         float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
 
