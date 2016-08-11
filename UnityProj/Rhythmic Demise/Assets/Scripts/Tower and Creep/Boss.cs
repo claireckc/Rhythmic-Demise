@@ -33,7 +33,7 @@ public abstract class Boss : Enemy{
         for (int i = 0; i < playerList.Count; i++)
         {
             Character c = playerList[i].GetComponent<Character>();
-
+            
             if (c.IsDead)
             {
                 //Need to be re-arrange soon
@@ -48,7 +48,7 @@ public abstract class Boss : Enemy{
 
     protected override void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "PlayerColllider")
+        if (other.tag == "Player")
         {
             playerList.Add(other.gameObject);
         }
@@ -56,7 +56,7 @@ public abstract class Boss : Enemy{
 
     protected override void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "PlayerCollider")
+        if (other.tag == "Player")
         {
             foreach (GameObject go in playerList)
             {

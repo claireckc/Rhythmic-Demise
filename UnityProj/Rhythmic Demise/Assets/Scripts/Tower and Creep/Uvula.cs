@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Uvula : Boss {
-
     public GameObject projectile;
 
 	void Start () {
