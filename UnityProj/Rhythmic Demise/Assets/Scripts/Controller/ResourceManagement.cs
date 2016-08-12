@@ -207,24 +207,172 @@ public class ResourceManagement : MonoBehaviour
     {
         if (HasTeam() && HasLeader())
         {
-            if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
+
+            switch (PlayerScript.playerdata.clickedMap)
             {
-                switch (PlayerScript.playerdata.clickedStageNumber)
-                {
-                    case 1:
-                        Application.LoadLevel("TutorialScene");
-                        break;
-
-                    case 2:
-                        Application.LoadLevel("Tutorial2Scene");
-                        break;
-
-                    case 3:
-                        Application.LoadLevel("Tutorial3Scene");
-                        break;
-                }
+                case Enums.MainMap.Mouth:
+                    switch (PlayerScript.playerdata.clickedStageNumber)
+                    {
+                        case 1:
+                            Application.LoadLevel("TutorialScene");
+                            break;
+                        case 2:
+                            Application.LoadLevel("Tutorial2Scene");
+                            break;
+                        case 3:
+                            Application.LoadLevel("Tutorial3Scene");
+                            break;
+                    }
+                    break;
+                case Enums.MainMap.Larnyx:
+                    switch (PlayerScript.playerdata.clickedStageNumber)
+                    {
+                        case 1:
+                            Application.LoadLevel("LarnyxMap1");
+                            break;
+                        case 2:
+                            Application.LoadLevel("LarnyxBossMap");
+                            break;
+                    }
+                    break;
+                case Enums.MainMap.Trachea:
+                    switch (PlayerScript.playerdata.clickedStageNumber)
+                    {
+                        case 1:
+                            Application.LoadLevel("TracheaMap1");
+                            break;
+                        case 2:
+                            Application.LoadLevel("TracheaMap2");
+                            break;
+                        case 3:
+                            //boss map not done
+                            break;
+                    }
+                    break;
+                case Enums.MainMap.Lung:
+                    switch (PlayerScript.playerdata.clickedStageNumber)
+                    {
+                        case 1:
+                            Application.LoadLevel("LungMap1");
+                            break;
+                        case 2:
+                            Application.LoadLevel("LungMap2");
+                            break;
+                        case 3:
+                            Application.LoadLevel("LungBossMap");
+                            break;
+                    }
+                    break;
+                case Enums.MainMap.Heart:
+                    switch (PlayerScript.playerdata.clickedStageNumber)
+                    {
+                        case 1:
+                            Application.LoadLevel("HeartMap1");
+                            break;
+                        case 2:
+                            Application.LoadLevel("HeartMap2");
+                            break;
+                        case 3:
+                            Application.LoadLevel("HeartBossMap");
+                            break;
+                    }
+                    break;
+                case Enums.MainMap.Liver:
+                    switch (PlayerScript.playerdata.clickedStageNumber)
+                    {
+                        case 1:
+                            Application.LoadLevel("LiverMap1");
+                            break;
+                        case 2:
+                            //boss map not done
+                            break;
+                    }
+                    break;
+                case Enums.MainMap.Spleen:
+                    switch (PlayerScript.playerdata.clickedStageNumber)
+                    {
+                        case 1:
+                            Application.LoadLevel("SpleenMap1");
+                            break;
+                        case 2:
+                            Application.LoadLevel("SpleenMap2");
+                            break;
+                        case 3:
+                            Application.LoadLevel("SpleenBossMap");
+                            break;
+                    }
+                    break;
+                case Enums.MainMap.Pancreas:
+                    switch (PlayerScript.playerdata.clickedStageNumber)
+                    {
+                        case 1:
+                            Application.LoadLevel("PancreasMap1");
+                            break;
+                        case 2:
+                            Application.LoadLevel("PancreasMap2");
+                            break;
+                        case 3:
+                            Application.LoadLevel("PancreasBossMap");
+                            break;
+                    }
+                    break;
+                case Enums.MainMap.Kidney:
+                    switch (PlayerScript.playerdata.clickedStageNumber)
+                    {
+                        case 1:
+                            Application.LoadLevel("KidneyMap1");
+                            break;
+                        case 2:
+                            Application.LoadLevel("KidneyMap2");
+                            break;
+                        case 3:
+                            Application.LoadLevel("KidneyBossMap");
+                            break;
+                    }
+                    break;
+                case Enums.MainMap.SIntes:
+                    switch (PlayerScript.playerdata.clickedStageNumber)
+                    {
+                        case 1:
+                            Application.LoadLevel("SmallIntestineMap1");
+                            break;
+                        case 2:
+                            //boss map not done
+                            break;
+                    }
+                    break;
+                case Enums.MainMap.LIntes:
+                    switch (PlayerScript.playerdata.clickedStageNumber)
+                    {
+                        case 1:
+                            Application.LoadLevel("LargeIntestineMap1");
+                            break;
+                        case 2:
+                            Application.LoadLevel("LargeIntestineMap1");
+                            break;
+                        case 3:
+                            Application.LoadLevel("LargeIntestineBossMap");
+                            break;
+                    }
+                    break;
+                case Enums.MainMap.Brain:
+                    switch (PlayerScript.playerdata.clickedStageNumber)
+                    {
+                        case 1:
+                            Application.LoadLevel("BrainMap1");
+                            break;
+                        case 2:
+                            Application.LoadLevel("BrainMap2");
+                            break;
+                        case 3:
+                            Application.LoadLevel("BrainBossMap");
+                            break;
+                    }
+                    break;
+                default:
+                    Debug.Log("Stage Enter Error");
+                    break;
             }
-            //EDIT THIS
         }
         else if(!HasTeam())
         {
