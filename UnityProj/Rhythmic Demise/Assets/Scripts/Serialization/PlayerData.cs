@@ -91,7 +91,7 @@ public class PlayerData
                     tp.energyNeeded = 1;
                     break;
             }
-            
+
             for (int j = 0; j < 3; j++)
             {
                 sk = new Skills();
@@ -146,10 +146,11 @@ public class PlayerData
 
             //initialize the number of substages, when everything is confirmed
             newMap.stages = new List<SubMap>();
-            if (i == 0) //tutorial stage
+            if (i == 1 || i == 5)
             {
-                newMap.isLocked = false;
-                for (int k = 0; k < 3; k++)
+                //larnyx and liver only has two stages
+                newMap.isLocked = true;
+                for (int k = 0; k < 2; k++)
                 {
                     stage = new SubMap();
                     stage.parentMap = newMap.mapName;
@@ -163,7 +164,31 @@ public class PlayerData
                 }
             }
             else
-                newMap.isLocked = true; //true - set FALSE for DEBUG
+            {
+                if (i == 0)
+                    newMap.isLocked = false;
+                else
+                    newMap.isLocked = true;
+
+                for (int k = 0; k < 3; k++)
+                {
+                    stage = new SubMap();
+                    stage.parentMap = newMap.mapName;
+                    stage.mapId = k;
+                    if (i == 0 && k == 0)
+                    {
+                        stage.topComboCount = 0;
+                        stage.resourceAttained = -1;
+                    }
+                    else
+                        stage.topComboCount = stage.resourceAttained = -1;
+                    stage.stars = 0f;
+                    stage.comboRange = new List<int>();
+                    for (int j = 0; j < 3; j++)
+                        stage.comboRange.Add(0);
+                    newMap.stages.Add(stage);
+                }
+            }
 
             newMap.avgStars = 0;
             mapProgress.Add(newMap);
