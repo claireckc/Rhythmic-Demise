@@ -10,11 +10,10 @@ public class UIManager_Start : MonoBehaviour
     //Canvas
     public Canvas optionCanvas, aboutCanvas, volumeCanvas, startCanvas;
     public Slider sfxSlider, bgSlider, buttonSlider;
-    public Text startText;
+    UnityEngine.UI.Button newGameButton, continueButton;
 
     void Awake()
     {
-        startText = startText.GetComponent<Text>();
         //optionCanvas = optionCanvas.GetComponent<Canvas>();
         aboutCanvas = aboutCanvas.GetComponent<Canvas>();
         volumeCanvas = volumeCanvas.GetComponent<Canvas>();
@@ -27,6 +26,8 @@ public class UIManager_Start : MonoBehaviour
         bgSlider.onValueChanged.AddListener(delegate { BackgroundSliderChange(); });
         buttonSlider.onValueChanged.AddListener(delegate { ButtonSiderChange(); });
 
+        newGameButton = GameObject.Find("Start/StartButton").GetComponent<UnityEngine.UI.Button>();
+        continueButton = GameObject.Find("Start/ContinueButton").GetComponent<UnityEngine.UI.Button>();
     }
 
     void Start()
@@ -37,10 +38,20 @@ public class UIManager_Start : MonoBehaviour
         aboutCanvas.enabled = false;
         volumeCanvas.enabled = false;
 
+        newGameButton.enabled = continueButton.enabled = false;
+
         if (PlayerScript.playerdata.pathogenType != Enums.CharacterType.None)
-            startText.text = "Resume Game";
+        {
+            continueButton.enabled = true;
+            newGameButton.enabled = false;
+            newGameButton.gameObject.SetActive(false);
+        }
         else
-            startText.text = "Start New Game";
+        {
+            newGameButton.enabled = true;
+            continueButton.enabled = false;
+            continueButton.gameObject.SetActive(false);
+        }
 
         sfxSlider.value = PlayerScript.playerdata.effectsVolume;
         bgSlider.value = PlayerScript.playerdata.globalVolume;
@@ -54,7 +65,7 @@ public class UIManager_Start : MonoBehaviour
     }
     public void Start_StartPress()
     {
-        if (startText.text == "Resume Game")
+        if (PlayerScript.playerdata.pathogenType != Enums.CharacterType.None)
             Application.LoadLevel("MainMapOverview");
         else
             Application.LoadLevel("TroopSelection_Start");
@@ -80,12 +91,12 @@ public class UIManager_Start : MonoBehaviour
 
     public void Option_ErasePress()
     {
+        //create modal for confirmation here
         print("before: " + PlayerScript.playerdata.pathogenType);
         if (PlayerScript.playerdata.pathogenType != Enums.CharacterType.None)
         {
             SaveLoadManager.EraseInformation();
             PlayerScript.playerdata = new PlayerData();
-            startText.text = "Start New Game";
             print("Inside");
 
         }
