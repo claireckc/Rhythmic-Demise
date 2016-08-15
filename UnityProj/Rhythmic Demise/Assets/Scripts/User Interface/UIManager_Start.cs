@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +12,8 @@ public class UIManager_Start : MonoBehaviour
     public Canvas optionCanvas, aboutCanvas, volumeCanvas, startCanvas;
     public Slider sfxSlider, bgSlider, buttonSlider;
     UnityEngine.UI.Button newGameButton, continueButton;
+
+    UnityEngine.UI.Button[] startCanvasButtons, optionCanvasButtons;
 
     void Awake()
     {
@@ -34,7 +37,7 @@ public class UIManager_Start : MonoBehaviour
     {
         print("Start: " + PlayerScript.playerdata.pathogenType);
         startCanvas.enabled = true;
-        //optionCanvas.enabled = false;
+        optionCanvas.enabled = false;
         aboutCanvas.enabled = false;
         volumeCanvas.enabled = false;
 
@@ -56,6 +59,37 @@ public class UIManager_Start : MonoBehaviour
         sfxSlider.value = PlayerScript.playerdata.effectsVolume;
         bgSlider.value = PlayerScript.playerdata.globalVolume;
         buttonSlider.value = PlayerScript.playerdata.buttonAlpha;
+
+        GetStartComponents();
+        GetOptionComponents();
+    }
+    
+    void GetOptionComponents()
+    {
+        optionCanvasButtons = optionCanvas.GetComponentsInChildren<UnityEngine.UI.Button>();
+    }
+
+    void GetStartComponents()
+    {
+        startCanvasButtons = startCanvas.GetComponentsInChildren<UnityEngine.UI.Button>();
+    }
+
+    void SetButtons(Canvas canvas, bool set)
+    {
+        if (canvas == startCanvas)
+        {
+            for (int i = 0; i < startCanvasButtons.Length; i++)
+            {
+                startCanvasButtons[i].interactable = set;
+            }
+        }
+        else if (canvas == optionCanvas)
+        {
+            for (int i = 0; i < optionCanvasButtons.Length; i++)
+            {
+                optionCanvasButtons[i].interactable = set;
+            }
+        }
     }
 
     /*******************************Start components******************************/
@@ -75,9 +109,8 @@ public class UIManager_Start : MonoBehaviour
     public void Start_OptionPress()
     {
         //disable components in canvas
-        // startCanvas.enabled = false;
+        SetButtons(startCanvas, false);
         optionCanvas.enabled = true;
-        startCanvas.enabled = false;
 
     }
 
@@ -87,6 +120,7 @@ public class UIManager_Start : MonoBehaviour
     {
         optionCanvas.enabled = false;
         startCanvas.enabled = true;
+        SetButtons(startCanvas, true);
     }
 
     public void Option_ErasePress()
@@ -107,6 +141,7 @@ public class UIManager_Start : MonoBehaviour
     {
         volumeCanvas.enabled = true;
         optionCanvas.enabled = false;
+        SetButtons(optionCanvas, false);
     }
 
     public void Option_AboutPress()
@@ -143,6 +178,7 @@ public class UIManager_Start : MonoBehaviour
     {
         volumeCanvas.enabled = false;
         optionCanvas.enabled = true;
+        SetButtons(optionCanvas, true);
         SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
        // AudioListener.volume = bgSlider.value;
     }
