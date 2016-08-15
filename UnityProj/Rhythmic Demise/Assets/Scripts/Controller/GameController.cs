@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour {
     void Start()
     {
         if (gameController == null) gameController = this;
-
+        
         init();
 
         FloatingTextController.Initialize();
@@ -258,5 +258,10 @@ public class GameController : MonoBehaviour {
     public void LoadLevel(string level)
     {
         Application.LoadLevel(level);
+    }
+
+    public int getCurrentStreak()
+    {
+        return currentStreak;
     }
 }

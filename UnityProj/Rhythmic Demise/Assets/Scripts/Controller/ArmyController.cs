@@ -52,7 +52,6 @@ public class ArmyController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         findClosestEnemy();
-
         switch (currentAction)
         {
             case Enums.PlayerState.Idle:
@@ -144,6 +143,7 @@ public class ArmyController : MonoBehaviour {
         }
 
         Invoke("initLeaderBonus", 1);
+        targetPos = currPos;
     }
 
     public void initArmy(List<Character> a)
@@ -215,7 +215,7 @@ public class ArmyController : MonoBehaviour {
                         c.setGoalPos(archerTempPos);
                     }
 
-                    if (c.getInPath())
+                    if (!c.getInPath())
                     {
                         archerY = Random.Range(pos.transform.position.y - 1, pos.transform.position.y + 1);
                         archerTempPos = new Vector3(pos.transform.position.x - 1, archerY);
@@ -232,7 +232,7 @@ public class ArmyController : MonoBehaviour {
                         c.setGoalPos(priestTempPos);
                     }
 
-                    if (c.getInPath())
+                    if (!c.getInPath())
                     {
                         priestY = Random.Range(pos.transform.position.y - 1, pos.transform.position.y + 1);
                         priestTempPos = new Vector3(pos.transform.position.x, priestY);
@@ -341,6 +341,14 @@ public class ArmyController : MonoBehaviour {
         foreach (Character c in army)
         {
             c.addHealth(hp);
+        }
+    }
+
+    public void takeDamage(float d)
+    {
+        foreach (Character c in army)
+        {
+            c.TakeDamage(d);
         }
     }
 }

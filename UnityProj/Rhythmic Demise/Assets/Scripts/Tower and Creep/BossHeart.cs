@@ -46,7 +46,7 @@ public class BossHeart : Boss{
 
             GameObject spawn = Instantiate(troopPrefab, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
             
-            spawn.SendMessage("Initialize", closestPlayer);
+            spawn.SendMessage("Initialize", closestPlayer.transform.position);
         }
     }
 
@@ -56,6 +56,6 @@ public class BossHeart : Boss{
         float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
 
         GameObject shoot = Instantiate(projectile, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-        shoot.SendMessage("Initialize", closestPlayer);
+        shoot.SendMessage("Initialize", closestPlayer.transform.position);
     }
 }
