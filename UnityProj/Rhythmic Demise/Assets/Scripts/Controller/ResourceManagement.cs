@@ -284,7 +284,7 @@ public class ResourceManagement : MonoBehaviour
                             Application.LoadLevel("LiverMap1");
                             break;
                         case 2:
-                            //boss map not done
+                            Application.LoadLevel("LiverEventMap");
                             break;
                     }
                     break;
@@ -337,7 +337,7 @@ public class ResourceManagement : MonoBehaviour
                             Application.LoadLevel("SmallIntestineMap1");
                             break;
                         case 2:
-                            //boss map not done
+                            Application.LoadLevel("SmallIntestineEventMap");
                             break;
                     }
                     break;
