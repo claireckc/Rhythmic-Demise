@@ -26,7 +26,22 @@ public class Troop {
         {
             experienceGained -= expToLevel;
             level++;
+            StatLevelUp();
+            SkillLevelUp();
             CalculateExpNeeded();
         }
+    }
+
+    void StatLevelUp()
+    {
+        maxHealth *= 1.3f;
+        attack *= 1.2f;
+        defenseRating *= 1.3f;
+    }
+    
+    void SkillLevelUp()
+    {
+        for(int i = 0; i < skills.Count; i++)
+            skills[i].LevelUp();
     }
 }

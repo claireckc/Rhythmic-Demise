@@ -30,6 +30,10 @@ public class ShootingTower : Tower {
                 }
             }
         }
+        else
+        {
+            //tower is dead. check stage if its tutorial, invoke tutorial overlay
+        }
 	}
 
     protected override void Action()

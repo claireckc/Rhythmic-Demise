@@ -36,8 +36,15 @@ public class ArmyController : MonoBehaviour {
     Vector3 archerTempPos;
     Vector3 priestTempPos;
 
+    MovingPoint movingPt1, movingPt2, movingPt3, movingPt4, movingPt5, movingPt6;
+    MovingPoint prevPoint;
+    GameObject TutManager;
+
+    bool moved;
+
 	// Use this for initialization
 	void Start () {
+        moved = false;
         if (armyController == null)
         {
             armyController = this;
@@ -47,11 +54,15 @@ public class ArmyController : MonoBehaviour {
         enemyList = new List<GameObject>();
 
         init();
+        GetMovingPoints();
 	}
 	
 	// Update is called once per frame
 	void Update () {
         findClosestEnemy();
+        if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
+            TutorialCall();
+
         switch (currentAction)
         {
             case Enums.PlayerState.Idle:
@@ -80,6 +91,38 @@ public class ArmyController : MonoBehaviour {
                 break;
         }
 	}
+
+    void GetMovingPoints()
+    {
+        movingPt1 = GameObject.Find("MovingPoints/MovingPoint1").GetComponent<MovingPoint>();
+        movingPt2 = GameObject.Find("MovingPoints/MovingPoint2").GetComponent<MovingPoint>();
+        movingPt3 = GameObject.Find("MovingPoints/MovingPoint3").GetComponent<MovingPoint>();
+        movingPt4 = GameObject.Find("MovingPoints/MovingPoint4").GetComponent<MovingPoint>();
+        movingPt5 = GameObject.Find("MovingPoints/MovingPoint5").GetComponent<MovingPoint>();
+        movingPt6 = GameObject.Find("MovingPoints/MovingPoint6").GetComponent<MovingPoint>();
+    }
+
+    void TutorialCall()
+    {
+        if(PlayerScript.playerdata.clickedStageNumber == 1)
+        {
+            if (currPos != prevPoint)
+            {
+                if (currPos == movingPt1 || currPos == movingPt3 || currPos == movingPt4)
+                {
+                    TutManager.SendMessage("PlayMoveRight");
+                    prevPoint = currPos;
+                }
+
+                if (currPos == movingPt2 || currPos == movingPt5)
+                {
+                    TutManager.SendMessage("PlayAttack");
+                    prevPoint = currPos;
+                }
+            }
+        }
+        
+    }
 
     void init()
     {
@@ -144,6 +187,7 @@ public class ArmyController : MonoBehaviour {
 
         Invoke("initLeaderBonus", 1);
         targetPos = currPos;
+        TutManager = GameObject.Find("Tutorial Manager");
     }
 
     public void initArmy(List<Character> a)
