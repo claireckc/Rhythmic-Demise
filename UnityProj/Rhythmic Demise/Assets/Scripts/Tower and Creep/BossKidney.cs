@@ -57,7 +57,7 @@ public class BossKidney : Boss {
 
         GameObject spawn = Instantiate(troopPrefab, tempPos, Quaternion.Euler(0, 0, angle)) as GameObject;
 
-        spawn.SendMessage("Initialize", closestPlayer);
+        spawn.SendMessage("Initialize", closestPlayer.transform.position);
     }
 
     protected override void Action()
@@ -66,6 +66,6 @@ public class BossKidney : Boss {
         float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
 
         GameObject shoot = Instantiate(projectile, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-        shoot.SendMessage("Initialize", closestPlayer);
+        shoot.SendMessage("Initialize", closestPlayer.transform.position);
     }
 }

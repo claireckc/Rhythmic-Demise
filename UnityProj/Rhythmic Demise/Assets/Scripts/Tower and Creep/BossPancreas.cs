@@ -55,6 +55,6 @@ public class BossPancreas : Boss {
         float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
 
         GameObject shoot = Instantiate(projectile, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-        shoot.SendMessage("Initialize", closestPlayer);
+        shoot.SendMessage("Initialize", closestPlayer.transform.position);
     }
 }

@@ -5,15 +5,20 @@ public class ProjectileController : MonoBehaviour {
 
 	public float damage;
 	public GameObject enemy;
-	public float movementSpeed = 2.0f;
+	public float speed = 2.0f;
+
+    private Vector3 direction;
+    private Vector3 goal;
+    private const float minDistance = 0.2f;
 
 	// Use this for initialization
 	void Start () {
 
 	}
 
-	void Initialize (GameObject target){
-		enemy = target;
+	void Initialize (Vector3 target){
+        direction = target - this.transform.position;
+		goal = target;
 	}
 
 
@@ -23,11 +28,14 @@ public class ProjectileController : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
+        float angle = Mathf.Atan2(-direction.y, -direction.x) * Mathf.Rad2Deg;
+        this.transform.rotation = Quaternion.Euler(0, 0, angle);
+        transform.position = Vector2.Lerp(transform.position, goal, speed * Time.deltaTime);
 
-		Vector3 dir = enemy.transform.position - this.transform.position;
-		float angle = Mathf.Atan2 (-dir.y, -dir.x) * Mathf.Rad2Deg;
-		this.transform.rotation = Quaternion.Euler (0, 0, angle);
-		transform.position = Vector2.Lerp (transform.position, enemy.transform.position, movementSpeed * Time.deltaTime);
+        if ((transform.position - goal).sqrMagnitude <= minDistance * minDistance)
+        {
+            Destroy(gameObject);
+        }
 	}
 
 	void OnTriggerEnter2D(Collider2D other){

@@ -2,13 +2,20 @@
 using System.Collections;
 
 public class EndResultManager : MonoBehaviour {
+    public static EndResultManager erm;
+
     AudioSource audio;
     Animator anim;
     GameObject endStageClone;
 
     bool isComplete, done;
+    bool isBossStage;
 
-	void Awake () {
+	void Start () {
+        if (erm == null) { 
+            erm = this; 
+        }
+
         anim = GetComponent<Animator>();
         audio = GameObject.Find("Audio Source").GetComponent<AudioSource>();
         endStageClone = Instantiate(Resources.Load<GameObject>("Prefabs/End Stage"));
@@ -24,11 +31,25 @@ public class EndResultManager : MonoBehaviour {
         {
             isComplete = true;
         }
-
+        /*
         //Just for prototype, need to be arrange later
         if (PlayerScript.playerdata.mapProgress[0].stages[2].isCurrent(PlayerScript.playerdata.clickedStageNumber))
         {
             if(!GameObject.Find("Boss")){
+                isComplete = true;
+            }
+        }*/
+
+        if (GameObject.Find("Boss") && !isBossStage)
+        {
+            isBossStage = true;
+        }
+
+        if (isBossStage)
+        {
+            Boss b = GameObject.Find("Boss").GetComponent<Boss>();
+            if (b.IsDead)
+            {
                 isComplete = true;
             }
         }
@@ -39,7 +60,7 @@ public class EndResultManager : MonoBehaviour {
         }
 	}
 
-    void StopGame()
+    public void StopGame()
     {
         audio.Stop();
         anim.SetTrigger("Finish");
@@ -47,5 +68,10 @@ public class EndResultManager : MonoBehaviour {
         //update resources
         endStageClone.SendMessage("UpdateData", (int)PlayerScript.playerdata.clickedMap);
         done = true;
+    }
+
+    public bool isDone()
+    {
+        return done;
     }
 }

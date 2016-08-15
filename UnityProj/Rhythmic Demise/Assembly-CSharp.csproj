@@ -69,6 +69,9 @@
      <Compile Include="Assets\Scripts\Controller\Stage Handler\SubStageHandler.cs" />
      <Compile Include="Assets\Scripts\EndResultManager.cs" />
      <Compile Include="Assets\Scripts\Enums.cs" />
+     <Compile Include="Assets\Scripts\Events\EventLiver.cs" />
+     <Compile Include="Assets\Scripts\Events\EventSmallIntestine.cs" />
+     <Compile Include="Assets\Scripts\Events\Timer.cs" />
      <Compile Include="Assets\Scripts\MovingPoint.cs" />
      <Compile Include="Assets\Scripts\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\Player Data\MainMap.cs" />
@@ -89,6 +92,7 @@
      <Compile Include="Assets\Scripts\Tower and Creep\Boss.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\BossHeart.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\BossKidney.cs" />
+     <Compile Include="Assets\Scripts\Tower and Creep\BossLargeIntestine.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\BossPancreas.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\BossSpleen.cs" />
      <Compile Include="Assets\Scripts\Tower and Creep\BreathingAI.cs" />
@@ -102,6 +106,7 @@
      <Compile Include="Assets\Scripts\User Interface\UIManager_TroopSel.cs" />
      <Compile Include="Assets\SkillsManager.cs" />
      <Compile Include="Assets\StageRateHandler.cs" />
+     <Compile Include="Assets\SubRatings.cs" />
      <Compile Include="Assets\TracheaAI.cs" />
      <Compile Include="Assets\TutorialManager.cs" />
  <Reference Include="UnityEngine.UI">
