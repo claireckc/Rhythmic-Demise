@@ -38,12 +38,14 @@ public class ArmyController : MonoBehaviour {
 
     MovingPoint movingPt1, movingPt2, movingPt3, movingPt4, movingPt5, movingPt6;
     MovingPoint prevPoint;
-    GameObject TutManager;
+    GameObject tutManager;
 
     bool moved;
 
 	// Use this for initialization
+
 	void Start () {
+        tutManager = GameObject.Find("Tutorial Manager");
         moved = false;
         if (armyController == null)
         {
@@ -94,12 +96,25 @@ public class ArmyController : MonoBehaviour {
 
     void GetMovingPoints()
     {
-        movingPt1 = GameObject.Find("MovingPoints/MovingPoint1").GetComponent<MovingPoint>();
-        movingPt2 = GameObject.Find("MovingPoints/MovingPoint2").GetComponent<MovingPoint>();
-        movingPt3 = GameObject.Find("MovingPoints/MovingPoint3").GetComponent<MovingPoint>();
-        movingPt4 = GameObject.Find("MovingPoints/MovingPoint4").GetComponent<MovingPoint>();
-        movingPt5 = GameObject.Find("MovingPoints/MovingPoint5").GetComponent<MovingPoint>();
-        movingPt6 = GameObject.Find("MovingPoints/MovingPoint6").GetComponent<MovingPoint>();
+        if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
+        {
+            switch (PlayerScript.playerdata.clickedStageNumber)
+            {
+                case 1: //first tutorial, 6 moving points
+                    movingPt1 = GameObject.Find("MovingPoints/MovingPoint1").GetComponent<MovingPoint>();
+                    movingPt2 = GameObject.Find("MovingPoints/MovingPoint2").GetComponent<MovingPoint>();
+                    movingPt3 = GameObject.Find("MovingPoints/MovingPoint3").GetComponent<MovingPoint>();
+                    movingPt4 = GameObject.Find("MovingPoints/MovingPoint4").GetComponent<MovingPoint>();
+                    movingPt5 = GameObject.Find("MovingPoints/MovingPoint5").GetComponent<MovingPoint>();
+                    movingPt6 = GameObject.Find("MovingPoints/MovingPoint6").GetComponent<MovingPoint>();
+                    break;
+                case 2: //second tutorial, 7 moving points, 3 paths 8 more moving points. Only need to provide tutorial for choosing path
+                    break;
+                case 3: //boss stage
+                    break;
+       
+            }
+        }
     }
 
     void TutorialCall()
@@ -110,13 +125,13 @@ public class ArmyController : MonoBehaviour {
             {
                 if (currPos == movingPt1 || currPos == movingPt3 || currPos == movingPt4)
                 {
-                    TutManager.SendMessage("PlayMoveRight");
+                    tutManager.SendMessage("PlayMoveRight");
                     prevPoint = currPos;
                 }
 
                 if (currPos == movingPt2 || currPos == movingPt5)
                 {
-                    TutManager.SendMessage("PlayAttack");
+                    tutManager.SendMessage("PlayAttack");
                     prevPoint = currPos;
                 }
             }
@@ -187,7 +202,6 @@ public class ArmyController : MonoBehaviour {
 
         Invoke("initLeaderBonus", 1);
         targetPos = currPos;
-        TutManager = GameObject.Find("Tutorial Manager");
     }
 
     public void initArmy(List<Character> a)

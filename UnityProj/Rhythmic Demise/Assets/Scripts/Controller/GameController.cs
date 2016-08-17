@@ -35,9 +35,14 @@ public class GameController : MonoBehaviour {
     private bool inputActionTurn;
     private Vector3 comboTextPosition;
 
+    GameObject tutManager;
+    
     // Use this for initialization
     void Start()
     {
+        if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
+            tutManager = GameObject.Find("Tutorial Manager");
+
         if (gameController == null) gameController = this;
         
         init();
@@ -236,6 +241,202 @@ public class GameController : MonoBehaviour {
     {
         moveSequence += hit;
         lastHit = true;
+        TutorialCall(hit);
+    }
+
+    void TutorialCall(string hit)
+    {
+        if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && lastHit)
+        {
+            int index = moveSequence.Length - 1; ;
+            bool hide = false;
+            print(TutorialManager.TutManager.currentPlaying);
+            switch (TutorialManager.TutManager.currentPlaying)
+            {
+                case Enums.TutMove.Right:
+                    switch (index)
+                    {
+                        case 0:
+                            //red
+                            if (hit == "1")
+                                hide = true;
+                            break;
+                        case 1:
+                            //red
+                            if (hit == "1")
+                                hide = true;
+                            break;
+                        case 2:
+                            //green
+                            if (hit == "3")
+                                hide = true;
+                            break;
+                        case 3:
+                            //yellow
+                            if (hit == "4")
+                                hide = true;
+                            break;
+                    }
+                    break;
+                case Enums.TutMove.Left:
+                    switch (index)
+                    {
+                        case 0:
+                            //red
+                            if (hit == "1")
+                                hide = true;
+                            break;
+                        case 1:
+                            //red
+                            if (hit == "1")
+                                hide = true;
+                            break;
+                        case 2:
+                            //green
+                            if (hit == "4")
+                                hide = true;
+                            break;
+                        case 3:
+                            //yellow
+                            if (hit == "3")
+                                hide = true;
+                            break;
+                    }
+                    break;
+                case Enums.TutMove.Up:
+                    switch (index)
+                    {
+                        case 0:
+                            //red
+                            if (hit == "1")
+                                hide = true;
+                            break;
+                        case 1:
+                            //red
+                            if (hit == "1")
+                                hide = true;
+                            break;
+                        case 2:
+                            //green
+                            if (hit == "4")
+                                hide = true;
+                            break;
+                        case 3:
+                            //yellow
+                            if (hit == "4")
+                                hide = true;
+                            break;
+                    }
+                    break;
+                case Enums.TutMove.Down:
+                    switch (index)
+                    {
+                        case 0:
+                            //red
+                            if (hit == "1")
+                                hide = true;
+                            break;
+                        case 1:
+                            //red
+                            if (hit == "1")
+                                hide = true;
+                            break;
+                        case 2:
+                            //green
+                            if (hit == "3")
+                                hide = true;
+                            break;
+                        case 3:
+                            //green
+                            if (hit == "3")
+                                hide = true;
+                            break;
+                    }
+                    break;
+                case Enums.TutMove.Attack:
+                    switch (index)
+                    {
+                        case 0:
+                            //green
+                            if (hit == "3")
+                                hide = true;
+                            break;
+                        case 1:
+                            //green
+                            if (hit == "3")
+                                hide = true;
+                            break;
+                        case 2:
+                            //green
+                            if (hit == "3")
+                                hide = true;
+                            break;
+                        case 3:
+                            //blue
+                            if (hit == "2")
+                                hide = true;
+                            break;
+                    }
+                    break;
+                case Enums.TutMove.Defend:
+                    switch (index)
+                    {
+                        case 0:
+                            //yellow
+                            if (hit == "4")
+                                hide = true;
+                            break;
+                        case 1:
+                            //yellow
+                            if (hit == "4")
+                                hide = true;
+                            break;
+                        case 2:
+                            //yellow
+                            if (hit == "4")
+                                hide = true;
+                            break;
+                        case 3:
+                            //red
+                            if (hit == "1")
+                                hide = true;
+                            break;
+                    }
+                    break;
+                case Enums.TutMove.Skill:
+                    switch (index)
+                    {
+                        case 0:
+                            //red
+                            if (hit == "1")
+                                hide = true;
+                            break;
+                        case 1:
+                            //blue
+                            if (hit == "2")
+                                hide = true;
+                            break;
+                        case 2:
+                            //green
+                            if (hit == "3")
+                                hide = true;
+                            break;
+                        case 3:
+                            //yellow
+                            if (hit == "4")
+                                hide = true;
+                            break;
+                    }
+                    break;
+            }
+
+            if (hide)
+            {
+                tutManager.SendMessage("Hide", index);
+            }
+            else
+                tutManager.SendMessage("ShowAll");
+        }
     }
 
     public void addScore(int point)

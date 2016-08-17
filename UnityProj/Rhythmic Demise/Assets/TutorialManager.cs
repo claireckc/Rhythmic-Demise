@@ -3,6 +3,8 @@ using System.Collections;
 
 public class TutorialManager : MonoBehaviour {
 
+    public static TutorialManager TutManager;
+
     const int POS = 4;
     GameObject arrow, attack, defend;
     public GameObject[] noteLocation;
@@ -13,8 +15,12 @@ public class TutorialManager : MonoBehaviour {
     public Tower tower1, tower2;
     Vector3 scale;
 
+    public Enums.TutMove currentPlaying;
+
     void Start()
     {
+        TutManager = new TutorialManager();
+        currentPlaying = Enums.TutMove.None;
         firstTowerDead = secondTowerDead = false;
         arrow = Resources.Load<GameObject>("Prefabs/GamePlay/Right Arrow Icon");
         attack = Resources.Load<GameObject>("Prefabs/GamePlay/Attack");
@@ -53,7 +59,7 @@ public class TutorialManager : MonoBehaviour {
         noteLocation[3] = GameObject.Find("Note Position/Note 4 Position");
     }
 
-    void Hide(int index)
+    public void Hide(int index)
     {
         noteLocation[index].GetComponent<SpriteRenderer>().enabled = false;
     }
@@ -132,91 +138,54 @@ public class TutorialManager : MonoBehaviour {
             IconPos.transform.localScale += scale - new Vector3(0.25f, 0.25f, 0.25f);
         
     }
-   
 
-    void PlayMoveRight()
+    public void PlayMoveRight()
     {
         SetIcon(arrow, 0f);
         InitRightNotes();
+        TutManager.currentPlaying = Enums.TutMove.Right;
+        //currentPlaying = Enums.TutMove.Right;
     }
 
-    void PlayMoveUp()
+   public void PlayMoveUp()
     {
         SetIcon(arrow, 90f);
         InitUpNotes();
+        TutManager.currentPlaying = Enums.TutMove.Up;
     }
 
-    void PlayMoveDown()
+    public void PlayMoveDown()
     {
         SetIcon(arrow, -90f);
         InitDownNotes();
+        TutManager.currentPlaying = Enums.TutMove.Down;
     }
 
-    void PlayAttack()
+    public void PlayAttack()
     {
         SetIcon(attack, 0f);
         InitAttackNotes();
+        TutManager.currentPlaying = Enums.TutMove.Attack;
     }
 
-    void PlayDefend()
+    public void PlayDefend()
     {
         SetIcon(defend, 0f);
         InitDefendNotes();
+        TutManager.currentPlaying = Enums.TutMove.Defend;
     }
 
-    void PlaySkill()
+    public void PlaySkill()
     {
         //Instantiate(arrow, IconPos.transform.position, Quaternion.Euler(0f, 0, -90f));        //skill icon
         InitSkillNotes();
-
-    }
-
-    void InitAnim()
-    {
-        int time = 0;
-        //call when notes are set in notePosition
-        for (int i = 0; i < noteLocation.Length; i++)
-        {
-            PlayAnimation(++time, i);
-        }
-    }
-
-    void PlayAnimation(int time, int index)
-    {
-        StartCoroutine(PlayAnim(time, index));
+        TutManager.currentPlaying = Enums.TutMove.Skill;
     }
     
-    IEnumerator PlayAnim(int delay, int index)
-    {
-        noteLocation[index].GetComponent<SpriteRenderer>().enabled = false;
-        yield return new WaitForSeconds(delay);
-        noteLocation[index].GetComponent<SpriteRenderer>().enabled = true;
-    }
-
-    void PlayAnimation(int notePosition)
-    {
-        switch (notePosition)
-        {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-        }
-    }
-
     void Refresh()
     {
         for(int i = 0; i < noteLocation.Length; i++)
             Destroy(noteLocation[i]);
         Destroy(IconPos);
-    }
-
-    void Blink(GameObject obj)
-    {
-
     }
 }
