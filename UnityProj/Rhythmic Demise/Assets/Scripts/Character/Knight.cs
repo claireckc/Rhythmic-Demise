@@ -14,8 +14,8 @@ public class Knight : Character {
 
         //0 is knight index
         currentHealth = maxHealth = PlayerScript.playerdata.troopData[0].maxHealth;
-        damage = PlayerScript.playerdata.troopData[0].attack;
-        armor = PlayerScript.playerdata.troopData[0].defenseRating;
+        damage = PlayerScript.playerdata.troopData[0].damage;
+        armor = PlayerScript.playerdata.troopData[0].armor;
 	}
 	
 	// Update is called once per frame

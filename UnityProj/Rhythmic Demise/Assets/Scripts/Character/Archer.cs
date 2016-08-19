@@ -16,8 +16,8 @@ public class Archer : Character {
         
         //1 is archer index
         currentHealth = maxHealth = PlayerScript.playerdata.troopData[1].maxHealth;
-        damage = PlayerScript.playerdata.troopData[1].attack;
-        armor = PlayerScript.playerdata.troopData[1].defenseRating;
+        damage = PlayerScript.playerdata.troopData[1].damage;
+        armor = PlayerScript.playerdata.troopData[1].armor;
 	}
 	
 	// Update is called once per frame

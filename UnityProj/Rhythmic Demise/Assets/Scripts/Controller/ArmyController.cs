@@ -51,6 +51,8 @@ public class ArmyController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        checkHealth();
+
         findClosestEnemy();
         switch (currentAction)
         {
@@ -80,6 +82,19 @@ public class ArmyController : MonoBehaviour {
                 break;
         }
 	}
+
+    void checkHealth()
+    {
+        for (int i = 0; i < army.Count; i++)
+        {
+            Character c = army[i];
+            if (c.IsDead)
+            {
+                army.Remove(army[i]);
+                Destroy(c.gameObject);
+            }
+        }
+    }
 
     void init()
     {
@@ -116,7 +131,7 @@ public class ArmyController : MonoBehaviour {
         for (int i = 0; i < archerCount; i++)
         {
             float archerY = Random.Range(currPos.transform.position.y - 1, currPos.transform.position.y + 1);
-            Vector3 archerTempPos = new Vector3(currPos.transform.position.x - 1, archerY);
+            Vector3 archerTempPos = new Vector3(currPos.transform.position.x, archerY);
             Archer a = Instantiate(archerPrefab, archerTempPos, archerPrefab.transform.rotation) as Archer;
 
             if (PlayerScript.playerdata.leaderType == Enums.JobType.Archer && i == 0)
@@ -131,7 +146,7 @@ public class ArmyController : MonoBehaviour {
         for (int i = 0; i < priestCount; i++)
         {
             float priestY = Random.Range(currPos.transform.position.y - 1, currPos.transform.position.y + 1);
-            Vector3 priestTempPos = new Vector3(currPos.transform.position.x, priestY);
+            Vector3 priestTempPos = new Vector3(currPos.transform.position.x - 1, priestY);
             Priest p = Instantiate(priestPrefab, priestTempPos, priestPrefab.transform.rotation) as Priest;
 
             if (PlayerScript.playerdata.leaderType == Enums.JobType.Priest && i == 0)
@@ -211,14 +226,14 @@ public class ArmyController : MonoBehaviour {
                     if (!isRandomOnce)
                     {
                         archerY = Random.Range(pos.transform.position.y - 1, pos.transform.position.y + 1);
-                        archerTempPos = new Vector3(pos.transform.position.x - 1, archerY);
+                        archerTempPos = new Vector3(pos.transform.position.x, archerY);
                         c.setGoalPos(archerTempPos);
                     }
 
                     if (!c.getInPath())
                     {
                         archerY = Random.Range(pos.transform.position.y - 1, pos.transform.position.y + 1);
-                        archerTempPos = new Vector3(pos.transform.position.x - 1, archerY);
+                        archerTempPos = new Vector3(pos.transform.position.x, archerY);
                         c.setGoalPos(archerTempPos);
                     }
                         
@@ -228,14 +243,14 @@ public class ArmyController : MonoBehaviour {
                     if (!isRandomOnce)
                     {
                         priestY = Random.Range(pos.transform.position.y - 1, pos.transform.position.y + 1);
-                        priestTempPos = new Vector3(pos.transform.position.x, priestY);
+                        priestTempPos = new Vector3(pos.transform.position.x - 1, priestY);
                         c.setGoalPos(priestTempPos);
                     }
 
                     if (!c.getInPath())
                     {
                         priestY = Random.Range(pos.transform.position.y - 1, pos.transform.position.y + 1);
-                        priestTempPos = new Vector3(pos.transform.position.x, priestY);
+                        priestTempPos = new Vector3(pos.transform.position.x - 1, priestY);
                         c.setGoalPos(priestTempPos);
                     }
                         
@@ -312,14 +327,14 @@ public class ArmyController : MonoBehaviour {
                 foreach (Character c in army)
                 {
                     //increase defense by 20%
-                    c.setArmor(c.getArmor() * 1.2f);
+                    c.setArmor(c.getArmor() + 5);
                 }
                 break;
             case Enums.JobType.Archer:
                 foreach (Character c in army)
                 {
                     //increase damage by 20%
-                    c.setDamage(c.getDamage() * 1.2f);
+                    c.setDamage(c.getDamage() + 5);
                 }
                 break;
             case Enums.JobType.Priest:
@@ -329,7 +344,7 @@ public class ArmyController : MonoBehaviour {
                     if (c.getJobType() == Enums.JobType.Priest)
                     {
                         Priest p = c as Priest;
-                        p.setHealPower(p.getHealPower() * 1.5f);
+                        p.setHealPower(p.getHealPower() + 10);
                     }
                 }
                 break;

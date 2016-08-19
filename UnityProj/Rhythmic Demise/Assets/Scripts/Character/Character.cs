@@ -83,12 +83,16 @@ public abstract class Character : MonoBehaviour {
 
     public void TakeDamage(float damage)
     {   
+        /*
         float damageMultiplier = 1 - 0.06f * armor / (1 + (0.06f * Mathf.Abs(armor)));
         float finalDamage = damage * damageMultiplier;
         finalDamage = Mathf.Round(finalDamage * 100f) / 100f;
         currentHealth -= finalDamage;
+        */
 
-        FloatingTextController.CreateFloatingText(finalDamage.ToString(), transform);
+        currentHealth -= damage;
+
+        FloatingTextController.CreateFloatingText(damage.ToString(), transform);
     }
 
     public Enums.JobType getJobType()

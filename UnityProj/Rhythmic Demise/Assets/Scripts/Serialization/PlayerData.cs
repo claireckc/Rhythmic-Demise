@@ -20,8 +20,8 @@ public class PlayerData
     public int clickedStageNumber;
 
     //multiplier
-    public float attackMultiplier;
-    public float defenseMultiplier;
+    public int attackBonus;
+    public int defenseBonus;
     public float expMultiplier;     //base on stage number and player unit level
 
     //Map progress
@@ -53,8 +53,8 @@ public class PlayerData
         troopData = new List<Troop>();
         troopSelected = new List<TroopSelected>();
 
-        attackMultiplier = 1f;
-        defenseMultiplier = 1f;
+        attackBonus = 0;
+        defenseBonus = 0;
         expMultiplier = 1f;
 
         //for troop data
@@ -73,21 +73,21 @@ public class PlayerData
             switch (i)
             {
                 case 0: //knight
-                    tp.currentHealth = tp.maxHealth = 15;
-                    tp.attack = 3 * attackMultiplier;
-                    tp.defenseRating = 2 * defenseMultiplier;
-                    tp.energyNeeded = 2;
+                    tp.currentHealth = tp.maxHealth = 200;
+                    tp.damage = 20 + attackBonus;
+                    tp.armor = 5 + defenseBonus;
+                    tp.energyNeeded = 1;
                     break;
                 case 1: //archer
-                    tp.currentHealth = tp.maxHealth = 8;
-                    tp.attack = 2 * attackMultiplier;
-                    tp.defenseRating = 1 * defenseMultiplier;
+                    tp.currentHealth = tp.maxHealth = 130;
+                    tp.damage = 20 + attackBonus;
+                    tp.armor = 2 + defenseBonus;
                     tp.energyNeeded = 1;
                     break;
                 case 2: //priest
-                    tp.currentHealth = tp.maxHealth = 10;
-                    tp.attack = 1 * attackMultiplier;
-                    tp.defenseRating = 1.2f * defenseMultiplier;
+                    tp.currentHealth = tp.maxHealth = 100;
+                    tp.damage = 12 + attackBonus;
+                    tp.armor = 2 + defenseBonus;
                     tp.energyNeeded = 1;
                     break;
             }

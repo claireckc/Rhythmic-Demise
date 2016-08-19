@@ -8,6 +8,7 @@ public class Orb : MonoBehaviour {
     private GameObject enemy;
     private Vector3 direction;
     private Vector3 goal;
+    private const float minDistance = 0.2f;
 
     // Use this for initialization
     void Start()
@@ -34,7 +35,7 @@ public class Orb : MonoBehaviour {
         this.transform.rotation = Quaternion.Euler(0, 0, angle);
         transform.position = Vector2.Lerp(transform.position, goal, speed * Time.deltaTime);
 
-        if (transform.position == goal)
+        if ((transform.position - goal).sqrMagnitude <= minDistance * minDistance)
         {
             Destroy(gameObject);
         }
