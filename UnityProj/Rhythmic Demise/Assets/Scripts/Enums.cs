@@ -14,9 +14,6 @@ public class Enums : MonoBehaviour {
     public enum JobType {None, Knight, Archer, Priest}
 
     [System.Serializable]
-    public enum TutMove { None, Left, Right, Up, Down, Attack, Defend, Skill}
-
-    [System.Serializable]
     public enum SkillName
     {
         None, 

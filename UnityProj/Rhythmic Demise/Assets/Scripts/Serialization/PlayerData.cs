@@ -30,9 +30,6 @@ public class PlayerData
     //settings
     public float globalVolume, effectsVolume, buttonAlpha;
 
-    //for tutorial
-    public bool firstTut1, firstTut2, firstTut3, firstResource;
-
     private Troop tp;
     private Skills sk;
     private MainMap newMap;
@@ -46,6 +43,7 @@ public class PlayerData
 
     public void Init()
     {
+        Debug.Log("call init in playerdata script");
         leaderType = Enums.JobType.None;
         skillSelected = Enums.SkillName.None;
         pathogenType = Enums.CharacterType.None;
@@ -58,8 +56,6 @@ public class PlayerData
         attackBonus = 0;
         defenseBonus = 0;
         expMultiplier = 1f;
-
-        firstTut1 = firstTut2 = firstTut3 = firstResource = true;
 
         //for troop data
         for (int i = 0; i < 3; i++)
@@ -198,4 +194,19 @@ public class PlayerData
             mapProgress.Add(newMap);
         }
     }
+
+    /*public void Awake()
+    {
+        if (playerdata != null)
+            Destroy(gameObject);
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+            playerdata = this;
+        }
+    }
+    public void Start()
+    {
+        Init();
+    }*/
 }
