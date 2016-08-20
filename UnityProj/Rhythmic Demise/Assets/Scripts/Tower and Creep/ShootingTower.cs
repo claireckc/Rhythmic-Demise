@@ -9,10 +9,6 @@ public class ShootingTower : Tower {
 	// Use this for initialization
 	new void Start () {
         base.Start();
-
-        currentHealth = maxHealth = 8;
-        cooldown = nextActionTime = 5.0f;
-
 	}
 	
 	// Update is called once per frame
@@ -45,5 +41,6 @@ public class ShootingTower : Tower {
 
         GameObject shoot = Instantiate(arrow, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
         shoot.SendMessage("Initialize", closestPlayer.transform.position);
+        shoot.SendMessage("initDamage", damage);
     }
 }

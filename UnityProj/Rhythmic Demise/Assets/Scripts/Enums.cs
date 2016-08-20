@@ -8,7 +8,7 @@ public class Enums : MonoBehaviour {
     [System.Serializable]
     public enum CharacterType {None, Cancer, Diabetic };
     [System.Serializable]
-    public enum PlayerState { Idle, Move, MoveUp, MoveDown, MoveLeft, MoveRight, Attack, Heal, Skill };
+    public enum PlayerState { Idle, MoveUp, MoveDown, MoveLeft, MoveRight, Attack, Skill };
 
     [System.Serializable]
     public enum JobType {None, Knight, Archer, Priest}
@@ -46,13 +46,13 @@ public class Enums : MonoBehaviour {
     public static string[] MapName =
     {
         "Mouth", "Larnyx", "Trachea", "Lungs", "Heart", "Liver",
-        "Spleen", "Pancreas", "Kidney", "Sintes","Lintes", "Brain"
+        "Spleen", "Pancreas", "Kidney", "Lintes","Sintes", "Brain"
     };
 
     public static string[] StageName =
     {
         "MouthStage", "LarnyxStage", "TracheaStage", "LungStage", "HeartStage", 
         "LiverStage", "SpleenStage", "PancreasStage", "KidneyStage", 
-        "SmallIntesStage", "LargeIntesStage", "BrainStage"
+        "LargeIntesStage", "SmallIntesStage", "BrainStage"
     };
 }

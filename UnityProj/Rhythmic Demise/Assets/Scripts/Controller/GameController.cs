@@ -479,9 +479,9 @@ public class GameController : MonoBehaviour {
 
     public void levelUp(int tIndex)
     {
-        PlayerScript.playerdata.troopData[tIndex].attack += 1;
-        PlayerScript.playerdata.troopData[tIndex].maxHealth += 2;
-        PlayerScript.playerdata.troopData[tIndex].defenseRating += 0.5f;
+        PlayerScript.playerdata.troopData[tIndex].damage += 5;
+        PlayerScript.playerdata.troopData[tIndex].maxHealth += 20;
+        PlayerScript.playerdata.troopData[tIndex].armor += 1;
     }
 
     public void LoadLevel(string level)

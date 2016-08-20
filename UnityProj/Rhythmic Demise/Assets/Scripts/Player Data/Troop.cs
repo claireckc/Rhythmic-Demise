@@ -8,7 +8,8 @@ public class Troop {
 
     public Enums.JobType job;
     public int level, energyNeeded;
-    public float currentHealth, maxHealth, attack, defenseRating;
+    public int currentHealth, maxHealth, damage; 
+    public int armor;
     public List<Skills> skills;        //3
 
     public float expToLevel;
