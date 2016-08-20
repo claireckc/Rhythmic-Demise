@@ -17,6 +17,7 @@ public class TutorialManager : MonoBehaviour {
     GameObject textManager;
     bool allInvisible;
 
+    public bool tut2End;
     public Enums.TutMove currentPlaying;
 
     void Start()
@@ -34,24 +35,29 @@ public class TutorialManager : MonoBehaviour {
         greenNote = Resources.Load<GameObject>("Prefabs/GamePlay/Green Note");
         yellowNote = Resources.Load<GameObject>("Prefabs/GamePlay/Yellow Note");
         scale = new Vector3(0.5f, 0.5f, 0.5f);
+        tut2End = false;
 
         InitNoteLocation();
     }
 
     void FixedUpdate()
     {
-        if (tower1.IsDead && !firstTowerDead)
+        if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && PlayerScript.playerdata.clickedStageNumber == 1 &&
+            PlayerScript.playerdata.firstTut1)
         {
-            PlayMoveRight();
-            textManager.SendMessage("ShowPanel");
-            firstTowerDead = true;
-        }
+            if (tower1.IsDead && !firstTowerDead)
+            {
+                PlayMoveRight();
+                textManager.SendMessage("ShowPanel");
+                firstTowerDead = true;
+            }
 
-        if (tower2.IsDead && !secondTowerDead)
-        {
-            PlayMoveRight();
-            textManager.SendMessage("ShowPanel");
-            secondTowerDead = true;
+            if (tower2.IsDead && !secondTowerDead)
+            {
+                PlayMoveRight();
+                textManager.SendMessage("ShowPanel");
+                secondTowerDead = true;
+            }
         }
         
     }
@@ -72,6 +78,24 @@ public class TutorialManager : MonoBehaviour {
             allInvisible = true;
         else
             allInvisible = false;
+    }
+
+    void DestroyAll()
+    {
+        for(int i = 0; i < noteLocation.Length; i++)
+            Destroy(noteLocation[i].gameObject);
+        Destroy(IconPos.gameObject);
+    }
+
+    void HideAll()
+    {
+        if (!allInvisible)
+        {
+            for(int i = 0; i < noteLocation.Length; i++)
+                noteLocation[i].GetComponent<SpriteRenderer>().enabled = false;
+            allInvisible = true;
+        }
+        HideIcon();
     }
 
     void ShowAll()
@@ -156,7 +180,7 @@ public class TutorialManager : MonoBehaviour {
         SetIcon(arrow, 0f);
         InitRightNotes();
         TutManager.currentPlaying = Enums.TutMove.Right;
-        if (allInvisible)
+        if (allInvisible && tut2End)
             ShowAll();
         //currentPlaying = Enums.TutMove.Right;
     }
@@ -166,7 +190,7 @@ public class TutorialManager : MonoBehaviour {
         SetIcon(arrow, 90f);
         InitUpNotes();
         TutManager.currentPlaying = Enums.TutMove.Up;
-        if (allInvisible)
+        if (allInvisible && tut2End)
             ShowAll();
     }
 
@@ -175,7 +199,7 @@ public class TutorialManager : MonoBehaviour {
         SetIcon(arrow, -90f);
         InitDownNotes();
         TutManager.currentPlaying = Enums.TutMove.Down;
-        if (allInvisible)
+        if (allInvisible && tut2End)
             ShowAll();
     }
 
@@ -184,7 +208,7 @@ public class TutorialManager : MonoBehaviour {
         SetIcon(attack, 0f);
         InitAttackNotes();
         TutManager.currentPlaying = Enums.TutMove.Attack;
-        if (allInvisible)
+        if (allInvisible && tut2End)
             ShowAll();
     }
 
@@ -193,7 +217,7 @@ public class TutorialManager : MonoBehaviour {
         SetIcon(defend, 0f);
         InitDefendNotes();
         TutManager.currentPlaying = Enums.TutMove.Defend;
-        if (allInvisible)
+        if (allInvisible && tut2End)
             ShowAll();
     }
 
@@ -202,12 +226,16 @@ public class TutorialManager : MonoBehaviour {
         //Instantiate(arrow, IconPos.transform.position, Quaternion.Euler(0f, 0, -90f));        //skill icon
         InitSkillNotes();
         TutManager.currentPlaying = Enums.TutMove.Skill;
-        if (allInvisible)
+        if (allInvisible && tut2End)
             ShowAll();
     }
     
     void HideIcon()
     {
         IconPos.transform.GetComponent<SpriteRenderer>().enabled = false;
+    }
+
+    void ShowNothing()
+    {
     }
 }

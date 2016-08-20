@@ -5,7 +5,12 @@ using UnityEngine.UI;
 
 public class TextManager : MonoBehaviour
 {
+    //general
+    Canvas tutorialCanvas;
+    GameObject notePosition, iconPosition;
+    GameObject tutManager;
 
+    //for first tutorial scene
     AudioSource gameAudio, tutorialAudio;
 
     public TextAsset tutorialText;
@@ -15,64 +20,88 @@ public class TextManager : MonoBehaviour
     GameObject textPanel;
     Text panelText;
     GameObject troopArrows, controlsArrows, resourceArrows, pauseArrows;
-    GameObject tutManager;
 
-    // Use this for initialization
+    //for second tutorial scene
+    GameObject explainPanel, enemyPanel, riskPanel, selectPanel;
+
     void Start()
     {
-        if (PlayerScript.playerdata.firstTut1)
+        tutManager = GameObject.Find("Tutorial Manager");
+        tutorialCanvas = GameObject.Find("Tutorial Canvas").GetComponent<Canvas>();
+        notePosition = GameObject.Find("Note Position");
+        iconPosition = GameObject.Find("IconPosition");
+        gameAudio = GameObject.Find("Audio Source").GetComponent<AudioSource>();
+
+        if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && PlayerScript.playerdata.clickedStageNumber == 1)
         {
-            tutManager = GameObject.Find("Tutorial Manager");
-
-            if (tutorialText != null)
-                content = (tutorialText.text.Split('\n'));
-
-            if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && PlayerScript.playerdata.clickedStageNumber == 1)
+            if (PlayerScript.playerdata.firstTut1)
             {
+                if (tutorialText != null)
+                    content = (tutorialText.text.Split('\n'));
+
                 currentLine = 0;
                 endLine = 9;
+
+                textPanel = GameObject.Find("Tutorial Canvas/Panel");
+                panelText = GameObject.Find("Tutorial Canvas/Panel/Text").GetComponent<Text>();
+
+                troopArrows = GameObject.Find("Tutorial Canvas/TroopArrow");
+                controlsArrows = GameObject.Find("Tutorial Canvas/ControlsArrows");
+                resourceArrows = GameObject.Find("Tutorial Canvas/ResourceArrow");
+                pauseArrows = GameObject.Find("Tutorial Canvas/Pause Arrow");
+                
+                tutorialAudio = GameObject.Find("Tutorial Audio").GetComponent<AudioSource>();
+
+                textPanel.SetActive(true);
+                panelText.text = content[currentLine];
+
+                troopArrows.SetActive(false);
+                controlsArrows.SetActive(false);
+                resourceArrows.SetActive(false);
+                pauseArrows.SetActive(false);
+
+                gameAudio.Stop();
+                tutorialAudio.Stop();
             }
+            else
+            {
+                textPanel = GameObject.Find("Tutorial Canvas/Panel");
+                panelText = GameObject.Find("Tutorial Canvas/Panel/Text").GetComponent<Text>();
 
-            textPanel = GameObject.Find("Tutorial Canvas/Panel");
-            panelText = GameObject.Find("Tutorial Canvas/Panel/Text").GetComponent<Text>();
-
-            troopArrows = GameObject.Find("Tutorial Canvas/TroopArrow");
-            controlsArrows = GameObject.Find("Tutorial Canvas/ControlsArrows");
-            resourceArrows = GameObject.Find("Tutorial Canvas/ResourceArrow");
-            pauseArrows = GameObject.Find("Tutorial Canvas/Pause Arrow");
-
-            gameAudio = GameObject.Find("Audio Source").GetComponent<AudioSource>();
-            tutorialAudio = GameObject.Find("Tutorial Audio").GetComponent<AudioSource>();
-
-            textPanel.SetActive(true);
-            panelText.text = content[currentLine];
-
-            troopArrows.SetActive(false);
-            controlsArrows.SetActive(false);
-            resourceArrows.SetActive(false);
-            pauseArrows.SetActive(false);
-
-            gameAudio.Stop();
-            tutorialAudio.Stop();
+                troopArrows = GameObject.Find("Tutorial Canvas/TroopArrow");
+                controlsArrows = GameObject.Find("Tutorial Canvas/ControlsArrows");
+                resourceArrows = GameObject.Find("Tutorial Canvas/ResourceArrow");
+                pauseArrows = GameObject.Find("Tutorial Canvas/Pause Arrow");
+                
+                DestroyAll();
+            }
         }
-        else
+
+        if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && PlayerScript.playerdata.clickedStageNumber == 2)
         {
-            textPanel = GameObject.Find("Tutorial Canvas/Panel");
-            panelText = GameObject.Find("Tutorial Canvas/Panel/Text").GetComponent<Text>();
-
-            troopArrows = GameObject.Find("Tutorial Canvas/TroopArrow");
-            controlsArrows = GameObject.Find("Tutorial Canvas/ControlsArrows");
-            resourceArrows = GameObject.Find("Tutorial Canvas/ResourceArrow");
-            pauseArrows = GameObject.Find("Tutorial Canvas/Pause Arrow");
-
-            textPanel.SetActive(false);
-
-            troopArrows.SetActive(false);
-            controlsArrows.SetActive(false);
-            resourceArrows.SetActive(false);
-            pauseArrows.SetActive(false);
-
+                explainPanel = GameObject.Find("Tutorial Canvas/Explain Panel");
+                enemyPanel = GameObject.Find("Tutorial Canvas/Enemy Panel");
+                riskPanel = GameObject.Find("Tutorial Canvas/Risk Panel");
+                selectPanel = GameObject.Find("Tutorial Canvas/Select Panel");
+            if (PlayerScript.playerdata.firstTut2)
+            {
+                explainPanel.SetActive(false);
+                enemyPanel.SetActive(false);
+                riskPanel.SetActive(false);
+                selectPanel.SetActive(false);
+            }
+            else
+                DestroyAll();
         }
+    }
+
+    void DestroyAll()
+    {
+        Destroy(tutorialCanvas.gameObject);
+        Destroy(notePosition.gameObject);
+        Destroy(iconPosition.gameObject);
+        Destroy(tutManager.gameObject);
+        Destroy(this.gameObject);
     }
 
 
@@ -100,7 +129,72 @@ public class TextManager : MonoBehaviour
         }
     }
 
-    public void PanelClick_1()
+    //tutorial 2
+    void ShowTutorial2Panel()
+    {
+        explainPanel.SetActive(true);
+        //pause the game
+        Time.timeScale = 0f;
+        gameAudio.Pause();
+    }
+
+    void HideTutorial2Panel(GameObject panel, bool music)
+    {
+        panel.SetActive(false);
+        Destroy(panel.gameObject);
+
+        if (music)
+        {
+            if (!gameAudio.isPlaying)
+                gameAudio.Play();
+            Time.timeScale = 1f;
+        }
+        else
+        {
+            if (gameAudio.isPlaying)
+                gameAudio.Pause();
+        }
+
+    }
+
+    public void Tutorial2Explain_Click()
+    {
+        enemyPanel.SetActive(true);
+        HideTutorial2Panel(explainPanel, false);
+    }
+
+    public void Tutorial2Enemy_Click()
+    {
+        riskPanel.SetActive(true);
+        HideTutorial2Panel(enemyPanel, false);
+    }
+
+    public void Tutorial2Risk_Click()
+    {
+        selectPanel.SetActive(true);
+        HideTutorial2Panel(riskPanel, false);
+    }
+    
+    public void Tutorial2Top_Click()
+    {
+        tutManager.SendMessage("PlayMoveUp");
+        HideTutorial2Panel(selectPanel, true);
+    }
+
+    public void Tutorial2Forward_Click()
+    {
+        tutManager.SendMessage("PlayMoveRight");
+        HideTutorial2Panel(selectPanel, true);
+    }
+
+    public void Tutorial2Bottom_Click()
+    {
+        tutManager.SendMessage("PlayMoveDown");
+        HideTutorial2Panel(selectPanel, true);
+    }
+
+    //tutorial 1
+    public void Tutorial1Panel_Click()
     {
         if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
         {

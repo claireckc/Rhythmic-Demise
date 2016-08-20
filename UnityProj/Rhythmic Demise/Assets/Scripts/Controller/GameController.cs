@@ -36,12 +36,15 @@ public class GameController : MonoBehaviour {
     private Vector3 comboTextPosition;
 
     GameObject tutManager, tower1, tower2;
-    
+
     // Use this for initialization
     void Start()
     {
         if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
-            tutManager = GameObject.Find("Tutorial Manager");
+        {
+            if (PlayerScript.playerdata.firstTut1 || PlayerScript.playerdata.firstTut2 || PlayerScript.playerdata.firstTut3)
+                tutManager = GameObject.Find("Tutorial Manager");
+        }
 
 
         if (gameController == null) gameController = this;
@@ -152,7 +155,10 @@ public class GameController : MonoBehaviour {
                 inputActionTurn = false;
 
                 clearSequence();
-                tutManager.SendMessage("ShowAll");
+
+                if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && 
+                    PlayerScript.playerdata.clickedStageNumber == 2 && !TutorialManager.TutManager.tut2End)
+                    tutManager.SendMessage("ShowAll");
                 //reset current streak
                 currentStreak = 0;
                 ScoreManager.comboMultiplier = 1;
@@ -237,19 +243,37 @@ public class GameController : MonoBehaviour {
         priestCountText.text = "x" + priestCount;
         knightCountText.text = "x" + knightCount;
     }
+    bool AccessTutorial()
+    {
+        if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
+        {
+            return ((PlayerScript.playerdata.clickedStageNumber == 1 && PlayerScript.playerdata.firstTut1) ||
+                (PlayerScript.playerdata.clickedStageNumber == 2 && PlayerScript.playerdata.firstTut2) ||
+                (PlayerScript.playerdata.clickedStageNumber == 3 && PlayerScript.playerdata.firstTut3));
+        }
+        else if (Application.loadedLevelName == "Resource Management" && PlayerScript.playerdata.firstResource)
+            return true;
+
+        return false;
+    }
 
     public void addHit(string hit)
     {
         moveSequence += hit;
         lastHit = true;
-        TutorialCall(hit);
+        
+        if(AccessTutorial() && !TutorialManager.TutManager.tut2End)
+        {
+            print("Called accesstutorial true");
+            TutorialCall(hit);
+        }
     }
 
     void TutorialCall(string hit)
     {
         if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && lastHit)
         {
-            int index = moveSequence.Length - 1; ;
+            int index = moveSequence.Length - 1;
             bool hide = false;
 
             switch (TutorialManager.TutManager.currentPlaying)
@@ -430,13 +454,16 @@ public class GameController : MonoBehaviour {
                     }
                     break;
             }
-
+            
             if (hide)
             {
                 tutManager.SendMessage("Hide", index);
             }
             else
-                tutManager.SendMessage("ShowAll");
+            {
+                if(!TutorialManager.TutManager.tut2End)
+                    tutManager.SendMessage("ShowAll");
+            }
         }
     }
 
