@@ -1,0 +1,147 @@
+fileFormatVersion: 2
+guid: eb9c7ce48c9ef9347baa294b81b4e82b
+timeCreated: 1471726476
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: DiabeticKnight_Attack_0
+    21300002: DiabeticKnight_Attack_1
+    21300004: DiabeticKnight_Attack_2
+    21300006: DiabeticKnight_Attack_3
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: DiabeticKnight_Attack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -48, y: 34}
+        - {x: -51, y: 33}
+        - {x: -71, y: -10}
+        - {x: -71, y: -56}
+        - {x: -42, y: -70}
+        - {x: 51, y: -70}
+        - {x: 71, y: -36}
+        - {x: 71, y: 34}
+    - name: DiabeticKnight_Attack_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -1, y: 49}
+        - {x: -17, y: 47}
+        - {x: -68, y: 5}
+        - {x: -68, y: -18}
+        - {x: -35, y: -60}
+        - {x: 56, y: -60}
+        - {x: 65, y: -58}
+        - {x: 66, y: -51}
+        - {x: 66, y: 49}
+    - name: DiabeticKnight_Attack_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 73, y: -5}
+        - {x: 73, y: 29}
+        - {x: 70, y: 47}
+        - {x: 64, y: 49}
+        - {x: 46, y: 49}
+        - {x: 39, y: 42}
+        - {x: -12, y: 46}
+        - {x: -63, y: 6}
+        - {x: -63, y: -25}
+        - {x: -14, y: -60}
+        - {x: 10, y: -60}
+        - {x: 32, y: -57}
+        - {x: 39, y: -55}
+        - {x: 55, y: -44}
+    - name: DiabeticKnight_Attack_3
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 73, y: 39}
+        - {x: 62, y: 25}
+        - {x: 52, y: 35}
+        - {x: 46, y: 39}
+        - {x: -19, y: 39}
+        - {x: -63, y: 26}
+        - {x: -63, y: -56}
+        - {x: -23, y: -67}
+        - {x: 65, y: -67}
+        - {x: 91, y: 26}
+        - {x: 91, y: 39}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

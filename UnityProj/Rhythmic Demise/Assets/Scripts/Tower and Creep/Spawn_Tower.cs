@@ -1,19 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 public class Spawn_Tower : Tower {
 
     //tower inst
     public GameObject creep;
 
+    public int troopHealth;
+    public int troopCooldown;
+
     // Use this for initialization
     new void Start()
     {
         base.Start();
-
-        currentHealth = maxHealth = 3;
-        cooldown = nextActionTime = 0.5f;
     }
 
     // Update is called once per frame
@@ -47,6 +46,13 @@ public class Spawn_Tower : Tower {
 
         GameObject spawn = Instantiate(creep, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
         spawn.SendMessage("Initialize", closestPlayer);
+
+        float health = troopHealth;
+        float d = damage;
+
+        spawn.SendMessage("initHealth", troopHealth);
+        spawn.SendMessage("initDamage", damage);
+        spawn.SendMessage("initCooldown", troopCooldown);
 
         //Decreasing the health
         TakeDamage(1);

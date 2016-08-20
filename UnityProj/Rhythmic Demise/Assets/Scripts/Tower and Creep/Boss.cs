@@ -1,7 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public abstract class Boss : Enemy{
+
+    public void Start()
+    {
+        currentHealth = maxHealth;
+        playerList = new List<GameObject>();
+    }
+
     protected abstract void specialAction();
 
     protected override void FindClosestEnemy()
@@ -32,16 +40,22 @@ public abstract class Boss : Enemy{
     {
         for (int i = 0; i < playerList.Count; i++)
         {
-            Character c = playerList[i].GetComponent<Character>();
-            
-            if (c.IsDead)
+            if (playerList[i] == null)
             {
-                //Need to be re-arrange soon
                 playerList.Remove(playerList[i]);
-                ArmyController.armyController.army.Remove(c);
-                GameController.gameController.updateUI();
+            }
+            else
+            {
+                Character c = playerList[i].GetComponent<Character>();
 
-                Destroy(c.gameObject);
+                if (c.IsDead)
+                {
+                    playerList.Remove(playerList[i]);
+                    ArmyController.armyController.army.Remove(c);
+                    GameController.gameController.updateUI();
+
+                    Destroy(c.gameObject);
+                }
             }
         }
     }
@@ -50,7 +64,10 @@ public abstract class Boss : Enemy{
     {
         if (other.tag == "Player")
         {
-            playerList.Add(other.gameObject);
+            if (!playerList.Contains(other.gameObject))
+            {
+                playerList.Add(other.gameObject);
+            }
         }
     }
 

@@ -35,18 +35,9 @@ public class GameController : MonoBehaviour {
     private bool inputActionTurn;
     private Vector3 comboTextPosition;
 
-    GameObject tutManager, tower1, tower2;
-
     // Use this for initialization
     void Start()
     {
-        if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
-        {
-            if (PlayerScript.playerdata.firstTut1 || PlayerScript.playerdata.firstTut2 || PlayerScript.playerdata.firstTut3)
-                tutManager = GameObject.Find("Tutorial Manager");
-        }
-
-
         if (gameController == null) gameController = this;
         
         init();
@@ -129,7 +120,6 @@ public class GameController : MonoBehaviour {
                     moveActionTurn = true;
                     break;
             }
-            
 
             clearSequence();
         }
@@ -156,9 +146,6 @@ public class GameController : MonoBehaviour {
 
                 clearSequence();
 
-                if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && 
-                    PlayerScript.playerdata.clickedStageNumber == 2 && !TutorialManager.TutManager.tut2End)
-                    tutManager.SendMessage("ShowAll");
                 //reset current streak
                 currentStreak = 0;
                 ScoreManager.comboMultiplier = 1;
@@ -196,6 +183,7 @@ public class GameController : MonoBehaviour {
                 ArmyController.armyController.setCurrentState(Enums.PlayerState.Idle);
                 ArmyController.armyController.reset();
             }
+
         }
         //manage if miss the next move after completing a move
         else if (!lastHit)
@@ -243,228 +231,11 @@ public class GameController : MonoBehaviour {
         priestCountText.text = "x" + priestCount;
         knightCountText.text = "x" + knightCount;
     }
-    bool AccessTutorial()
-    {
-        if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
-        {
-            return ((PlayerScript.playerdata.clickedStageNumber == 1 && PlayerScript.playerdata.firstTut1) ||
-                (PlayerScript.playerdata.clickedStageNumber == 2 && PlayerScript.playerdata.firstTut2) ||
-                (PlayerScript.playerdata.clickedStageNumber == 3 && PlayerScript.playerdata.firstTut3));
-        }
-        else if (Application.loadedLevelName == "Resource Management" && PlayerScript.playerdata.firstResource)
-            return true;
-
-        return false;
-    }
 
     public void addHit(string hit)
     {
         moveSequence += hit;
         lastHit = true;
-        
-        if(AccessTutorial() && !TutorialManager.TutManager.tut2End)
-        {
-            print("Called accesstutorial true");
-            TutorialCall(hit);
-        }
-    }
-
-    void TutorialCall(string hit)
-    {
-        if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && lastHit)
-        {
-            int index = moveSequence.Length - 1;
-            bool hide = false;
-
-            switch (TutorialManager.TutManager.currentPlaying)
-            {
-                case Enums.TutMove.Right:
-                    switch (index)
-                    {
-                        case 0:
-                            //red
-                            if (hit == "1")
-                                hide = true;
-                            break;
-                        case 1:
-                            //red
-                            if (hit == "1")
-                                hide = true;
-                            break;
-                        case 2:
-                            //green
-                            if (hit == "3")
-                                hide = true;
-                            break;
-                        case 3:
-                            //yellow
-                            if (hit == "4")
-                                hide = true;
-                            break;
-                    }
-                    break;
-                case Enums.TutMove.Left:
-                    switch (index)
-                    {
-                        case 0:
-                            //red
-                            if (hit == "1")
-                                hide = true;
-                            break;
-                        case 1:
-                            //red
-                            if (hit == "1")
-                                hide = true;
-                            break;
-                        case 2:
-                            //green
-                            if (hit == "4")
-                                hide = true;
-                            break;
-                        case 3:
-                            //yellow
-                            if (hit == "3")
-                                hide = true;
-                            break;
-                    }
-                    break;
-                case Enums.TutMove.Up:
-                    switch (index)
-                    {
-                        case 0:
-                            //red
-                            if (hit == "1")
-                                hide = true;
-                            break;
-                        case 1:
-                            //red
-                            if (hit == "1")
-                                hide = true;
-                            break;
-                        case 2:
-                            //green
-                            if (hit == "4")
-                                hide = true;
-                            break;
-                        case 3:
-                            //yellow
-                            if (hit == "4")
-                                hide = true;
-                            break;
-                    }
-                    break;
-                case Enums.TutMove.Down:
-                    switch (index)
-                    {
-                        case 0:
-                            //red
-                            if (hit == "1")
-                                hide = true;
-                            break;
-                        case 1:
-                            //red
-                            if (hit == "1")
-                                hide = true;
-                            break;
-                        case 2:
-                            //green
-                            if (hit == "3")
-                                hide = true;
-                            break;
-                        case 3:
-                            //green
-                            if (hit == "3")
-                                hide = true;
-                            break;
-                    }
-                    break;
-                case Enums.TutMove.Attack:
-                    switch (index)
-                    {
-                        case 0:
-                            //green
-                            if (hit == "3")
-                                hide = true;
-                            break;
-                        case 1:
-                            //green
-                            if (hit == "3")
-                                hide = true;
-                            break;
-                        case 2:
-                            //green
-                            if (hit == "3")
-                                hide = true;
-                            break;
-                        case 3:
-                            //blue
-                            if (hit == "2")
-                                hide = true;
-                            break;
-                    }
-                    break;
-                case Enums.TutMove.Defend:
-                    switch (index)
-                    {
-                        case 0:
-                            //yellow
-                            if (hit == "4")
-                                hide = true;
-                            break;
-                        case 1:
-                            //yellow
-                            if (hit == "4")
-                                hide = true;
-                            break;
-                        case 2:
-                            //yellow
-                            if (hit == "4")
-                                hide = true;
-                            break;
-                        case 3:
-                            //red
-                            if (hit == "1")
-                                hide = true;
-                            break;
-                    }
-                    break;
-                case Enums.TutMove.Skill:
-                    switch (index)
-                    {
-                        case 0:
-                            //red
-                            if (hit == "1")
-                                hide = true;
-                            break;
-                        case 1:
-                            //blue
-                            if (hit == "2")
-                                hide = true;
-                            break;
-                        case 2:
-                            //green
-                            if (hit == "3")
-                                hide = true;
-                            break;
-                        case 3:
-                            //yellow
-                            if (hit == "4")
-                                hide = true;
-                            break;
-                    }
-                    break;
-            }
-            
-            if (hide)
-            {
-                tutManager.SendMessage("Hide", index);
-            }
-            else
-            {
-                if(!TutorialManager.TutManager.tut2End)
-                    tutManager.SendMessage("ShowAll");
-            }
-        }
     }
 
     public void addScore(int point)
@@ -479,9 +250,9 @@ public class GameController : MonoBehaviour {
 
     public void levelUp(int tIndex)
     {
-        PlayerScript.playerdata.troopData[tIndex].attack += 1;
-        PlayerScript.playerdata.troopData[tIndex].maxHealth += 2;
-        PlayerScript.playerdata.troopData[tIndex].defenseRating += 0.5f;
+        PlayerScript.playerdata.troopData[tIndex].damage += 5;
+        PlayerScript.playerdata.troopData[tIndex].maxHealth += 20;
+        PlayerScript.playerdata.troopData[tIndex].armor += 1;
     }
 
     public void LoadLevel(string level)

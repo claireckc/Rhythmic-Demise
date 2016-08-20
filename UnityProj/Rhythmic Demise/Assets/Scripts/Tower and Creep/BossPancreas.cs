@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 public class BossPancreas : Boss {
 
     public GameObject projectile;
 
+    private int algoBalancer;
+
 	void Start () {
-        currentHealth = maxHealth = 20;
-        playerList = new List<GameObject>();
-        cooldown = nextActionTime = 5.0f;
+        base.Start();
 	}
 	
 	void Update () {
@@ -30,7 +29,16 @@ public class BossPancreas : Boss {
                     if (tempNum <= 85)
                         Action();
                     else
-                        specialAction();
+                    {
+                        if (algoBalancer > 2)
+                        {
+                            Action();
+                        }
+                        else
+                        {
+                            specialAction();
+                        }
+                    }
                 }
             }
         }
@@ -38,14 +46,16 @@ public class BossPancreas : Boss {
 
     protected override void specialAction()
     {
+        algoBalancer++;
+
         foreach (GameObject go in playerList)
         {
             Character c = go.GetComponent<Character>();
 
             //reduce army's power
-            c.setArmor(c.getArmor() * 0.8f);
+            c.setArmor(c.getArmor() - 5);
 
-            c.setDamage(c.getDamage() * 0.8f);
+            c.setDamage(c.getDamage() - 5);
         }
     }
 
@@ -56,5 +66,6 @@ public class BossPancreas : Boss {
 
         GameObject shoot = Instantiate(projectile, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
         shoot.SendMessage("Initialize", closestPlayer.transform.position);
+        shoot.SendMessage("initDamage", damage);
     }
 }
