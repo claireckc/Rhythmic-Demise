@@ -35,13 +35,14 @@ public class GameController : MonoBehaviour {
     private bool inputActionTurn;
     private Vector3 comboTextPosition;
 
-    GameObject tutManager;
+    GameObject tutManager, tower1, tower2;
     
     // Use this for initialization
     void Start()
     {
         if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
             tutManager = GameObject.Find("Tutorial Manager");
+
 
         if (gameController == null) gameController = this;
         
@@ -125,6 +126,7 @@ public class GameController : MonoBehaviour {
                     moveActionTurn = true;
                     break;
             }
+            
 
             clearSequence();
         }
@@ -150,7 +152,7 @@ public class GameController : MonoBehaviour {
                 inputActionTurn = false;
 
                 clearSequence();
-
+                tutManager.SendMessage("ShowAll");
                 //reset current streak
                 currentStreak = 0;
                 ScoreManager.comboMultiplier = 1;
@@ -188,7 +190,6 @@ public class GameController : MonoBehaviour {
                 ArmyController.armyController.setCurrentState(Enums.PlayerState.Idle);
                 ArmyController.armyController.reset();
             }
-
         }
         //manage if miss the next move after completing a move
         else if (!lastHit)
@@ -250,7 +251,7 @@ public class GameController : MonoBehaviour {
         {
             int index = moveSequence.Length - 1; ;
             bool hide = false;
-            print(TutorialManager.TutManager.currentPlaying);
+
             switch (TutorialManager.TutManager.currentPlaying)
             {
                 case Enums.TutMove.Right:

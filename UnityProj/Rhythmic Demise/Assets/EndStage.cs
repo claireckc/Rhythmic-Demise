@@ -49,6 +49,7 @@ public class EndStage : MonoBehaviour {
         {
             currentStage.topComboCount = ScoreManager.score;
         }
+       
     }
 
     public void UpdateStars()

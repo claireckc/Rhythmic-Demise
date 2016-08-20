@@ -36,17 +36,29 @@ public class ArmyController : MonoBehaviour {
     Vector3 archerTempPos;
     Vector3 priestTempPos;
 
-    MovingPoint movingPt1, movingPt2, movingPt3, movingPt4, movingPt5, movingPt6;
+    MovingPoint movingPt1, movingPt2, movingPt3, movingPt4, movingPt5, movingPt6, endPoint;
     MovingPoint prevPoint;
     GameObject tutManager;
+    GameObject textManager;
 
-    bool moved;
+    bool moved, callMovingPt2, callMovingPt5;
+
+    Tower tower1, tower2;
 
 	// Use this for initialization
 
 	void Start () {
         tutManager = GameObject.Find("Tutorial Manager");
-        moved = false;
+        textManager = GameObject.Find("Text Manager");
+        
+        if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth &&
+            PlayerScript.playerdata.clickedStageNumber == 1)
+        {
+            tower1 = GameObject.Find("Towers/Shooting Tower 1").GetComponent<Tower>();
+            tower2 = GameObject.Find("Towers/Shooting Tower").GetComponent<Tower>();
+        }
+
+        moved = callMovingPt2 = callMovingPt5 = false;
         if (armyController == null)
         {
             armyController = this;
@@ -62,6 +74,7 @@ public class ArmyController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         findClosestEnemy();
+
         if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
             TutorialCall();
 
@@ -107,6 +120,7 @@ public class ArmyController : MonoBehaviour {
                     movingPt4 = GameObject.Find("MovingPoints/MovingPoint4").GetComponent<MovingPoint>();
                     movingPt5 = GameObject.Find("MovingPoints/MovingPoint5").GetComponent<MovingPoint>();
                     movingPt6 = GameObject.Find("MovingPoints/MovingPoint6").GetComponent<MovingPoint>();
+                    endPoint = GameObject.Find("MovingPoints/EndPoint").GetComponent<MovingPoint>();
                     break;
                 case 2: //second tutorial, 7 moving points, 3 paths 8 more moving points. Only need to provide tutorial for choosing path
                     break;
@@ -119,19 +133,54 @@ public class ArmyController : MonoBehaviour {
 
     void TutorialCall()
     {
-        if(PlayerScript.playerdata.clickedStageNumber == 1)
+        if(PlayerScript.playerdata.clickedStageNumber == 1 && PlayerScript.playerdata.firstTut1)
         {
             if (currPos != prevPoint)
             {
-                if (currPos == movingPt1 || currPos == movingPt3 || currPos == movingPt4)
+                if(currPos == movingPt1)
+                {
+                    textManager.SendMessage("ShowPanel", false);
+                    prevPoint = currPos;
+                }
+                
+                if(currPos == movingPt2)
+                {
+                    if(!callMovingPt2)
+                        textManager.SendMessage("ShowPanel", true);
+
+                    tutManager.SendMessage("PlayAttack");
+                    callMovingPt2 = true;
+
+                    if (!tower1.IsDead)
+                        tutManager.SendMessage("PlayAttack");
+                    else
+                    {
+                        tutManager.SendMessage("PlayMoveRight");
+                        prevPoint = currPos;
+                    }
+                }
+
+                if (currPos == movingPt3 || currPos == movingPt4 || currPos == movingPt6)
                 {
                     tutManager.SendMessage("PlayMoveRight");
                     prevPoint = currPos;
                 }
 
-                if (currPos == movingPt2 || currPos == movingPt5)
+                if(currPos == movingPt5)
                 {
-                    tutManager.SendMessage("PlayAttack");
+                    if (!tower2.IsDead)
+                        tutManager.SendMessage("PlayAttack");
+                    else {
+                        tutManager.SendMessage("PlayMoveRight");
+                        prevPoint = currPos;
+                    }
+                }
+
+                if(currPos == endPoint)
+                {
+                    tutManager.SendMessage("HideIcon");
+                    PlayerScript.playerdata.firstTut1 = false;  //prevent tutorial from playing again
+                    SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
                     prevPoint = currPos;
                 }
             }
