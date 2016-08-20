@@ -34,9 +34,12 @@ public class Knight : Character {
                 {
                     if (ArmyController.armyController.enemyList.Count > 0)
                     {
-                        Enemy enemy = ArmyController.armyController.closestEnemy.GetComponent<Enemy>();
-                        enemy.TakeDamage(damage);
+                        //Enemy enemy = ArmyController.armyController.closestEnemy.GetComponent<Enemy>();
+                        //enemy.TakeDamage(damage);
                         isAttacking = true;
+
+                        //set attack animation
+                        anim.SetTrigger("Attack");
                     }
                 }
             }
@@ -112,5 +115,11 @@ public class Knight : Character {
                 }
             }
         }
+    }
+
+    void hitEnemy()
+    {
+        Enemy enemy = ArmyController.armyController.closestEnemy.GetComponent<Enemy>();
+        enemy.TakeDamage(damage);
     }
 }

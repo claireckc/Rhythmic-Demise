@@ -1,0 +1,110 @@
+fileFormatVersion: 2
+guid: 62c22823b495670489389b00f54060ca
+timeCreated: 1471726488
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: DiabeticArcher_Walk_0
+    21300002: DiabeticArcher_Walk_1
+    21300004: DiabetesArcher_Walk_0
+    21300006: DiabetesArcher_Walk_1
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: DiabeticArcher_Walk_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 38, y: -36}
+        - {x: 39, y: -61}
+        - {x: 70, y: -55}
+        - {x: 80, y: -40}
+        - {x: 80, y: -12}
+        - {x: 70, y: 10}
+        - {x: 44, y: 12}
+        - {x: 39, y: 4}
+        - {x: 14, y: 18}
+        - {x: -29, y: 32}
+        - {x: -57, y: 32}
+        - {x: -85, y: 4}
+        - {x: -85, y: -18}
+        - {x: -78, y: -44}
+        - {x: -69, y: -68}
+        - {x: 24, y: -68}
+        - {x: 34, y: -48}
+        - {x: 38, y: -39}
+    - name: DiabeticArcher_Walk_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 50, y: 37}
+        - {x: -72, y: 37}
+        - {x: -85, y: 24}
+        - {x: -85, y: -40}
+        - {x: -71, y: -62}
+        - {x: 34, y: -62}
+        - {x: 80, y: -31}
+        - {x: 80, y: 27}
+        - {x: 79, y: 30}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

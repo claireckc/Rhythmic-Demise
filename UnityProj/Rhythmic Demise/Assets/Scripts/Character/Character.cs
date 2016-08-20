@@ -15,6 +15,8 @@ public abstract class Character : MonoBehaviour {
     protected bool isAttacking;
     protected Vector3 goalPos;
     protected bool inPath;
+    
+    public Animator anim;
 
     public Enums.PlayerState currentAction;
 
@@ -32,6 +34,7 @@ public abstract class Character : MonoBehaviour {
 	protected void Start () {
         movementSpeed = 2f;
         inPath = true;
+        anim = gameObject.GetComponent<Animator>();
 	}
 
 	// Update is called once per frame

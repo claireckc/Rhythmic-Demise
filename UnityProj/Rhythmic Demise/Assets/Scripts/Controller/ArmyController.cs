@@ -36,6 +36,8 @@ public class ArmyController : MonoBehaviour {
     Vector3 archerTempPos;
     Vector3 priestTempPos;
 
+    int enumIndex;
+
 	// Use this for initialization
 	void Start () {
         if (armyController == null)
@@ -54,25 +56,52 @@ public class ArmyController : MonoBehaviour {
         checkHealth();
 
         findClosestEnemy();
+
+        enumIndex = (int)currentAction;
+
         switch (currentAction)
         {
             case Enums.PlayerState.Idle:
+                foreach (Character c in army)
+                {
+                    c.anim.SetInteger("State", enumIndex);
+                }
                 break;
             case Enums.PlayerState.MoveUp:
                 targetPos = currPos.up;
                 moveTo(targetPos);
+
+                foreach (Character c in army)
+                {
+                    c.anim.SetInteger("State", enumIndex);
+                }
                 break;
             case Enums.PlayerState.MoveDown:
                 targetPos = currPos.bottom;
                 moveTo(targetPos);
+
+                foreach (Character c in army)
+                {
+                    c.anim.SetInteger("State", enumIndex);
+                }
                 break;
             case Enums.PlayerState.MoveLeft:
                 targetPos = currPos.left;
                 moveTo(targetPos);
+
+                foreach (Character c in army)
+                {
+                    c.anim.SetInteger("State", enumIndex);
+                }
                 break;
             case Enums.PlayerState.MoveRight:
                 targetPos = currPos.right;
                 moveTo(targetPos);
+
+                foreach (Character c in army)
+                {
+                    c.anim.SetInteger("State", enumIndex);
+                }
                 break;
             case Enums.PlayerState.Attack:
                 attack();
@@ -158,6 +187,7 @@ public class ArmyController : MonoBehaviour {
         }
 
         Invoke("initLeaderBonus", 1);
+        Invoke("initAnimVar", 1);
         targetPos = currPos;
     }
 
@@ -316,6 +346,15 @@ public class ArmyController : MonoBehaviour {
         }
         else
             closestEnemy = null;
+    }
+
+    void initAnimVar()
+    {
+
+        foreach (Character c in army)
+        {
+            c.anim.SetInteger("Type", (int)PlayerScript.playerdata.pathogenType);
+        }
     }
 
     void initLeaderBonus()
