@@ -1,33 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Creep : Enemy {
 
     private float movementSpeed;
+    private bool stopAndAttack;
 
 	// Use this for initialization
 	void Start () {
+        currentHealth = maxHealth = 1;
+        cooldown = nextActionTime = 2.0f;
         movementSpeed = 1.0f;
+        damage = 0.2f;
+
+        playerList = new List<GameObject>();
 	}
 
     void Initialize(GameObject target){
-        playerList.Add(target);
-        //closestPlayer = target;
-    }
-
-    void initHealth(float health)
-    {
-        this.currentHealth = this.maxHealth = health;
-    }
-
-    void initDamage(float d)
-    {
-        this.damage = d;
-    }
-
-    void initCooldown(float cd)
-    {
-        this.cooldown = cd;
+        closestPlayer = target;
     }
 
     void Update(){
@@ -35,13 +26,13 @@ public class Creep : Enemy {
         {
             SetHealthVisual(currentHealth / maxHealth);
 
-            UpdateEnemyList();
+            //UpdateEnemyList();
 
-            FindClosestEnemy();
+            //FindClosestEnemy();
 
-            if (closestPlayer != null)
+            if (stopAndAttack)
             {
-                if ((transform.position - closestPlayer.transform.position).sqrMagnitude <= 1 * 1)
+                if (closestPlayer != null)
                 {
                     //start attacking it
                     if (Time.time >= nextActionTime)
@@ -49,13 +40,13 @@ public class Creep : Enemy {
                         Action();
                     }
                 }
-                else
-                {
-                    Vector3 dir = closestPlayer.transform.position - this.transform.position;
-                    float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
-                    this.transform.rotation = Quaternion.Euler(0, 0, angle);
-                    transform.position = Vector2.MoveTowards(transform.position, closestPlayer.transform.position, movementSpeed * Time.deltaTime);
-                }
+            }
+            else
+            {
+                Vector3 dir = closestPlayer.transform.position - this.transform.position;
+                float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
+                this.transform.rotation = Quaternion.Euler(0, 0, angle);
+                transform.position = Vector2.MoveTowards(transform.position, closestPlayer.transform.position, movementSpeed * Time.deltaTime);
             }
         }
     }
@@ -97,22 +88,17 @@ public class Creep : Enemy {
     {
         for (int i = 0; i < playerList.Count; i++)
         {
-            if (playerList[i] == null)
+            Character c = playerList[i].GetComponent<Character>();
+
+            if (c.IsDead)
             {
+                //Need to be re-arrange soon
                 playerList.Remove(playerList[i]);
-            }
-            else
-            {
-                Character c = playerList[i].GetComponent<Character>();
+                GameController gc = GameObject.Find("GameController").GetComponent<GameController>();
+                ArmyController.armyController.army.Remove(c);
+                gc.updateUI();
 
-                if (c.IsDead)
-                {
-                    playerList.Remove(playerList[i]);
-                    ArmyController.armyController.army.Remove(c);
-                    GameController.gameController.updateUI();
-
-                    Destroy(c.gameObject);
-                }
+                Destroy(c.gameObject);
             }
         }
     }
@@ -121,33 +107,13 @@ public class Creep : Enemy {
     {
         if (other.tag == "Player")
         {
-            if (!playerList.Contains(other.gameObject))
-            {
-                playerList.Add(other.gameObject);
-            }
+            stopAndAttack = true;
         }
     }
 
     protected override void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Player")
-        {
-            foreach (GameObject go in playerList)
-            {
-                if (other.gameObject == go)
-                {
-                    toRemove = go;
-                    break;
-                }
-            }
-
-            if (toRemove != null)
-            {
-                playerList.Remove(toRemove);
-            }
-
-            //closestEnemy = null;
-        }
+        stopAndAttack = false;
     }
 
     public override void TakeDamage(float damage)

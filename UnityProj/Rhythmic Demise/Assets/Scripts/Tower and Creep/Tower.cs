@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Tower : Enemy {
 
@@ -9,7 +10,7 @@ public class Tower : Enemy {
 
 	// Use this for initialization
 	protected void Start () {
-        currentHealth = maxHealth;
+        playerList = new List<GameObject>();
 	}
 	
 	// Update is called once per frame
@@ -50,22 +51,16 @@ public class Tower : Enemy {
     {
         for (int i = 0; i < playerList.Count; i++)
         {
-            if (playerList[i] == null)
+            Character c = playerList[i].GetComponent<Character>();
+
+            if (c.IsDead)
             {
+                //Need to be re-arrange soon
                 playerList.Remove(playerList[i]);
-            }
-            else
-            {
-                Character c = playerList[i].GetComponent<Character>();
+                ArmyController.armyController.army.Remove(c);
+                GameController.gameController.updateUI();
 
-                if (c.IsDead)
-                {
-                    playerList.Remove(playerList[i]);
-                    ArmyController.armyController.army.Remove(c);
-                    GameController.gameController.updateUI();
-
-                    Destroy(c.gameObject);
-                }
+                Destroy(c.gameObject);
             }
         }
     }

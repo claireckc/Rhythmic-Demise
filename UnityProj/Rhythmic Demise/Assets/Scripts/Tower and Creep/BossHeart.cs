@@ -1,18 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BossHeart : Boss{
 
     public GameObject projectile;
     public GameObject troopPrefab; //rbc
-    public GameObject[] spawnPoint;
-
-    public float troopDamage;
-    public float troopHealth;
-    public float troopCoolDown;
 
 	void Start () {
-        base.Start();
+        currentHealth = maxHealth = 20;
+        playerList = new List<GameObject>();
+        cooldown = nextActionTime = 5.0f;
 	}
 	
 	void Update () {
@@ -30,7 +28,7 @@ public class BossHeart : Boss{
                     nextActionTime = Time.time + cooldown;
 
                     int tempNum = Random.Range(1, 101);
-                    if (tempNum <= 75)
+                    if (tempNum <= 85)
                         Action();
                     else
                         specialAction();
@@ -46,13 +44,9 @@ public class BossHeart : Boss{
             Vector3 dir = closestPlayer.transform.position - this.transform.position;
             float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
 
-            GameObject spawn = Instantiate(troopPrefab, spawnPoint[i].transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
+            GameObject spawn = Instantiate(troopPrefab, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
             
-            spawn.SendMessage("Initialize", closestPlayer);
-
-            spawn.SendMessage("initHealth", troopHealth);
-            spawn.SendMessage("initDamage", troopDamage);
-            spawn.SendMessage("initCooldown", troopCoolDown);
+            spawn.SendMessage("Initialize", closestPlayer.transform.position);
         }
     }
 
@@ -63,6 +57,5 @@ public class BossHeart : Boss{
 
         GameObject shoot = Instantiate(projectile, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
         shoot.SendMessage("Initialize", closestPlayer.transform.position);
-        shoot.SendMessage("initDamage", damage);
     }
 }

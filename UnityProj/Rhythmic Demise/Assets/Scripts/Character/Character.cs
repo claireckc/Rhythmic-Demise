@@ -15,8 +15,6 @@ public abstract class Character : MonoBehaviour {
     protected bool isAttacking;
     protected Vector3 goalPos;
     protected bool inPath;
-    
-    public Animator anim;
 
     public Enums.PlayerState currentAction;
 
@@ -34,7 +32,6 @@ public abstract class Character : MonoBehaviour {
 	protected void Start () {
         movementSpeed = 2f;
         inPath = true;
-        anim = gameObject.GetComponent<Animator>();
 	}
 
 	// Update is called once per frame
@@ -86,16 +83,12 @@ public abstract class Character : MonoBehaviour {
 
     public void TakeDamage(float damage)
     {   
-        /*
         float damageMultiplier = 1 - 0.06f * armor / (1 + (0.06f * Mathf.Abs(armor)));
         float finalDamage = damage * damageMultiplier;
         finalDamage = Mathf.Round(finalDamage * 100f) / 100f;
         currentHealth -= finalDamage;
-        */
 
-        currentHealth -= damage;
-
-        FloatingTextController.CreateFloatingText(damage.ToString(), transform);
+        FloatingTextController.CreateFloatingText(finalDamage.ToString(), transform);
     }
 
     public Enums.JobType getJobType()

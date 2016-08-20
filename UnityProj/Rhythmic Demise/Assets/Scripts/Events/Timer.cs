@@ -3,18 +3,12 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class Timer : MonoBehaviour {
-    public static Timer timer;
 
-    public float time;
+    public float timer;
     private Text timerText;
 
 	// Use this for initialization
 	void Start () {
-        if (timer == null)
-        {
-            timer = this;
-        }
-
         timerText = GetComponent<Text>();
 	}
 	
@@ -22,12 +16,12 @@ public class Timer : MonoBehaviour {
 	void Update () {
         if (!EndResultManager.erm.isDone())
         {
-            time -= Time.deltaTime;
+            timer -= Time.deltaTime;
 
-            timerText.text = time.ToString("f0");
+            timerText.text = timer.ToString("f0");
         }
 
-        if (time <= 0)
+        if (timer <= 0)
         {
             EndResultManager.erm.StopGame();
         }

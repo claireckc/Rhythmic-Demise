@@ -5,16 +5,16 @@ using System.Collections.Generic;
 public abstract class Enemy : MonoBehaviour {
 
     protected float currentHealth;
-    public float maxHealth;
-    public float damage;
-    public float cooldown;
+    protected float maxHealth;
+    protected float damage;
+    protected float cooldown;
     protected float nextActionTime;
 
     protected float closestDist;
     protected GameObject firstPlayer;
     protected GameObject closestPlayer;
     protected GameObject toRemove;
-    public List<GameObject> playerList = new List<GameObject>();
+    protected List<GameObject> playerList;
 
     public GameObject healthBar;
 

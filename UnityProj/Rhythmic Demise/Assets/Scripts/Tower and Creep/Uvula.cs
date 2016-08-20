@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Uvula : Boss {
     public GameObject projectile;
 
-    public void Start()
-    {
-        base.Start();
-    }
-
+	void Start () {
+        currentHealth = maxHealth = 20;
+        playerList = new List<GameObject>();
+        cooldown = nextActionTime = 5.0f;
+	}
+	
 	void Update () {
         if (!IsDead)
         {
@@ -36,7 +38,6 @@ public class Uvula : Boss {
 
         GameObject shoot = Instantiate(projectile, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
         shoot.SendMessage("Initialize", closestPlayer.transform.position);
-        shoot.SendMessage("initDamage", damage);
     }
 
     protected override void specialAction()

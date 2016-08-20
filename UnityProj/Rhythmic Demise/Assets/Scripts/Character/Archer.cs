@@ -16,8 +16,8 @@ public class Archer : Character {
         
         //1 is archer index
         currentHealth = maxHealth = PlayerScript.playerdata.troopData[1].maxHealth;
-        damage = PlayerScript.playerdata.troopData[1].damage;
-        armor = PlayerScript.playerdata.troopData[1].armor;
+        damage = PlayerScript.playerdata.troopData[1].attack;
+        armor = PlayerScript.playerdata.troopData[1].defenseRating;
 	}
 	
 	// Update is called once per frame
@@ -31,10 +31,17 @@ public class Archer : Character {
         {
             if (ArmyController.armyController.enemyList.Count > 0)
             {
-                isAttacking = true;
+                //Debug.Log("Attack!");
+                //start attack animation and instatiate projectile
 
-                //trigger attack animation
-                anim.SetTrigger("Attack");
+                Vector3 dir = ArmyController.armyController.closestEnemy.transform.position - this.transform.position;
+                float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
+
+                GameObject shoot = Instantiate(arrow, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
+                shoot.SendMessage("Initialize", ArmyController.armyController.closestEnemy.transform.position);
+                shoot.SendMessage("initDamage", damage);
+
+                isAttacking = true;
             }
             else
             {
@@ -51,6 +58,9 @@ public class Archer : Character {
             {
                 if (ArmyController.armyController.enemyList.Count > 0)
                 {
+                    //Debug.Log("Attack!");
+                    //start attack animation and instatiate projectile
+
                     Vector3 dir = ArmyController.armyController.closestEnemy.transform.position - this.transform.position;
                     float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
 
@@ -102,15 +112,5 @@ public class Archer : Character {
                 }
             }
         }
-    }
-
-    void spawnArrow()
-    {
-        Vector3 dir = ArmyController.armyController.closestEnemy.transform.position - this.transform.position;
-        float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
-
-        GameObject shoot = Instantiate(arrow, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-        shoot.SendMessage("Initialize", ArmyController.armyController.closestEnemy.transform.position);
-        shoot.SendMessage("initDamage", damage);
     }
 }

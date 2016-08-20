@@ -4,20 +4,19 @@ using System.Collections;
 public class EventLiver : MonoBehaviour {
 
     public GameObject spellPrefab;
+    public GameObject spellCircle;
     public GameObject[] spellLocation;
 
     private float nextActionTime;
     private float cooldown;
-    private MovingPoint targetPos1;
-    private MovingPoint targetPos2;
-    private float spellDamage;
-    private float spellAmount;
+    private float launchAttackTime;
+    private GameObject targetPos;
+    private bool attacked;
 
     // Use this for initialization
 	void Start () {
-        nextActionTime = cooldown = 4f;
-        spellDamage = 3;
-        spellAmount = 1;
+        nextActionTime = cooldown = 5f;
+        launchAttackTime = 2f;
 	}
 	
 	// Update is called once per frame
@@ -31,25 +30,21 @@ public class EventLiver : MonoBehaviour {
         {
             nextActionTime = Time.time + cooldown;
 
-            for (int i = 0; i < spellAmount; i++)
-            {
-                int index = Random.Range(0, spellLocation.Length);
+            int index = Random.Range(0, spellLocation.Length);
 
-                targetPos1 = spellLocation[index].GetComponent<MovingPoint>();
+            targetPos = spellLocation[index];
 
-                GameObject sc = Instantiate(spellPrefab, targetPos1.transform.position, spellPrefab.transform.rotation) as GameObject;
-                Destroy(sc, 2);
+            GameObject sc = Instantiate(spellCircle, targetPos.transform.position, spellCircle.transform.rotation) as GameObject;
+            launchAttackTime = Time.time + 2;
+            Destroy(sc, 2);
+            attacked = false;
+        }
 
-                if (ArmyController.armyController.currPos == targetPos1)
-                {
-                    ArmyController.armyController.takeDamage(spellDamage);
-                }
-            }
+        if (Time.time >= launchAttackTime && !attacked)
+        {
+            attacked = true;
 
-            if (Timer.timer.time <= 30)
-            {
-                spellAmount = 2;
-            }
+            Instantiate(spellPrefab, targetPos.transform.position, targetPos.transform.rotation);
         }
     }
 }

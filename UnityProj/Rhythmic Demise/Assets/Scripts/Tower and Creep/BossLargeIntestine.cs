@@ -1,21 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BossLargeIntestine : Boss {
 
     public GameObject projectile;
     public GameObject spellCircle;
     public GameObject[] spellLocation;
-    public GameObject spellPrefab;
 
     private float launchAttackTime;
     private GameObject targetPos;
     private bool attacked;
 
 	void Start () {
-        base.Start();
-
-        attacked = true;
+        currentHealth = maxHealth = 20;
+        playerList = new List<GameObject>();
+        cooldown = nextActionTime = 7.0f;
+        launchAttackTime = nextActionTime + 2;
 	}
 	
 	void Update () {
@@ -32,24 +33,25 @@ public class BossLargeIntestine : Boss {
                 {
                     nextActionTime = Time.time + cooldown;
 
-                    int tempNum = Random.Range(1, 101);
-                    if (tempNum <= 80)
-                        Action();
-                    else
-                        specialAction();
+                    int index = Random.Range(0, spellLocation.Length);
+
+                    targetPos = spellLocation[index];
+
+                    GameObject sc = Instantiate(spellCircle, targetPos.transform.position, spellCircle.transform.rotation) as GameObject;
+                    launchAttackTime = Time.time + 2;
+                    Destroy(sc, 2);
+                    attacked = false;
                 }
 
                 if (Time.time >= launchAttackTime && !attacked)
                 {
                     attacked = true;
 
-                    GameObject sc = Instantiate(spellPrefab, targetPos.transform.position, spellPrefab.transform.rotation) as GameObject;
-                    Destroy(sc, 2);
+                    Vector3 dir = closestPlayer.transform.position - this.transform.position;
+                    float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
 
-                    if (ArmyController.armyController.currPos == targetPos)
-                    {
-                        ArmyController.armyController.takeDamage(damage * 2);
-                    }
+                    GameObject shoot = Instantiate(projectile, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
+                    shoot.SendMessage("Initialize", targetPos.transform.position);
                 }
             }
         }
@@ -57,23 +59,9 @@ public class BossLargeIntestine : Boss {
 
     protected override void specialAction()
     {
-        int index = Random.Range(0, spellLocation.Length);
-
-        targetPos = spellLocation[index];
-
-        GameObject sc = Instantiate(spellCircle, targetPos.transform.position, spellCircle.transform.rotation) as GameObject;
-        launchAttackTime = Time.time + 2;
-        Destroy(sc, 2);
-        attacked = false;
     }
 
     protected override void Action()
     {
-        Vector3 dir = closestPlayer.transform.position - this.transform.position;
-        float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
-
-        GameObject shoot = Instantiate(projectile, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-        shoot.SendMessage("Initialize", closestPlayer.transform.position);
-        shoot.SendMessage("initDamage", damage);
     }
 }
