@@ -17,8 +17,8 @@ public class Priest : Character {
 
         //2 is priest index
         currentHealth = maxHealth = PlayerScript.playerdata.troopData[2].maxHealth;
-        damage = PlayerScript.playerdata.troopData[2].attack;
-        armor = PlayerScript.playerdata.troopData[2].defenseRating;
+        damage = PlayerScript.playerdata.troopData[2].damage;
+        armor = PlayerScript.playerdata.troopData[2].armor;
         hexDuration = 3;
         healPower = 2;
 	}
@@ -42,7 +42,7 @@ public class Priest : Character {
 
                 GameObject shoot = Instantiate(orb, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
                 shoot.SendMessage("Initialize", ArmyController.armyController.closestEnemy);
-                shoot.SendMessage("initDamage", 0.5f);
+                shoot.SendMessage("initDamage", damage);
 
                 isAttacking = true;
             }

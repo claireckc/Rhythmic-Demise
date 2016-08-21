@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 public class BossKidney : Boss {
 
     public GameObject projectile;
     public GameObject troopPrefab; //wbc
 
+    public float troopDamage;
+    public float troopHealth;
+    public float troopCoolDown;
+
 	void Start () {
-        currentHealth = maxHealth = 20;
-        playerList = new List<GameObject>();
-        cooldown = nextActionTime = 5.0f;
+        base.Start();
 	}
 	
 	void Update () {
@@ -57,7 +58,11 @@ public class BossKidney : Boss {
 
         GameObject spawn = Instantiate(troopPrefab, tempPos, Quaternion.Euler(0, 0, angle)) as GameObject;
 
-        spawn.SendMessage("Initialize", closestPlayer.transform.position);
+        spawn.SendMessage("Initialize", closestPlayer);
+
+        spawn.SendMessage("initHealth", troopHealth);
+        spawn.SendMessage("initDamage", troopDamage);
+        spawn.SendMessage("initCooldown", troopCoolDown);
     }
 
     protected override void Action()
@@ -67,5 +72,6 @@ public class BossKidney : Boss {
 
         GameObject shoot = Instantiate(projectile, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
         shoot.SendMessage("Initialize", closestPlayer.transform.position);
+        shoot.SendMessage("initDamage", damage);
     }
 }

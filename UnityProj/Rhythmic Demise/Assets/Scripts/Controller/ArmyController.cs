@@ -45,6 +45,8 @@ public class ArmyController : MonoBehaviour {
 
     Tower tower1, tower2;
 
+    int enumIndex;
+
 	// Use this for initialization
 
 	void Start () {
@@ -76,7 +78,11 @@ public class ArmyController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        checkHealth();
+
         findClosestEnemy();
+
+        enumIndex = (int)currentAction;
 
         if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
             TutorialCall();
@@ -84,22 +90,46 @@ public class ArmyController : MonoBehaviour {
         switch (currentAction)
         {
             case Enums.PlayerState.Idle:
+                foreach (Character c in army)
+                {
+                    c.anim.SetInteger("State", enumIndex);
+                }
                 break;
             case Enums.PlayerState.MoveUp:
                 targetPos = currPos.up;
                 moveTo(targetPos);
+
+                foreach (Character c in army)
+                {
+                    c.anim.SetInteger("State", enumIndex);
+                }
                 break;
             case Enums.PlayerState.MoveDown:
                 targetPos = currPos.bottom;
                 moveTo(targetPos);
+
+                foreach (Character c in army)
+                {
+                    c.anim.SetInteger("State", enumIndex);
+                }
                 break;
             case Enums.PlayerState.MoveLeft:
                 targetPos = currPos.left;
                 moveTo(targetPos);
+
+                foreach (Character c in army)
+                {
+                    c.anim.SetInteger("State", enumIndex);
+                }
                 break;
             case Enums.PlayerState.MoveRight:
                 targetPos = currPos.right;
                 moveTo(targetPos);
+
+                foreach (Character c in army)
+                {
+                    c.anim.SetInteger("State", enumIndex);
+                }
                 break;
             case Enums.PlayerState.Attack:
                 attack();
@@ -134,6 +164,19 @@ public class ArmyController : MonoBehaviour {
                 case 3: //boss stage
                     break;
        
+            }
+        }
+    }
+
+    void checkHealth()
+    {
+        for (int i = 0; i < army.Count; i++)
+        {
+            Character c = army[i];
+            if (c.IsDead)
+            {
+                army.Remove(army[i]);
+                Destroy(c.gameObject);
             }
         }
     }
@@ -282,6 +325,7 @@ public class ArmyController : MonoBehaviour {
         }
 
         Invoke("initLeaderBonus", 1);
+        Invoke("initAnimVar", 1);
         targetPos = currPos;
     }
 
@@ -472,6 +516,15 @@ public class ArmyController : MonoBehaviour {
                     }
                 }
                 break;
+        }
+    }
+
+    void initAnimVar()
+    {
+
+        foreach (Character c in army)
+        {
+            c.anim.SetInteger("Type", (int)PlayerScript.playerdata.pathogenType);
         }
     }
 

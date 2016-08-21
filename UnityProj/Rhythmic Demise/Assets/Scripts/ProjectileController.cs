@@ -21,6 +21,10 @@ public class ProjectileController : MonoBehaviour {
 		goal = target;
 	}
 
+    void initDamage(float damage)
+    {
+        this.damage = damage;
+    }
 
 	// Update is called once per frame
 	void Update () {
@@ -40,9 +44,8 @@ public class ProjectileController : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.tag == "Player") {
-			//Debug.Log ("Hit");
             Character player = other.GetComponent<Character>();
-            player.TakeDamage(1);
+            player.TakeDamage(damage);
 			Destroy (gameObject);
 		}
 	}
