@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 public class BossSpleen : Boss {
 
     public GameObject projectile;
     public GameObject troopPrefab; //rbc
+    public GameObject[] spawnPoint;
+
+    public float troopDamage;
+    public float troopHealth;
+    public float troopCoolDown;
 
 	void Start () {
-        playerList = new List<GameObject>();
-        cooldown = nextActionTime = 3.0f;
-        currentHealth = maxHealth = 20;
+        base.Start();
 	}
 	
 	void Update () {
@@ -31,7 +33,7 @@ public class BossSpleen : Boss {
 
                     if (tempNum <= 50)
                         Action();
-                    else if (tempNum <= 80)
+                    else if (tempNum <= 70)
                         specialAction();
                     else
                         regenerate();
@@ -42,7 +44,7 @@ public class BossSpleen : Boss {
 
     void regenerate()
     {
-        currentHealth += 10;
+        currentHealth += 100;
 
         if (currentHealth >= maxHealth)
             currentHealth = maxHealth;
@@ -55,9 +57,13 @@ public class BossSpleen : Boss {
             Vector3 dir = closestPlayer.transform.position - this.transform.position;
             float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
 
-            GameObject spawn = Instantiate(troopPrefab, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
+            GameObject spawn = Instantiate(troopPrefab, spawnPoint[i].transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
 
-            spawn.SendMessage("Initialize", closestPlayer.transform.position);
+            spawn.SendMessage("Initialize", closestPlayer);
+
+            spawn.SendMessage("initHealth", troopHealth);
+            spawn.SendMessage("initDamage", troopDamage);
+            spawn.SendMessage("initCooldown", troopCoolDown);
         }
     }
 
@@ -68,5 +74,6 @@ public class BossSpleen : Boss {
 
         GameObject shoot = Instantiate(projectile, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
         shoot.SendMessage("Initialize", closestPlayer.transform.position);
+        shoot.SendMessage("initDamage", damage);
     }
 }

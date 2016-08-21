@@ -1,0 +1,357 @@
+fileFormatVersion: 2
+guid: 27dacbe1e118afc49be8e88b77cce580
+timeCreated: 1471726504
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: DiabeticArcher_Attack_0
+    21300002: DiabeticArcher_Attack_1
+    21300004: DiabeticArcher_Attack_2
+    21300006: DiabeticArcher_Attack_3
+    21300008: DiabeticArcher_Attack_4
+    21300010: DiabeticArcher_Attack_5
+    21300012: DiabeticArcher_Attack_6
+    21300014: DiabeticArcher_Attack_7
+    21300016: DiabeticArcher_Attack_8
+    21300018: DiabeticArcher_Attack_9
+    21300020: DiabeticArcher_Attack_10
+    21300022: DiabeticArcher_Attack_11
+    21300024: DiabetescArcher_Attack_0
+    21300026: DiabetescArcher_Attack_1
+    21300028: DiabetescArcher_Attack_2
+    21300030: DiabetescArcher_Attack_3
+    21300032: DiabetescArcher_Attack_4
+    21300034: DiabetescArcher_Attack_5
+    21300036: DiabetescArcher_Attack_6
+    21300038: DiabetescArcher_Attack_7
+    21300040: DiabetescArcher_Attack_8
+    21300042: DiabetescArcher_Attack_9
+    21300044: DiabetescArcher_Attack_10
+    21300046: DiabetescArcher_Attack_11
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: DiabeticArcher_Attack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 288
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 38, y: -36}
+        - {x: 39, y: -61}
+        - {x: 70, y: -55}
+        - {x: 80, y: -40}
+        - {x: 80, y: -12}
+        - {x: 70, y: 10}
+        - {x: 44, y: 12}
+        - {x: 39, y: 4}
+        - {x: 14, y: 18}
+        - {x: -29, y: 32}
+        - {x: -57, y: 32}
+        - {x: -85, y: 4}
+        - {x: -85, y: -18}
+        - {x: -78, y: -44}
+        - {x: -69, y: -68}
+        - {x: 24, y: -68}
+        - {x: 34, y: -48}
+        - {x: 38, y: -39}
+    - name: DiabeticArcher_Attack_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 288
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 44, y: 12}
+        - {x: 39, y: 4}
+        - {x: 14, y: 18}
+        - {x: -29, y: 32}
+        - {x: -58, y: 32}
+        - {x: -71, y: 18}
+        - {x: -71, y: -56}
+        - {x: -43, y: -67}
+        - {x: 63, y: -67}
+        - {x: 80, y: -40}
+        - {x: 80, y: -12}
+        - {x: 70, y: 10}
+    - name: DiabeticArcher_Attack_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 288
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 38, y: -36}
+        - {x: 39, y: -61}
+        - {x: 70, y: -55}
+        - {x: 80, y: -40}
+        - {x: 80, y: -12}
+        - {x: 70, y: 10}
+        - {x: -18, y: 32}
+        - {x: -61, y: 32}
+        - {x: -71, y: 23}
+        - {x: -71, y: -12}
+        - {x: -35, y: -67}
+        - {x: 7, y: -67}
+        - {x: 21, y: -64}
+        - {x: 32, y: -52}
+        - {x: 34, y: -48}
+        - {x: 38, y: -39}
+    - name: DiabeticArcher_Attack_3
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 288
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 39, y: -56}
+        - {x: 40, y: -59}
+        - {x: 73, y: -58}
+        - {x: 80, y: -38}
+        - {x: 80, y: -4}
+        - {x: 59, y: 14}
+        - {x: -8, y: 32}
+        - {x: -63, y: 32}
+        - {x: -71, y: 22}
+        - {x: -71, y: -9}
+        - {x: -40, y: -67}
+        - {x: 12, y: -67}
+        - {x: 40, y: -59}
+        - {x: 34, y: -48}
+        - {x: 38, y: -39}
+        - {x: 38, y: -36}
+    - name: DiabeticArcher_Attack_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 144
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -10, y: 32}
+        - {x: -62, y: 32}
+        - {x: -71, y: 21}
+        - {x: -71, y: -56}
+        - {x: -43, y: -67}
+        - {x: 64, y: -67}
+        - {x: 80, y: -44}
+        - {x: 80, y: -10}
+        - {x: 69, y: 9}
+    - name: DiabeticArcher_Attack_5
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 144
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 16, y: 32}
+        - {x: -64, y: 32}
+        - {x: -71, y: 23}
+        - {x: -71, y: -56}
+        - {x: -43, y: -67}
+        - {x: 63, y: -67}
+        - {x: 80, y: -40}
+        - {x: 80, y: 1}
+        - {x: 75, y: 18}
+    - name: DiabeticArcher_Attack_6
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 144
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 44, y: 12}
+        - {x: 39, y: 4}
+        - {x: 14, y: 18}
+        - {x: -29, y: 32}
+        - {x: -58, y: 32}
+        - {x: -71, y: 18}
+        - {x: -71, y: -56}
+        - {x: -43, y: -67}
+        - {x: 63, y: -67}
+        - {x: 80, y: -40}
+        - {x: 80, y: -12}
+        - {x: 70, y: 10}
+    - name: DiabeticArcher_Attack_7
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 144
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 44, y: 12}
+        - {x: 39, y: 4}
+        - {x: 14, y: 18}
+        - {x: -29, y: 32}
+        - {x: -58, y: 32}
+        - {x: -71, y: 18}
+        - {x: -71, y: -56}
+        - {x: -43, y: -67}
+        - {x: 63, y: -67}
+        - {x: 80, y: -40}
+        - {x: 80, y: -12}
+        - {x: 70, y: 10}
+    - name: DiabeticArcher_Attack_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -68, y: 32}
+        - {x: -71, y: 27}
+        - {x: -71, y: -7}
+        - {x: -46, y: -51}
+        - {x: -32, y: -67}
+        - {x: 25, y: -67}
+        - {x: 68, y: -64}
+        - {x: 70, y: -60}
+        - {x: 70, y: 19}
+        - {x: 24, y: 32}
+    - name: DiabeticArcher_Attack_9
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -68, y: 32}
+        - {x: -71, y: 27}
+        - {x: -71, y: -7}
+        - {x: -46, y: -51}
+        - {x: -32, y: -67}
+        - {x: 25, y: -67}
+        - {x: 68, y: -64}
+        - {x: 70, y: -60}
+        - {x: 70, y: 19}
+        - {x: 24, y: 32}
+    - name: DiabeticArcher_Attack_10
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -58, y: 32}
+        - {x: -71, y: 20}
+        - {x: -71, y: -16}
+        - {x: -47, y: -67}
+        - {x: 33, y: -67}
+        - {x: 71, y: -55}
+        - {x: 71, y: -1}
+        - {x: 68, y: 17}
+        - {x: 18, y: 27}
+        - {x: -10, y: 32}
+    - name: DiabeticArcher_Attack_11
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -68, y: 32}
+        - {x: -71, y: 27}
+        - {x: -71, y: -7}
+        - {x: -46, y: -51}
+        - {x: -32, y: -67}
+        - {x: 25, y: -67}
+        - {x: 68, y: -64}
+        - {x: 70, y: -60}
+        - {x: 70, y: 19}
+        - {x: 24, y: 32}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

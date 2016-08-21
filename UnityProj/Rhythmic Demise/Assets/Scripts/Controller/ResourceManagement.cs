@@ -668,8 +668,8 @@ public class ResourceManagement : MonoBehaviour
                 chooseKnightSprite.GetComponentInChildren<Text>().enabled = true;
 
             knightLevel.text = PlayerScript.playerdata.troopData[0].level.ToString();
-            knightAttack.text = PlayerScript.playerdata.troopData[0].attack.ToString();
-            knightDefense.text = PlayerScript.playerdata.troopData[0].defenseRating.ToString();
+            knightAttack.text = PlayerScript.playerdata.troopData[0].damage.ToString();
+            knightDefense.text = PlayerScript.playerdata.troopData[0].armor.ToString();
             knightResource.text = PlayerScript.playerdata.troopData[0].energyNeeded.ToString();
 
             //set second slot
@@ -680,8 +680,8 @@ public class ResourceManagement : MonoBehaviour
                 chooseArcherSprite.GetComponentInChildren<Text>().enabled = true;
 
             archerLevel.text = PlayerScript.playerdata.troopData[1].level.ToString();
-            archerAttack.text = PlayerScript.playerdata.troopData[1].attack.ToString();
-            archerDefense.text = PlayerScript.playerdata.troopData[1].defenseRating.ToString();
+            archerAttack.text = PlayerScript.playerdata.troopData[1].damage.ToString();
+            archerDefense.text = PlayerScript.playerdata.troopData[1].armor.ToString();
             archerResource.text = PlayerScript.playerdata.troopData[1].energyNeeded.ToString();
 
             //set third slot
@@ -692,8 +692,8 @@ public class ResourceManagement : MonoBehaviour
                 choosePriestSprite.GetComponentInChildren<Text>().enabled = true;
 
             priestLevel.text = PlayerScript.playerdata.troopData[2].level.ToString();
-            priestAttack.text = PlayerScript.playerdata.troopData[2].attack.ToString();
-            priestDefense.text = PlayerScript.playerdata.troopData[2].defenseRating.ToString();
+            priestAttack.text = PlayerScript.playerdata.troopData[2].damage.ToString();
+            priestDefense.text = PlayerScript.playerdata.troopData[2].armor.ToString();
             priestResource.text = PlayerScript.playerdata.troopData[2].energyNeeded.ToString();
         }
         else
@@ -706,8 +706,8 @@ public class ResourceManagement : MonoBehaviour
                 chooseKnightSprite.GetComponentInChildren<Text>().enabled = true;
 
             knightLevel.text = PlayerScript.playerdata.troopData[0].level.ToString();
-            knightAttack.text = PlayerScript.playerdata.troopData[0].attack.ToString();
-            knightDefense.text = PlayerScript.playerdata.troopData[0].defenseRating.ToString();
+            knightAttack.text = PlayerScript.playerdata.troopData[0].damage.ToString();
+            knightDefense.text = PlayerScript.playerdata.troopData[0].armor.ToString();
             knightResource.text = PlayerScript.playerdata.troopData[0].energyNeeded.ToString();
 
             //set second slot
@@ -718,8 +718,8 @@ public class ResourceManagement : MonoBehaviour
                 chooseArcherSprite.GetComponentInChildren<Text>().enabled = true;
 
             archerLevel.text = PlayerScript.playerdata.troopData[1].level.ToString();
-            archerAttack.text = PlayerScript.playerdata.troopData[1].attack.ToString();
-            archerDefense.text = PlayerScript.playerdata.troopData[1].defenseRating.ToString();
+            archerAttack.text = PlayerScript.playerdata.troopData[1].damage.ToString();
+            archerDefense.text = PlayerScript.playerdata.troopData[1].armor.ToString();
             archerResource.text = PlayerScript.playerdata.troopData[1].energyNeeded.ToString();
 
             //set third slot
@@ -730,8 +730,8 @@ public class ResourceManagement : MonoBehaviour
                 choosePriestSprite.GetComponentInChildren<Text>().enabled = true;
 
             priestLevel.text = PlayerScript.playerdata.troopData[2].level.ToString();
-            priestAttack.text = PlayerScript.playerdata.troopData[2].attack.ToString();
-            priestDefense.text = PlayerScript.playerdata.troopData[2].defenseRating.ToString();
+            priestAttack.text = PlayerScript.playerdata.troopData[2].damage.ToString();
+            priestDefense.text = PlayerScript.playerdata.troopData[2].armor.ToString();
             priestResource.text = PlayerScript.playerdata.troopData[2].energyNeeded.ToString();
         }
     }

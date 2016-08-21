@@ -8,7 +8,8 @@ public class Troop {
 
     public Enums.JobType job;
     public int level, energyNeeded;
-    public float currentHealth, maxHealth, attack, defenseRating;
+    public int currentHealth, maxHealth, damage;
+    public int armor;
     public List<Skills> skills;        //3
 
     public float expToLevel;
@@ -34,9 +35,9 @@ public class Troop {
 
     void StatLevelUp()
     {
-        maxHealth *= 1.3f;
-        attack *= 1.2f;
-        defenseRating *= 1.3f;
+        maxHealth += 15;
+        damage += 5;
+        armor *= 1;
     }
     
     void SkillLevelUp()
