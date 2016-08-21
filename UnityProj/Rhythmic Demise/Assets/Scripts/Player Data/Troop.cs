@@ -8,7 +8,7 @@ public class Troop {
 
     public Enums.JobType job;
     public int level, energyNeeded;
-    public int currentHealth, maxHealth, damage; 
+    public int currentHealth, maxHealth, damage;
     public int armor;
     public List<Skills> skills;        //3
 
@@ -27,7 +27,22 @@ public class Troop {
         {
             experienceGained -= expToLevel;
             level++;
+            StatLevelUp();
+            SkillLevelUp();
             CalculateExpNeeded();
         }
+    }
+
+    void StatLevelUp()
+    {
+        maxHealth += 15;
+        damage += 5;
+        armor *= 1;
+    }
+    
+    void SkillLevelUp()
+    {
+        for(int i = 0; i < skills.Count; i++)
+            skills[i].LevelUp();
     }
 }
