@@ -35,7 +35,7 @@ public class GameController : MonoBehaviour {
     private bool inputActionTurn;
     private Vector3 comboTextPosition;
 
-    GameObject tutManager, tower1, tower2;
+    GameObject tutorialManager, tower1, tower2;
 
     // Use this for initialization
     void Start()
@@ -43,7 +43,7 @@ public class GameController : MonoBehaviour {
         if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
         {
             if (PlayerScript.playerdata.firstTut1 || PlayerScript.playerdata.firstTut2 || PlayerScript.playerdata.firstTut3)
-                tutManager = GameObject.Find("Tutorial Manager");
+                tutorialManager = GameObject.Find("Tutorial Manager");
         }
 
 
@@ -129,10 +129,11 @@ public class GameController : MonoBehaviour {
                     moveActionTurn = true;
                     break;
             }
-            
 
+            FinalTutorial(moveSequence);
             clearSequence();
         }
+
 	}
 
     void spawnBeat()
@@ -155,10 +156,11 @@ public class GameController : MonoBehaviour {
                 inputActionTurn = false;
 
                 clearSequence();
+                
+                if(AccessTutorial() && !TutorialManager.TutManager.tut3End
+                    || AccessTutorial() && !TutorialManager.TutManager.tut2End)
+                     tutorialManager.SendMessage("ShowAll");
 
-                if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && 
-                    PlayerScript.playerdata.clickedStageNumber == 2 && !TutorialManager.TutManager.tut2End)
-                    tutManager.SendMessage("ShowAll");
                 //reset current streak
                 currentStreak = 0;
                 ScoreManager.comboMultiplier = 1;
@@ -243,6 +245,29 @@ public class GameController : MonoBehaviour {
         priestCountText.text = "x" + priestCount;
         knightCountText.text = "x" + knightCount;
     }
+
+    public void addHit(string hit)
+    {
+        moveSequence += hit;
+        lastHit = true;
+
+        if (AccessTutorial())
+            TutorialCall(hit);
+    }
+
+    void FinalTutorial(string move)
+    {
+        if(AccessTutorial())
+        {
+            if (TutorialManager.TutManager.final && move == "1234")
+            {
+                tutorialManager.SendMessage("HideIcon");
+                tutorialManager.SendMessage("HideAll");
+                TutorialManager.TutManager.tut3End = true;
+            }
+        }
+    }
+
     bool AccessTutorial()
     {
         if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
@@ -255,18 +280,6 @@ public class GameController : MonoBehaviour {
             return true;
 
         return false;
-    }
-
-    public void addHit(string hit)
-    {
-        moveSequence += hit;
-        lastHit = true;
-        
-        if(AccessTutorial() && !TutorialManager.TutManager.tut2End)
-        {
-            print("Called accesstutorial true");
-            TutorialCall(hit);
-        }
     }
 
     void TutorialCall(string hit)
@@ -457,12 +470,13 @@ public class GameController : MonoBehaviour {
             
             if (hide)
             {
-                tutManager.SendMessage("Hide", index);
+                tutorialManager.SendMessage("Hide", index);
             }
             else
             {
-                if(!TutorialManager.TutManager.tut2End)
-                    tutManager.SendMessage("ShowAll");
+                if(AccessTutorial() && !TutorialManager.TutManager.tut3End)
+                    tutorialManager.SendMessage("ShowAll");
+
             }
         }
     }

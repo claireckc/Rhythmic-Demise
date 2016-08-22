@@ -24,6 +24,9 @@ public class TextManager : MonoBehaviour
     //for second tutorial scene
     GameObject explainPanel, enemyPanel, riskPanel, selectPanel;
 
+    //for third tutorial scene
+    GameObject introPanel, xplainPanel, bossPanel, closePanel;
+
     void Start()
     {
         tutManager = GameObject.Find("Tutorial Manager");
@@ -76,8 +79,7 @@ public class TextManager : MonoBehaviour
                 DestroyAll();
             }
         }
-
-        if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && PlayerScript.playerdata.clickedStageNumber == 2)
+        else if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && PlayerScript.playerdata.clickedStageNumber == 2)
         {
                 explainPanel = GameObject.Find("Tutorial Canvas/Explain Panel");
                 enemyPanel = GameObject.Find("Tutorial Canvas/Enemy Panel");
@@ -89,6 +91,23 @@ public class TextManager : MonoBehaviour
                 enemyPanel.SetActive(false);
                 riskPanel.SetActive(false);
                 selectPanel.SetActive(false);
+            }
+            else
+                DestroyAll();
+        }
+        else if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && PlayerScript.playerdata.clickedStageNumber == 3)
+        {
+            introPanel = GameObject.Find("Tutorial Canvas/IntroPanel");
+            xplainPanel = GameObject.Find("Tutorial Canvas/ExplainPanel");
+            bossPanel = GameObject.Find("Tutorial Canvas/BossPanel");
+            closePanel = GameObject.Find("Tutorial Canvas/ClosePanel");
+
+            if (PlayerScript.playerdata.firstTut3)
+            {
+                introPanel.SetActive(false);
+                xplainPanel.SetActive(false);
+                bossPanel.SetActive(false);
+                closePanel.SetActive(false);
             }
             else
                 DestroyAll();
@@ -129,7 +148,46 @@ public class TextManager : MonoBehaviour
         }
     }
 
-    //tutorial 2
+    /*************************************************Tutorial 3*************************************************/
+    void ShowTutorial3Panel()
+    {
+        introPanel.SetActive(true);
+        Time.timeScale = 0f;
+        gameAudio.Pause();
+    }
+
+    void ShowClosePanel()
+    {
+        closePanel.SetActive(true);
+        Time.timeScale = 0f;
+        gameAudio.Pause();
+    }
+
+    public void IntroPanel_Click()
+    {
+        xplainPanel.SetActive(true);
+        HideTutorialPanel(introPanel, false);
+    }
+
+    public void ExplainPanel_Click()
+    {
+        bossPanel.SetActive(true);
+        HideTutorialPanel(xplainPanel, false);
+    }
+
+    public void BossPanel_Click()
+    {
+        HideTutorialPanel(bossPanel, true);
+    }
+
+    public void ClosePanel_Click()
+    {
+        HideTutorialPanel(closePanel, true);
+        tutManager.SendMessage("PlaySkill");
+        TutorialManager.TutManager.final = true;
+    }
+    
+    /*************************************************Tutorial 2*************************************************/
     void ShowTutorial2Panel()
     {
         explainPanel.SetActive(true);
@@ -138,7 +196,7 @@ public class TextManager : MonoBehaviour
         gameAudio.Pause();
     }
 
-    void HideTutorial2Panel(GameObject panel, bool music)
+    void HideTutorialPanel(GameObject panel, bool music)
     {
         panel.SetActive(false);
         Destroy(panel.gameObject);
@@ -160,40 +218,40 @@ public class TextManager : MonoBehaviour
     public void Tutorial2Explain_Click()
     {
         enemyPanel.SetActive(true);
-        HideTutorial2Panel(explainPanel, false);
+        HideTutorialPanel(explainPanel, false);
     }
 
     public void Tutorial2Enemy_Click()
     {
         riskPanel.SetActive(true);
-        HideTutorial2Panel(enemyPanel, false);
+        HideTutorialPanel(enemyPanel, false);
     }
 
     public void Tutorial2Risk_Click()
     {
         selectPanel.SetActive(true);
-        HideTutorial2Panel(riskPanel, false);
+        HideTutorialPanel(riskPanel, false);
     }
     
     public void Tutorial2Top_Click()
     {
         tutManager.SendMessage("PlayMoveUp");
-        HideTutorial2Panel(selectPanel, true);
+        HideTutorialPanel(selectPanel, true);
     }
 
     public void Tutorial2Forward_Click()
     {
         tutManager.SendMessage("PlayMoveRight");
-        HideTutorial2Panel(selectPanel, true);
+        HideTutorialPanel(selectPanel, true);
     }
 
     public void Tutorial2Bottom_Click()
     {
         tutManager.SendMessage("PlayMoveDown");
-        HideTutorial2Panel(selectPanel, true);
+        HideTutorialPanel(selectPanel, true);
     }
 
-    //tutorial 1
+    /*************************************************Tutorial 1*************************************************/
     public void Tutorial1Panel_Click()
     {
         if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
