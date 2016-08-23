@@ -58,12 +58,6 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -141,6 +135,8 @@
     <Compile Include="Assets\TextManager.cs" />
     <Compile Include="Assets\TracheaAI.cs" />
     <Compile Include="Assets\TutorialManager.cs" />
+    <Compile Include="Assets\TutorialManager_Map.cs" />
+    <Compile Include="Assets\TutorialManager_Resource.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Tutorial Text.txt" />

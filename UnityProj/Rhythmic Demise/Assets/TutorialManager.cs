@@ -20,7 +20,6 @@ public class TutorialManager : MonoBehaviour {
     public bool tut2End, tut3End;
     public bool final;
     public Enums.TutMove currentPlaying;
-    bool stop;
 
     void Start()
     {
@@ -39,7 +38,6 @@ public class TutorialManager : MonoBehaviour {
         scale = new Vector3(0.5f, 0.5f, 0.5f);
         TutManager.tut3End = false;
         TutManager.tut2End = true;
-        stop = false;
         TutManager.final = false;
         InitNoteLocation();
     }

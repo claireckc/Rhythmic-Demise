@@ -6,7 +6,7 @@ using System.Collections;
 
 public class ResourceManagement : MonoBehaviour
 {
-
+    bool firstTutorial;
     public Sprite cancerKnightSprite, cancerArcherSprite, cancerPriestSprite;
     public Sprite diabeticKnightSprite, diabeticArcherSprite, diabeticPriestSprite;
     public Image slot1, slot2, slot3;
@@ -29,9 +29,12 @@ public class ResourceManagement : MonoBehaviour
     public UnityEngine.UI.Button knightLeader, archerLeader, priestLeader;
 
     public Image chooseKnightSprite, chooseArcherSprite, choosePriestSprite;
+
+    GameObject resourceTutorial;
+
     void Start()
     {
-
+        firstTutorial = true;
         slotClicked = 0;
         StartMain();
         StartChoose();
@@ -41,6 +44,9 @@ public class ResourceManagement : MonoBehaviour
         chooseCanvas.enabled = false;
 
         skillManager = GameObject.Find("SkillsManager");
+
+        if (PlayerScript.playerdata.firstResource)
+            resourceTutorial = GameObject.Find("Tutorial Manager");
     }
 
     public void StartMain()
@@ -194,7 +200,7 @@ public class ResourceManagement : MonoBehaviour
 
     public bool HasTeam()
     {
-        for(int i = 0; i < PlayerScript.playerdata.troopSelected.Count; i++)
+        for (int i = 0; i < PlayerScript.playerdata.troopSelected.Count; i++)
         {
             if (PlayerScript.playerdata.troopSelected[i].troop.job != Enums.JobType.None)
                 return true;
@@ -202,18 +208,23 @@ public class ResourceManagement : MonoBehaviour
 
         return false;
     }
-    
+
     public void Main_PlayPress()
     {
         if (HasTeam() && HasLeader())
         {
-
             switch (PlayerScript.playerdata.clickedMap)
             {
                 case Enums.MainMap.Mouth:
                     switch (PlayerScript.playerdata.clickedStageNumber)
                     {
                         case 1:
+                            if (PlayerScript.playerdata.firstResource)
+                            {
+                                PlayerScript.playerdata.firstResource = false;
+                                SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
+                            }
+
                             Application.LoadLevel("TutorialScene");
                             break;
                         case 2:
@@ -374,7 +385,7 @@ public class ResourceManagement : MonoBehaviour
                     break;
             }
         }
-        else if(!HasTeam())
+        else if (!HasTeam())
         {
             //print out a messsage to tell them to select a unit first
             PrintMessage("Select units first.");
@@ -397,6 +408,14 @@ public class ResourceManagement : MonoBehaviour
         chooseCanvas.enabled = true;
         playButton.interactable = false;
         slotClicked = 1;
+
+        if (PlayerScript.playerdata.firstResource)
+        {
+            if (firstTutorial)
+                resourceTutorial.SendMessage("ActivateChooseTutorial");
+            else
+                resourceTutorial.SendMessage("ActivateSkillTutorial");
+        }
     }
 
     public void Slot2_Click()
@@ -738,6 +757,11 @@ public class ResourceManagement : MonoBehaviour
 
     public void ChooseCanvas_BackPress()
     {
+        if (PlayerScript.playerdata.firstResource)
+        {
+            resourceTutorial.SendMessage("ActivateFinalTutorial");
+        }
+
         slotClicked = 0;
         InitMain();
         playButton.interactable = true;
@@ -749,6 +773,9 @@ public class ResourceManagement : MonoBehaviour
         PlayerScript.playerdata.leaderType = Enums.JobType.Knight;
         PrintMessage("Knight is now the leader.");
         UpdateLeaderButton();
+
+        if (PlayerScript.playerdata.firstResource)
+            resourceTutorial.SendMessage("ActivateSkillPanel");
     }
     public void Choose_ArcherLeader()
     {
@@ -805,13 +832,20 @@ public class ResourceManagement : MonoBehaviour
         if (PlayerScript.playerdata.troopSelected[slotClicked - 1].troop.job != Enums.JobType.Knight && PlayerScript.playerdata.troopData[0].level > 0 && allowed)
         {
             PlayerScript.playerdata.totalResource += PlayerScript.playerdata.troopSelected[slotClicked - 1].troop.energyNeeded * PlayerScript.playerdata.troopSelected.Count;
-            PlayerScript.playerdata.troopSelected[slotClicked - 1].count = 0;
+            PlayerScript.playerdata.troopSelected[slotClicked - 1].count = 1;
             PlayerScript.playerdata.troopSelected[slotClicked - 1].troop = PlayerScript.playerdata.troopData[0];
 
 
             slotClicked = 0;
             InitMain();
             chooseCanvas.enabled = false;
+
+            if (PlayerScript.playerdata.firstResource)
+            {
+                print("Changed first tutorial");
+                resourceTutorial.SendMessage("ActivateLeaderTutorial");
+                firstTutorial = false;
+            }
         }
     }
 
@@ -831,7 +865,7 @@ public class ResourceManagement : MonoBehaviour
         if (PlayerScript.playerdata.troopSelected[slotClicked - 1].troop.job != Enums.JobType.Archer && PlayerScript.playerdata.troopData[1].level > 0 && allowed)
         {
             PlayerScript.playerdata.totalResource += PlayerScript.playerdata.troopSelected[slotClicked - 1].troop.energyNeeded * PlayerScript.playerdata.troopSelected.Count;
-            PlayerScript.playerdata.troopSelected[slotClicked - 1].count = 0;
+            PlayerScript.playerdata.troopSelected[slotClicked - 1].count = 1;
             PlayerScript.playerdata.troopSelected[slotClicked - 1].troop = PlayerScript.playerdata.troopData[1];
 
             slotClicked = 0;
@@ -856,7 +890,7 @@ public class ResourceManagement : MonoBehaviour
         if (PlayerScript.playerdata.troopSelected[slotClicked - 1].troop.job != Enums.JobType.Priest && PlayerScript.playerdata.troopData[2].level > 0 && allowed)
         {
             PlayerScript.playerdata.totalResource += PlayerScript.playerdata.troopSelected[slotClicked - 1].troop.energyNeeded * PlayerScript.playerdata.troopSelected.Count;
-            PlayerScript.playerdata.troopSelected[slotClicked - 1].count = 0;
+            PlayerScript.playerdata.troopSelected[slotClicked - 1].count = 1;
             PlayerScript.playerdata.troopSelected[slotClicked - 1].troop = PlayerScript.playerdata.troopData[2];
 
 
@@ -869,5 +903,10 @@ public class ResourceManagement : MonoBehaviour
     public void SkillPress()
     {
         skillManager.SendMessage("Show", null);
+
+        if (PlayerScript.playerdata.firstResource)
+        {
+            resourceTutorial.SendMessage("ActivateFirstSkillTutorial");
+        }
     }
 }
