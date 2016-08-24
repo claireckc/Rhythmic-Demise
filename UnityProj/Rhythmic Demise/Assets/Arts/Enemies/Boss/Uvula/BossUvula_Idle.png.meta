@@ -1,0 +1,121 @@
+fileFormatVersion: 2
+guid: 1ef2180e736b6fb4c96beeac203282c8
+timeCreated: 1471925447
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: BossUvula_Idle_0
+    21300002: BossUvula_Idle_1
+    21300004: BossUvula_Idle_2
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: BossUvula_Idle_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 190, y: 50}
+        - {x: 104, y: 144}
+        - {x: 54, y: 144}
+        - {x: -11, y: 46}
+        - {x: -11, y: -52}
+        - {x: 47, y: -90}
+        - {x: 124, y: -90}
+        - {x: 136, y: -73}
+        - {x: 143, y: -54}
+        - {x: 189, y: -1}
+        - {x: 190, y: 1}
+    - name: BossUvula_Idle_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 52, y: 144}
+        - {x: 51, y: 139}
+        - {x: -9, y: 9}
+        - {x: -10, y: 8}
+        - {x: -10, y: -44}
+        - {x: 61, y: -90}
+        - {x: 161, y: -90}
+        - {x: 190, y: -63}
+        - {x: 190, y: 94}
+        - {x: 153, y: 144}
+    - name: BossUvula_Idle_2
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -13, y: -90}
+        - {x: 133, y: -90}
+        - {x: 189, y: -47}
+        - {x: 189, y: 42}
+        - {x: 108, y: 144}
+        - {x: 58, y: 144}
+        - {x: -13, y: 111}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

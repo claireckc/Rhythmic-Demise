@@ -20,8 +20,6 @@ public class EventHandler : MonoBehaviour {
     public SpriteRenderer[] partsSprite;
     GameObject stageRate;
 
-    bool interact;
-
     // Use this for initialization
     void Start ()
     {
@@ -29,9 +27,9 @@ public class EventHandler : MonoBehaviour {
         labelText = labelText.GetComponent<Text>();
         labelAnim = labelAnim.GetComponent<Animator>();
         stageRate = GameObject.Find("Map Rating");
+        print(stageRate);
         whiteColor = new Color(255f/255f, 255f/255f, 255f/255f);
         lockedColor = new Color(146f/255f, 146f/255f, 255f/255f);
-        interact = true;
 
         for (int i = 0; i < partsAnim.Length; i++)
         {
@@ -58,16 +56,6 @@ public class EventHandler : MonoBehaviour {
         dFontSize = 40;
         iFontSize = 32;
     }
-
-    void BlockInteraction()
-    {
-        interact = false;
-    }
-
-    void AllowInteraction()
-    {
-        interact = true;
-    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -84,11 +72,8 @@ public class EventHandler : MonoBehaviour {
         }
 		else if(platform == RuntimePlatform.WindowsEditor || platform == RuntimePlatform.OSXEditor)
         {
-            if (interact)
-            {
-                if (Input.GetMouseButtonDown(0))
-                    DetermineTouchPosition(Input.mousePosition);
-            }
+            if (Input.GetMouseButtonDown(0))
+                DetermineTouchPosition(Input.mousePosition);
         }
 	}
 
@@ -349,6 +334,27 @@ public class EventHandler : MonoBehaviour {
                 SetFontSize("Kidney");
                 break;
             case 9:
+                if (labelText.text != "Large Intestine")
+                {
+                    if (labelText.text == "Parts")
+                        labelAnim.SetTrigger("newSelection");
+                    else
+                    {
+                        labelAnim.ResetTrigger("newSelection");
+                        labelAnim.Play("NewLabelAnimation", -1, 0.0f);
+                    }
+                    if (addon == "")
+                    {
+                        labelText.text = "Large Intestine";
+                        SetFontSize("Large Intestine");
+                    }
+                    else
+                        labelText.text = "Locked";
+                }
+                DisplayStars(Enums.MainMap.LIntes);
+                SetFontSize("Large Intestine");
+                break;
+            case 10:
                 if (labelText.text != "Small Intestine")
                 {
                     if (labelText.text == "Parts")
@@ -363,27 +369,6 @@ public class EventHandler : MonoBehaviour {
                     else
                         labelText.text = "Locked";
 
-                }
-                DisplayStars(Enums.MainMap.LIntes);
-                SetFontSize("Large Intestine");
-                break;
-            case 10:
-                if (labelText.text != "Large Intestine")
-                {
-                    if (labelText.text == "Parts")
-                        labelAnim.SetTrigger("newSelection");
-                    else
-                    {
-                        labelAnim.ResetTrigger("newSelection");
-                        labelAnim.Play("NewLabelAnimation", -1, 0.0f);
-                    }
-                    if (addon == "")
-                    {
-                        labelText.text = "Small Intestine";
-                        SetFontSize("Large Intestine");
-                    }
-                    else
-                        labelText.text = "Locked";
                 }
                 DisplayStars(Enums.MainMap.SIntes);
                 SetFontSize("Small Intestine");

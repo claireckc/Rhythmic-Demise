@@ -50,7 +50,7 @@ public class ArmyController : MonoBehaviour {
 	// Use this for initialization
 
 	void Start () {
-
+        Debug.Log("TEST");
         if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
         {
             tutManager = GameObject.Find("Tutorial Manager");
@@ -61,17 +61,17 @@ public class ArmyController : MonoBehaviour {
                 tower1 = GameObject.Find("Towers/Shooting Tower 1").GetComponent<Tower>();
                 tower2 = GameObject.Find("Towers/Shooting Tower").GetComponent<Tower>();
             }
-        }
+        } Debug.Log("TEST");
 
         moved = callMovingPt2 = false;
         if (armyController == null)
         {
             armyController = this;
-        }
+        } Debug.Log("TEST");
 
         army = new List<Character>();
         enemyList = new List<GameObject>();
-
+        Debug.Log("TEST");
         init();
         GetMovingPoints();
 	}
@@ -162,11 +162,6 @@ public class ArmyController : MonoBehaviour {
                     endPoint = GameObject.Find("MovingPoints/EndPoint").GetComponent<MovingPoint>();
                     break;
                 case 3: //boss stage
-                    movingPt1 = GameObject.Find("MovingPoints/MovingPoint1").GetComponent<MovingPoint>();
-                    //boss points
-                    movingPt2 = GameObject.Find("MovingPoints/MovingPoint2.3").GetComponent<MovingPoint>();
-                    movingPt3 = GameObject.Find("MovingPoints/MovingPoint3.3").GetComponent<MovingPoint>();
-                    movingPt4 = GameObject.Find("MovingPoints/MovingPoint4.3").GetComponent<MovingPoint>();
                     break;
        
             }
@@ -242,9 +237,9 @@ public class ArmyController : MonoBehaviour {
         }
         else if (PlayerScript.playerdata.clickedStageNumber == 2 && PlayerScript.playerdata.firstTut2)
         {
-            if (currPos != prevPoint)
+            if(currPos != prevPoint)
             {
-                if (currPos == movingPt2)
+                if(currPos == movingPt2)
                 {
                     textManager.SendMessage("ShowTutorial2Panel");
                     moved = true;
@@ -256,28 +251,12 @@ public class ArmyController : MonoBehaviour {
                     PlayerScript.playerdata.firstTut2 = false;
                     SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
                 }
-
-                if (currPos != movingPt1 && currPos != movingPt2 && !TutorialManager.TutManager.tut2End)
+                
+                if(currPos != movingPt1 && currPos != movingPt2 && !TutorialManager.TutManager.tut2End)
                 {
                     tutManager.SendMessage("HideAll");
                     TutorialManager.TutManager.tut2End = true;
                     textManager.SendMessage("DestroyAll");
-                }
-            }
-        }
-        else if (PlayerScript.playerdata.clickedStageNumber == 3 && PlayerScript.playerdata.firstTut3)
-        {
-            if (currPos != prevPoint)
-            {
-                if (currPos == movingPt1)
-                {
-                    textManager.SendMessage("ShowTutorial3Panel");
-                    prevPoint = currPos;
-                }
-                else if (currPos == movingPt2 || currPos == movingPt3 || currPos == movingPt4)
-                {
-                    textManager.SendMessage("ShowClosePanel");
-                    prevPoint = currPos;
                 }
             }
         }
@@ -344,7 +323,6 @@ public class ArmyController : MonoBehaviour {
 
             army.Add(p);
         }
-
         Invoke("initLeaderBonus", 1);
         Invoke("initAnimVar", 1);
         targetPos = currPos;

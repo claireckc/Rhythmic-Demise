@@ -47,7 +47,6 @@
   <ItemGroup>
      <Compile Include="Assets\EndStage.cs" />
      <Compile Include="Assets\PathColliderController.cs" />
-     <Compile Include="Assets\Scenes\SkillsManager.cs" />
      <Compile Include="Assets\Scripts\Beat\BeatSpawner.cs" />
      <Compile Include="Assets\Scripts\Beat\NoteControl.cs" />
      <Compile Include="Assets\Scripts\Button.cs" />
@@ -70,6 +69,7 @@
      <Compile Include="Assets\Scripts\Controller\Stage Handler\SubStageHandler.cs" />
      <Compile Include="Assets\Scripts\EndResultManager.cs" />
      <Compile Include="Assets\Scripts\Enums.cs" />
+     <Compile Include="Assets\Scripts\Events\EventBrain.cs" />
      <Compile Include="Assets\Scripts\Events\EventLiver.cs" />
      <Compile Include="Assets\Scripts\Events\EventSmallIntestine.cs" />
      <Compile Include="Assets\Scripts\Events\Timer.cs" />
@@ -106,14 +106,11 @@
      <Compile Include="Assets\Scripts\Tower and Creep\Uvula.cs" />
      <Compile Include="Assets\Scripts\User Interface\UIManager_Start.cs" />
      <Compile Include="Assets\Scripts\User Interface\UIManager_TroopSel.cs" />
+     <Compile Include="Assets\SkillsManager.cs" />
      <Compile Include="Assets\StageRateHandler.cs" />
      <Compile Include="Assets\SubRatings.cs" />
-     <Compile Include="Assets\TextManager.cs" />
      <Compile Include="Assets\TracheaAI.cs" />
      <Compile Include="Assets\TutorialManager.cs" />
-     <Compile Include="Assets\TutorialManager_Map.cs" />
-     <Compile Include="Assets\TutorialManager_Resource.cs" />
-     <None Include="Assets\Tutorial Text.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/UNITY/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

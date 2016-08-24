@@ -31,14 +31,6 @@ public class EndResultManager : MonoBehaviour {
         {
             isComplete = true;
         }
-        /*
-        //Just for prototype, need to be arrange later
-        if (PlayerScript.playerdata.mapProgress[0].stages[2].isCurrent(PlayerScript.playerdata.clickedStageNumber))
-        {
-            if(!GameObject.Find("Boss")){
-                isComplete = true;
-            }
-        }*/
 
         if (GameObject.Find("Boss") && !isBossStage)
         {
@@ -64,9 +56,9 @@ public class EndResultManager : MonoBehaviour {
     {
         audio.Stop();
         anim.SetTrigger("Finish");
-
+        
         //update resources
-        endStageClone.SendMessage("UpdateData", (int)PlayerScript.playerdata.clickedMap);
+        endStageClone.SendMessage("UpdateData", GameController.gameController.getHighestStreak());
         done = true;
     }
 

@@ -54,6 +54,8 @@ public class BossHeart : Boss{
             spawn.SendMessage("initDamage", troopDamage);
             spawn.SendMessage("initCooldown", troopCoolDown);
         }
+
+        anim.SetTrigger("Summon");
     }
 
     protected override void Action()
@@ -64,5 +66,7 @@ public class BossHeart : Boss{
         GameObject shoot = Instantiate(projectile, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
         shoot.SendMessage("Initialize", closestPlayer.transform.position);
         shoot.SendMessage("initDamage", damage);
+
+        anim.SetTrigger("Attack");
     }
 }

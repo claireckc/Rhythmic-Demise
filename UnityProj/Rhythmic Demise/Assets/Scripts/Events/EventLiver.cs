@@ -4,19 +4,20 @@ using System.Collections;
 public class EventLiver : MonoBehaviour {
 
     public GameObject spellPrefab;
-    public GameObject spellCircle;
     public GameObject[] spellLocation;
 
     private float nextActionTime;
     private float cooldown;
-    private float launchAttackTime;
-    private GameObject targetPos;
-    private bool attacked;
+    private MovingPoint targetPos1;
+    private MovingPoint targetPos2;
+    private float spellDamage;
+    private float spellAmount;
 
     // Use this for initialization
 	void Start () {
-        nextActionTime = cooldown = 5f;
-        launchAttackTime = 2f;
+        nextActionTime = cooldown = 4f;
+        spellDamage = 3;
+        spellAmount = 1;
 	}
 	
 	// Update is called once per frame
@@ -30,21 +31,25 @@ public class EventLiver : MonoBehaviour {
         {
             nextActionTime = Time.time + cooldown;
 
-            int index = Random.Range(0, spellLocation.Length);
+            for (int i = 0; i < spellAmount; i++)
+            {
+                int index = Random.Range(0, spellLocation.Length);
 
-            targetPos = spellLocation[index];
+                targetPos1 = spellLocation[index].GetComponent<MovingPoint>();
 
-            GameObject sc = Instantiate(spellCircle, targetPos.transform.position, spellCircle.transform.rotation) as GameObject;
-            launchAttackTime = Time.time + 2;
-            Destroy(sc, 2);
-            attacked = false;
-        }
+                GameObject sc = Instantiate(spellPrefab, targetPos1.transform.position, spellPrefab.transform.rotation) as GameObject;
+                Destroy(sc, 2);
 
-        if (Time.time >= launchAttackTime && !attacked)
-        {
-            attacked = true;
+                if (ArmyController.armyController.currPos == targetPos1)
+                {
+                    ArmyController.armyController.takeDamage(spellDamage);
+                }
+            }
 
-            Instantiate(spellPrefab, targetPos.transform.position, targetPos.transform.rotation);
+            if (Timer.timer.time <= 30)
+            {
+                spellAmount = 2;
+            }
         }
     }
 }

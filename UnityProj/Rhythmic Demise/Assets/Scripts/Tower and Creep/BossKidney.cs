@@ -40,6 +40,26 @@ public class BossKidney : Boss {
 
     protected override void specialAction()
     {
+        anim.SetTrigger("Skill");
+    }
+
+    protected override void Action()
+    {
+        anim.SetTrigger("Attack");
+    }
+
+    void hitEnemy()
+    {
+        Vector3 dir = closestPlayer.transform.position - this.transform.position;
+        float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
+
+        GameObject shoot = Instantiate(projectile, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
+        shoot.SendMessage("Initialize", closestPlayer.transform.position);
+        shoot.SendMessage("initDamage", damage);
+    }
+
+    void triggerSkill()
+    {
         int randNum = Random.Range(0, playerList.Count);
 
         //destroy one random character
@@ -63,15 +83,5 @@ public class BossKidney : Boss {
         spawn.SendMessage("initHealth", troopHealth);
         spawn.SendMessage("initDamage", troopDamage);
         spawn.SendMessage("initCooldown", troopCoolDown);
-    }
-
-    protected override void Action()
-    {
-        Vector3 dir = closestPlayer.transform.position - this.transform.position;
-        float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
-
-        GameObject shoot = Instantiate(projectile, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-        shoot.SendMessage("Initialize", closestPlayer.transform.position);
-        shoot.SendMessage("initDamage", damage);
     }
 }

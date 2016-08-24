@@ -10,6 +10,7 @@ public class Tower : Enemy {
 	// Use this for initialization
 	protected void Start () {
         currentHealth = maxHealth;
+        anim = gameObject.GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame

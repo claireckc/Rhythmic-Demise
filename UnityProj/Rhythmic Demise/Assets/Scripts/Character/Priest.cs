@@ -34,17 +34,9 @@ public class Priest : Character {
         {
             if (ArmyController.armyController.enemyList.Count > 0)
             {
-                //Debug.Log("Attack!");
-                //start attack animation and instatiate projectile
-
-                Vector3 dir = ArmyController.armyController.closestEnemy.transform.position - this.transform.position;
-                float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
-
-                GameObject shoot = Instantiate(orb, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-                shoot.SendMessage("Initialize", ArmyController.armyController.closestEnemy);
-                shoot.SendMessage("initDamage", damage);
-
                 isAttacking = true;
+
+                anim.SetTrigger("Attack");
             }
             else
             {
@@ -88,5 +80,15 @@ public class Priest : Character {
     public void setHealPower(float hp)
     {
         healPower = hp;
+    }
+
+    void spawnOrb()
+    {
+        Vector3 dir = ArmyController.armyController.closestEnemy.transform.position - this.transform.position;
+        float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
+
+        GameObject shoot = Instantiate(orb, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
+        shoot.SendMessage("Initialize", ArmyController.armyController.closestEnemy);
+        shoot.SendMessage("initDamage", damage);
     }
 }

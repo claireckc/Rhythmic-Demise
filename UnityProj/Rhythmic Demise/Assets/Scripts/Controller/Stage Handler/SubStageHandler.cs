@@ -64,6 +64,32 @@ public class SubStageHandler : MonoBehaviour
         {
             print("Ray hit: " + rayHit.collider.gameObject.tag);
             EnterLevel(rayHit.collider.gameObject.tag);
+           /* switch (rayHit.collider.gameObject.tag)
+            {
+                case "Mouth_1":
+                    //go into troop selection screen
+                    PlayerScript.playerdata.clickedStageNumber = 1;
+                    Application.LoadLevel("Resource Management");
+                    break;
+                case "Mouth_2":
+                    //if (PlayerScript.playerdata.mapProgress[0].stages[0].topComboCount >= 0 || !PlayerScript.playerdata.mapProgress[0].stages[0].IsComplete())
+                    if(CheckAccess(Enums.MainMap.Mouth, 2))
+                    {
+                        PlayerScript.playerdata.clickedStageNumber = 2;
+                        Application.LoadLevel("Resource Management");
+                    }
+                    break;
+
+                case "Mouth_3":
+                    //if (PlayerScript.playerdata.mapProgress[0].stages[1].topComboCount >= 0 || !PlayerScript.playerdata.mapProgress[0].stages[1].IsComplete())
+                    if(CheckAccess(Enums.MainMap.Mouth, 3))
+                    {
+                        PlayerScript.playerdata.clickedStageNumber = 3;
+                        Application.LoadLevel("Resource Management");
+                    }
+                    break;
+            }*/
+
         }
     }
 

@@ -1,0 +1,537 @@
+fileFormatVersion: 2
+guid: 543568c03dfba174db5b90ce7d34a6dd
+timeCreated: 1471932008
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: LarnyxBoss_Attack_0
+    21300002: LarnyxBoss_Attack_1
+    21300004: LarnyxBoss_Attack_2
+    21300006: LarnyxBoss_Attack_3
+    21300008: LarnyxBoss_Attack_4
+    21300010: LarnyxBoss_Attack_5
+    21300012: LarnyxBoss_Attack_6
+    21300014: LarnyxBoss_Attack_7
+    21300016: LarnyxBoss_Attack_8
+    21300018: LarnyxBoss_Attack_9
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: LarnyxBoss_Attack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 576
+        width: 512
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 114, y: 53}
+        - {x: 50, y: 53}
+        - {x: -2, y: 24}
+        - {x: -48, y: 53}
+        - {x: -81, y: 53}
+        - {x: -95, y: 43}
+        - {x: -126, y: -49}
+        - {x: -126, y: -118}
+        - {x: -62, y: -144}
+        - {x: 48, y: -144}
+        - {x: 67, y: -120}
+        - {x: 164, y: -88}
+        - {x: 164, y: -9}
+    - name: LarnyxBoss_Attack_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 576
+        width: 512
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 114, y: 53}
+        - {x: -81, y: 53}
+        - {x: -95, y: 43}
+        - {x: -126, y: -49}
+        - {x: -126, y: -118}
+        - {x: -62, y: -144}
+        - {x: 48, y: -144}
+        - {x: 67, y: -120}
+        - {x: 164, y: -88}
+        - {x: 164, y: -9}
+      - - {x: -108, y: -10}
+        - {x: -112, y: -11}
+        - {x: -121, y: -27}
+        - {x: -121, y: -39}
+        - {x: -120, y: -43}
+        - {x: -106, y: -43}
+        - {x: -92, y: -41}
+        - {x: -91, y: -38}
+        - {x: -91, y: -18}
+        - {x: -97, y: -10}
+    - name: LarnyxBoss_Attack_2
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 576
+        width: 512
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 114, y: 53}
+        - {x: -115, y: 53}
+        - {x: -126, y: 35}
+        - {x: -126, y: -118}
+        - {x: -62, y: -144}
+        - {x: 48, y: -144}
+        - {x: 67, y: -120}
+        - {x: 164, y: -88}
+        - {x: 164, y: -9}
+      - - {x: -108, y: -10}
+        - {x: -112, y: -11}
+        - {x: -121, y: -27}
+        - {x: -121, y: -39}
+        - {x: -120, y: -43}
+        - {x: -106, y: -43}
+        - {x: -92, y: -41}
+        - {x: -91, y: -38}
+        - {x: -91, y: -18}
+        - {x: -97, y: -10}
+      - - {x: -125, y: 47}
+        - {x: -137, y: 47}
+        - {x: -164, y: 43}
+        - {x: -175, y: 17}
+        - {x: -175, y: -4}
+        - {x: -135, y: -4}
+        - {x: -130, y: -3}
+        - {x: -124, y: 6}
+        - {x: -124, y: 46}
+    - name: LarnyxBoss_Attack_3
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 576
+        width: 512
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 114, y: 53}
+        - {x: -126, y: 53}
+        - {x: -126, y: -125}
+        - {x: -102, y: -144}
+        - {x: 48, y: -144}
+        - {x: 67, y: -120}
+        - {x: 164, y: -88}
+        - {x: 164, y: -9}
+      - - {x: -201, y: -16}
+        - {x: -210, y: -27}
+        - {x: -210, y: -45}
+        - {x: -207, y: -49}
+        - {x: -191, y: -49}
+        - {x: -180, y: -40}
+        - {x: -180, y: -25}
+        - {x: -183, y: -16}
+      - - {x: -108, y: -10}
+        - {x: -112, y: -11}
+        - {x: -121, y: -27}
+        - {x: -121, y: -39}
+        - {x: -120, y: -43}
+        - {x: -106, y: -43}
+        - {x: -92, y: -41}
+        - {x: -91, y: -38}
+        - {x: -91, y: -18}
+        - {x: -97, y: -10}
+      - - {x: -125, y: 47}
+        - {x: -137, y: 47}
+        - {x: -164, y: 43}
+        - {x: -175, y: 17}
+        - {x: -175, y: -4}
+        - {x: -135, y: -4}
+        - {x: -130, y: -3}
+        - {x: -124, y: 6}
+        - {x: -124, y: 46}
+    - name: LarnyxBoss_Attack_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 288
+        width: 512
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 114, y: 53}
+        - {x: -126, y: 53}
+        - {x: -126, y: -125}
+        - {x: -102, y: -144}
+        - {x: 48, y: -144}
+        - {x: 67, y: -120}
+        - {x: 164, y: -88}
+        - {x: 164, y: -9}
+      - - {x: -201, y: -16}
+        - {x: -210, y: -27}
+        - {x: -210, y: -45}
+        - {x: -207, y: -49}
+        - {x: -191, y: -49}
+        - {x: -180, y: -40}
+        - {x: -180, y: -25}
+        - {x: -183, y: -16}
+      - - {x: -108, y: -10}
+        - {x: -112, y: -11}
+        - {x: -121, y: -27}
+        - {x: -121, y: -39}
+        - {x: -120, y: -43}
+        - {x: -106, y: -43}
+        - {x: -92, y: -41}
+        - {x: -91, y: -38}
+        - {x: -91, y: -18}
+        - {x: -97, y: -10}
+      - - {x: -125, y: 47}
+        - {x: -137, y: 47}
+        - {x: -164, y: 43}
+        - {x: -175, y: 17}
+        - {x: -175, y: -4}
+        - {x: -135, y: -4}
+        - {x: -130, y: -3}
+        - {x: -124, y: 6}
+        - {x: -124, y: 46}
+      - - {x: -215, y: 92}
+        - {x: -235, y: 87}
+        - {x: -241, y: 66}
+        - {x: -241, y: 46}
+        - {x: -238, y: 41}
+        - {x: -191, y: 41}
+        - {x: -190, y: 51}
+        - {x: -190, y: 92}
+    - name: LarnyxBoss_Attack_5
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 288
+        width: 512
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 114, y: 53}
+        - {x: -126, y: 53}
+        - {x: -126, y: -125}
+        - {x: -102, y: -144}
+        - {x: 48, y: -144}
+        - {x: 67, y: -120}
+        - {x: 164, y: -88}
+        - {x: 164, y: -9}
+      - - {x: -201, y: -16}
+        - {x: -210, y: -27}
+        - {x: -210, y: -45}
+        - {x: -207, y: -49}
+        - {x: -191, y: -49}
+        - {x: -180, y: -40}
+        - {x: -180, y: -25}
+        - {x: -183, y: -16}
+      - - {x: -108, y: -10}
+        - {x: -112, y: -11}
+        - {x: -121, y: -27}
+        - {x: -121, y: -39}
+        - {x: -120, y: -43}
+        - {x: -106, y: -43}
+        - {x: -92, y: -41}
+        - {x: -91, y: -38}
+        - {x: -91, y: -18}
+        - {x: -97, y: -10}
+      - - {x: -125, y: 47}
+        - {x: -137, y: 47}
+        - {x: -164, y: 43}
+        - {x: -175, y: 17}
+        - {x: -175, y: -4}
+        - {x: -135, y: -4}
+        - {x: -130, y: -3}
+        - {x: -124, y: 6}
+        - {x: -124, y: 46}
+      - - {x: -215, y: 92}
+        - {x: -235, y: 87}
+        - {x: -241, y: 66}
+        - {x: -241, y: 46}
+        - {x: -238, y: 41}
+        - {x: -191, y: 41}
+        - {x: -190, y: 51}
+        - {x: -190, y: 92}
+    - name: LarnyxBoss_Attack_6
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 288
+        width: 512
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -81, y: 53}
+        - {x: -95, y: 43}
+        - {x: -126, y: -45}
+        - {x: -126, y: -134}
+        - {x: -121, y: -139}
+        - {x: 104, y: -139}
+        - {x: 177, y: -108}
+        - {x: 177, y: -32}
+        - {x: 165, y: -21}
+        - {x: 108, y: 0}
+        - {x: 96, y: 53}
+      - - {x: -201, y: -16}
+        - {x: -210, y: -27}
+        - {x: -210, y: -45}
+        - {x: -207, y: -49}
+        - {x: -191, y: -49}
+        - {x: -180, y: -40}
+        - {x: -180, y: -25}
+        - {x: -183, y: -16}
+      - - {x: -108, y: -10}
+        - {x: -112, y: -11}
+        - {x: -121, y: -27}
+        - {x: -121, y: -39}
+        - {x: -120, y: -43}
+        - {x: -106, y: -43}
+        - {x: -92, y: -41}
+        - {x: -91, y: -38}
+        - {x: -91, y: -18}
+        - {x: -97, y: -10}
+      - - {x: -125, y: 47}
+        - {x: -137, y: 47}
+        - {x: -164, y: 43}
+        - {x: -175, y: 17}
+        - {x: -175, y: -4}
+        - {x: -135, y: -4}
+        - {x: -130, y: -3}
+        - {x: -124, y: 6}
+        - {x: -124, y: 46}
+      - - {x: -191, y: 88}
+        - {x: -230, y: 88}
+        - {x: -245, y: 61}
+        - {x: -245, y: 43}
+        - {x: -188, y: 43}
+        - {x: -185, y: 44}
+        - {x: -185, y: 85}
+        - {x: -187, y: 87}
+    - name: LarnyxBoss_Attack_7
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 288
+        width: 512
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 117, y: 53}
+        - {x: -109, y: 53}
+        - {x: -126, y: 17}
+        - {x: -126, y: -139}
+        - {x: 71, y: -139}
+        - {x: 159, y: -91}
+        - {x: 164, y: -82}
+        - {x: 164, y: -6}
+      - - {x: -201, y: -16}
+        - {x: -210, y: -27}
+        - {x: -210, y: -45}
+        - {x: -207, y: -49}
+        - {x: -191, y: -49}
+        - {x: -180, y: -40}
+        - {x: -180, y: -25}
+        - {x: -183, y: -16}
+      - - {x: -108, y: -10}
+        - {x: -112, y: -11}
+        - {x: -121, y: -27}
+        - {x: -121, y: -39}
+        - {x: -120, y: -43}
+        - {x: -106, y: -43}
+        - {x: -92, y: -41}
+        - {x: -91, y: -38}
+        - {x: -91, y: -18}
+        - {x: -97, y: -10}
+      - - {x: -144, y: 53}
+        - {x: -170, y: 37}
+        - {x: -170, y: -6}
+        - {x: -163, y: -9}
+        - {x: -146, y: -9}
+        - {x: -121, y: 6}
+        - {x: -121, y: 27}
+        - {x: -130, y: 53}
+      - - {x: -191, y: 88}
+        - {x: -230, y: 88}
+        - {x: -245, y: 61}
+        - {x: -245, y: 43}
+        - {x: -188, y: 43}
+        - {x: -185, y: 44}
+        - {x: -185, y: 85}
+        - {x: -187, y: 87}
+    - name: LarnyxBoss_Attack_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 101, y: -37}
+        - {x: 95, y: -40}
+        - {x: 90, y: -43}
+        - {x: 91, y: -57}
+        - {x: 96, y: -83}
+        - {x: 102, y: -93}
+        - {x: 176, y: -77}
+        - {x: 176, y: -15}
+        - {x: 114, y: 53}
+        - {x: -115, y: 53}
+        - {x: -126, y: 35}
+        - {x: -126, y: -118}
+        - {x: -62, y: -144}
+        - {x: 48, y: -144}
+        - {x: 67, y: -120}
+        - {x: 79, y: -51}
+        - {x: 99, y: -37}
+      - - {x: -214, y: -40}
+        - {x: -207, y: -45}
+        - {x: -184, y: -45}
+        - {x: -180, y: -37}
+        - {x: -180, y: -19}
+        - {x: -199, y: -19}
+        - {x: -214, y: -24}
+      - - {x: -108, y: -10}
+        - {x: -112, y: -11}
+        - {x: -121, y: -27}
+        - {x: -121, y: -39}
+        - {x: -120, y: -43}
+        - {x: -106, y: -43}
+        - {x: -92, y: -41}
+        - {x: -91, y: -38}
+        - {x: -91, y: -18}
+        - {x: -97, y: -10}
+      - - {x: -144, y: 53}
+        - {x: -170, y: 37}
+        - {x: -170, y: -6}
+        - {x: -163, y: -9}
+        - {x: -146, y: -9}
+        - {x: -121, y: 6}
+        - {x: -121, y: 27}
+        - {x: -130, y: 53}
+      - - {x: -191, y: 88}
+        - {x: -230, y: 88}
+        - {x: -245, y: 61}
+        - {x: -245, y: 43}
+        - {x: -188, y: 43}
+        - {x: -185, y: 44}
+        - {x: -185, y: 85}
+        - {x: -187, y: 87}
+    - name: LarnyxBoss_Attack_9
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 116, y: 53}
+        - {x: -81, y: 53}
+        - {x: -95, y: 43}
+        - {x: -126, y: -49}
+        - {x: -126, y: -130}
+        - {x: -70, y: -144}
+        - {x: 96, y: -144}
+        - {x: 158, y: -90}
+        - {x: 166, y: -76}
+        - {x: 166, y: -12}
+      - - {x: -214, y: -40}
+        - {x: -207, y: -45}
+        - {x: -184, y: -45}
+        - {x: -180, y: -37}
+        - {x: -180, y: -19}
+        - {x: -199, y: -19}
+        - {x: -214, y: -24}
+      - - {x: -118, y: -11}
+        - {x: -118, y: -24}
+        - {x: -113, y: -44}
+        - {x: -96, y: -44}
+        - {x: -91, y: -41}
+        - {x: -91, y: -12}
+        - {x: -98, y: -11}
+      - - {x: -144, y: 53}
+        - {x: -170, y: 37}
+        - {x: -170, y: -6}
+        - {x: -163, y: -9}
+        - {x: -146, y: -9}
+        - {x: -121, y: 6}
+        - {x: -121, y: 27}
+        - {x: -130, y: 53}
+      - - {x: -191, y: 88}
+        - {x: -230, y: 88}
+        - {x: -245, y: 61}
+        - {x: -245, y: 43}
+        - {x: -188, y: 43}
+        - {x: -185, y: 44}
+        - {x: -185, y: 85}
+        - {x: -187, y: 87}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
