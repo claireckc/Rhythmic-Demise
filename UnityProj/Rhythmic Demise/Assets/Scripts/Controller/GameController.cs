@@ -493,4 +493,9 @@ public class GameController : MonoBehaviour {
     {
         return currentStreak;
     }
+
+    public int getHighestStreak()
+    {
+        return highestStreak;
+    }
 }

@@ -58,7 +58,7 @@ public class EndResultManager : MonoBehaviour {
         anim.SetTrigger("Finish");
         
         //update resources
-        endStageClone.SendMessage("UpdateData", (int)PlayerScript.playerdata.clickedMap);
+        endStageClone.SendMessage("UpdateData", GameController.gameController.getHighestStreak());
         done = true;
     }
 

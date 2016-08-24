@@ -109,10 +109,8 @@
      <Compile Include="Assets\SkillsManager.cs" />
      <Compile Include="Assets\StageRateHandler.cs" />
      <Compile Include="Assets\SubRatings.cs" />
-     <Compile Include="Assets\TextManager.cs" />
      <Compile Include="Assets\TracheaAI.cs" />
      <Compile Include="Assets\TutorialManager.cs" />
-     <None Include="Assets\Tutorial Text.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/UNITY/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

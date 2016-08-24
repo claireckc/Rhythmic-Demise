@@ -6,14 +6,15 @@ public class EndStage : MonoBehaviour {
     MainMap currentMap;
     SubMap currentStage;
     
-    public void UpdateData(int stage)
+    public void UpdateData(int highestStreak)
     {
         currentMap = PlayerScript.playerdata.mapProgress[(int)PlayerScript.playerdata.clickedMap];
         currentStage = currentMap.stages[PlayerScript.playerdata.clickedStageNumber - 1];
         PlayerScript.playerdata.totalResource += ScoreManager.score;
-        UpdateMap();
+        UpdateMap(highestStreak);
         UpdateStars();
-        UnlockNextMap(stage);
+        UnlockNextMap((int)PlayerScript.playerdata.clickedMap);
+        UpdatePlayerExp(PlayerScript.playerdata.clickedStageNumber);
         SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
         
         for(int i = 0; i < currentMap.stages.Count; i++)
@@ -47,11 +48,11 @@ public class EndStage : MonoBehaviour {
         }
     }
 
-    public void UpdateMap()
+    public void UpdateMap(int highestStreak)
     {
-       if(currentStage.topComboCount < ScoreManager.score)
+        if (currentStage.topComboCount < highestStreak)
         {
-            currentStage.topComboCount = ScoreManager.score;
+            currentStage.topComboCount = highestStreak;
         }
     }
 

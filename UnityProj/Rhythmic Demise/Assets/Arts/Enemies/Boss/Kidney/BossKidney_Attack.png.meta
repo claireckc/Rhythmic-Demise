@@ -1,0 +1,188 @@
+fileFormatVersion: 2
+guid: acbc570cdd3f660449ff430fe73e8221
+timeCreated: 1471937265
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: BossKidney_Attack_0
+    21300002: BossKidney_Attack_1
+    21300004: BossKidney_Attack_2
+    21300006: BossKidney_Attack_3
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: BossKidney_Attack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 125, y: 29}
+        - {x: 84, y: 68}
+        - {x: 34, y: 68}
+        - {x: 10, y: 18}
+        - {x: 10, y: -39}
+        - {x: 19, y: -79}
+        - {x: 50, y: -93}
+        - {x: 57, y: -95}
+        - {x: 97, y: -95}
+        - {x: 119, y: -70}
+        - {x: 123, y: -50}
+        - {x: 125, y: -34}
+      - - {x: -67, y: 69}
+        - {x: -105, y: 42}
+        - {x: -110, y: 25}
+        - {x: -110, y: -51}
+        - {x: -91, y: -94}
+        - {x: 6, y: -94}
+        - {x: 6, y: 69}
+    - name: BossKidney_Attack_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 5, y: 68}
+        - {x: -9, y: 57}
+        - {x: -14, y: 21}
+        - {x: -14, y: -80}
+        - {x: 11, y: -95}
+        - {x: 90, y: -95}
+        - {x: 101, y: -76}
+        - {x: 101, y: 37}
+        - {x: 69, y: 68}
+      - - {x: -109, y: 69}
+        - {x: -133, y: 16}
+        - {x: -133, y: -73}
+        - {x: -112, y: -94}
+        - {x: -30, y: -94}
+        - {x: -18, y: -72}
+        - {x: -18, y: 25}
+        - {x: -45, y: 69}
+    - name: BossKidney_Attack_2
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 30, y: 73}
+        - {x: 22, y: 67}
+        - {x: 2, y: 31}
+        - {x: 2, y: -39}
+        - {x: 8, y: -78}
+        - {x: 22, y: -69}
+        - {x: 24, y: -65}
+        - {x: 29, y: -70}
+        - {x: 50, y: -90}
+        - {x: 91, y: -90}
+        - {x: 117, y: -64}
+        - {x: 117, y: 38}
+        - {x: 84, y: 73}
+      - - {x: -81, y: 74}
+        - {x: -114, y: 45}
+        - {x: -117, y: 23}
+        - {x: -117, y: -75}
+        - {x: -115, y: -84}
+        - {x: -96, y: -89}
+        - {x: -2, y: -89}
+        - {x: -2, y: 74}
+    - name: BossKidney_Attack_3
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 512
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 94, y: 63}
+        - {x: 34, y: 63}
+        - {x: 16, y: 48}
+        - {x: 16, y: -94}
+        - {x: 31, y: -100}
+        - {x: 101, y: -100}
+        - {x: 131, y: -77}
+        - {x: 131, y: 8}
+        - {x: 115, y: 53}
+      - - {x: -10, y: -74}
+        - {x: -7, y: -77}
+        - {x: 4, y: -84}
+        - {x: 11, y: -37}
+        - {x: 11, y: 15}
+        - {x: 0, y: 48}
+        - {x: -22, y: 65}
+        - {x: -61, y: 65}
+        - {x: -84, y: 52}
+        - {x: -104, y: 4}
+        - {x: -104, y: -84}
+        - {x: -103, y: -88}
+        - {x: -72, y: -98}
+        - {x: -31, y: -98}
+        - {x: -20, y: -80}
+        - {x: -14, y: -63}
+        - {x: -15, y: -47}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

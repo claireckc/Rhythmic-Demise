@@ -30,6 +30,9 @@ public class PlayerData
     //settings
     public float globalVolume, effectsVolume, buttonAlpha;
 
+    //for tutorial
+    public bool firstTut1, firstTut2, firstTut3, firstResource;
+
     private Troop tp;
     private Skills sk;
     private MainMap newMap;
@@ -56,6 +59,8 @@ public class PlayerData
         attackBonus = 0;
         defenseBonus = 0;
         expMultiplier = 1f;
+
+        firstTut1 = firstTut2 = firstTut3 = firstResource = true;
 
         //for troop data
         for (int i = 0; i < 3; i++)

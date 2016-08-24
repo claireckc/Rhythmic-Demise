@@ -1,0 +1,131 @@
+fileFormatVersion: 2
+guid: c5d734942c6cbd047aefbe059446ba02
+timeCreated: 1471808373
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: DiabeticPriest_Attack_0
+    21300002: DiabeticPriest_Attack_1
+    21300004: DiabeticPriest_Attack_2
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: DiabeticPriest_Attack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -67, y: 23}
+        - {x: -90, y: -6}
+        - {x: -90, y: -59}
+        - {x: -77, y: -71}
+        - {x: -68, y: -72}
+        - {x: 71, y: -72}
+        - {x: 73, y: -69}
+        - {x: 73, y: 19}
+        - {x: 69, y: 23}
+    - name: DiabeticPriest_Attack_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 41, y: -51}
+        - {x: 47, y: -66}
+        - {x: 54, y: -65}
+        - {x: 63, y: -61}
+        - {x: 87, y: -40}
+        - {x: 87, y: -9}
+        - {x: 77, y: 23}
+        - {x: -97, y: 23}
+        - {x: -97, y: -64}
+        - {x: -55, y: -72}
+        - {x: 32, y: -72}
+        - {x: 34, y: -56}
+        - {x: 39, y: -46}
+        - {x: 39, y: -44}
+    - name: DiabeticPriest_Attack_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -67, y: 23}
+        - {x: -90, y: -6}
+        - {x: -90, y: -59}
+        - {x: -77, y: -71}
+        - {x: -68, y: -72}
+        - {x: 71, y: -72}
+        - {x: 73, y: -69}
+        - {x: 73, y: 19}
+        - {x: 69, y: 23}
+      - - {x: 66, y: -11}
+        - {x: 66, y: -44}
+        - {x: 69, y: -46}
+        - {x: 99, y: -46}
+        - {x: 101, y: -40}
+        - {x: 101, y: -11}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
