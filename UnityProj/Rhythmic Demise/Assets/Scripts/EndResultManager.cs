@@ -25,6 +25,8 @@ public class EndResultManager : MonoBehaviour {
         if (ArmyController.armyController.army.Count <= 0)
         {
             audio.Stop();
+            GameObject.Find("Game Music").SendMessage("EndGameMusic");
+            GameObject.Find("Game Music").SendMessage("PlayGameOver");
             anim.SetTrigger("GameOver");
         }
         else if (ArmyController.armyController.currPos.name == "EndPoint")
@@ -56,6 +58,7 @@ public class EndResultManager : MonoBehaviour {
 
         if (isComplete && !done)
         {
+            GameObject.Find("Game Music").SendMessage("PlayVictory");
             StopGame();
         }
 	}

@@ -58,6 +58,12 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -69,7 +75,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\DontDestroyOnLoad.cs" />
     <Compile Include="Assets\EndStage.cs" />
+    <Compile Include="Assets\GameMusic.cs" />
     <Compile Include="Assets\PathColliderController.cs" />
     <Compile Include="Assets\Scenes\SkillsManager.cs" />
     <Compile Include="Assets\Scripts\Beat\BeatSpawner.cs" />

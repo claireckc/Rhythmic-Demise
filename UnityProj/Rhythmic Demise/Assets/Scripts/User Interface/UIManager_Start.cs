@@ -5,22 +5,20 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class UIManager_Start : MonoBehaviour
-{
-
-    static UIManager_Start instance;
+{ 
     //Canvas
     public Canvas optionCanvas, aboutCanvas, volumeCanvas, startCanvas;
     public Slider sfxSlider, bgSlider, buttonSlider;
-    UnityEngine.UI.Button newGameButton, continueButton;
+    Text startText;
+    
+    UnityEngine.UI.Button confirmButton, cancelButton;
+    GameObject eraseModel;
 
-    UnityEngine.UI.Button[] startCanvasButtons, optionCanvasButtons;
+    AudioSource selectClick, bgmUI, stageMusic, bossMusic;
+
 
     void Awake()
     {
-        //optionCanvas = optionCanvas.GetComponent<Canvas>();
-        aboutCanvas = aboutCanvas.GetComponent<Canvas>();
-        volumeCanvas = volumeCanvas.GetComponent<Canvas>();
-
         sfxSlider = sfxSlider.GetComponent<Slider>();
         bgSlider = bgSlider.GetComponent<Slider>();
         buttonSlider = buttonSlider.GetComponent<Slider>();
@@ -28,77 +26,85 @@ public class UIManager_Start : MonoBehaviour
         sfxSlider.onValueChanged.AddListener(delegate { SfxSliderChange(); });
         bgSlider.onValueChanged.AddListener(delegate { BackgroundSliderChange(); });
         buttonSlider.onValueChanged.AddListener(delegate { ButtonSiderChange(); });
+        eraseModel = GameObject.Find("OptionCanvas/ConfirmPanel");
+        confirmButton = GameObject.Find("OptionCanvas/ConfirmPanel/YesButton").GetComponent<UnityEngine.UI.Button>();
+        cancelButton = GameObject.Find("OptionCanvas/ConfirmPanel/NoButton").GetComponent<UnityEngine.UI.Button>();
 
-        newGameButton = GameObject.Find("Start/StartButton").GetComponent<UnityEngine.UI.Button>();
-        continueButton = GameObject.Find("Start/ContinueButton").GetComponent<UnityEngine.UI.Button>();
+
+        startText = GameObject.Find("Start/StartButton").GetComponent<Text>();
     }
 
     void Start()
     {
-        print("Start: " + PlayerScript.playerdata.pathogenType);
+        SetupAudio();
         startCanvas.enabled = true;
         optionCanvas.enabled = false;
         aboutCanvas.enabled = false;
         volumeCanvas.enabled = false;
+        eraseModel.SetActive(false);
 
-        newGameButton.enabled = continueButton.enabled = false;
-
-        if (PlayerScript.playerdata.pathogenType != Enums.CharacterType.None)
+        if (PlayerScript.playerdata.pathogenType == Enums.CharacterType.None)
         {
-            continueButton.enabled = true;
-            newGameButton.enabled = false;
-            newGameButton.gameObject.SetActive(false);
+            startText.text = "Start New Game";
         }
         else
         {
-            newGameButton.enabled = true;
-            continueButton.enabled = false;
-            continueButton.gameObject.SetActive(false);
+            startText.text = "Continue Game";
         }
 
         sfxSlider.value = PlayerScript.playerdata.effectsVolume;
         bgSlider.value = PlayerScript.playerdata.globalVolume;
         buttonSlider.value = PlayerScript.playerdata.buttonAlpha;
 
-        GetStartComponents();
-        GetOptionComponents();
     }
-    
-    void GetOptionComponents()
+    void SetupAudio()
     {
-        optionCanvasButtons = optionCanvas.GetComponentsInChildren<UnityEngine.UI.Button>();
+        selectClick = GameObject.Find("UI Music/Select").GetComponent<AudioSource>();
+        bgmUI = GameObject.Find("UI Music/BGM").GetComponent<AudioSource>();
+        stageMusic = GameObject.Find("UI Music/Stage Music").GetComponent<AudioSource>();
+        bossMusic = GameObject.Find("UI Music/Boss Music").GetComponent<AudioSource>();
+
+        selectClick.volume = PlayerScript.playerdata.effectsVolume;
+        bgmUI.volume = PlayerScript.playerdata.globalVolume;
+
+        if (!bgmUI.isPlaying)
+            bgmUI.Play();
     }
 
-    void GetStartComponents()
+    void PlaySelectAudio()
     {
-        startCanvasButtons = startCanvas.GetComponentsInChildren<UnityEngine.UI.Button>();
+        selectClick.Play();
     }
 
-    void SetButtons(Canvas canvas, bool set)
+    void DisableAllInteractions(Canvas canvas)
     {
-        if (canvas == startCanvas)
+        UnityEngine.UI.Button[] allButtons = canvas.GetComponentsInChildren<UnityEngine.UI.Button>();
+
+        for(int i = 0; i < allButtons.Length; i++)
         {
-            for (int i = 0; i < startCanvasButtons.Length; i++)
-            {
-                startCanvasButtons[i].interactable = set;
-            }
-        }
-        else if (canvas == optionCanvas)
-        {
-            for (int i = 0; i < optionCanvasButtons.Length; i++)
-            {
-                optionCanvasButtons[i].interactable = set;
-            }
+            allButtons[i].interactable = false;
         }
     }
 
+    void EnableAllInteractions(Canvas canvas)
+    {
+        UnityEngine.UI.Button[] allButtons = canvas.GetComponentsInChildren<UnityEngine.UI.Button>();
+
+        for (int i = 0; i < allButtons.Length; i++)
+        {
+            allButtons[i].interactable = true;
+        }
+    }
     /*******************************Start components******************************/
     public void Start_ExitPress()
     {
+        PlaySelectAudio();
         Application.Quit();
     }
     public void Start_StartPress()
     {
+        PlaySelectAudio();
+
         if (PlayerScript.playerdata.pathogenType != Enums.CharacterType.None)
             Application.LoadLevel("MainMapOverview");
         else
@@ -108,8 +114,9 @@ public class UIManager_Start : MonoBehaviour
 
     public void Start_OptionPress()
     {
+        PlaySelectAudio();
         //disable components in canvas
-        SetButtons(startCanvas, false);
+        DisableAllInteractions(startCanvas);
         optionCanvas.enabled = true;
 
     }
@@ -118,13 +125,15 @@ public class UIManager_Start : MonoBehaviour
 
     public void Option_BackPress()
     {
+        PlaySelectAudio();
         optionCanvas.enabled = false;
         startCanvas.enabled = true;
-        SetButtons(startCanvas, true);
+        EnableAllInteractions(startCanvas);
     }
 
     public void Option_ErasePress()
     {
+        PlaySelectAudio();
         //create modal for confirmation here
         print("before: " + PlayerScript.playerdata.pathogenType);
         if (PlayerScript.playerdata.pathogenType != Enums.CharacterType.None)
@@ -139,34 +148,55 @@ public class UIManager_Start : MonoBehaviour
 
     public void Option_VolumePress()
     {
+        PlaySelectAudio();
         volumeCanvas.enabled = true;
         optionCanvas.enabled = false;
-        SetButtons(optionCanvas, false);
+        DisableAllInteractions(optionCanvas);
     }
 
     public void Option_AboutPress()
     {
+        PlaySelectAudio();
         aboutCanvas.enabled = true;
         optionCanvas.enabled = false;
+    }
+
+    public void ShowEraseModal()
+    {
+        PlaySelectAudio();
+        eraseModel.SetActive(true);
+        DisableAllInteractions(optionCanvas);
+        confirmButton.interactable = true;
+        cancelButton.interactable = true;
+    }
+
+    public void CancelDelete()
+    {
+        PlaySelectAudio();
+        eraseModel.SetActive(false);
+        EnableAllInteractions(optionCanvas);
     }
 
     /***************************About Component**********************************/
     public void About_BackPress()
     {
+        PlaySelectAudio();
         aboutCanvas.enabled = false;
         optionCanvas.enabled = true;
-        print("Clicked back in about page");
+        EnableAllInteractions(optionCanvas);
     }
 
     /*******************************Volume components******************************/
     public void SfxSliderChange()
     {
         PlayerScript.playerdata.effectsVolume = sfxSlider.value;
+        UpdateVolume();
     }
 
     public void BackgroundSliderChange()
     {
         PlayerScript.playerdata.globalVolume = bgSlider.value;
+        UpdateVolume();
     }
 
     public void ButtonSiderChange()
@@ -176,10 +206,19 @@ public class UIManager_Start : MonoBehaviour
 
     public void Volume_BackPress()
     {
+        PlaySelectAudio();
         volumeCanvas.enabled = false;
         optionCanvas.enabled = true;
-        SetButtons(optionCanvas, true);
+        EnableAllInteractions(optionCanvas);
         SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
-       // AudioListener.volume = bgSlider.value;
+    }
+
+    void UpdateVolume()
+    {
+        selectClick.volume = PlayerScript.playerdata.effectsVolume;
+        bgmUI.volume = PlayerScript.playerdata.globalVolume;
+        stageMusic.volume = PlayerScript.playerdata.globalVolume / 2;
+        bossMusic.volume = PlayerScript.playerdata.globalVolume / 2;
+
     }
 }

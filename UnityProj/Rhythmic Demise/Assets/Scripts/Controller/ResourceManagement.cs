@@ -32,6 +32,9 @@ public class ResourceManagement : MonoBehaviour
 
     GameObject resourceTutorial;
 
+    AudioSource selectClick, bgmUI;
+
+    
     void Start()
     {
         firstTutorial = true;
@@ -47,6 +50,8 @@ public class ResourceManagement : MonoBehaviour
 
         if (PlayerScript.playerdata.firstResource)
             resourceTutorial = GameObject.Find("Tutorial Manager");
+
+        SetupAudio();
     }
 
     public void StartMain()
@@ -80,6 +85,23 @@ public class ResourceManagement : MonoBehaviour
 
         messageText = messageText.GetComponent<Text>();
         textAnim = textAnim.GetComponent<Animator>();
+    }
+
+    void SetupAudio()
+    {
+        selectClick = GameObject.Find("UI Music/Select").GetComponent<AudioSource>();
+        bgmUI = GameObject.Find("UI Music/BGM").GetComponent<AudioSource>();
+
+        selectClick.volume = PlayerScript.playerdata.effectsVolume;
+        bgmUI.volume = PlayerScript.playerdata.globalVolume;
+
+        if (!bgmUI.isPlaying)
+            bgmUI.Play();
+    }
+
+    void PlaySelectAudio()
+    {
+        selectClick.Play();
     }
 
     public void InitMain()
@@ -213,6 +235,7 @@ public class ResourceManagement : MonoBehaviour
     {
         if (HasTeam() && HasLeader())
         {
+            PlaySelectAudio();
             switch (PlayerScript.playerdata.clickedMap)
             {
                 case Enums.MainMap.Mouth:
@@ -405,6 +428,7 @@ public class ResourceManagement : MonoBehaviour
 
     public void Slot1_Click()
     {
+        PlaySelectAudio();
         chooseCanvas.enabled = true;
         playButton.interactable = false;
         slotClicked = 1;
@@ -420,6 +444,7 @@ public class ResourceManagement : MonoBehaviour
 
     public void Slot2_Click()
     {
+        PlaySelectAudio();
         chooseCanvas.enabled = true;
         playButton.interactable = false;
         slotClicked = 2;
@@ -427,6 +452,7 @@ public class ResourceManagement : MonoBehaviour
 
     public void Slot3_Click()
     {
+        PlaySelectAudio();
         chooseCanvas.enabled = true;
         playButton.interactable = false;
         slotClicked = 3;
@@ -434,6 +460,7 @@ public class ResourceManagement : MonoBehaviour
 
     public void Slot1_Plus()
     {
+        PlaySelectAudio();
         if (PlayerScript.playerdata.troopSelected[0].troop.job != Enums.JobType.None)
         {
             if (PlayerScript.playerdata.totalEnergy >= PlayerScript.playerdata.troopSelected[0].troop.energyNeeded && PlayerScript.playerdata.totalEnergy != 0)
@@ -449,6 +476,7 @@ public class ResourceManagement : MonoBehaviour
 
     public void Slot2_Plus()
     {
+        PlaySelectAudio();
         if (PlayerScript.playerdata.troopSelected[1].troop.job != Enums.JobType.None)
         {
             if (PlayerScript.playerdata.totalEnergy >= PlayerScript.playerdata.troopSelected[1].troop.energyNeeded && PlayerScript.playerdata.totalEnergy != 0)
@@ -464,6 +492,7 @@ public class ResourceManagement : MonoBehaviour
 
     public void Slot3_Plus()
     {
+        PlaySelectAudio();
         if (PlayerScript.playerdata.troopSelected[2].troop.job != Enums.JobType.None)
         {
             if (PlayerScript.playerdata.totalEnergy >= PlayerScript.playerdata.troopSelected[2].troop.energyNeeded && PlayerScript.playerdata.totalEnergy != 0)
@@ -479,6 +508,7 @@ public class ResourceManagement : MonoBehaviour
 
     public void Slot1_Minus()
     {
+        PlaySelectAudio();
         if (PlayerScript.playerdata.troopSelected[0].troop.job != Enums.JobType.None && PlayerScript.playerdata.troopSelected[0].count > 0)
         {
             PlayerScript.playerdata.totalEnergy += PlayerScript.playerdata.troopSelected[0].troop.energyNeeded;
@@ -497,6 +527,7 @@ public class ResourceManagement : MonoBehaviour
 
     public void Slot2_Minus()
     {
+        PlaySelectAudio();
         if (PlayerScript.playerdata.troopSelected[1].troop.job != Enums.JobType.None && PlayerScript.playerdata.troopSelected[1].count > 0)
         {
             PlayerScript.playerdata.totalEnergy += PlayerScript.playerdata.troopSelected[1].troop.energyNeeded;
@@ -514,6 +545,7 @@ public class ResourceManagement : MonoBehaviour
 
     public void Slot3_Minus()
     {
+        PlaySelectAudio();
         if (PlayerScript.playerdata.troopSelected[2].troop.job != Enums.JobType.None && PlayerScript.playerdata.troopSelected[2].count > 0)
         {
             PlayerScript.playerdata.totalEnergy += PlayerScript.playerdata.troopSelected[2].troop.energyNeeded;
@@ -531,6 +563,7 @@ public class ResourceManagement : MonoBehaviour
 
     public void Management_BackPress()
     {
+        PlaySelectAudio();
         Application.LoadLevel("MouthStage");
     }
 
@@ -757,6 +790,7 @@ public class ResourceManagement : MonoBehaviour
 
     public void ChooseCanvas_BackPress()
     {
+        PlaySelectAudio();
         if (PlayerScript.playerdata.firstResource)
         {
             resourceTutorial.SendMessage("ActivateFinalTutorial");
@@ -770,6 +804,7 @@ public class ResourceManagement : MonoBehaviour
 
     public void Choose_KnightLeader()
     {
+        PlaySelectAudio();
         PlayerScript.playerdata.leaderType = Enums.JobType.Knight;
         PrintMessage("Knight is now the leader.");
         UpdateLeaderButton();
@@ -779,12 +814,14 @@ public class ResourceManagement : MonoBehaviour
     }
     public void Choose_ArcherLeader()
     {
+        PlaySelectAudio();
         PlayerScript.playerdata.leaderType = Enums.JobType.Archer;
         PrintMessage("Archer is now the leader.");
         UpdateLeaderButton();
     }
     public void Choose_PriestLeader()
     {
+        PlaySelectAudio();
         PlayerScript.playerdata.leaderType = Enums.JobType.Priest;
         PrintMessage("Priest is now the leader.");
         UpdateLeaderButton();
@@ -820,6 +857,7 @@ public class ResourceManagement : MonoBehaviour
     }
     public void Choose_KnightPress()
     {
+        PlaySelectAudio();
         bool allowed = true;
         for (int i = 0; i < PlayerScript.playerdata.troopSelected.Count; i++)
         {
@@ -851,6 +889,7 @@ public class ResourceManagement : MonoBehaviour
 
     public void Choose_ArcherPress()
     {
+        PlaySelectAudio();
         bool allowed = true;
 
         for (int i = 0; i < PlayerScript.playerdata.troopSelected.Count; i++)
@@ -876,6 +915,7 @@ public class ResourceManagement : MonoBehaviour
 
     public void Choose_PriestPress()
     {
+        PlaySelectAudio();
         bool allowed = true;
 
         for (int i = 0; i < PlayerScript.playerdata.troopSelected.Count; i++)
@@ -902,6 +942,7 @@ public class ResourceManagement : MonoBehaviour
 
     public void SkillPress()
     {
+        PlaySelectAudio();
         skillManager.SendMessage("Show", null);
 
         if (PlayerScript.playerdata.firstResource)

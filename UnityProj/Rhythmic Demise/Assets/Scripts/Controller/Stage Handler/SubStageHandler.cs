@@ -9,11 +9,30 @@ public class SubStageHandler : MonoBehaviour
     public RaycastHit2D rayHit;
     private GameObject obj;
 
+    AudioSource selectClick, bgmUI;
+
+    void SetupAudio()
+    {
+        selectClick = GameObject.Find("UI Music/Select").GetComponent<AudioSource>();
+        bgmUI = GameObject.Find("UI Music/BGM").GetComponent<AudioSource>();
+
+        selectClick.volume = PlayerScript.playerdata.effectsVolume;
+        bgmUI.volume = PlayerScript.playerdata.globalVolume;
+
+        if (!bgmUI.isPlaying)
+            bgmUI.Play();
+    }
+
+    void PlaySelectAudio()
+    {
+        selectClick.Play();
+    }
+
     // Use this for initialization
     void Start()
     {
-
         platform = Application.platform;
+        SetupAudio();
     }
 
     // Update is called once per frame
@@ -62,7 +81,7 @@ public class SubStageHandler : MonoBehaviour
         rayHit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, 1 << 15);
         if (rayHit.collider != null)
         {
-            print("Ray hit: " + rayHit.collider.gameObject.tag);
+            PlaySelectAudio();
             EnterLevel(rayHit.collider.gameObject.tag);
         }
     }
@@ -92,6 +111,7 @@ public class SubStageHandler : MonoBehaviour
 
     public void Map_ReturnClick()
     {
+        PlaySelectAudio();
         PlayerScript.playerdata.clickedStageNumber = 0;
         Application.LoadLevel("MainMapOverview");
     }

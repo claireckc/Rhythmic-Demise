@@ -11,12 +11,11 @@ public class TextManager : MonoBehaviour
     GameObject tutManager;
 
     //for first tutorial scene
-    AudioSource gameAudio, tutorialAudio;
+    AudioSource gameAudio;
 
     public TextAsset tutorialText;
     string[] content;
     int currentLine, endLine;
-    bool showText;
     GameObject textPanel;
     Text panelText;
     GameObject troopArrows, controlsArrows, resourceArrows, pauseArrows;
@@ -26,6 +25,7 @@ public class TextManager : MonoBehaviour
 
     //for third tutorial scene
     GameObject introPanel, xplainPanel, bossPanel, closePanel;
+    AudioSource selectClick;
 
     void Start()
     {
@@ -34,11 +34,13 @@ public class TextManager : MonoBehaviour
         notePosition = GameObject.Find("Note Position");
         iconPosition = GameObject.Find("IconPosition");
         gameAudio = GameObject.Find("Audio Source").GetComponent<AudioSource>();
+        selectClick = GameObject.Find("UI Music/Select").GetComponent<AudioSource>();
 
         if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && PlayerScript.playerdata.clickedStageNumber == 1)
         {
             if (PlayerScript.playerdata.firstTut1)
             {
+                gameAudio.Pause();
                 if (tutorialText != null)
                     content = (tutorialText.text.Split('\n'));
 
@@ -52,8 +54,6 @@ public class TextManager : MonoBehaviour
                 controlsArrows = GameObject.Find("Tutorial Canvas/ControlsArrows");
                 resourceArrows = GameObject.Find("Tutorial Canvas/ResourceArrow");
                 pauseArrows = GameObject.Find("Tutorial Canvas/Pause Arrow");
-                
-                tutorialAudio = GameObject.Find("Tutorial Audio").GetComponent<AudioSource>();
 
                 textPanel.SetActive(true);
                 panelText.text = content[currentLine];
@@ -63,8 +63,6 @@ public class TextManager : MonoBehaviour
                 resourceArrows.SetActive(false);
                 pauseArrows.SetActive(false);
 
-                gameAudio.Stop();
-                tutorialAudio.Stop();
             }
             else
             {
@@ -75,16 +73,17 @@ public class TextManager : MonoBehaviour
                 controlsArrows = GameObject.Find("Tutorial Canvas/ControlsArrows");
                 resourceArrows = GameObject.Find("Tutorial Canvas/ResourceArrow");
                 pauseArrows = GameObject.Find("Tutorial Canvas/Pause Arrow");
-                
+
                 DestroyAll();
             }
         }
-        else if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && PlayerScript.playerdata.clickedStageNumber == 2)
+        else if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && PlayerScript.playerdata.clickedStageNumber == 2)
         {
-                explainPanel = GameObject.Find("Tutorial Canvas/Explain Panel");
-                enemyPanel = GameObject.Find("Tutorial Canvas/Enemy Panel");
-                riskPanel = GameObject.Find("Tutorial Canvas/Risk Panel");
-                selectPanel = GameObject.Find("Tutorial Canvas/Select Panel");
+            explainPanel = GameObject.Find("Tutorial Canvas/Explain Panel");
+            enemyPanel = GameObject.Find("Tutorial Canvas/Enemy Panel");
+            riskPanel = GameObject.Find("Tutorial Canvas/Risk Panel");
+            selectPanel = GameObject.Find("Tutorial Canvas/Select Panel");
+
             if (PlayerScript.playerdata.firstTut2)
             {
                 explainPanel.SetActive(false);
@@ -95,7 +94,7 @@ public class TextManager : MonoBehaviour
             else
                 DestroyAll();
         }
-        else if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && PlayerScript.playerdata.clickedStageNumber == 3)
+        else if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && PlayerScript.playerdata.clickedStageNumber == 3)
         {
             introPanel = GameObject.Find("Tutorial Canvas/IntroPanel");
             xplainPanel = GameObject.Find("Tutorial Canvas/ExplainPanel");
@@ -114,6 +113,11 @@ public class TextManager : MonoBehaviour
         }
     }
 
+    void PlaySelectAudio()
+    {
+        selectClick.Play();
+    }
+
     void DestroyAll()
     {
         Destroy(tutorialCanvas.gameObject);
@@ -129,23 +133,16 @@ public class TextManager : MonoBehaviour
         panelText.text = content[currentLine];
         Time.timeScale = 0f;
         textPanel.SetActive(true);
-        if(currentLine != 0)
+        /*if(currentLine != 0)
         {
-            gameAudio.Stop();
-            tutorialAudio.Play();
-        }
+            gameAudio.Pause();
+        }*/
     }
 
     void HidePanel()
     {
         textPanel.SetActive(false);
         Time.timeScale = 1f;
-
-        if (tutorialAudio.isPlaying)
-        {
-            tutorialAudio.Stop();
-            gameAudio.Play();
-        }
     }
 
     /*************************************************Tutorial 3*************************************************/
@@ -154,6 +151,7 @@ public class TextManager : MonoBehaviour
         introPanel.SetActive(true);
         Time.timeScale = 0f;
         gameAudio.Pause();
+        GameObject.Find("Game Music").SendMessage("PauseGameMusic");
     }
 
     void ShowClosePanel()
@@ -161,32 +159,37 @@ public class TextManager : MonoBehaviour
         closePanel.SetActive(true);
         Time.timeScale = 0f;
         gameAudio.Pause();
+        GameObject.Find("Game Music").SendMessage("PauseGameMusic");
     }
 
     public void IntroPanel_Click()
     {
+        PlaySelectAudio();
         xplainPanel.SetActive(true);
         HideTutorialPanel(introPanel, false);
     }
 
     public void ExplainPanel_Click()
     {
+        PlaySelectAudio();
         bossPanel.SetActive(true);
         HideTutorialPanel(xplainPanel, false);
     }
 
     public void BossPanel_Click()
     {
+        PlaySelectAudio();
         HideTutorialPanel(bossPanel, true);
     }
 
     public void ClosePanel_Click()
     {
+        PlaySelectAudio();
         HideTutorialPanel(closePanel, true);
         tutManager.SendMessage("PlaySkill");
         TutorialManager.TutManager.final = true;
     }
-    
+
     /*************************************************Tutorial 2*************************************************/
     void ShowTutorial2Panel()
     {
@@ -194,6 +197,7 @@ public class TextManager : MonoBehaviour
         //pause the game
         Time.timeScale = 0f;
         gameAudio.Pause();
+        GameObject.Find("Game Music").SendMessage("PauseGameMusic");
     }
 
     void HideTutorialPanel(GameObject panel, bool music)
@@ -204,49 +208,62 @@ public class TextManager : MonoBehaviour
         if (music)
         {
             if (!gameAudio.isPlaying)
+            {
                 gameAudio.Play();
+                GameObject.Find("Game Music").SendMessage("UnPauseGameMusic");
+            }
             Time.timeScale = 1f;
         }
         else
         {
             if (gameAudio.isPlaying)
+            {
                 gameAudio.Pause();
+                GameObject.Find("Game Music").SendMessage("PauseGameMusic");
+
+            }
         }
 
     }
 
     public void Tutorial2Explain_Click()
     {
+        PlaySelectAudio();
         enemyPanel.SetActive(true);
         HideTutorialPanel(explainPanel, false);
     }
 
     public void Tutorial2Enemy_Click()
     {
+        PlaySelectAudio();
         riskPanel.SetActive(true);
         HideTutorialPanel(enemyPanel, false);
     }
 
     public void Tutorial2Risk_Click()
     {
+        PlaySelectAudio();
         selectPanel.SetActive(true);
         HideTutorialPanel(riskPanel, false);
     }
-    
+
     public void Tutorial2Top_Click()
     {
+        PlaySelectAudio();
         tutManager.SendMessage("PlayMoveUp");
         HideTutorialPanel(selectPanel, true);
     }
 
     public void Tutorial2Forward_Click()
     {
+        PlaySelectAudio();
         tutManager.SendMessage("PlayMoveRight");
         HideTutorialPanel(selectPanel, true);
     }
 
     public void Tutorial2Bottom_Click()
     {
+        PlaySelectAudio();
         tutManager.SendMessage("PlayMoveDown");
         HideTutorialPanel(selectPanel, true);
     }
@@ -256,7 +273,7 @@ public class TextManager : MonoBehaviour
     {
         if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
         {
-            print(currentLine);
+            PlaySelectAudio();
             //maximum line number is 9
             if (currentLine <= endLine)
             {
@@ -288,7 +305,8 @@ public class TextManager : MonoBehaviour
                         //to line 5(introduce beat)
                         currentLine++;
                         pauseArrows.SetActive(false);
-                        tutorialAudio.Play();
+                        gameAudio.Play();
+                        GameObject.Find("Game Music").SendMessage("PlayGameMusic");
                         break;
                     case 5:
                         //to line 6(introduce forward control)
@@ -300,7 +318,6 @@ public class TextManager : MonoBehaviour
                         currentLine++;
                         break;
                     case 7:
-                        //call show first
                         //at line 8(introduce attack)
                         HidePanel();
                         tutManager.SendMessage("PlayAttack");
@@ -320,8 +337,6 @@ public class TextManager : MonoBehaviour
                 if (textPanel.active)
                     panelText.text = content[currentLine];
             }
-            else
-                showText = false;
         }
     }
 }

@@ -159,6 +159,9 @@ public class ArmyController : MonoBehaviour {
                     //second tutorial, only appear in movingpt2
                     movingPt1 = GameObject.Find("MovingPoints/MovingPoint1").GetComponent<MovingPoint>();
                     movingPt2 = GameObject.Find("MovingPoints/MovingPoint2").GetComponent<MovingPoint>();
+                    movingPt3 = GameObject.Find("MovingPoints/Path1/MovingPoint3.1").GetComponent<MovingPoint>();
+                    movingPt4 = GameObject.Find("MovingPoints/Path2/MovingPoint4.1").GetComponent<MovingPoint>();
+                    movingPt5 = GameObject.Find("MovingPoints/Path3/MovingPoint5.1").GetComponent<MovingPoint>();
                     endPoint = GameObject.Find("MovingPoints/EndPoint").GetComponent<MovingPoint>();
                     break;
                 case 3: //boss stage
@@ -257,11 +260,12 @@ public class ArmyController : MonoBehaviour {
                     SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
                 }
 
-                if (currPos != movingPt1 && currPos != movingPt2 && !TutorialManager.TutManager.tut2End)
+                if(currPos == movingPt3 || currPos == movingPt4 || currPos == movingPt5)
                 {
                     tutManager.SendMessage("HideAll");
                     TutorialManager.TutManager.tut2End = true;
-                    textManager.SendMessage("DestroyAll");
+                    //textManager.SendMessage("DestroyAll");
+                    prevPoint = currPos;
                 }
             }
         }

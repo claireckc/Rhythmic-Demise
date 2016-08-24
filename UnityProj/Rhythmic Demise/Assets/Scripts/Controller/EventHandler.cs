@@ -22,6 +22,25 @@ public class EventHandler : MonoBehaviour {
 
     bool interact;
 
+    AudioSource selectClick, bgmUI;
+    
+    void SetupAudio()
+    {
+        selectClick = GameObject.Find("UI Music/Select").GetComponent<AudioSource>();
+        bgmUI = GameObject.Find("UI Music/BGM").GetComponent<AudioSource>();
+
+        selectClick.volume = PlayerScript.playerdata.effectsVolume;
+        bgmUI.volume = PlayerScript.playerdata.globalVolume;
+
+        if (!bgmUI.isPlaying)
+            bgmUI.Play();
+    }
+
+    void PlaySelectAudio()
+    {
+        selectClick.Play();
+    }
+    
     // Use this for initialization
     void Start ()
     {
@@ -57,6 +76,8 @@ public class EventHandler : MonoBehaviour {
 
         dFontSize = 40;
         iFontSize = 32;
+
+        SetupAudio();
     }
 
     void BlockInteraction()
@@ -127,14 +148,14 @@ public class EventHandler : MonoBehaviour {
         rayHit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, 1 << 13);
        if(rayHit.collider != null)
         {
+            PlaySelectAudio();
             SetAccess(rayHit.collider.gameObject.tag);
         }
     }
 
     public void Map_ReturnClick()
     {
-        //Application.LoadLevel("StartScreen");
-        Debug.Log("Pressed!");
+        PlaySelectAudio();
         SceneManager.LoadScene("StartScreen");
     }
 

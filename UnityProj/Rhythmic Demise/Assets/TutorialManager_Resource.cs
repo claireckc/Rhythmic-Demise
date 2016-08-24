@@ -20,6 +20,25 @@ public class TutorialManager_Resource : MonoBehaviour
     GameObject skillIntroPanel, skillChoosePanel, backButtonArrow;
     UnityEngine.UI.Button firstKnightSkill_button, backButton;
 
+    AudioSource selectClick, bgmUI;
+
+    void SetupAudio()
+    {
+        selectClick = GameObject.Find("UI Music/Select").GetComponent<AudioSource>();
+        bgmUI = GameObject.Find("UI Music/BGM").GetComponent<AudioSource>();
+
+        selectClick.volume = PlayerScript.playerdata.effectsVolume;
+        bgmUI.volume = PlayerScript.playerdata.globalVolume;
+
+        if (!bgmUI.isPlaying)
+            bgmUI.Play();
+    }
+
+    void PlaySelectAudio()
+    {
+        selectClick.Play();
+    }
+
     void Start()
     {
 
@@ -30,6 +49,8 @@ public class TutorialManager_Resource : MonoBehaviour
         InitMainTutorial();
         InitSkillTutorial();
         InitChooseTutorial();
+
+        SetupAudio();
 
         if (PlayerScript.playerdata.firstResource)
         {
@@ -173,6 +194,7 @@ public class TutorialManager_Resource : MonoBehaviour
 
     public void IntroPanel_Click()
     {
+        PlaySelectAudio();
         slotPanel.SetActive(true);
         HidePanel(introPanel);
         slot1_button.interactable = true;
@@ -189,6 +211,7 @@ public class TutorialManager_Resource : MonoBehaviour
 
     public void ChooseIntro_Click()
     {
+        PlaySelectAudio();
         knightPanel.SetActive(true);
         HidePanel(chooseIntroPanel);
         DisableAllInteractions(chooseCanvas);
@@ -205,6 +228,7 @@ public class TutorialManager_Resource : MonoBehaviour
 
     public void PlusPanelClick()
     {
+        PlaySelectAudio();
         slot2Panel.SetActive(true);
         DisableAllInteractions(mainCanvas);
         slot1_button.interactable = true;
@@ -259,7 +283,7 @@ public class TutorialManager_Resource : MonoBehaviour
 
     public void SkillIntroPanel_Click()
     {
-        print("Skill intro clicked!");
+        PlaySelectAudio();
         skillChoosePanel.SetActive(true);
         HidePanel(skillIntroPanel);
         firstKnightSkill_button.interactable = true;

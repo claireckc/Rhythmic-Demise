@@ -3,7 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour
+{
     public static GameController gameController;
 
     private string moveSequence;
@@ -48,7 +49,7 @@ public class GameController : MonoBehaviour {
 
 
         if (gameController == null) gameController = this;
-        
+
         init();
 
         FloatingTextController.Initialize();
@@ -56,7 +57,7 @@ public class GameController : MonoBehaviour {
         InvokeRepeating("spawnBeat", 0, 0.5f);
 
         Invoke("updateUI", startDelayTime);
-	}
+    }
 
     void init()
     {
@@ -74,9 +75,10 @@ public class GameController : MonoBehaviour {
 
         moveSequence = "";
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         if (moveSequence.Length == 1)
         {
             inputActionTurn = true;
@@ -134,7 +136,7 @@ public class GameController : MonoBehaviour {
             clearSequence();
         }
 
-	}
+    }
 
     void spawnBeat()
     {
@@ -156,10 +158,11 @@ public class GameController : MonoBehaviour {
                 inputActionTurn = false;
 
                 clearSequence();
-                
-                if(AccessTutorial() && !TutorialManager.TutManager.tut3End
-                    || AccessTutorial() && !TutorialManager.TutManager.tut2End)
-                     tutorialManager.SendMessage("ShowAll");
+
+                if (AccessTutorial() && !TutEnded())
+                {
+                    tutorialManager.SendMessage("ShowAll");
+                }
 
                 //reset current streak
                 currentStreak = 0;
@@ -203,7 +206,6 @@ public class GameController : MonoBehaviour {
         else if (!lastHit)
         {
             clearSequence();
-
             //reset current streak
             currentStreak = 0;
             ScoreManager.comboMultiplier = 1;
@@ -225,7 +227,7 @@ public class GameController : MonoBehaviour {
         priestCount = 0;
         knightCount = 0;
 
-        foreach(Character character in ArmyController.armyController.army)
+        foreach (Character character in ArmyController.armyController.army)
         {
             switch (character.getJobType())
             {
@@ -251,13 +253,13 @@ public class GameController : MonoBehaviour {
         moveSequence += hit;
         lastHit = true;
 
-        if (AccessTutorial())
+        if (AccessTutorial() && !TutEnded())
             TutorialCall(hit);
     }
 
     void FinalTutorial(string move)
     {
-        if(AccessTutorial())
+        if (AccessTutorial())
         {
             if (TutorialManager.TutManager.final && move == "1234")
             {
@@ -266,6 +268,16 @@ public class GameController : MonoBehaviour {
                 TutorialManager.TutManager.tut3End = true;
             }
         }
+    }
+
+    bool TutEnded()
+    {
+        if (Application.loadedLevelName == "Tutorial2Scene" && TutorialManager.TutManager.tut2End)
+            return true;
+        else if (Application.loadedLevelName == "Tutorial3Scene" && TutorialManager.TutManager.tut3End)
+            return true;
+        return false;
+
     }
 
     bool AccessTutorial()
@@ -284,7 +296,7 @@ public class GameController : MonoBehaviour {
 
     void TutorialCall(string hit)
     {
-        if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && lastHit)
+        if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && lastHit)
         {
             int index = moveSequence.Length - 1;
             bool hide = false;
@@ -467,14 +479,14 @@ public class GameController : MonoBehaviour {
                     }
                     break;
             }
-            
+
             if (hide)
             {
                 tutorialManager.SendMessage("Hide", index);
             }
             else
             {
-                if(AccessTutorial() && !TutorialManager.TutManager.tut3End)
+                if (AccessTutorial())
                     tutorialManager.SendMessage("ShowAll");
 
             }
@@ -500,6 +512,7 @@ public class GameController : MonoBehaviour {
 
     public void LoadLevel(string level)
     {
+        GameObject.Find("UI Music/BGM").GetComponent<AudioSource>().Play();
         Application.LoadLevel(level);
     }
 
