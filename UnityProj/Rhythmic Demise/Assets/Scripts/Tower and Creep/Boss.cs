@@ -6,6 +6,7 @@ public abstract class Boss : Enemy{
 
     public void Start()
     {
+        anim = gameObject.GetComponent<Animator>();
         currentHealth = maxHealth;
         playerList = new List<GameObject>();
     }

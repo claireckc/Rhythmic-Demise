@@ -18,6 +18,8 @@ public abstract class Enemy : MonoBehaviour {
 
     public GameObject healthBar;
 
+    public Animator anim;
+
     public bool IsDead
     {
         get

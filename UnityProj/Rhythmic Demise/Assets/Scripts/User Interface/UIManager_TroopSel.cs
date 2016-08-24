@@ -14,6 +14,7 @@ public class UIManager_TroopSel : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("DAMAGE: " + PlayerScript.playerdata.troopData[0].damage);
         playerdata = FindObjectOfType<PlayerScript>();
     }
 
@@ -32,8 +33,8 @@ public class UIManager_TroopSel : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
         {
-            PlayerScript.playerdata.troopData[i].damage *= PlayerScript.playerdata.attackBonus;
-            PlayerScript.playerdata.troopData[i].armor *= PlayerScript.playerdata.defenseBonus;
+            PlayerScript.playerdata.troopData[i].damage += PlayerScript.playerdata.attackBonus;
+            PlayerScript.playerdata.troopData[i].armor += PlayerScript.playerdata.defenseBonus;
         }
 
         SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
@@ -48,8 +49,8 @@ public class UIManager_TroopSel : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
         {
-            PlayerScript.playerdata.troopData[i].damage *= PlayerScript.playerdata.attackBonus;
-            PlayerScript.playerdata.troopData[i].armor *= PlayerScript.playerdata.defenseBonus;
+            PlayerScript.playerdata.troopData[i].damage += PlayerScript.playerdata.attackBonus;
+            PlayerScript.playerdata.troopData[i].armor += PlayerScript.playerdata.defenseBonus;
         }
 
         SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
