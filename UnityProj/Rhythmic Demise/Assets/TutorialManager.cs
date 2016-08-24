@@ -18,14 +18,15 @@ public class TutorialManager : MonoBehaviour
     GameObject textManager;
     bool allInvisible;
 
-    public bool tut2End;
+    public bool tut2End, tut3End;
+    public bool final;
     public Enums.TutMove currentPlaying;
 
     void Start()
     {
         TutManager = new TutorialManager();
         textManager = GameObject.Find("Text Manager");
-        currentPlaying = Enums.TutMove.None;
+        TutManager.currentPlaying = Enums.TutMove.None;
         firstTowerDead = secondTowerDead = false;
         arrow = Resources.Load<GameObject>("Prefabs/GamePlay/Right Arrow Icon");
         attack = Resources.Load<GameObject>("Prefabs/GamePlay/Attack");
@@ -36,8 +37,9 @@ public class TutorialManager : MonoBehaviour
         greenNote = Resources.Load<GameObject>("Prefabs/GamePlay/Green Note");
         yellowNote = Resources.Load<GameObject>("Prefabs/GamePlay/Yellow Note");
         scale = new Vector3(0.5f, 0.5f, 0.5f);
-        tut2End = false;
-
+        TutManager.tut3End = false;
+        TutManager.tut2End = true;
+        TutManager.final = false;
         InitNoteLocation();
     }
 
@@ -105,7 +107,9 @@ public class TutorialManager : MonoBehaviour
         {
             noteLocation[i].GetComponent<SpriteRenderer>().enabled = true;
         }
+            
     }
+
     void InitRightNotes()
     {
         //red red green yellow
@@ -181,9 +185,8 @@ public class TutorialManager : MonoBehaviour
         SetIcon(arrow, 0f);
         InitRightNotes();
         TutManager.currentPlaying = Enums.TutMove.Right;
-        if (allInvisible && tut2End)
+        if (allInvisible && TutManager.tut2End)
             ShowAll();
-        //currentPlaying = Enums.TutMove.Right;
     }
 
     public void PlayMoveUp()
@@ -191,7 +194,7 @@ public class TutorialManager : MonoBehaviour
         SetIcon(arrow, 90f);
         InitUpNotes();
         TutManager.currentPlaying = Enums.TutMove.Up;
-        if (allInvisible && tut2End)
+        if (allInvisible && TutManager.tut2End)
             ShowAll();
     }
 
@@ -200,7 +203,7 @@ public class TutorialManager : MonoBehaviour
         SetIcon(arrow, -90f);
         InitDownNotes();
         TutManager.currentPlaying = Enums.TutMove.Down;
-        if (allInvisible && tut2End)
+        if (allInvisible && TutManager.tut2End)
             ShowAll();
     }
 
@@ -209,7 +212,7 @@ public class TutorialManager : MonoBehaviour
         SetIcon(attack, 0f);
         InitAttackNotes();
         TutManager.currentPlaying = Enums.TutMove.Attack;
-        if (allInvisible && tut2End)
+        if (allInvisible && TutManager.tut2End)
             ShowAll();
     }
 
@@ -218,7 +221,7 @@ public class TutorialManager : MonoBehaviour
         SetIcon(defend, 0f);
         InitDefendNotes();
         TutManager.currentPlaying = Enums.TutMove.Defend;
-        if (allInvisible && tut2End)
+        if (allInvisible && TutManager.tut2End)
             ShowAll();
     }
 
@@ -234,9 +237,5 @@ public class TutorialManager : MonoBehaviour
     void HideIcon()
     {
         IconPos.transform.GetComponent<SpriteRenderer>().enabled = false;
-    }
-
-    void ShowNothing()
-    {
     }
 }

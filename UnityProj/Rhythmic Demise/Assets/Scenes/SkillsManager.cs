@@ -29,9 +29,11 @@ public class SkillsManager : MonoBehaviour {
     UnityEngine.UI.Button choose_KnightLeaderButton, choose_ArcherLeaderButton, choose_PriestLeaderButton;
 
     GameObject resourceManagement;
+    bool enter;
     
     // Use this for initialization
     void Start () {
+        enter = false;
         resourceManagement = GameObject.Find("UI Manager");
         GetChooseCanvasComponents();
         GetSkillCanvasComponents();
@@ -173,17 +175,33 @@ public class SkillsManager : MonoBehaviour {
 
     public void Hide_BackPress()
     {
-        print("PRessed");
+        if (PlayerScript.playerdata.firstResource) {
+            GameObject.Find("Tutorial Manager").SendMessage("DestroySkillTutorial");
+            enter = true;
+        }
+
         DisableSkillCanvasComponents();
         EnabledChooseCanvasComponents();
         resourceManagement.SendMessage("UpdateLeaderButton", null);
         skillCanvas.enabled = false;
+
+        if (enter)
+        {
+            GameObject.Find("Tutorial Manager").SendMessage("DisableChoose");
+            enter = false;
+        }
+        
     }
 
     public void KnightSel1_Press()
     {
         PlayerScript.playerdata.skillSelected = Enums.SkillName.KnightHigh;
         resourceManagement.SendMessage("PrintMessage", "KnightHigh Selected");
+
+        if (PlayerScript.playerdata.firstResource)
+        {
+            GameObject.Find("Tutorial Manager").SendMessage("ActivatePlayTutorial");
+        }
     }
 
     public void KnightSel2_Press()

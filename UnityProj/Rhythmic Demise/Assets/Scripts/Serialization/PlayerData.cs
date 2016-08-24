@@ -6,7 +6,6 @@ using UnityEngine.Serialization;
 [System.Serializable]
 public class PlayerData
 {
-
     //Resources
     public int totalResource, totalEnergy;
 
@@ -31,7 +30,7 @@ public class PlayerData
     public float globalVolume, effectsVolume, buttonAlpha;
 
     //for tutorial
-    public bool firstTut1, firstTut2, firstTut3, firstResource;
+    public bool firstTut1, firstTut2, firstTut3, firstResource, firstMap;
 
     private Troop tp;
     private Skills sk;
@@ -60,7 +59,7 @@ public class PlayerData
         defenseBonus = 0;
         expMultiplier = 1f;
 
-        firstTut1 = firstTut2 = firstTut3 = firstResource = true;
+        firstTut1 = firstTut2 = firstTut3 = firstResource = firstMap = true;
 
         //for troop data
         for (int i = 0; i < 3; i++)

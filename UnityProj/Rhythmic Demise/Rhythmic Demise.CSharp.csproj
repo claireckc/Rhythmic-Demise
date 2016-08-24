@@ -77,6 +77,7 @@
   <ItemGroup>
     <Compile Include="Assets\EndStage.cs" />
     <Compile Include="Assets\PathColliderController.cs" />
+    <Compile Include="Assets\Scenes\SkillsManager.cs" />
     <Compile Include="Assets\Scripts\Beat\BeatSpawner.cs" />
     <Compile Include="Assets\Scripts\Beat\NoteControl.cs" />
     <Compile Include="Assets\Scripts\Button.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="Assets\Scripts\Serialization\SaveLoadManager.cs" />
     <Compile Include="Assets\Scripts\StageClearManager.cs" />
     <Compile Include="Assets\Scripts\Tower and Creep\Boss.cs" />
+    <Compile Include="Assets\Scripts\Tower and Creep\BossBrain.cs" />
     <Compile Include="Assets\Scripts\Tower and Creep\BossHeart.cs" />
     <Compile Include="Assets\Scripts\Tower and Creep\BossKidney.cs" />
     <Compile Include="Assets\Scripts\Tower and Creep\BossPancreas.cs" />
@@ -130,11 +132,12 @@
     <Compile Include="Assets\Scripts\Tower and Creep\Uvula.cs" />
     <Compile Include="Assets\Scripts\User Interface\UIManager_Start.cs" />
     <Compile Include="Assets\Scripts\User Interface\UIManager_TroopSel.cs" />
-    <Compile Include="Assets\SkillsManager.cs" />
     <Compile Include="Assets\StageRateHandler.cs" />
     <Compile Include="Assets\SubRatings.cs" />
     <Compile Include="Assets\TracheaAI.cs" />
     <Compile Include="Assets\TutorialManager.cs" />
+    <Compile Include="Assets\TutorialManager_Map.cs" />
+    <Compile Include="Assets\TutorialManager_Resource.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

@@ -16,7 +16,7 @@ public class SubMap {
 
     public bool IsComplete()
     {
-        return (topComboCount >= 0);
+        return (topComboCount > 0);
     }
 
     public bool isCurrent(int clicked)

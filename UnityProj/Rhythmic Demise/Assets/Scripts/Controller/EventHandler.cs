@@ -20,6 +20,8 @@ public class EventHandler : MonoBehaviour {
     public SpriteRenderer[] partsSprite;
     GameObject stageRate;
 
+    bool interact;
+
     // Use this for initialization
     void Start ()
     {
@@ -27,9 +29,9 @@ public class EventHandler : MonoBehaviour {
         labelText = labelText.GetComponent<Text>();
         labelAnim = labelAnim.GetComponent<Animator>();
         stageRate = GameObject.Find("Map Rating");
-        print(stageRate);
         whiteColor = new Color(255f/255f, 255f/255f, 255f/255f);
         lockedColor = new Color(146f/255f, 146f/255f, 255f/255f);
+        interact = true;
 
         for (int i = 0; i < partsAnim.Length; i++)
         {
@@ -56,6 +58,16 @@ public class EventHandler : MonoBehaviour {
         dFontSize = 40;
         iFontSize = 32;
     }
+
+    void BlockInteraction()
+    {
+        interact = false;
+    }
+
+    void AllowInteraction()
+    {
+        interact = true;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -72,8 +84,11 @@ public class EventHandler : MonoBehaviour {
         }
 		else if(platform == RuntimePlatform.WindowsEditor || platform == RuntimePlatform.OSXEditor)
         {
-            if (Input.GetMouseButtonDown(0))
-                DetermineTouchPosition(Input.mousePosition);
+            if (interact)
+            {
+                if (Input.GetMouseButtonDown(0))
+                    DetermineTouchPosition(Input.mousePosition);
+            }
         }
 	}
 
