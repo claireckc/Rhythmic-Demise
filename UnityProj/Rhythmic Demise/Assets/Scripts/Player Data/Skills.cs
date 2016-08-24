@@ -3,8 +3,7 @@ using System.Collections;
 using UnityEngine.Serialization;
 
 [System.Serializable]
-public class Skills
-{
+public class Skills {
 
     public Enums.SkillName skillName;
     public float skillValue;

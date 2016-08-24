@@ -45,7 +45,6 @@ public class PlayerData
 
     public void Init()
     {
-        Debug.Log("call init in playerdata script");
         leaderType = Enums.JobType.None;
         skillSelected = Enums.SkillName.None;
         pathogenType = Enums.CharacterType.None;
@@ -198,19 +197,4 @@ public class PlayerData
             mapProgress.Add(newMap);
         }
     }
-
-    /*public void Awake()
-    {
-        if (playerdata != null)
-            Destroy(gameObject);
-        else
-        {
-            DontDestroyOnLoad(gameObject);
-            playerdata = this;
-        }
-    }
-    public void Start()
-    {
-        Init();
-    }*/
 }

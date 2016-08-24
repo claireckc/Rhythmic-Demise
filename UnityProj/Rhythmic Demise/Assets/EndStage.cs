@@ -6,15 +6,14 @@ public class EndStage : MonoBehaviour {
     MainMap currentMap;
     SubMap currentStage;
     
-    public void UpdateData(int highestStreak)
+    public void UpdateData(int stage)
     {
         currentMap = PlayerScript.playerdata.mapProgress[(int)PlayerScript.playerdata.clickedMap];
         currentStage = currentMap.stages[PlayerScript.playerdata.clickedStageNumber - 1];
         PlayerScript.playerdata.totalResource += ScoreManager.score;
-        UpdateMap(highestStreak);
+        UpdateMap();
         UpdateStars();
-        UnlockNextMap((int)PlayerScript.playerdata.clickedMap);
-        UpdatePlayerExp(PlayerScript.playerdata.clickedStageNumber);
+        UnlockNextMap(stage);
         SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
         
         for(int i = 0; i < currentMap.stages.Count; i++)
@@ -26,15 +25,11 @@ public class EndStage : MonoBehaviour {
 
     void UpdatePlayerExp(int stage)
     {
-        /*
-        1. Get player unit's level
-        2. Get stage (level) and form multiplier (player level / stage number)
-        3. call function to level up
-        */
-        for(int i = 0; i < PlayerScript.playerdata.troopSelected.Count; i++)
+        float baseExp = 1f * ((int)PlayerScript.playerdata.clickedMap * 10f) + (stage * 2.5f);
+
+        for (int i = 0; i < PlayerScript.playerdata.troopSelected.Count; i++)
         {
             PlayerScript.playerdata.expMultiplier = (float)PlayerScript.playerdata.troopSelected[i].troop.level / stage;
-            float baseExp = 1f;//get base experience from level completion, NOT COMPLETE
             PlayerScript.playerdata.troopSelected[i].troop.LevelUp(baseExp * PlayerScript.playerdata.expMultiplier);
         }
     }
@@ -48,12 +43,13 @@ public class EndStage : MonoBehaviour {
         }
     }
 
-    public void UpdateMap(int highestStreak)
+    public void UpdateMap()
     {
-        if (currentStage.topComboCount < highestStreak)
+       if(currentStage.topComboCount < ScoreManager.score)
         {
-            currentStage.topComboCount = highestStreak;
+            currentStage.topComboCount = ScoreManager.score;
         }
+       
     }
 
     public void UpdateStars()

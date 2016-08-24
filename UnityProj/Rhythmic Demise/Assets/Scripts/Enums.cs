@@ -14,7 +14,7 @@ public class Enums : MonoBehaviour {
     public enum JobType {None, Knight, Archer, Priest}
 
     [System.Serializable]
-    public enum TutMove { None, Left, Right, Up, Down, Attack, Defend, Skill }
+    public enum TutMove { None, Left, Right, Up, Down, Attack, Defend, Skill}
 
     [System.Serializable]
     public enum SkillName
@@ -46,13 +46,13 @@ public class Enums : MonoBehaviour {
     public static string[] MapName =
     {
         "Mouth", "Larnyx", "Trachea", "Lungs", "Heart", "Liver",
-        "Spleen", "Pancreas", "Kidney", "Lintes","Sintes", "Brain"
+        "Spleen", "Pancreas", "Kidney", "Sintes","Lintes", "Brain"
     };
 
     public static string[] StageName =
     {
         "MouthStage", "LarnyxStage", "TracheaStage", "LungStage", "HeartStage", 
         "LiverStage", "SpleenStage", "PancreasStage", "KidneyStage", 
-        "LargeIntesStage", "SmallIntesStage", "BrainStage"
+        "SmallIntesStage", "LargeIntesStage", "BrainStage"
     };
 }

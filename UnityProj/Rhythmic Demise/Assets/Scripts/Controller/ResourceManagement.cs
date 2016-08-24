@@ -91,9 +91,6 @@ public class ResourceManagement : MonoBehaviour
             resourceLabel.text = "Sugar:";
 
         resourceText.text = PlayerScript.playerdata.totalResource.ToString();
-        //DEBUG
-        PlayerScript.playerdata.totalEnergy = 10;
-        //
         energyText.text = PlayerScript.playerdata.totalEnergy.ToString();
 
         for (int i = 0; i < PlayerScript.playerdata.troopSelected.Count; i++)
@@ -259,7 +256,7 @@ public class ResourceManagement : MonoBehaviour
                             Application.LoadLevel("TracheaMap2");
                             break;
                         case 3:
-                            Application.LoadLevel("TracheaEventMap");
+                            //boss map not done
                             break;
                     }
                     break;
@@ -362,7 +359,7 @@ public class ResourceManagement : MonoBehaviour
                             Application.LoadLevel("LargeIntestineMap1");
                             break;
                         case 2:
-                            Application.LoadLevel("LargeIntestineMap2");
+                            Application.LoadLevel("LargeIntestineMap1");
                             break;
                         case 3:
                             Application.LoadLevel("LargeIntestineBossMap");

@@ -21,8 +21,6 @@ public class Uvula : Boss {
                 //start attacking it
                 if (Time.time >= nextActionTime)
                 {
-                    nextActionTime = Time.time + cooldown;
-                    
                     Action();
                 }
             }
@@ -31,22 +29,18 @@ public class Uvula : Boss {
 
     protected override void Action()
     {
+        nextActionTime = Time.time + cooldown;
 
-        anim.SetTrigger("Attack");
-    }
-
-    protected override void specialAction()
-    {
-        
-    }
-
-    void hitEnemy()
-    {
         Vector3 dir = closestPlayer.transform.position - this.transform.position;
         float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
 
         GameObject shoot = Instantiate(projectile, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
         shoot.SendMessage("Initialize", closestPlayer.transform.position);
         shoot.SendMessage("initDamage", damage);
+    }
+
+    protected override void specialAction()
+    {
+        
     }
 }

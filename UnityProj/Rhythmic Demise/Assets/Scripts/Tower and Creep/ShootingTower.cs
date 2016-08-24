@@ -32,11 +32,6 @@ public class ShootingTower : Tower {
     {
         nextActionTime = Time.time + cooldown;
 
-        anim.SetTrigger("Attack");
-    }
-
-    void triggerAttack()
-    {
         Vector3 dir = closestPlayer.transform.position - this.transform.position;
         float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
 

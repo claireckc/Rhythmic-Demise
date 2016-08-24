@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TutorialManager : MonoBehaviour
-{
+public class TutorialManager : MonoBehaviour {
 
     public static TutorialManager TutManager;
 
@@ -45,7 +44,7 @@ public class TutorialManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && PlayerScript.playerdata.clickedStageNumber == 1 &&
+        if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && PlayerScript.playerdata.clickedStageNumber == 1 &&
             PlayerScript.playerdata.firstTut1)
         {
             if (tower1.IsDead && !firstTowerDead)
@@ -62,7 +61,7 @@ public class TutorialManager : MonoBehaviour
                 secondTowerDead = true;
             }
         }
-
+        
     }
 
     void InitNoteLocation()
@@ -85,7 +84,7 @@ public class TutorialManager : MonoBehaviour
 
     void DestroyAll()
     {
-        for (int i = 0; i < noteLocation.Length; i++)
+        for(int i = 0; i < noteLocation.Length; i++)
             Destroy(noteLocation[i].gameObject);
         Destroy(IconPos.gameObject);
     }
@@ -94,7 +93,7 @@ public class TutorialManager : MonoBehaviour
     {
         if (!allInvisible)
         {
-            for (int i = 0; i < noteLocation.Length; i++)
+            for(int i = 0; i < noteLocation.Length; i++)
                 noteLocation[i].GetComponent<SpriteRenderer>().enabled = false;
             allInvisible = true;
         }
@@ -166,7 +165,7 @@ public class TutorialManager : MonoBehaviour
 
     void SetIcon(GameObject icon, float rotZ)
     {
-        if (IconPos.GetComponent<SpriteRenderer>().sprite != icon.GetComponent<SpriteRenderer>().sprite)
+        if(IconPos.GetComponent<SpriteRenderer>().sprite != icon.GetComponent<SpriteRenderer>().sprite)
         {
             IconPos.GetComponent<SpriteRenderer>().sprite = icon.GetComponent<SpriteRenderer>().sprite;
             IconPos.GetComponent<Animator>().runtimeAnimatorController = icon.GetComponent<Animator>().runtimeAnimatorController;
@@ -189,7 +188,7 @@ public class TutorialManager : MonoBehaviour
             ShowAll();
     }
 
-    public void PlayMoveUp()
+   public void PlayMoveUp()
     {
         SetIcon(arrow, 90f);
         InitUpNotes();
@@ -233,7 +232,7 @@ public class TutorialManager : MonoBehaviour
         if (allInvisible && tut2End)
             ShowAll();
     }
-
+    
     void HideIcon()
     {
         IconPos.transform.GetComponent<SpriteRenderer>().enabled = false;

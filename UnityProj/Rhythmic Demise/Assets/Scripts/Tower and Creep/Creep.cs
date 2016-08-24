@@ -4,28 +4,15 @@ using System.Collections;
 public class Creep : Enemy {
 
     private float movementSpeed;
-    private int type; //1 - RBC, 2 - WBC
 
 	// Use this for initialization
 	void Start () {
         movementSpeed = 1.0f;
-        anim = gameObject.GetComponent<Animator>();
-
-        Sprite s = gameObject.GetComponent<SpriteRenderer>().sprite;
-        if (s.name.Contains("RBC"))
-        {
-            type = 1;
-        }
-        else if (s.name.Contains("WBC"))
-        {
-            type = 2;
-        }
-
-        anim.SetInteger("Type", type);
 	}
 
     void Initialize(GameObject target){
         playerList.Add(target);
+        //closestPlayer = target;
     }
 
     void initHealth(float health)
@@ -56,7 +43,6 @@ public class Creep : Enemy {
             {
                 if ((transform.position - closestPlayer.transform.position).sqrMagnitude <= 1 * 1)
                 {
-                    anim.SetBool("Move", false);
                     //start attacking it
                     if (Time.time >= nextActionTime)
                     {
@@ -69,8 +55,6 @@ public class Creep : Enemy {
                     float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
                     this.transform.rotation = Quaternion.Euler(0, 0, angle);
                     transform.position = Vector2.MoveTowards(transform.position, closestPlayer.transform.position, movementSpeed * Time.deltaTime);
-
-                    anim.SetBool("Move", true);
                 }
             }
         }
@@ -80,7 +64,9 @@ public class Creep : Enemy {
     {
         nextActionTime = Time.time + cooldown;
 
-        anim.SetTrigger("Attack");
+        //Attack animation start
+        Character c = closestPlayer.GetComponent<Character>();
+        c.TakeDamage(damage);
     }
 
     protected override void FindClosestEnemy()
@@ -180,11 +166,5 @@ public class Creep : Enemy {
         healthBar.transform.localScale = new Vector3(healthNormalized,
                                                      healthBar.transform.localScale.y,
                                                      healthBar.transform.localScale.z);
-    }
-
-    void triggerHitDamage()
-    {
-        Character c = closestPlayer.GetComponent<Character>();
-        c.TakeDamage(damage);
     }
 }
