@@ -18,7 +18,8 @@ public class TutorialManager : MonoBehaviour
     GameObject textManager;
     bool allInvisible;
 
-    public bool tut2End;
+    public bool tut2End, tut3End;
+    public bool final;
     public Enums.TutMove currentPlaying;
 
     void Start()
@@ -36,7 +37,9 @@ public class TutorialManager : MonoBehaviour
         greenNote = Resources.Load<GameObject>("Prefabs/GamePlay/Green Note");
         yellowNote = Resources.Load<GameObject>("Prefabs/GamePlay/Yellow Note");
         scale = new Vector3(0.5f, 0.5f, 0.5f);
-        tut2End = false;
+        TutManager.tut3End = false;
+        TutManager.tut2End = false;
+        TutManager.final = false;
 
         InitNoteLocation();
     }

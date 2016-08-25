@@ -519,26 +519,22 @@ public class ArmyController : MonoBehaviour {
             case Enums.JobType.Knight:
                 foreach (Character c in army)
                 {
-                    //increase defense by 20%
-                    c.setArmor(c.getArmor() * 1.2f);
+                    //increase defense by 5
+                    c.setArmor(c.getArmor() + 5);
                 }
                 break;
             case Enums.JobType.Archer:
                 foreach (Character c in army)
                 {
-                    //increase damage by 20%
-                    c.setDamage(c.getDamage() * 1.2f);
+                    //increase damage by 5
+                    c.setDamage(c.getDamage() + 5);
                 }
                 break;
             case Enums.JobType.Priest:
                 foreach (Character c in army)
                 {
-                    //increase heal power by 50%
-                    if (c.getJobType() == Enums.JobType.Priest)
-                    {
-                        Priest p = c as Priest;
-                        p.setHealPower(p.getHealPower() * 1.5f);
-                    }
+                    //increase hp by 50
+                    c.addMaxHealth(50);
                 }
                 break;
         }

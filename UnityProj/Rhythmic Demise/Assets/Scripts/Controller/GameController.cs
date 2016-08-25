@@ -520,4 +520,14 @@ public class GameController : MonoBehaviour
     {
         return currentStreak;
     }
+
+    public int getHighestStreak()
+    {
+        return highestStreak;
+    }
+
+    public void setActionTurn(bool b)
+    {
+        moveActionTurn = true;
+    }
 }
