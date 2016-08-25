@@ -10,6 +10,8 @@ public class TutorialManager_Map : MonoBehaviour
     GameObject firstPanel, secondPanel;
     GameObject eventHandler;
 
+    AudioSource selectClick, bgmUI, normalStage;
+
     void Start()
     {
         tutorialCanvas = GameObject.Find("Tutorial Canvas").GetComponent<Canvas>();
@@ -17,6 +19,7 @@ public class TutorialManager_Map : MonoBehaviour
         secondPanel = GameObject.Find("Tutorial Canvas/SecondPanel");
         eventHandler = GameObject.Find("EventHandler");
 
+        SetupAudio();
         if (PlayerScript.playerdata.firstMap)
         {
             //havent started playing
@@ -38,10 +41,28 @@ public class TutorialManager_Map : MonoBehaviour
         }
     }
 
+    void SetupAudio()
+    {
+        selectClick = GameObject.Find("UI Music/Select").GetComponent<AudioSource>();
+        bgmUI = GameObject.Find("UI Music/BGM").GetComponent<AudioSource>();
+
+        selectClick.volume = PlayerScript.playerdata.effectsVolume;
+        bgmUI.volume = PlayerScript.playerdata.globalVolume;
+
+        if (!bgmUI.isPlaying)
+            bgmUI.Play();
+    }
+
+    void PlaySelectAudio()
+    {
+        selectClick.Play();
+    }
+    
     void DestroyAll()
     {
         Destroy(tutorialCanvas.gameObject);
         Destroy(gameObject);
+
     }
 
     bool IsTutorialComplete()
@@ -56,6 +77,7 @@ public class TutorialManager_Map : MonoBehaviour
 
     public void FirstPanel_Click()
     {
+        PlaySelectAudio();
         secondPanel.SetActive(true);
         HidePanel(firstPanel);
     }
@@ -63,6 +85,7 @@ public class TutorialManager_Map : MonoBehaviour
     public void SecondPanel_Click()
     {
         //activate mouth glowing
+        PlaySelectAudio();
         eventHandler.SendMessage("SetAccess", "Mouth");
         HidePanel(secondPanel);
         PlayerScript.playerdata.firstMap = false;

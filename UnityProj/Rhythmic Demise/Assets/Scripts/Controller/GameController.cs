@@ -3,7 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour
+{
     public static GameController gameController;
 
     private string moveSequence;
@@ -35,7 +36,7 @@ public class GameController : MonoBehaviour {
     private bool inputActionTurn;
     private Vector3 comboTextPosition;
 
-    GameObject tutManager, tower1, tower2;
+    GameObject tutorialManager, tower1, tower2;
 
     // Use this for initialization
     void Start()
@@ -43,12 +44,12 @@ public class GameController : MonoBehaviour {
         if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
         {
             if (PlayerScript.playerdata.firstTut1 || PlayerScript.playerdata.firstTut2 || PlayerScript.playerdata.firstTut3)
-                tutManager = GameObject.Find("Tutorial Manager");
+                tutorialManager = GameObject.Find("Tutorial Manager");
         }
 
 
         if (gameController == null) gameController = this;
-        
+
         init();
 
         FloatingTextController.Initialize();
@@ -56,7 +57,7 @@ public class GameController : MonoBehaviour {
         InvokeRepeating("spawnBeat", 0, 0.5f);
 
         Invoke("updateUI", startDelayTime);
-	}
+    }
 
     void init()
     {
@@ -74,9 +75,10 @@ public class GameController : MonoBehaviour {
 
         moveSequence = "";
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         if (moveSequence.Length == 1)
         {
             inputActionTurn = true;
@@ -129,11 +131,12 @@ public class GameController : MonoBehaviour {
                     moveActionTurn = true;
                     break;
             }
-            
 
+            FinalTutorial(moveSequence);
             clearSequence();
         }
-	}
+
+    }
 
     void spawnBeat()
     {
@@ -156,9 +159,11 @@ public class GameController : MonoBehaviour {
 
                 clearSequence();
 
-                if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && 
-                    PlayerScript.playerdata.clickedStageNumber == 2 && !TutorialManager.TutManager.tut2End)
-                    tutManager.SendMessage("ShowAll");
+                if (AccessTutorial() && !TutEnded())
+                {
+                    tutorialManager.SendMessage("ShowAll");
+                }
+
                 //reset current streak
                 currentStreak = 0;
                 ScoreManager.comboMultiplier = 1;
@@ -187,9 +192,10 @@ public class GameController : MonoBehaviour {
                 //calculate combo multiplier
                 ScoreManager.comboMultiplier += 1;
             }
-            
+
             if (moveBeatCounter >= 4)
             {
+
                 moveActionTurn = false;
                 moveBeatCounter = 0;
                 ArmyController.armyController.setCurrentState(Enums.PlayerState.Idle);
@@ -200,7 +206,6 @@ public class GameController : MonoBehaviour {
         else if (!lastHit)
         {
             clearSequence();
-
             //reset current streak
             currentStreak = 0;
             ScoreManager.comboMultiplier = 1;
@@ -222,7 +227,7 @@ public class GameController : MonoBehaviour {
         priestCount = 0;
         knightCount = 0;
 
-        foreach(Character character in ArmyController.armyController.army)
+        foreach (Character character in ArmyController.armyController.army)
         {
             switch (character.getJobType())
             {
@@ -242,6 +247,39 @@ public class GameController : MonoBehaviour {
         priestCountText.text = "x" + priestCount;
         knightCountText.text = "x" + knightCount;
     }
+
+    public void addHit(string hit)
+    {
+        moveSequence += hit;
+        lastHit = true;
+
+        if (AccessTutorial() && !TutEnded())
+            TutorialCall(hit);
+    }
+
+    void FinalTutorial(string move)
+    {
+        if (AccessTutorial())
+        {
+            if (TutorialManager.TutManager.final && move == "1234")
+            {
+                tutorialManager.SendMessage("HideIcon");
+                tutorialManager.SendMessage("HideAll");
+                TutorialManager.TutManager.tut3End = true;
+            }
+        }
+    }
+
+    bool TutEnded()
+    {
+        if (Application.loadedLevelName == "Tutorial2Scene" && TutorialManager.TutManager.tut2End)
+            return true;
+        else if (Application.loadedLevelName == "Tutorial3Scene" && TutorialManager.TutManager.tut3End)
+            return true;
+        return false;
+
+    }
+
     bool AccessTutorial()
     {
         if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
@@ -256,21 +294,9 @@ public class GameController : MonoBehaviour {
         return false;
     }
 
-    public void addHit(string hit)
-    {
-        moveSequence += hit;
-        lastHit = true;
-        
-        if(AccessTutorial() && !TutorialManager.TutManager.tut2End)
-        {
-            print("Called accesstutorial true");
-            TutorialCall(hit);
-        }
-    }
-
     void TutorialCall(string hit)
     {
-        if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && lastHit)
+        if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth && lastHit)
         {
             int index = moveSequence.Length - 1;
             bool hide = false;
@@ -453,15 +479,16 @@ public class GameController : MonoBehaviour {
                     }
                     break;
             }
-            
+
             if (hide)
             {
-                tutManager.SendMessage("Hide", index);
+                tutorialManager.SendMessage("Hide", index);
             }
             else
             {
-                if(!TutorialManager.TutManager.tut2End)
-                    tutManager.SendMessage("ShowAll");
+                if (AccessTutorial())
+                    tutorialManager.SendMessage("ShowAll");
+
             }
         }
     }
@@ -485,21 +512,12 @@ public class GameController : MonoBehaviour {
 
     public void LoadLevel(string level)
     {
+        GameObject.Find("UI Music/BGM").GetComponent<AudioSource>().Play();
         Application.LoadLevel(level);
     }
 
     public int getCurrentStreak()
     {
         return currentStreak;
-    }
-
-    public int getHighestStreak()
-    {
-        return highestStreak;
-    }
-
-    public void setActionTurn(bool b)
-    {
-        moveActionTurn = b;
     }
 }

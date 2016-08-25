@@ -11,7 +11,7 @@ public class ArmyController : MonoBehaviour {
     public MovingPoint goalPos;
     private Character leader;
     public MovingPoint currPos;
-    public MovingPoint targetPos;
+    private MovingPoint targetPos;
 
     public Enums.PlayerState currentAction;
 
@@ -50,12 +50,13 @@ public class ArmyController : MonoBehaviour {
 	// Use this for initialization
 
 	void Start () {
-        if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
+
+        if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
         {
             tutManager = GameObject.Find("Tutorial Manager");
             textManager = GameObject.Find("Text Manager");
 
-            if (PlayerScript.playerdata.clickedStageNumber == 1)
+            if(PlayerScript.playerdata.clickedStageNumber == 1)
             {
                 tower1 = GameObject.Find("Towers/Shooting Tower 1").GetComponent<Tower>();
                 tower2 = GameObject.Find("Towers/Shooting Tower").GetComponent<Tower>();
@@ -63,11 +64,10 @@ public class ArmyController : MonoBehaviour {
         }
 
         moved = callMovingPt2 = false;
-
         if (armyController == null)
         {
             armyController = this;
-        } 
+        }
 
         army = new List<Character>();
         enemyList = new List<GameObject>();
@@ -78,7 +78,6 @@ public class ArmyController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //Debug.Log(currPos + " tp: " + targetPos);
         checkHealth();
 
         findClosestEnemy();
@@ -126,6 +125,7 @@ public class ArmyController : MonoBehaviour {
             case Enums.PlayerState.MoveRight:
                 targetPos = currPos.right;
                 moveTo(targetPos);
+
                 foreach (Character c in army)
                 {
                     c.anim.SetInteger("State", enumIndex);
@@ -159,9 +159,17 @@ public class ArmyController : MonoBehaviour {
                     //second tutorial, only appear in movingpt2
                     movingPt1 = GameObject.Find("MovingPoints/MovingPoint1").GetComponent<MovingPoint>();
                     movingPt2 = GameObject.Find("MovingPoints/MovingPoint2").GetComponent<MovingPoint>();
+                    movingPt3 = GameObject.Find("MovingPoints/Path1/MovingPoint3.1").GetComponent<MovingPoint>();
+                    movingPt4 = GameObject.Find("MovingPoints/Path2/MovingPoint4.1").GetComponent<MovingPoint>();
+                    movingPt5 = GameObject.Find("MovingPoints/Path3/MovingPoint5.1").GetComponent<MovingPoint>();
                     endPoint = GameObject.Find("MovingPoints/EndPoint").GetComponent<MovingPoint>();
                     break;
                 case 3: //boss stage
+                    movingPt1 = GameObject.Find("MovingPoints/MovingPoint1").GetComponent<MovingPoint>();
+                    //boss points
+                    movingPt2 = GameObject.Find("MovingPoints/MovingPoint2.3").GetComponent<MovingPoint>();
+                    movingPt3 = GameObject.Find("MovingPoints/MovingPoint3.3").GetComponent<MovingPoint>();
+                    movingPt4 = GameObject.Find("MovingPoints/MovingPoint4.3").GetComponent<MovingPoint>();
                     break;
        
             }
@@ -237,9 +245,9 @@ public class ArmyController : MonoBehaviour {
         }
         else if (PlayerScript.playerdata.clickedStageNumber == 2 && PlayerScript.playerdata.firstTut2)
         {
-            if(currPos != prevPoint)
+            if (currPos != prevPoint)
             {
-                if(currPos == movingPt2)
+                if (currPos == movingPt2)
                 {
                     textManager.SendMessage("ShowTutorial2Panel");
                     moved = true;
@@ -251,12 +259,29 @@ public class ArmyController : MonoBehaviour {
                     PlayerScript.playerdata.firstTut2 = false;
                     SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
                 }
-                
-                if(currPos != movingPt1 && currPos != movingPt2 && !TutorialManager.TutManager.tut2End)
+
+                if(currPos == movingPt3 || currPos == movingPt4 || currPos == movingPt5)
                 {
                     tutManager.SendMessage("HideAll");
                     TutorialManager.TutManager.tut2End = true;
-                    textManager.SendMessage("DestroyAll");
+                    //textManager.SendMessage("DestroyAll");
+                    prevPoint = currPos;
+                }
+            }
+        }
+        else if (PlayerScript.playerdata.clickedStageNumber == 3 && PlayerScript.playerdata.firstTut3)
+        {
+            if (currPos != prevPoint)
+            {
+                if (currPos == movingPt1)
+                {
+                    textManager.SendMessage("ShowTutorial3Panel");
+                    prevPoint = currPos;
+                }
+                else if (currPos == movingPt2 || currPos == movingPt3 || currPos == movingPt4)
+                {
+                    textManager.SendMessage("ShowClosePanel");
+                    prevPoint = currPos;
                 }
             }
         }
@@ -323,6 +348,7 @@ public class ArmyController : MonoBehaviour {
 
             army.Add(p);
         }
+
         Invoke("initLeaderBonus", 1);
         Invoke("initAnimVar", 1);
         targetPos = currPos;
@@ -493,22 +519,26 @@ public class ArmyController : MonoBehaviour {
             case Enums.JobType.Knight:
                 foreach (Character c in army)
                 {
-                    //increase defense by 5
-                    c.setArmor(c.getArmor() + 5);
+                    //increase defense by 20%
+                    c.setArmor(c.getArmor() * 1.2f);
                 }
                 break;
             case Enums.JobType.Archer:
                 foreach (Character c in army)
                 {
-                    //increase damage by 5
-                    c.setDamage(c.getDamage() + 5);
+                    //increase damage by 20%
+                    c.setDamage(c.getDamage() * 1.2f);
                 }
                 break;
             case Enums.JobType.Priest:
                 foreach (Character c in army)
                 {
-                    //increase hp by 20%
-                    c.addMaxHealth(50);
+                    //increase heal power by 50%
+                    if (c.getJobType() == Enums.JobType.Priest)
+                    {
+                        Priest p = c as Priest;
+                        p.setHealPower(p.getHealPower() * 1.5f);
+                    }
                 }
                 break;
         }
