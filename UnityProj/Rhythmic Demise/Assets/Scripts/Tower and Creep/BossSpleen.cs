@@ -48,6 +48,8 @@ public class BossSpleen : Boss {
 
         if (currentHealth >= maxHealth)
             currentHealth = maxHealth;
+
+        anim.SetTrigger("Regen");
     }
 
     protected override void specialAction()
@@ -65,6 +67,8 @@ public class BossSpleen : Boss {
             spawn.SendMessage("initDamage", troopDamage);
             spawn.SendMessage("initCooldown", troopCoolDown);
         }
+
+        anim.SetTrigger("Summon");
     }
 
     protected override void Action()

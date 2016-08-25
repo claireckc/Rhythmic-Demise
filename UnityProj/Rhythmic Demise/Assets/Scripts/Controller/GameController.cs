@@ -187,10 +187,9 @@ public class GameController : MonoBehaviour {
                 //calculate combo multiplier
                 ScoreManager.comboMultiplier += 1;
             }
-
+            
             if (moveBeatCounter >= 4)
             {
-
                 moveActionTurn = false;
                 moveBeatCounter = 0;
                 ArmyController.armyController.setCurrentState(Enums.PlayerState.Idle);
@@ -497,5 +496,10 @@ public class GameController : MonoBehaviour {
     public int getHighestStreak()
     {
         return highestStreak;
+    }
+
+    public void setActionTurn(bool b)
+    {
+        moveActionTurn = b;
     }
 }

@@ -11,7 +11,7 @@ public class ArmyController : MonoBehaviour {
     public MovingPoint goalPos;
     private Character leader;
     public MovingPoint currPos;
-    private MovingPoint targetPos;
+    public MovingPoint targetPos;
 
     public Enums.PlayerState currentAction;
 
@@ -50,34 +50,35 @@ public class ArmyController : MonoBehaviour {
 	// Use this for initialization
 
 	void Start () {
-        Debug.Log("TEST");
-        if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
+        if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
         {
             tutManager = GameObject.Find("Tutorial Manager");
             textManager = GameObject.Find("Text Manager");
 
-            if(PlayerScript.playerdata.clickedStageNumber == 1)
+            if (PlayerScript.playerdata.clickedStageNumber == 1)
             {
                 tower1 = GameObject.Find("Towers/Shooting Tower 1").GetComponent<Tower>();
                 tower2 = GameObject.Find("Towers/Shooting Tower").GetComponent<Tower>();
             }
-        } Debug.Log("TEST");
+        }
 
         moved = callMovingPt2 = false;
+
         if (armyController == null)
         {
             armyController = this;
-        } Debug.Log("TEST");
+        } 
 
         army = new List<Character>();
         enemyList = new List<GameObject>();
-        Debug.Log("TEST");
+
         init();
         GetMovingPoints();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        //Debug.Log(currPos + " tp: " + targetPos);
         checkHealth();
 
         findClosestEnemy();
@@ -125,7 +126,6 @@ public class ArmyController : MonoBehaviour {
             case Enums.PlayerState.MoveRight:
                 targetPos = currPos.right;
                 moveTo(targetPos);
-
                 foreach (Character c in army)
                 {
                     c.anim.SetInteger("State", enumIndex);
@@ -493,26 +493,22 @@ public class ArmyController : MonoBehaviour {
             case Enums.JobType.Knight:
                 foreach (Character c in army)
                 {
-                    //increase defense by 20%
-                    c.setArmor(c.getArmor() * 1.2f);
+                    //increase defense by 5
+                    c.setArmor(c.getArmor() + 5);
                 }
                 break;
             case Enums.JobType.Archer:
                 foreach (Character c in army)
                 {
-                    //increase damage by 20%
-                    c.setDamage(c.getDamage() * 1.2f);
+                    //increase damage by 5
+                    c.setDamage(c.getDamage() + 5);
                 }
                 break;
             case Enums.JobType.Priest:
                 foreach (Character c in army)
                 {
-                    //increase heal power by 50%
-                    if (c.getJobType() == Enums.JobType.Priest)
-                    {
-                        Priest p = c as Priest;
-                        p.setHealPower(p.getHealPower() * 1.5f);
-                    }
+                    //increase hp by 20%
+                    c.addMaxHealth(50);
                 }
                 break;
         }

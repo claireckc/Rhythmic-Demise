@@ -9,12 +9,13 @@ public abstract class Character : MonoBehaviour {
     protected float maxHealth;
     protected float damage;
     protected float armor;
-    protected string skill;
+    protected Enums.SkillName skill;
     protected Enums.CharacterType race;
     protected Enums.JobType job;
     protected bool isAttacking;
     protected Vector3 goalPos;
     protected bool inPath;
+    protected float nextSkillTime;
     
     public Animator anim;
 
@@ -126,6 +127,13 @@ public abstract class Character : MonoBehaviour {
     public float getHealth()
     {
         return currentHealth;
+    }
+
+    public void addMaxHealth(float mh)
+    {
+        maxHealth += mh;
+
+        currentHealth = maxHealth;
     }
 
     public void setGoalPos(Vector3 pos)

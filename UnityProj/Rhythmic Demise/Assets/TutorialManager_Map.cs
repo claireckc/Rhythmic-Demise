@@ -12,7 +12,6 @@ public class TutorialManager_Map : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("DAMAGE: " + PlayerScript.playerdata.troopData[0].damage);
         tutorialCanvas = GameObject.Find("Tutorial Canvas").GetComponent<Canvas>();
         firstPanel = GameObject.Find("Tutorial Canvas/FirstPanel");
         secondPanel = GameObject.Find("Tutorial Canvas/SecondPanel");

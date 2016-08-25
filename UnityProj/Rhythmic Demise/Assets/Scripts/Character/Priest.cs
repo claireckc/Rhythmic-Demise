@@ -4,23 +4,19 @@ using System.Collections;
 public class Priest : Character {
 
     public GameObject orb;
-    private int hexDuration;
-    private float healPower;
 
 	// Use this for initialization
 	protected new void Start () {
         base.Start();
 
         isAttacking = false;
-        skill = "Hex";
         job = Enums.JobType.Priest;
 
         //2 is priest index
         currentHealth = maxHealth = PlayerScript.playerdata.troopData[2].maxHealth;
         damage = PlayerScript.playerdata.troopData[2].damage;
         armor = PlayerScript.playerdata.troopData[2].armor;
-        hexDuration = 3;
-        healPower = 2;
+        skill = PlayerScript.playerdata.skillSelected;
 	}
 	
 	// Update is called once per frame
@@ -47,41 +43,37 @@ public class Priest : Character {
 
     public override void useSkill()
     {
-        if(skill.Equals("Hex"))
+        if (Time.time >= nextSkillTime)
         {
-            if (!isAttacking)
+            if (skill == Enums.SkillName.PriestHex)
             {
-                if (ArmyController.armyController.enemyList.Count > 0)
+                nextSkillTime = Time.time + PlayerScript.playerdata.troopData[0].skills[1].skillCooldown;
+
+                if (!isAttacking)
                 {
-                    Enemy enemy = ArmyController.armyController.closestEnemy.GetComponent<Enemy>();
-                    enemy.disabled(hexDuration);
-                    isAttacking = true;
+                    if (ArmyController.armyController.enemyList.Count > 0)
+                    {
+                        Enemy enemy = ArmyController.armyController.closestEnemy.GetComponent<Enemy>();
+                        enemy.disabled(PlayerScript.playerdata.troopData[2].skills[1].skillValue);
+                        isAttacking = true;
+                    }
+                }
+            }
+            else if (skill == Enums.SkillName.PriestHeal)
+            {
+                nextSkillTime = Time.time + PlayerScript.playerdata.troopData[0].skills[0].skillCooldown;
+
+                if (!isAttacking)
+                {
+                    if (ArmyController.armyController.enemyList.Count > 0)
+                    {
+                        ArmyController.armyController.healArmy(PlayerScript.playerdata.troopData[2].skills[0].skillValue);
+                        isAttacking = true;
+                    }
                 }
             }
         }
-        else if (skill.Equals("Heal"))
-        {
-            if (!isAttacking)
-            {
-                if (ArmyController.armyController.enemyList.Count > 0)
-                {
-                    ArmyController.armyController.healArmy(healPower);
-                    isAttacking = true;
-                }
-            }
-        }
     }
-
-    public float getHealPower()
-    {
-        return healPower;
-    }
-
-    public void setHealPower(float hp)
-    {
-        healPower = hp;
-    }
-
     void spawnOrb()
     {
         Vector3 dir = ArmyController.armyController.closestEnemy.transform.position - this.transform.position;

@@ -9,10 +9,11 @@ public class Skills
     public Enums.SkillName skillName;
     public float skillValue;
     public int skillLevel;      //0 means locked, 1 and above means unlocked
+    public int skillCooldown;
 
     public void LevelUp()
     {
         skillLevel++;
-        skillValue *= 1.2f;
+        skillValue += 10;
     }
 }

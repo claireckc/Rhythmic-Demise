@@ -31,7 +31,7 @@ public class PlayerData
     public float globalVolume, effectsVolume, buttonAlpha;
 
     //for tutorial
-    public bool firstTut1, firstTut2, firstTut3, firstResource;
+    public bool firstTut1, firstTut2, firstTut3, firstResource, firstMap;
 
     private Troop tp;
     private Skills sk;
@@ -60,7 +60,7 @@ public class PlayerData
         defenseBonus = 0;
         expMultiplier = 1f;
 
-        firstTut1 = firstTut2 = firstTut3 = firstResource = true;
+        firstTut1 = firstTut2 = firstTut3 = firstResource = firstMap = true;
 
         //for troop data
         for (int i = 0; i < 3; i++)
@@ -97,35 +97,67 @@ public class PlayerData
                     break;
             }
 
-            for (int j = 0; j < 3; j++)
+            for (int j = 0; j < 2; j++)
             {
                 sk = new Skills();
                 switch (i)
                 {
                     //if knight
                     case 0:
-                        sk.skillName = (Enums.SkillName)j + 1;
+                        switch (j)
+                        {
+                            case 0:
+                                sk.skillName = Enums.SkillName.KnightCharge;
+                                sk.skillValue = 25;
+                                sk.skillLevel = 1;
+                                sk.skillCooldown = 20;
+                                break;
+                            case 1:
+                                sk.skillName = Enums.SkillName.KnightHigh;
+                                sk.skillValue = 50;
+                                sk.skillLevel = 1;
+                                sk.skillCooldown = 20;
+                                break;
+                        }
                         break;
                     //if archer
                     case 1:
-                        sk.skillName = (Enums.SkillName)j + 4;
+                        switch (j)
+                        {
+                            case 0:
+                                sk.skillName = Enums.SkillName.ArcherAOE;
+                                sk.skillValue = 25;
+                                sk.skillLevel = 0;
+                                sk.skillCooldown = 20;
+                                break;
+                            case 1:
+                                sk.skillName = Enums.SkillName.ArcherHigh;
+                                sk.skillValue = 50;
+                                sk.skillLevel = 0;
+                                sk.skillCooldown = 20;
+                                break;
+                        }
                         break;
                     //if priest
                     case 2:
-                        sk.skillName = (Enums.SkillName)j + 7;
+                        switch (j)
+                        {
+                            case 0:
+                                sk.skillName = Enums.SkillName.PriestHeal;
+                                sk.skillValue = 80;
+                                sk.skillLevel = 0;
+                                sk.skillCooldown = 20;
+                                break;
+                            case 1:
+                                sk.skillName = Enums.SkillName.PriestHex;
+                                sk.skillValue = 5;
+                                sk.skillLevel = 0;
+                                sk.skillCooldown = 20;
+                                break;
+                        }
                         break;
                 }
-                if (i == 0)
-                {
-                    sk.skillLevel = 1;
-                    /*sk.skillValue = sk.skilllevel * SOMETHING    //MICHAEL, SET SKILL VALUE HERE, THIS IS INITIALIZATION! KNIGHT SKILL VALUE*/
-                }
-                else
-                {
-                    sk.skillLevel = 0;
-                    sk.skillValue = 0;
-                }
-
+                
                 tp.skills.Add(sk);
             }
 

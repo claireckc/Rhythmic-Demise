@@ -10,12 +10,12 @@ public class Knight : Character {
         base.Start();
 
         job = Enums.JobType.Knight;
-        skill = "SwordWave";
-
+        
         //0 is knight index
         currentHealth = maxHealth = PlayerScript.playerdata.troopData[0].maxHealth;
         damage = PlayerScript.playerdata.troopData[0].damage;
         armor = PlayerScript.playerdata.troopData[0].armor;
+        skill = PlayerScript.playerdata.skillSelected;
 	}
 	
 	// Update is called once per frame
@@ -60,58 +60,65 @@ public class Knight : Character {
 
     public override void useSkill()
     {
-        if (skill.Equals("Bash"))
+        if (Time.time >= nextSkillTime)
         {
-            if (ArmyController.armyController.closestEnemy != null)
+            if (skill == Enums.SkillName.KnightHigh)
             {
-                float distance = Vector3.Distance(transform.position, ArmyController.armyController.closestEnemy.transform.position);
-                if (distance < 3) //if enemy is already within attack range
+                nextSkillTime = Time.time + PlayerScript.playerdata.troopData[0].skills[1].skillCooldown;
+
+                if (ArmyController.armyController.closestEnemy != null)
                 {
-                    if (!isAttacking)
+                    float distance = Vector3.Distance(transform.position, ArmyController.armyController.closestEnemy.transform.position);
+                    if (distance < 3) //if enemy is already within attack range
                     {
-                        if (ArmyController.armyController.enemyList.Count > 0)
+                        if (!isAttacking)
                         {
-                            Enemy enemy = ArmyController.armyController.closestEnemy.GetComponent<Enemy>();
-                            enemy.TakeDamage(damage * 2);
-                            enemy.disabled(1);
-                            isAttacking = true;
+                            if (ArmyController.armyController.enemyList.Count > 0)
+                            {
+                                Enemy enemy = ArmyController.armyController.closestEnemy.GetComponent<Enemy>();
+                                enemy.TakeDamage(damage * 2);
+                                enemy.disabled(1);
+                                isAttacking = true;
+                            }
                         }
                     }
-                }
-                else //move while enemy not in attack range
-                {
-                    Vector3 dir = ArmyController.armyController.closestEnemy.transform.position - transform.position;
-                    float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-                    transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                    else //move while enemy not in attack range
+                    {
+                        Vector3 dir = ArmyController.armyController.closestEnemy.transform.position - transform.position;
+                        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+                        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-                    transform.Translate(new Vector3(movementSpeed * Time.deltaTime, 0, 0));
-                }
-            }
-            else
-            {
-                //Debug.Log("No enemy in range");
-            }
-        }
-        else if(skill.Equals("SwordWave"))
-        {
-            if (!isAttacking)
-            {
-                if (ArmyController.armyController.enemyList.Count > 0)
-                {
-                    //Debug.Log("Attack!");
-                    //start attack animation and instatiate projectile
-
-                    Vector3 dir = ArmyController.armyController.closestEnemy.transform.position - this.transform.position;
-                    float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
-
-                    GameObject wave = Instantiate(swordWave, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-                    wave.SendMessage("initDamage", damage * 2);
-
-                    isAttacking = true;
+                        transform.Translate(new Vector3(movementSpeed * Time.deltaTime, 0, 0));
+                    }
                 }
                 else
                 {
-                    Debug.Log("No enemy in range");
+                    //Debug.Log("No enemy in range");
+                }
+            }
+            else if (skill == Enums.SkillName.KnightCharge)
+            {
+                nextSkillTime = Time.time + PlayerScript.playerdata.troopData[0].skills[0].skillCooldown;
+
+                if (!isAttacking)
+                {
+                    if (ArmyController.armyController.enemyList.Count > 0)
+                    {
+                        //Debug.Log("Attack!");
+                        //start attack animation and instatiate projectile
+
+                        Vector3 dir = ArmyController.armyController.closestEnemy.transform.position - this.transform.position;
+                        float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
+
+                        GameObject wave = Instantiate(swordWave, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
+                        wave.SendMessage("initDamage", damage * 2);
+
+                        isAttacking = true;
+                    }
+                    else
+                    {
+                        Debug.Log("No enemy in range");
+                    }
                 }
             }
         }
