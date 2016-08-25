@@ -7,6 +7,7 @@ public class UIManager_TroopSel : MonoBehaviour
 {
 
     public PlayerScript playerdata;
+    AudioSource selectClick;
 
     void Awake()
     {
@@ -14,19 +15,25 @@ public class UIManager_TroopSel : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("DAMAGE: " + PlayerScript.playerdata.troopData[0].damage);
         playerdata = FindObjectOfType<PlayerScript>();
+        selectClick = GameObject.Find("UI Music/Select").GetComponent<AudioSource>();
+    }
+
+    void PlaySelectAudio()
+    {
+        selectClick.Play();
     }
 
     public void OnBackPress()
     {
+        PlaySelectAudio();
         Application.LoadLevel("StartScreen");
-        //SceneManager.LoadScene ("StartScreen");
         Destroy(gameObject);
     }
 
     public void OnCancerPress()
     {
+        PlaySelectAudio();
         PlayerScript.playerdata.pathogenType = Enums.CharacterType.Cancer;
         PlayerScript.playerdata.attackBonus = 0;
         PlayerScript.playerdata.defenseBonus = 10;
@@ -43,6 +50,7 @@ public class UIManager_TroopSel : MonoBehaviour
 
     public void OnDiabeticPress()
     {
+        PlaySelectAudio();
         PlayerScript.playerdata.pathogenType = Enums.CharacterType.Diabetic;
         PlayerScript.playerdata.attackBonus = 10;
         PlayerScript.playerdata.defenseBonus = 0;

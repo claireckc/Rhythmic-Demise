@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine.Serialization;
 
 [System.Serializable]
-public class Troop {
+public class Troop
+{
 
     public Enums.JobType job;
     public int level, energyNeeded;
@@ -12,37 +13,34 @@ public class Troop {
     public int armor;
     public List<Skills> skills;        //3
 
-    public float expToLevel;
+    public float expToLevel, currentExp;
 
-    public void CalculateExpNeeded()
+    public void IncreaseExpNeeded()
     {
-        expToLevel = level * 1.4f;
+        expToLevel *= 1.4f;
     }
 
-    public void LevelUp(float experienceGained)
+    public void LevelUp()
     {
-        //update experience needed
-        CalculateExpNeeded();
-        while(experienceGained >= expToLevel)
-        {
-            experienceGained -= expToLevel;
-            level++;
-            StatLevelUp();
-            SkillLevelUp();
-            CalculateExpNeeded();
-        }
+        currentExp += PlayerScript.playerdata.totalResource - expToLevel;
+        PlayerScript.playerdata.totalResource -= (int)expToLevel;
+        IncreaseExpNeeded();
+        StatLevelUp();
+        SkillLevelUp();
     }
+
 
     void StatLevelUp()
     {
         maxHealth += 15;
         damage += 5;
-        armor *= 1;
+        armor += 2;
+        energyNeeded *= 2;
     }
-    
+
     void SkillLevelUp()
     {
-        for(int i = 0; i < skills.Count; i++)
+        for (int i = 0; i < skills.Count; i++)
             skills[i].LevelUp();
     }
 }

@@ -14,26 +14,11 @@ public class EndStage : MonoBehaviour
         PlayerScript.playerdata.totalResource += ScoreManager.score;
         UpdateMap(highestStreak);
         UpdateStars();
+        UpdateTroop();
         UnlockNextMap((int)PlayerScript.playerdata.clickedMap);
-        UpdatePlayerExp(PlayerScript.playerdata.clickedStageNumber);
         SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
     }
-
-    void UpdatePlayerExp(int stage)
-    {
-        /*
-        1. Get player unit's level
-        2. Get stage (level) and form multiplier (player level / stage number)
-        3. call function to level up
-        */
-        for (int i = 0; i < PlayerScript.playerdata.troopSelected.Count; i++)
-        {
-            PlayerScript.playerdata.expMultiplier = (float)PlayerScript.playerdata.troopSelected[i].troop.level / stage;
-            float baseExp = 1f;//get base experience from level completion, NOT COMPLETE
-            PlayerScript.playerdata.troopSelected[i].troop.LevelUp(baseExp * PlayerScript.playerdata.expMultiplier);
-        }
-    }
-
+    
     void UnlockNextMap(int currentMapIndex)
     {
         //check if it is the last substage
@@ -46,6 +31,23 @@ public class EndStage : MonoBehaviour
         else
         {
             PlayerScript.playerdata.mapProgress[currentMapIndex].stages[PlayerScript.playerdata.clickedStageNumber].topComboCount = 0;
+        }
+    }
+
+    void UpdateTroop()
+    {
+        if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
+        {
+            if (PlayerScript.playerdata.clickedStageNumber == 1)
+            {
+                if (PlayerScript.playerdata.troopData[1].level == 0)
+                    PlayerScript.playerdata.troopData[1].level = 1;
+            }
+            else if (PlayerScript.playerdata.clickedStageNumber == 2)
+            {
+                if (PlayerScript.playerdata.troopData[2].level == 0)
+                    PlayerScript.playerdata.troopData[2].level = 1;
+            }
         }
     }
 
