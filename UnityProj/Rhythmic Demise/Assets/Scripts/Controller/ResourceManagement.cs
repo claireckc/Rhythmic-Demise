@@ -27,6 +27,7 @@ public class ResourceManagement : MonoBehaviour
     public Text knightLevel, knightAttack, knightDefense, archerLevel, archerAttack, archerDefense, priestLevel, priestAttack, priestDefense;
     public Text knightResource, archerResource, priestResource;
     public UnityEngine.UI.Button knightLeader, archerLeader, priestLeader;
+    UnityEngine.UI.Button knightLevelbutton, archerLevelbutton, priestLevelbutton;
 
     public Image chooseKnightSprite, chooseArcherSprite, choosePriestSprite;
 
@@ -34,6 +35,12 @@ public class ResourceManagement : MonoBehaviour
 
     AudioSource selectClick, bgmUI;
 
+    //level up modal
+    GameObject levelUpModal;
+    Image unitPreview;
+    Text levelPrev, attackPrev, defensePrev, resourcePrev;
+    int originalResource;
+    int slotLevel;
     
     void Start()
     {
@@ -41,6 +48,7 @@ public class ResourceManagement : MonoBehaviour
         slotClicked = 0;
         StartMain();
         StartChoose();
+        StartModal();
 
         InitMain();
         InitChoose();
@@ -52,6 +60,19 @@ public class ResourceManagement : MonoBehaviour
             resourceTutorial = GameObject.Find("Tutorial Manager");
 
         SetupAudio();
+    }
+
+    void StartModal()
+    {
+        levelUpModal = GameObject.Find("ChooseCanvas/LevelUpModal");
+        unitPreview = GameObject.Find("ChooseCanvas/LevelUpModal/UnitPreview").GetComponent<Image>();
+        levelPrev = GameObject.Find("ChooseCanvas/LevelUpModal/NewLevelCount").GetComponent<Text>();
+        attackPrev = GameObject.Find("ChooseCanvas/LevelUpModal/NewAttackCount").GetComponent<Text>();
+        defensePrev = GameObject.Find("ChooseCanvas/LevelUpModal/NewDefenseCount").GetComponent<Text>();
+        resourcePrev = GameObject.Find("ChooseCanvas/LevelUpModal/NewResourceCount").GetComponent<Text>();
+        originalResource = PlayerScript.playerdata.totalResource;
+        levelUpModal.SetActive(false);
+        slotLevel = -1;
     }
 
     public void StartMain()
@@ -433,6 +454,165 @@ public class ResourceManagement : MonoBehaviour
 
     }
 
+    void ShowLevelUpConfirm(int index)
+    {
+        slotLevel = index;
+        DisableAllInteractions(chooseCanvas);
+
+        if (index == 0)
+            unitPreview.sprite = slot1.sprite;
+        else if (index == 1)
+            unitPreview.sprite = slot2.sprite;
+        else if (index == 2)
+            unitPreview.sprite = slot3.sprite;
+
+        Troop tempTroop = new Troop();
+        tempTroop.level = PlayerScript.playerdata.troopData[index].level;
+        tempTroop.damage = PlayerScript.playerdata.troopData[index].damage;
+        tempTroop.armor = PlayerScript.playerdata.troopData[index].armor;
+        tempTroop.energyNeeded = PlayerScript.playerdata.troopData[index].energyNeeded;
+
+        tempTroop.skills = new System.Collections.Generic.List<Skills>();
+        for (int i = 0; i < PlayerScript.playerdata.troopData[index].skills.Count; i++)
+        {
+            Skills newSkill = new Skills();
+            newSkill.skillName = PlayerScript.playerdata.troopData[index].skills[i].skillName;
+            newSkill.skillValue = PlayerScript.playerdata.troopData[index].skills[i].skillValue;
+            newSkill.skillLevel = PlayerScript.playerdata.troopData[index].skills[i].skillLevel;
+            newSkill.skillCooldown = PlayerScript.playerdata.troopData[index].skills[i].skillCooldown;
+            tempTroop.skills.Add(newSkill);
+        }
+        
+        originalResource = PlayerScript.playerdata.totalResource;
+        tempTroop.LevelUp();
+
+        //update panel
+        levelPrev.text = tempTroop.level.ToString() + " (" + (tempTroop.level - PlayerScript.playerdata.troopData[index].level) + ")";
+        attackPrev.text = tempTroop.damage.ToString() + " (" + (tempTroop.damage - PlayerScript.playerdata.troopData[index].damage) + ")";
+        defensePrev.text = tempTroop.armor.ToString() + " (" + (tempTroop.armor - PlayerScript.playerdata.troopData[index].armor) + ")";
+        resourcePrev.text = tempTroop.energyNeeded.ToString() + " (" + (tempTroop.energyNeeded - PlayerScript.playerdata.troopData[index].energyNeeded) + ")";
+
+        levelUpModal.SetActive(true);
+    }
+
+    bool TroopLevelUp(int index)
+    {
+        if (PlayerScript.playerdata.totalResource >= (PlayerScript.playerdata.troopData[index].expToLevel - PlayerScript.playerdata.troopData[index].currentExp))
+        {
+            //able to level up
+            PlayerScript.playerdata.troopData[index].LevelUp();
+            UpdateTroopSelected(index);
+            InitChoose();
+            return true;
+        }
+        else {
+            PrintMessage("Insufficient " + resourceLabel.text);
+            return false;
+        }
+    }
+
+    public void SlotLevelCancel()
+    {
+        EnableAllInteractions(chooseCanvas);
+        levelUpModal.SetActive(false);
+    }
+
+    public void SlotLevelConfirm_Click()
+    {
+        PlaySelectAudio();
+        switch (slotLevel)
+        {
+            case 0:
+                if (TroopLevelUp(0))
+                {
+                    PrintMessage("Knight Level increased");
+                    EnableAllInteractions(chooseCanvas);
+                    levelUpModal.SetActive(false);
+                }
+                else
+                {
+                    PlayerScript.playerdata.totalResource = originalResource;
+                    EnableAllInteractions(chooseCanvas);
+                    levelUpModal.SetActive(false);
+                }
+                break;
+            case 1:
+                if (TroopLevelUp(1))
+                {
+                    PrintMessage("Archer Level increased");
+                    EnableAllInteractions(chooseCanvas);
+                    levelUpModal.SetActive(false);
+                }
+                else
+                {
+                    PlayerScript.playerdata.totalResource = originalResource;
+                    EnableAllInteractions(chooseCanvas);
+                    levelUpModal.SetActive(false);
+                }
+                break;
+            case 2:
+                if (TroopLevelUp(2))
+                {
+                    PrintMessage("Priest Level increased");
+                    EnableAllInteractions(chooseCanvas);
+                    levelUpModal.SetActive(false);
+                }
+                else
+                {
+                    PlayerScript.playerdata.totalResource = originalResource;
+                    EnableAllInteractions(chooseCanvas);
+                    levelUpModal.SetActive(false);
+                }
+                break;
+        }
+
+        InitChoose();
+        InitMain();
+    }
+
+    public void Slot1_LevelUp()
+    {
+        //show modal
+        PlaySelectAudio();
+        ShowLevelUpConfirm(0);
+    }
+
+    
+    void UpdateTroopSelected(int index)
+    {
+        for(int i = 0; i < PlayerScript.playerdata.troopSelected.Count; i++)
+        {
+            if (PlayerScript.playerdata.troopData[index].job == PlayerScript.playerdata.troopSelected[i].troop.job)
+                PlayerScript.playerdata.troopSelected[i].troop = PlayerScript.playerdata.troopData[index];
+        }
+    }
+
+    void DisableAllInteractions(Canvas canvas)
+    {
+        UnityEngine.UI.Button[] allButtons = canvas.GetComponentsInChildren<UnityEngine.UI.Button>();
+        for (int i = 0; i < allButtons.Length; i++)
+            allButtons[i].interactable = false;
+    }
+
+    void EnableAllInteractions(Canvas canvas)
+    {
+        UnityEngine.UI.Button[] allButtons = canvas.GetComponentsInChildren<UnityEngine.UI.Button>();
+        for (int i = 0; i < allButtons.Length; i++)
+            allButtons[i].interactable = true;
+    }
+
+    public void Slot2_LevelUp()
+    {
+        PlaySelectAudio();
+        ShowLevelUpConfirm(1);
+    }
+
+    public void Slot3_LevelUp()
+    {
+        PlaySelectAudio();
+        ShowLevelUpConfirm(2);
+    }
+
     public void Slot1_Click()
     {
         PlaySelectAudio();
@@ -753,21 +933,29 @@ public class ResourceManagement : MonoBehaviour
         archerLeader = archerLeader.GetComponent<UnityEngine.UI.Button>();
         priestLeader = priestLeader.GetComponent<UnityEngine.UI.Button>();
 
+        knightLevelbutton = GameObject.Find("ChooseCanvas/KnightPanel/KnightLevelUpButton").GetComponent<UnityEngine.UI.Button>();
+        archerLevelbutton = GameObject.Find("ChooseCanvas/ArcherPanel/ArcherLevelUpButton").GetComponent<UnityEngine.UI.Button>();
+        priestLevelbutton = GameObject.Find("ChooseCanvas/PriestPanel/PriestLevelUpButton").GetComponent<UnityEngine.UI.Button>();
     }
 
     public void InitChoose()
     {
         UpdateLeaderButton();
-
         //reflect all troop data
         if (PlayerScript.playerdata.pathogenType == Enums.CharacterType.Cancer)
         {
             //set first slot
             chooseKnightSprite.sprite = cancerKnightSprite;
             if (PlayerScript.playerdata.troopData[0].level > 0)
+            {
+                knightLevelbutton.interactable = true;
                 chooseKnightSprite.GetComponentInChildren<Text>().enabled = false;
+            }
             else
+            {
+                knightLevelbutton.interactable = false;
                 chooseKnightSprite.GetComponentInChildren<Text>().enabled = true;
+            }
 
             knightLevel.text = PlayerScript.playerdata.troopData[0].level.ToString();
             knightAttack.text = PlayerScript.playerdata.troopData[0].damage.ToString();
@@ -777,9 +965,15 @@ public class ResourceManagement : MonoBehaviour
             //set second slot
             chooseArcherSprite.sprite = cancerArcherSprite;
             if (PlayerScript.playerdata.troopData[1].level > 0)
+            {
+                archerLevelbutton.interactable = true;
                 chooseArcherSprite.GetComponentInChildren<Text>().enabled = false;
+            }
             else
+            {
+                archerLevelbutton.interactable = false;
                 chooseArcherSprite.GetComponentInChildren<Text>().enabled = true;
+            }
 
             archerLevel.text = PlayerScript.playerdata.troopData[1].level.ToString();
             archerAttack.text = PlayerScript.playerdata.troopData[1].damage.ToString();
@@ -789,9 +983,15 @@ public class ResourceManagement : MonoBehaviour
             //set third slot
             choosePriestSprite.sprite = cancerPriestSprite;
             if (PlayerScript.playerdata.troopData[2].level > 0)
+            {
+                priestLevelbutton.interactable = true;
                 choosePriestSprite.GetComponentInChildren<Text>().enabled = false;
+            }
             else
+            {
+                priestLevelbutton.interactable = false;
                 choosePriestSprite.GetComponentInChildren<Text>().enabled = true;
+            }
 
             priestLevel.text = PlayerScript.playerdata.troopData[2].level.ToString();
             priestAttack.text = PlayerScript.playerdata.troopData[2].damage.ToString();
@@ -803,9 +1003,15 @@ public class ResourceManagement : MonoBehaviour
             //set first slot
             chooseKnightSprite.sprite = diabeticKnightSprite;
             if (PlayerScript.playerdata.troopData[0].level > 0)
+            {
+                knightLevelbutton.interactable = true;
                 chooseKnightSprite.GetComponentInChildren<Text>().enabled = false;
+            }
             else
+            {
+                knightLevelbutton.interactable = false;
                 chooseKnightSprite.GetComponentInChildren<Text>().enabled = true;
+            }
 
             knightLevel.text = PlayerScript.playerdata.troopData[0].level.ToString();
             knightAttack.text = PlayerScript.playerdata.troopData[0].damage.ToString();
@@ -815,9 +1021,15 @@ public class ResourceManagement : MonoBehaviour
             //set second slot
             chooseArcherSprite.sprite = diabeticArcherSprite;
             if (PlayerScript.playerdata.troopData[1].level > 0)
+            {
+                archerLevelbutton.interactable = true;
                 chooseArcherSprite.GetComponentInChildren<Text>().enabled = false;
+            }
             else
+            {
+                archerLevelbutton.interactable = false;
                 chooseArcherSprite.GetComponentInChildren<Text>().enabled = true;
+            }
 
             archerLevel.text = PlayerScript.playerdata.troopData[1].level.ToString();
             archerAttack.text = PlayerScript.playerdata.troopData[1].damage.ToString();
@@ -827,9 +1039,15 @@ public class ResourceManagement : MonoBehaviour
             //set third slot
             choosePriestSprite.sprite = diabeticPriestSprite;
             if (PlayerScript.playerdata.troopData[2].level > 0)
+            {
+                priestLevelbutton.interactable = true;
                 choosePriestSprite.GetComponentInChildren<Text>().enabled = false;
+            }
             else
+            {
+                priestLevelbutton.interactable = false;
                 choosePriestSprite.GetComponentInChildren<Text>().enabled = true;
+            }
 
             priestLevel.text = PlayerScript.playerdata.troopData[2].level.ToString();
             priestAttack.text = PlayerScript.playerdata.troopData[2].damage.ToString();

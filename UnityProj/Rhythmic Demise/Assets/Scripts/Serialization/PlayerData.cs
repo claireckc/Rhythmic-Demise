@@ -51,8 +51,8 @@ public class PlayerData
         skillSelected = Enums.SkillName.None;
         pathogenType = Enums.CharacterType.None;
         globalVolume = effectsVolume = buttonAlpha = 1.0f;
-        totalResource = 5;
-        totalEnergy = 5;
+        totalResource = 0;
+        totalEnergy = 3;
         troopData = new List<Troop>();
         troopSelected = new List<TroopSelected>();
 
@@ -62,7 +62,7 @@ public class PlayerData
 
         firstTut1 = firstTut2 = firstTut3 = firstResource = firstMap = true;
 
-        //for troop data
+        //for troop data, three troop types only
         for (int i = 0; i < 3; i++)
         {
             tp = new Troop();
@@ -72,6 +72,9 @@ public class PlayerData
                 tp.level = i + 1;     //first unlock would be the knight
             else
                 tp.level = i + 1;//should be 0, set temp for debug mode;
+
+            tp.expToLevel = 10f;
+            tp.currentExp = 0f;
 
             //MICHAEL SET MAX HEALTH, ATTACK, DEFENSERATING HERE, THIS IS INITIALIZATION
 
