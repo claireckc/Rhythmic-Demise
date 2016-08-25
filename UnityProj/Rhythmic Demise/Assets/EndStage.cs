@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EndStage : MonoBehaviour {
+public class EndStage : MonoBehaviour
+{
     int stageCount;
     MainMap currentMap;
     SubMap currentStage;
-    
+
     public void UpdateData(int highestStreak)
     {
         currentMap = PlayerScript.playerdata.mapProgress[(int)PlayerScript.playerdata.clickedMap];
@@ -16,12 +17,6 @@ public class EndStage : MonoBehaviour {
         UnlockNextMap((int)PlayerScript.playerdata.clickedMap);
         UpdatePlayerExp(PlayerScript.playerdata.clickedStageNumber);
         SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
-        
-        for(int i = 0; i < currentMap.stages.Count; i++)
-        {
-            print("Combo: " + currentMap.stages[i].topComboCount);
-            print("Stars: " + currentMap.stages[i].stars);
-        }
     }
 
     void UpdatePlayerExp(int stage)
@@ -31,7 +26,7 @@ public class EndStage : MonoBehaviour {
         2. Get stage (level) and form multiplier (player level / stage number)
         3. call function to level up
         */
-        for(int i = 0; i < PlayerScript.playerdata.troopSelected.Count; i++)
+        for (int i = 0; i < PlayerScript.playerdata.troopSelected.Count; i++)
         {
             PlayerScript.playerdata.expMultiplier = (float)PlayerScript.playerdata.troopSelected[i].troop.level / stage;
             float baseExp = 1f;//get base experience from level completion, NOT COMPLETE
@@ -39,12 +34,18 @@ public class EndStage : MonoBehaviour {
         }
     }
 
-    void UnlockNextMap(int currentMap)
+    void UnlockNextMap(int currentMapIndex)
     {
-        if (currentMap < Enums.StageName.Length)
+        //check if it is the last substage
+        if (PlayerScript.playerdata.clickedStageNumber == PlayerScript.playerdata.mapProgress[currentMapIndex].stages.Count)
         {
-            PlayerScript.playerdata.mapProgress[currentMap + 1].isLocked = false;
-            PlayerScript.playerdata.mapProgress[currentMap + 1].stages[0].topComboCount = 0;
+            //last substagae, unlock the next map
+            PlayerScript.playerdata.mapProgress[currentMapIndex + 1].isLocked = false;
+            PlayerScript.playerdata.mapProgress[currentMapIndex + 1].stages[0].topComboCount = 0;
+        }
+        else
+        {
+            PlayerScript.playerdata.mapProgress[currentMapIndex].stages[PlayerScript.playerdata.clickedStageNumber].topComboCount = 0;
         }
     }
 
@@ -53,13 +54,14 @@ public class EndStage : MonoBehaviour {
         if (currentStage.topComboCount < highestStreak)
         {
             currentStage.topComboCount = highestStreak;
+            currentStage.resourceAttained = ScoreManager.score;
         }
     }
 
     public void UpdateStars()
     {
         int starsAttained = 0;
-        for(int i = 0; i < currentStage.comboRange.Count; i++)
+        for (int i = 0; i < currentStage.comboRange.Count; i++)
         {
             if (currentStage.topComboCount > currentStage.comboRange[i])
                 starsAttained++;

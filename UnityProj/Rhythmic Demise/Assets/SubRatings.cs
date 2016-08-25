@@ -117,11 +117,13 @@ public class SubRatings : MonoBehaviour {
             default:
                 if (currentMap.stages[stage - 1].topComboCount < 0)
                 {
+                    //still locked
                     cloneStar = Instantiate(theLock, GetPos(icon.transform.position, secondPosDiff), Quaternion.Euler(0f, 0f, 0f)) as GameObject;
                     cloneStars.Add(cloneStar);
                 }
                 else
                 {
+                    //unlocked but not played yet
                     cloneStar = Instantiate(emptyStar, GetPos(icon.transform.position, firstPosDiff), Quaternion.Euler(0f, 0f, 0f)) as GameObject;
                     cloneStars.Add(cloneStar);
                     cloneStar = Instantiate(emptyStar, GetPos(icon.transform.position, secondPosDiff), Quaternion.Euler(0f, 0f, 0f)) as GameObject;

@@ -178,12 +178,20 @@ public class SkillsManager : MonoBehaviour {
         EnabledChooseCanvasComponents();
         resourceManagement.SendMessage("UpdateLeaderButton", null);
         skillCanvas.enabled = false;
+
+        if (PlayerScript.playerdata.firstResource)
+            GameObject.Find("Tutorial Manager").SendMessage("DestroySkillTutorial");
     }
 
     public void KnightSel1_Press()
     {
         PlayerScript.playerdata.skillSelected = Enums.SkillName.KnightHigh;
         resourceManagement.SendMessage("PrintMessage", "KnightHigh Selected");
+
+        if (PlayerScript.playerdata.firstResource)
+        {
+            GameObject.Find("Tutorial Manager").SendMessage("ActivatePlayTutorial");
+        }
     }
 
     public void KnightSel2_Press()

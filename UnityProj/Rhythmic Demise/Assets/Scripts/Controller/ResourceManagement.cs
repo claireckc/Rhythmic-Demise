@@ -216,7 +216,14 @@ public class ResourceManagement : MonoBehaviour
     public bool HasLeader()
     {
         if (PlayerScript.playerdata.leaderType != Enums.JobType.None)
-            return true;
+        {
+            //check if leader is in troop selected
+            for(int i = 0; i < PlayerScript.playerdata.troopSelected.Count; i++)
+            {
+                if (PlayerScript.playerdata.leaderType == PlayerScript.playerdata.troopSelected[i].troop.job)
+                    return true;
+            }
+        }
         return false;
     }
 
@@ -564,7 +571,50 @@ public class ResourceManagement : MonoBehaviour
     public void Management_BackPress()
     {
         PlaySelectAudio();
-        Application.LoadLevel("MouthStage");
+        ReturnToSubMap();
+    }
+
+    void ReturnToSubMap()
+    {
+        switch (PlayerScript.playerdata.clickedMap)
+        {
+            case Enums.MainMap.Mouth:
+                Application.LoadLevel("MouthStage");
+                break;
+            case Enums.MainMap.Larnyx:
+                Application.LoadLevel("LarnyxStage");
+                break;
+            case Enums.MainMap.Trachea:
+                Application.LoadLevel("TracheaStage");
+                break;
+            case Enums.MainMap.Lung:
+                Application.LoadLevel("LungStage");
+                break;
+            case Enums.MainMap.Heart:
+                Application.LoadLevel("HeartStage");
+                break;
+            case Enums.MainMap.Liver:
+                Application.LoadLevel("LiverStage");
+                break;
+            case Enums.MainMap.Spleen:
+                Application.LoadLevel("SpleenStage");
+                break;
+            case Enums.MainMap.Pancreas:
+                Application.LoadLevel("PancreasStage");
+                break;
+            case Enums.MainMap.Kidney:
+                Application.LoadLevel("KidneyStage");
+                break;
+            case Enums.MainMap.SIntes:
+                Application.LoadLevel("SmallIntesStage");
+                break;
+            case Enums.MainMap.LIntes:
+                Application.LoadLevel("LargeIntesStage");
+                break;
+            case Enums.MainMap.Brain:
+                Application.LoadLevel("BrainStage");
+                break;
+        }
     }
 
     public void UpdateSelectedSlot(int SlotNumber)

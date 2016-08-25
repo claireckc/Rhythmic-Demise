@@ -5,12 +5,12 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class UIManager_Start : MonoBehaviour
-{ 
+{
     //Canvas
     public Canvas optionCanvas, aboutCanvas, volumeCanvas, startCanvas;
     public Slider sfxSlider, bgSlider, buttonSlider;
     Text startText;
-    
+
     UnityEngine.UI.Button confirmButton, cancelButton;
     GameObject eraseModel;
 
@@ -80,7 +80,7 @@ public class UIManager_Start : MonoBehaviour
     {
         UnityEngine.UI.Button[] allButtons = canvas.GetComponentsInChildren<UnityEngine.UI.Button>();
 
-        for(int i = 0; i < allButtons.Length; i++)
+        for (int i = 0; i < allButtons.Length; i++)
         {
             allButtons[i].interactable = false;
         }
@@ -135,15 +135,14 @@ public class UIManager_Start : MonoBehaviour
     {
         PlaySelectAudio();
         //create modal for confirmation here
-        print("before: " + PlayerScript.playerdata.pathogenType);
-        if (PlayerScript.playerdata.pathogenType != Enums.CharacterType.None)
-        {
-            SaveLoadManager.EraseInformation();
-            PlayerScript.playerdata = new PlayerData();
-            print("Inside");
+        SaveLoadManager.EraseInformation();
+        PlayerScript.playerdata = new PlayerData();
+        startText.text = "Start New Game";
+        SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
 
-        }
-        print("After: " + PlayerScript.playerdata.pathogenType);
+        optionCanvas.enabled = false;
+        startCanvas.enabled = true;
+        EnableAllInteractions(startCanvas);
     }
 
     public void Option_VolumePress()
