@@ -23,15 +23,14 @@ public class Enums : MonoBehaviour {
 
         KnightHigh,
         KnightCharge,
+        KnightDefbuff,
 
         ArcherAOE,
         ArcherHigh,
+        ArcherAtkBuff,
         
         PriestHeal,
         PriestHex,
-
-        KnightDefbuff,
-        ArcherAtkBuff,
         PriestHealBuff,
         PriestCurse
     }

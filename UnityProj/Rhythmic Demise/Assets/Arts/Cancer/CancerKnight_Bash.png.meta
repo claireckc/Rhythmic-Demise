@@ -1,0 +1,284 @@
+fileFormatVersion: 2
+guid: a7f6de0df1a673a439a0b2e1fb51841f
+timeCreated: 1472128843
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: CancerKnight_Bash_0
+    21300002: CancerKnight_Bash_1
+    21300004: CancerKnight_Bash_2
+    21300006: CancerKnight_Bash_3
+    21300008: CancerKnight_Bash_4
+    21300010: CancerKnight_Bash_5
+    21300012: CancerKnight_Bash_6
+    21300014: CancerKnight_Bash_7
+    21300016: CancerKnight_Bash_8
+    21300018: CancerKnight_Bash_9
+    21300020: CancerKnight_Bash_10
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: CancerKnight_Bash_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 288
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -63, y: 49}
+        - {x: -87, y: 41}
+        - {x: -94, y: 22}
+        - {x: -94, y: -52}
+        - {x: -77, y: -58}
+        - {x: 73, y: -58}
+        - {x: 77, y: -54}
+        - {x: 77, y: 32}
+        - {x: 53, y: 49}
+    - name: CancerKnight_Bash_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 288
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -76, y: 49}
+        - {x: -90, y: 42}
+        - {x: -94, y: 24}
+        - {x: -94, y: -53}
+        - {x: -89, y: -58}
+        - {x: 61, y: -58}
+        - {x: 105, y: -13}
+        - {x: 105, y: 49}
+    - name: CancerKnight_Bash_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 288
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -63, y: 49}
+        - {x: -87, y: 41}
+        - {x: -94, y: 22}
+        - {x: -94, y: -52}
+        - {x: -77, y: -58}
+        - {x: 73, y: -58}
+        - {x: 77, y: -54}
+        - {x: 77, y: 32}
+        - {x: 53, y: 49}
+    - name: CancerKnight_Bash_3
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 288
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -44, y: 49}
+        - {x: -88, y: 39}
+        - {x: -94, y: 26}
+        - {x: -94, y: -54}
+        - {x: -76, y: -58}
+        - {x: 62, y: -58}
+        - {x: 107, y: -16}
+        - {x: 107, y: 49}
+    - name: CancerKnight_Bash_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 144
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -63, y: 49}
+        - {x: -87, y: 41}
+        - {x: -94, y: 22}
+        - {x: -94, y: -52}
+        - {x: -77, y: -58}
+        - {x: 73, y: -58}
+        - {x: 77, y: -54}
+        - {x: 77, y: 32}
+        - {x: 53, y: 49}
+    - name: CancerKnight_Bash_5
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 144
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -94, y: 49}
+        - {x: -94, y: -55}
+        - {x: -84, y: -58}
+        - {x: 69, y: -58}
+        - {x: 107, y: -17}
+        - {x: 107, y: 49}
+    - name: CancerKnight_Bash_6
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 144
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 63, y: 21}
+        - {x: 53, y: 18}
+        - {x: 30, y: 38}
+        - {x: -81, y: 38}
+        - {x: -94, y: 7}
+        - {x: -94, y: -64}
+        - {x: -86, y: -66}
+        - {x: -63, y: -69}
+        - {x: 79, y: -69}
+        - {x: 79, y: 15}
+    - name: CancerKnight_Bash_7
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 144
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 77, y: -16}
+        - {x: 77, y: 13}
+        - {x: 53, y: 67}
+        - {x: 46, y: 70}
+        - {x: -36, y: 70}
+        - {x: -94, y: 35}
+        - {x: -94, y: -24}
+        - {x: -77, y: -37}
+        - {x: 41, y: -37}
+        - {x: 45, y: -27}
+        - {x: 45, y: -19}
+        - {x: 59, y: -23}
+    - name: CancerKnight_Bash_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 52, y: 72}
+        - {x: -37, y: 72}
+        - {x: -94, y: 34}
+        - {x: -94, y: -24}
+        - {x: -77, y: -37}
+        - {x: 42, y: -37}
+        - {x: 76, y: -9}
+        - {x: 76, y: 18}
+    - name: CancerKnight_Bash_9
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -87, y: 64}
+        - {x: -87, y: -24}
+        - {x: -81, y: -44}
+        - {x: 52, y: -44}
+        - {x: 112, y: 3}
+        - {x: 119, y: 11}
+        - {x: 119, y: 64}
+    - name: CancerKnight_Bash_10
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -87, y: -56}
+        - {x: -63, y: -67}
+        - {x: 76, y: -67}
+        - {x: 119, y: -28}
+        - {x: 119, y: 20}
+        - {x: 114, y: 30}
+        - {x: 106, y: 40}
+        - {x: -77, y: 40}
+        - {x: -87, y: 39}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,161 @@
+fileFormatVersion: 2
+guid: c2694f2508b57ec4fbe9c2c34af78686
+timeCreated: 1472137309
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: DiabeticArcher_SkillAOE_0
+    21300002: DiabeticArcher_SkillAOE_1
+    21300004: DiabeticArcher_SkillAOE_2
+    21300006: DiabeticArcher_SkillAOE_3
+    21300008: DiabeticArcher_SkillAOE_4
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: DiabeticArcher_SkillAOE_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 141
+        width: 256
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -56, y: 33.5}
+        - {x: -71, y: 14.5}
+        - {x: -71, y: -24.5}
+        - {x: -45, y: -65.5}
+        - {x: 65, y: -65.5}
+        - {x: 76, y: -55.5}
+        - {x: 76, y: 33.5}
+    - name: DiabeticArcher_SkillAOE_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 141
+        width: 256
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -71, y: 33.5}
+        - {x: -71, y: -24.5}
+        - {x: -40, y: -65.5}
+        - {x: 47, y: -65.5}
+        - {x: 70, y: -46.5}
+        - {x: 70, y: 28.5}
+        - {x: 69, y: 33.5}
+    - name: DiabeticArcher_SkillAOE_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 141
+        width: 256
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 47, y: 52.5}
+        - {x: 14, y: 57.5}
+        - {x: -59, y: 57.5}
+        - {x: -71, y: 43.5}
+        - {x: -71, y: 20.5}
+        - {x: -50, y: -20.5}
+        - {x: -32, y: -41.5}
+        - {x: 4, y: -41.5}
+        - {x: 40, y: -36.5}
+        - {x: 67, y: -20.5}
+        - {x: 70, y: -9.5}
+        - {x: 70, y: 20.5}
+    - name: DiabeticArcher_SkillAOE_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 256
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -64, y: 54.5}
+        - {x: -71, y: 41.5}
+        - {x: -71, y: 19.5}
+        - {x: -50, y: -23.5}
+        - {x: -36, y: -44.5}
+        - {x: 13, y: -44.5}
+        - {x: 64, y: -33.5}
+        - {x: 70, y: -19.5}
+        - {x: 70, y: 32.5}
+        - {x: 3, y: 54.5}
+    - name: DiabeticArcher_SkillAOE_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 256
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -64, y: 26.5}
+        - {x: -71, y: 16.5}
+        - {x: -71, y: -38.5}
+        - {x: -65, y: -70.5}
+        - {x: 61, y: -70.5}
+        - {x: 70, y: -54.5}
+        - {x: 70, y: 1.5}
+        - {x: -3, y: 26.5}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
