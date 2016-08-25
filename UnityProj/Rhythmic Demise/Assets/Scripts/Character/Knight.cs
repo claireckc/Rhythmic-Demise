@@ -32,7 +32,9 @@ public class Knight : Character {
     {
         if (ArmyController.armyController.closestEnemy != null)
         {
-            float distance = Vector3.Distance(transform.position, ArmyController.armyController.closestEnemy.transform.position);
+            //float distance = Vector3.Distance(transform.position, ArmyController.armyController.closestEnemy.transform.position);
+            float distance = Vector3.Distance(transform.position, ArmyController.armyController.closestEnemy.transform.GetChild(0).position);
+            
             if (distance < 2) //if enemy is already within attack range
             {
                 if (!isAttacking)
@@ -73,7 +75,9 @@ public class Knight : Character {
 
                 if (ArmyController.armyController.closestEnemy != null)
                 {
-                    float distance = Vector3.Distance(transform.position, ArmyController.armyController.closestEnemy.transform.position);
+                    //float distance = Vector3.Distance(transform.position, ArmyController.armyController.closestEnemy.transform.position);
+                    float distance = Vector3.Distance(transform.position, ArmyController.armyController.closestEnemy.transform.GetChild(0).position);
+
                     if (distance < 3) //if enemy is already within attack range
                     {
                         if (!isAttacking)
@@ -134,5 +138,17 @@ public class Knight : Character {
 
         GameObject wave = Instantiate(swordWave, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
         wave.SendMessage("initDamage", damage * 2);
+    }
+
+    public override void defend()
+    {
+        if (!isDefending)
+        {
+            isDefending = true;
+
+            armor *= 2;
+
+            anim.SetTrigger("Defend");
+        }
     }
 }

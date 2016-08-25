@@ -21,6 +21,6 @@ public class ScoreManager : MonoBehaviour {
 
     public static void addScore()
     {
-        score = score + (10 * comboMultiplier);
+        score = score + (2   * comboMultiplier);
     }
 }

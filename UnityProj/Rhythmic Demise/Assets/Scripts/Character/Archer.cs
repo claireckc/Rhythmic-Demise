@@ -4,7 +4,6 @@ using System.Collections;
 public class Archer : Character {
 
     public GameObject arrow;
-    public GameObject focusArrow;
 
 	// Use this for initialization
 	protected new void Start () {
@@ -121,5 +120,17 @@ public class Archer : Character {
         shoot3.SendMessage("initDamage", damage);
         shoot4.SendMessage("initDamage", damage);
         shoot5.SendMessage("initDamage", damage);
+    }
+
+    public override void defend()
+    {
+        if (!isDefending)
+        {
+            isDefending = true;
+
+            armor *= 2;
+
+            //anim.SetTrigger("Defend");
+        }
     }
 }

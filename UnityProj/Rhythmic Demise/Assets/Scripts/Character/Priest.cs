@@ -101,4 +101,16 @@ public class Priest : Character {
     {
         healPower += hp;
     }
+
+    public override void defend()
+    {
+        if (!isDefending)
+        {
+            isDefending = true;
+
+            armor *= 2;
+
+            //anim.SetTrigger("Defend");
+        }
+    }
 }

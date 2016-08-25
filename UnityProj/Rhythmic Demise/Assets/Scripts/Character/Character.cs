@@ -13,6 +13,7 @@ public abstract class Character : MonoBehaviour {
     protected Enums.CharacterType race;
     protected Enums.JobType job;
     protected bool isAttacking;
+    protected bool isDefending;
     protected Vector3 goalPos;
     protected bool inPath;
     protected float nextSkillTime;
@@ -76,6 +77,12 @@ public abstract class Character : MonoBehaviour {
     {
         isAttacking = false;
         inPath = true;
+
+        if (isDefending)
+        {
+            isDefending = false;
+            armor /= 2;
+        }
     }
 
     public void SetHealthVisual(float healthNormalized)
@@ -87,16 +94,17 @@ public abstract class Character : MonoBehaviour {
 
     public void TakeDamage(float damage)
     {   
-        /*
+        
         float damageMultiplier = 1 - 0.06f * armor / (1 + (0.06f * Mathf.Abs(armor)));
         float finalDamage = damage * damageMultiplier;
-        finalDamage = Mathf.Round(finalDamage * 100f) / 100f;
+        finalDamage = Mathf.CeilToInt(finalDamage);
+        //finalDamage = Mathf.Round(finalDamage * 100f) / 100f;
         currentHealth -= finalDamage;
-        */
 
-        currentHealth -= damage;
+        FloatingTextController.CreateFloatingText(finalDamage.ToString(), transform);
+        //currentHealth -= damage;
 
-        FloatingTextController.CreateFloatingText(damage.ToString(), transform);
+        //FloatingTextController.CreateFloatingText(damage.ToString(), transform);
     }
 
     public Enums.JobType getJobType()
@@ -166,4 +174,5 @@ public abstract class Character : MonoBehaviour {
 
     public abstract void attack();
     public abstract void useSkill();
+    public abstract void defend();
 }

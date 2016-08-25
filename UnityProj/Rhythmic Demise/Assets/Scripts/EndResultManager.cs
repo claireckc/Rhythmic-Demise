@@ -41,8 +41,15 @@ public class EndResultManager : MonoBehaviour {
 
         if (isBossStage)
         {
-            Boss b = GameObject.Find("Boss").GetComponent<Boss>();
-            if (b.IsDead)
+            if (GameObject.Find("Boss"))
+            {
+                Boss b = GameObject.Find("Boss").GetComponent<Boss>();
+                if (b.IsDead)
+                {
+                    isComplete = true;
+                }
+            }
+            else
             {
                 isComplete = true;
             }

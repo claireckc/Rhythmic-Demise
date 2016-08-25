@@ -137,6 +137,9 @@ public class ArmyController : MonoBehaviour {
             case Enums.PlayerState.Skill:
                 useSkill();
                 break;
+            case Enums.PlayerState.Defend:
+                defend();
+                break;
         }
 	}
 
@@ -389,6 +392,14 @@ public class ArmyController : MonoBehaviour {
         leader.useSkill();
     }
 
+    public void defend()
+    {
+        foreach (Character c in army)
+        {
+            c.defend();
+        }
+    }
+
     public void moveTo(MovingPoint pos)
     {
         goalPos = pos;
@@ -532,13 +543,17 @@ public class ArmyController : MonoBehaviour {
             case 2:
                 foreach (Character c in army)
                 {
+                    /*
                     //increase heal power by 50%
                     if (c.getJobType() == Enums.JobType.Priest)
                     {
                         //increase buff heal by 30
                         Priest p = c as Priest;
                         p.increaseHealPower(30);
-                    }
+                    }*/
+
+                    //increase max health by 40
+                    c.addMaxHealth(40);
                 }
                 break;
         }

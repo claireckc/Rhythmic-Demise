@@ -16,7 +16,7 @@ public class EventLiver : MonoBehaviour {
     // Use this for initialization
 	void Start () {
         nextActionTime = cooldown = 4f;
-        spellDamage = 3;
+        spellDamage = 40;
         spellAmount = 1;
 	}
 	
@@ -46,7 +46,12 @@ public class EventLiver : MonoBehaviour {
                 }
             }
 
-            if (Timer.timer.time <= 30)
+            
+            if (Timer.timer.time <= 25)
+            {
+                spellAmount = 3;
+            }
+            else if (Timer.timer.time <= 45)
             {
                 spellAmount = 2;
             }
