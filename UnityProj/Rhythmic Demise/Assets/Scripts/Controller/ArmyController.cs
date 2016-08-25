@@ -349,7 +349,6 @@ public class ArmyController : MonoBehaviour {
             army.Add(p);
         }
 
-        Invoke("initLeaderBonus", 1);
         Invoke("initAnimVar", 1);
         targetPos = currPos;
     }
@@ -511,30 +510,35 @@ public class ArmyController : MonoBehaviour {
             closestEnemy = null;
     }
 
-    void initLeaderBonus()
+    public void initSkillBonus(int type)
     {
         //init leader bonus buff
-        switch (PlayerScript.playerdata.leaderType)
+        switch (type)
         {
-            case Enums.JobType.Knight:
+            case 0:
                 foreach (Character c in army)
                 {
                     //increase defense by 5
                     c.setArmor(c.getArmor() + 5);
                 }
                 break;
-            case Enums.JobType.Archer:
+            case 1:
                 foreach (Character c in army)
                 {
                     //increase damage by 5
                     c.setDamage(c.getDamage() + 5);
                 }
                 break;
-            case Enums.JobType.Priest:
+            case 2:
                 foreach (Character c in army)
                 {
-                    //increase hp by 50
-                    c.addMaxHealth(50);
+                    //increase heal power by 50%
+                    if (c.getJobType() == Enums.JobType.Priest)
+                    {
+                        //increase buff heal by 30
+                        Priest p = c as Priest;
+                        p.increaseHealPower(30);
+                    }
                 }
                 break;
         }

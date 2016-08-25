@@ -1,0 +1,347 @@
+fileFormatVersion: 2
+guid: d07591b0e3151d941b5e5db4d59da6b2
+timeCreated: 1472137321
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: DiabeticArcher_SkillHigh_0
+    21300002: DiabeticArcher_SkillHigh_1
+    21300004: DiabeticArcher_SkillHigh_2
+    21300006: DiabeticArcher_SkillHigh_3
+    21300008: DiabeticArcher_SkillHigh_4
+    21300010: DiabeticArcher_SkillHigh_5
+    21300012: DiabeticArcher_SkillHigh_6
+    21300014: DiabeticArcher_SkillHigh_7
+    21300016: DiabeticArcher_SkillHigh_8
+    21300018: DiabeticArcher_SkillHigh_9
+    21300020: DiabeticArcher_SkillHigh_10
+    21300022: DiabeticArcher_SkillHigh_11
+    21300024: DiabeticArcher_SkillHigh_12
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: DiabeticArcher_SkillHigh_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 432
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 14, y: 32}
+        - {x: -55, y: 32}
+        - {x: -71, y: 21}
+        - {x: -71, y: -48}
+        - {x: -66, y: -67}
+        - {x: 69, y: -67}
+        - {x: 71, y: -61}
+        - {x: 71, y: 2}
+        - {x: 63, y: 10}
+    - name: DiabeticArcher_SkillHigh_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 432
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -4, y: 32}
+        - {x: -51, y: 32}
+        - {x: -70, y: 26}
+        - {x: -70, y: -27}
+        - {x: -48, y: -67}
+        - {x: 42, y: -67}
+        - {x: 71, y: -47}
+        - {x: 71, y: -5}
+        - {x: 44, y: 18}
+    - name: DiabeticArcher_SkillHigh_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 432
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 31, y: 7}
+        - {x: 30, y: 4}
+        - {x: 30, y: 1}
+        - {x: 24, y: 15}
+        - {x: -3, y: 32}
+        - {x: -54, y: 32}
+        - {x: -70, y: 23}
+        - {x: -70, y: -59}
+        - {x: -68, y: -67}
+        - {x: 66, y: -67}
+        - {x: 71, y: -51}
+        - {x: 71, y: -5}
+        - {x: 45, y: 15}
+    - name: DiabeticArcher_SkillHigh_3
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 432
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -13, y: 32}
+        - {x: -50, y: 32}
+        - {x: -69, y: 24}
+        - {x: -69, y: -24}
+        - {x: -46, y: -67}
+        - {x: 43, y: -67}
+        - {x: 72, y: -47}
+        - {x: 72, y: -5}
+        - {x: 45, y: 18}
+    - name: DiabeticArcher_SkillHigh_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 288
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 30, y: 7}
+        - {x: 29, y: 4}
+        - {x: 29, y: 1}
+        - {x: 23, y: 15}
+        - {x: -4, y: 32}
+        - {x: -55, y: 32}
+        - {x: -71, y: 23}
+        - {x: -71, y: -59}
+        - {x: -69, y: -67}
+        - {x: 65, y: -67}
+        - {x: 70, y: -51}
+        - {x: 70, y: -5}
+        - {x: 44, y: 15}
+    - name: DiabeticArcher_SkillHigh_5
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 288
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -4, y: 32}
+        - {x: -51, y: 32}
+        - {x: -70, y: 26}
+        - {x: -70, y: -27}
+        - {x: -48, y: -67}
+        - {x: 42, y: -67}
+        - {x: 71, y: -47}
+        - {x: 71, y: -5}
+        - {x: 44, y: 18}
+    - name: DiabeticArcher_SkillHigh_6
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 288
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 15, y: 32}
+        - {x: -54, y: 32}
+        - {x: -70, y: 21}
+        - {x: -70, y: -48}
+        - {x: -65, y: -67}
+        - {x: 70, y: -67}
+        - {x: 72, y: -61}
+        - {x: 72, y: 2}
+        - {x: 64, y: 10}
+    - name: DiabeticArcher_SkillHigh_7
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 288
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -13, y: 32}
+        - {x: -50, y: 32}
+        - {x: -69, y: 24}
+        - {x: -69, y: -24}
+        - {x: -46, y: -67}
+        - {x: 43, y: -67}
+        - {x: 72, y: -47}
+        - {x: 72, y: -5}
+        - {x: 45, y: 18}
+    - name: DiabeticArcher_SkillHigh_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 144
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -32, y: 31}
+        - {x: -58, y: 31}
+        - {x: -71, y: 15}
+        - {x: -71, y: -50}
+        - {x: -69, y: -65}
+        - {x: -55, y: -68}
+        - {x: 61, y: -68}
+        - {x: 70, y: -45}
+        - {x: 70, y: 0}
+        - {x: 47, y: 11}
+      - - {x: -128, y: 72}
+        - {x: -128, y: 69}
+        - {x: 112, y: 69}
+        - {x: 114, y: 71}
+        - {x: 114, y: 72}
+    - name: DiabeticArcher_SkillHigh_9
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 144
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -4, y: 32}
+        - {x: -51, y: 32}
+        - {x: -70, y: 26}
+        - {x: -70, y: -27}
+        - {x: -48, y: -67}
+        - {x: 42, y: -67}
+        - {x: 71, y: -47}
+        - {x: 71, y: -5}
+        - {x: 44, y: 18}
+    - name: DiabeticArcher_SkillHigh_10
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 144
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -64, y: 57}
+        - {x: -70, y: 48}
+        - {x: -70, y: 21}
+        - {x: -45, y: -42}
+        - {x: 23, y: -42}
+        - {x: 59, y: -35}
+        - {x: 71, y: -20}
+        - {x: 71, y: 32}
+        - {x: -10, y: 57}
+    - name: DiabeticArcher_SkillHigh_11
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 144
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -64, y: 57}
+        - {x: -69, y: 50}
+        - {x: -69, y: 17}
+        - {x: -50, y: -26}
+        - {x: -40, y: -42}
+        - {x: 29, y: -42}
+        - {x: 72, y: -32}
+        - {x: 72, y: 42}
+        - {x: 17, y: 57}
+      - - {x: -97, y: 72}
+        - {x: -96, y: 69}
+        - {x: 128, y: 69}
+        - {x: 128, y: 72}
+    - name: DiabeticArcher_SkillHigh_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -65, y: 34}
+        - {x: -71, y: 25}
+        - {x: -71, y: -9}
+        - {x: -57, y: -65}
+        - {x: 69, y: -65}
+        - {x: 70, y: -57}
+        - {x: 70, y: 18}
+        - {x: 4, y: 34}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

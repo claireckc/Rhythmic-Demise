@@ -18,6 +18,11 @@ public class Archer : Character {
         damage = PlayerScript.playerdata.troopData[1].damage;
         armor = PlayerScript.playerdata.troopData[1].armor;
         skill = PlayerScript.playerdata.skillSelected;
+
+        if (skill == Enums.SkillName.ArcherAtkBuff)
+        {
+            ArmyController.armyController.initSkillBonus(1); // 1 for archer
+        }
 	}
 	
 	// Update is called once per frame
@@ -55,14 +60,9 @@ public class Archer : Character {
                 {
                     if (ArmyController.armyController.enemyList.Count > 0)
                     {
-                        Vector3 dir = ArmyController.armyController.closestEnemy.transform.position - this.transform.position;
-                        float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
-
-                        GameObject shoot = Instantiate(focusArrow, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-                        shoot.SendMessage("Initialize", ArmyController.armyController.closestEnemy.transform.position);
-                        shoot.SendMessage("initDamage", damage * 2);
-
                         isAttacking = true;
+
+                        anim.SetTrigger("SkillHigh");
                     }
                     else
                     {
@@ -78,29 +78,9 @@ public class Archer : Character {
                 {
                     if (ArmyController.armyController.enemyList.Count > 0)
                     {
-                        //Debug.Log("Attack!");
-                        //start attack animation and instatiate projectile
-
-                        Vector3 dir = ArmyController.armyController.closestEnemy.transform.position - this.transform.position;
-                        float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
-
-                        GameObject shoot1 = Instantiate(arrow, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-                        GameObject shoot2 = Instantiate(arrow, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-                        GameObject shoot3 = Instantiate(arrow, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-                        GameObject shoot4 = Instantiate(arrow, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-                        GameObject shoot5 = Instantiate(arrow, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-                        shoot1.SendMessage("Initialize", ArmyController.armyController.closestEnemy.transform.position + new Vector3(1, 1, 0));
-                        shoot2.SendMessage("Initialize", ArmyController.armyController.closestEnemy.transform.position + new Vector3(1, -1, 0));
-                        shoot3.SendMessage("Initialize", ArmyController.armyController.closestEnemy.transform.position + new Vector3(0, 0, 0));
-                        shoot4.SendMessage("Initialize", ArmyController.armyController.closestEnemy.transform.position + new Vector3(-1, -1, 0));
-                        shoot5.SendMessage("Initialize", ArmyController.armyController.closestEnemy.transform.position + new Vector3(-1, 1, 0));
-                        shoot1.SendMessage("initDamage", damage);
-                        shoot2.SendMessage("initDamage", damage);
-                        shoot3.SendMessage("initDamage", damage);
-                        shoot4.SendMessage("initDamage", damage);
-                        shoot5.SendMessage("initDamage", damage);
-
                         isAttacking = true;
+
+                        anim.SetTrigger("SkillAOE");
                     }
                     else
                     {
@@ -119,5 +99,27 @@ public class Archer : Character {
         GameObject shoot = Instantiate(arrow, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
         shoot.SendMessage("Initialize", ArmyController.armyController.closestEnemy.transform.position);
         shoot.SendMessage("initDamage", damage);
+    }
+
+    void skillAOE()
+    {
+        Vector3 dir = ArmyController.armyController.closestEnemy.transform.position - this.transform.position;
+        float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
+
+        GameObject shoot1 = Instantiate(arrow, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
+        GameObject shoot2 = Instantiate(arrow, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
+        GameObject shoot3 = Instantiate(arrow, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
+        GameObject shoot4 = Instantiate(arrow, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
+        GameObject shoot5 = Instantiate(arrow, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
+        shoot1.SendMessage("Initialize", ArmyController.armyController.closestEnemy.transform.position + new Vector3(1, 1, 0));
+        shoot2.SendMessage("Initialize", ArmyController.armyController.closestEnemy.transform.position + new Vector3(1, -1, 0));
+        shoot3.SendMessage("Initialize", ArmyController.armyController.closestEnemy.transform.position + new Vector3(0, 0, 0));
+        shoot4.SendMessage("Initialize", ArmyController.armyController.closestEnemy.transform.position + new Vector3(-1, -1, 0));
+        shoot5.SendMessage("Initialize", ArmyController.armyController.closestEnemy.transform.position + new Vector3(-1, 1, 0));
+        shoot1.SendMessage("initDamage", damage);
+        shoot2.SendMessage("initDamage", damage);
+        shoot3.SendMessage("initDamage", damage);
+        shoot4.SendMessage("initDamage", damage);
+        shoot5.SendMessage("initDamage", damage);
     }
 }

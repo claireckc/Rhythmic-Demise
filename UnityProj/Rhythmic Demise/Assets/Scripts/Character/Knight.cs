@@ -16,6 +16,11 @@ public class Knight : Character {
         damage = PlayerScript.playerdata.troopData[0].damage;
         armor = PlayerScript.playerdata.troopData[0].armor;
         skill = PlayerScript.playerdata.skillSelected;
+
+        if (skill == Enums.SkillName.KnightDefbuff)
+        {
+            ArmyController.armyController.initSkillBonus(0); // 1 for archer
+        }
 	}
 	
 	// Update is called once per frame
@@ -75,10 +80,9 @@ public class Knight : Character {
                         {
                             if (ArmyController.armyController.enemyList.Count > 0)
                             {
-                                Enemy enemy = ArmyController.armyController.closestEnemy.GetComponent<Enemy>();
-                                enemy.TakeDamage(damage * 2);
-                                enemy.disabled(1);
                                 isAttacking = true;
+
+                                anim.SetTrigger("SkillBash");
                             }
                         }
                     }
@@ -104,16 +108,9 @@ public class Knight : Character {
                 {
                     if (ArmyController.armyController.enemyList.Count > 0)
                     {
-                        //Debug.Log("Attack!");
-                        //start attack animation and instatiate projectile
-
-                        Vector3 dir = ArmyController.armyController.closestEnemy.transform.position - this.transform.position;
-                        float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
-
-                        GameObject wave = Instantiate(swordWave, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-                        wave.SendMessage("initDamage", damage * 2);
-
                         isAttacking = true;
+
+                        anim.SetTrigger("SkillAOE");
                     }
                     else
                     {
@@ -128,5 +125,14 @@ public class Knight : Character {
     {
         Enemy enemy = ArmyController.armyController.closestEnemy.GetComponent<Enemy>();
         enemy.TakeDamage(damage);
+    }
+
+    void SkillAOE()
+    {
+        Vector3 dir = ArmyController.armyController.closestEnemy.transform.position - this.transform.position;
+        float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
+
+        GameObject wave = Instantiate(swordWave, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
+        wave.SendMessage("initDamage", damage * 2);
     }
 }

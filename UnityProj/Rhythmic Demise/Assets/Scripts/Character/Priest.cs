@@ -5,6 +5,8 @@ public class Priest : Character {
 
     public GameObject orb;
 
+    float healPower;
+
 	// Use this for initialization
 	protected new void Start () {
         base.Start();
@@ -17,6 +19,13 @@ public class Priest : Character {
         damage = PlayerScript.playerdata.troopData[2].damage;
         armor = PlayerScript.playerdata.troopData[2].armor;
         skill = PlayerScript.playerdata.skillSelected;
+
+        healPower = PlayerScript.playerdata.troopData[2].skills[0].skillValue;
+
+        if (skill == Enums.SkillName.PriestHealBuff)
+        {
+            ArmyController.armyController.initSkillBonus(2); // 1 for archer
+        }
 	}
 	
 	// Update is called once per frame
@@ -56,6 +65,8 @@ public class Priest : Character {
                         Enemy enemy = ArmyController.armyController.closestEnemy.GetComponent<Enemy>();
                         enemy.disabled(PlayerScript.playerdata.troopData[2].skills[1].skillValue);
                         isAttacking = true;
+
+                        anim.SetTrigger("Disable");
                     }
                 }
             }
@@ -67,8 +78,10 @@ public class Priest : Character {
                 {
                     if (ArmyController.armyController.enemyList.Count > 0)
                     {
-                        ArmyController.armyController.healArmy(PlayerScript.playerdata.troopData[2].skills[0].skillValue);
+                        ArmyController.armyController.healArmy(healPower);
                         isAttacking = true;
+
+                        anim.SetTrigger("Heal");
                     }
                 }
             }
@@ -82,5 +95,10 @@ public class Priest : Character {
         GameObject shoot = Instantiate(orb, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
         shoot.SendMessage("Initialize", ArmyController.armyController.closestEnemy);
         shoot.SendMessage("initDamage", damage);
+    }
+
+    public void increaseHealPower(float hp)
+    {
+        healPower += hp;
     }
 }

@@ -1,0 +1,250 @@
+fileFormatVersion: 2
+guid: c91b3bd05a5d7454cabb8105747e4862
+timeCreated: 1472138453
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: DiabeticPriest_Heal_0
+    21300002: DiabeticPriest_Heal_1
+    21300004: DiabeticPriest_Heal_2
+    21300006: DiabeticPriest_Heal_3
+    21300008: DiabeticPriest_Heal_4
+    21300010: DiabeticPriest_Heal_5
+    21300012: DiabeticPriest_Heal_6
+    21300014: DiabeticPriest_Heal_7
+    21300016: DiabeticPriest_Heal_8
+    21300018: DiabeticPriest_Heal_9
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: DiabeticPriest_Heal_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 288
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -67, y: 23}
+        - {x: -90, y: -6}
+        - {x: -90, y: -59}
+        - {x: -77, y: -71}
+        - {x: -68, y: -72}
+        - {x: 71, y: -72}
+        - {x: 73, y: -69}
+        - {x: 73, y: 19}
+        - {x: 69, y: 23}
+    - name: DiabeticPriest_Heal_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 288
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -71, y: 29}
+        - {x: -90, y: 3}
+        - {x: -90, y: -44}
+        - {x: -57, y: -70}
+        - {x: 58, y: -70}
+        - {x: 69, y: -68}
+        - {x: 69, y: 29}
+    - name: DiabeticPriest_Heal_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 288
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -45, y: 37}
+        - {x: -90, y: 17}
+        - {x: -90, y: -68}
+        - {x: -71, y: -72}
+        - {x: 58, y: -72}
+        - {x: 74, y: -49}
+        - {x: 74, y: 9}
+        - {x: 65, y: 37}
+    - name: DiabeticPriest_Heal_3
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 288
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -73, y: 62}
+        - {x: -99, y: 9}
+        - {x: -99, y: -72}
+        - {x: 56, y: -72}
+        - {x: 88, y: -62}
+        - {x: 88, y: 36}
+        - {x: 26, y: 62}
+    - name: DiabeticPriest_Heal_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 144
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -68, y: 41}
+        - {x: -90, y: 23}
+        - {x: -90, y: -52}
+        - {x: -78, y: -65}
+        - {x: 48, y: -65}
+        - {x: 71, y: -53}
+        - {x: 71, y: 41}
+    - name: DiabeticPriest_Heal_5
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 144
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -73, y: 62}
+        - {x: -99, y: 9}
+        - {x: -99, y: -72}
+        - {x: 56, y: -72}
+        - {x: 88, y: -62}
+        - {x: 88, y: 36}
+        - {x: 26, y: 62}
+    - name: DiabeticPriest_Heal_6
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 144
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -68, y: 41}
+        - {x: -90, y: 23}
+        - {x: -90, y: -52}
+        - {x: -78, y: -65}
+        - {x: 48, y: -65}
+        - {x: 71, y: -53}
+        - {x: 71, y: 41}
+    - name: DiabeticPriest_Heal_7
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 144
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -73, y: 62}
+        - {x: -99, y: 9}
+        - {x: -99, y: -72}
+        - {x: 56, y: -72}
+        - {x: 88, y: -62}
+        - {x: 88, y: 36}
+        - {x: 26, y: 62}
+    - name: DiabeticPriest_Heal_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -68, y: 41}
+        - {x: -90, y: 23}
+        - {x: -90, y: -52}
+        - {x: -78, y: -65}
+        - {x: 48, y: -65}
+        - {x: 71, y: -53}
+        - {x: 71, y: 41}
+    - name: DiabeticPriest_Heal_9
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 256
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -73, y: 62}
+        - {x: -99, y: 9}
+        - {x: -99, y: -72}
+        - {x: 56, y: -72}
+        - {x: 88, y: -62}
+        - {x: 88, y: 36}
+        - {x: 26, y: 62}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
