@@ -30,7 +30,7 @@ public class BossHeart : Boss{
                     nextActionTime = Time.time + cooldown;
 
                     int tempNum = Random.Range(1, 101);
-                    if (tempNum <= 75)
+                    if (tempNum <= 85)
                         Action();
                     else
                         specialAction();

@@ -119,6 +119,7 @@
      <Compile Include="Assets\TutorialManager.cs" />
      <Compile Include="Assets\TutorialManager_Map.cs" />
      <Compile Include="Assets\TutorialManager_Resource.cs" />
+     <None Include="Assets\Tutorial Text.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/UNITY/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

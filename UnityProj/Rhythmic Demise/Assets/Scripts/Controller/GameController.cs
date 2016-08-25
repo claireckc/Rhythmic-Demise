@@ -130,6 +130,11 @@ public class GameController : MonoBehaviour
                     ArmyController.armyController.setCurrentState(Enums.PlayerState.Skill);
                     moveActionTurn = true;
                     break;
+                //defend
+                case "4441":
+                    ArmyController.armyController.setCurrentState(Enums.PlayerState.Defend);
+                    moveActionTurn = true;
+                    break;
             }
 
             FinalTutorial(moveSequence);

@@ -31,9 +31,9 @@ public class BossSpleen : Boss {
                     
                     int tempNum = Random.Range(1, 101);
 
-                    if (tempNum <= 50)
+                    if (tempNum <= 80)
                         Action();
-                    else if (tempNum <= 70)
+                    else if (tempNum <= 90)
                         specialAction();
                     else
                         regenerate();
