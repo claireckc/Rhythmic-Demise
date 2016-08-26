@@ -115,7 +115,9 @@
      <Compile Include="Assets\Scripts\WindArt.cs" />
      <Compile Include="Assets\SkillsManager.cs" />
      <Compile Include="Assets\StageRateHandler.cs" />
+     <Compile Include="Assets\StartScreen_Handler.cs" />
      <Compile Include="Assets\SubRatings.cs" />
+     <Compile Include="Assets\TestScript.cs" />
      <Compile Include="Assets\TextManager.cs" />
      <Compile Include="Assets\TracheaAI.cs" />
      <Compile Include="Assets\TutorialManager.cs" />
