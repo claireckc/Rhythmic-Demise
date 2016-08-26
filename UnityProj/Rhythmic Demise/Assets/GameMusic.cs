@@ -55,6 +55,8 @@ public class GameMusic : MonoBehaviour {
             stageMusic.Stop();
         if (bossMusic.isPlaying)
             bossMusic.Stop();
+
+        print("stop");
     }
 
     void PlayGameOver()

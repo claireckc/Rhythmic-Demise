@@ -11,23 +11,34 @@ public class EndResultManager : MonoBehaviour {
     bool isComplete, done;
     bool isBossStage;
 
+    bool gameOver, played;
+
 	void Start () {
         if (erm == null) { 
             erm = this; 
         }
 
+        gameOver = played = false;
         anim = GetComponent<Animator>();
         audio = GameObject.Find("Audio Source").GetComponent<AudioSource>();
         endStageClone = Instantiate(Resources.Load<GameObject>("Prefabs/End Stage"));
 	}
+    void PlaygameOver()
+    {
+        if (gameOver && !played)
+        {
+            GameObject.Find("Game Music").SendMessage("PlayGameOver");
+            played = true;
+        }
+    }
 	
 	void Update () {
         if (ArmyController.armyController.army.Count <= 0)
         {
+            gameOver = true;
             audio.Stop();
-            GameObject.Find("Game Music").SendMessage("EndGameMusic");
-            GameObject.Find("Game Music").SendMessage("PlayGameOver");
             anim.SetTrigger("GameOver");
+            PlaygameOver();
         }
         else if (ArmyController.armyController.currPos.name == "EndPoint")
         {

@@ -31,8 +31,7 @@ public class Enums : MonoBehaviour {
         
         PriestHeal,
         PriestHex,
-        PriestHealBuff,
-        PriestCurse
+        PriestHealBuff
     }
 
     [System.Serializable]

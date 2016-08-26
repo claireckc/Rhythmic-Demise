@@ -227,7 +227,76 @@ public class TutorialManager : MonoBehaviour
 
     public void PlaySkill()
     {
-        //Instantiate(arrow, IconPos.transform.position, Quaternion.Euler(0f, 0, -90f));        //skill icon
+        GameObject skillIcon = Resources.Load("Prefabs/Icons/Cancer/KnightHigh") as GameObject; ;
+
+        if(PlayerScript.playerdata.pathogenType == Enums.CharacterType.Cancer)
+        {
+            switch (PlayerScript.playerdata.skillSelected)
+            {
+                case Enums.SkillName.KnightHigh:
+                    skillIcon = Resources.Load("Prefabs/Icons/Cancer/KnightHigh") as GameObject;
+                    break;
+                case Enums.SkillName.KnightCharge:
+                    skillIcon = Resources.Load("Prefabs/Icons/Cancer/KnightCharge") as GameObject;
+                    break;
+                case Enums.SkillName.KnightDefbuff:
+                    skillIcon = Resources.Load("Prefabs/Icons/Cancer/KnightDeffbuff") as GameObject;
+                    break;
+                case Enums.SkillName.ArcherAOE:
+                    skillIcon = Resources.Load("Prefabs/Icons/Cancer/ArcherAOE") as GameObject;
+                    break;
+                case Enums.SkillName.ArcherAtkBuff:
+                    skillIcon = Resources.Load("Prefabs/Icons/Cancer/ArcherAttkBuff") as GameObject;
+                    break;
+                case Enums.SkillName.ArcherHigh:
+                    skillIcon = Resources.Load("Prefabs/Icons/Cancer/ArcherHigh") as GameObject;
+                    break;
+                case Enums.SkillName.PriestHeal:
+                    skillIcon = Resources.Load("Prefabs/Icons/Cancer/PriestHeal") as GameObject;
+                    break;
+                case Enums.SkillName.PriestHealBuff:
+                    skillIcon = Resources.Load("Prefabs/Icons/Cancer/PriestHealBuff") as GameObject;
+                    break;
+                case Enums.SkillName.PriestHex:
+                    skillIcon = Resources.Load("Prefabs/Icons/Cancer/PriestDisable") as GameObject;
+                    break;
+            }
+        }
+        else
+        {
+            switch (PlayerScript.playerdata.skillSelected)
+            {
+                case Enums.SkillName.KnightHigh:
+                    skillIcon = Resources.Load("Prefabs/Icons/Diabetic/KnightHigh") as GameObject;
+                    break;
+                case Enums.SkillName.KnightCharge:
+                    skillIcon = Resources.Load("Prefabs/Icons/Diabetic/KnightCharge") as GameObject;
+                    break;
+                case Enums.SkillName.KnightDefbuff:
+                    skillIcon = Resources.Load("Prefabs/Icons/Diabetic/KnightDeffbuff") as GameObject;
+                    break;
+                case Enums.SkillName.ArcherAOE:
+                    skillIcon = Resources.Load("Prefabs/Icons/Diabetic/ArcherAOE") as GameObject;
+                    break;
+                case Enums.SkillName.ArcherAtkBuff:
+                    skillIcon = Resources.Load("Prefabs/Icons/Diabetic/ArcherAttkBuff") as GameObject;
+                    break;
+                case Enums.SkillName.ArcherHigh:
+                    skillIcon = Resources.Load("Prefabs/Icons/Diabetic/ArcherHigh") as GameObject;
+                    break;
+                case Enums.SkillName.PriestHeal:
+                    skillIcon = Resources.Load("Prefabs/Icons/Diabetic/PriestHeal") as GameObject;
+                    break;
+                case Enums.SkillName.PriestHealBuff:
+                    skillIcon = Resources.Load("Prefabs/Icons/Diabetic/PriestHealBuff") as GameObject;
+                    break;
+                case Enums.SkillName.PriestHex:
+                    skillIcon = Resources.Load("Prefabs/Icons/Diabetic/PriestDisable") as GameObject;
+                    break;
+            }
+        }
+
+        //Instantiate(skillIcon, IconPos.transform.position, Quaternion.Euler(0f, 0, -90f));        //skill icon
         InitSkillNotes();
         TutManager.currentPlaying = Enums.TutMove.Skill;
         if (allInvisible)
