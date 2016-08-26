@@ -465,7 +465,6 @@ public class ResourceManagement : MonoBehaviour
                     }
                     break;
                 default:
-                    Debug.Log("Stage Enter Error");
                     break;
             }
         }
@@ -1252,7 +1251,6 @@ public class ResourceManagement : MonoBehaviour
 
             if (PlayerScript.playerdata.firstResource)
             {
-                print("Changed first tutorial");
                 resourceTutorial.SendMessage("ActivateLeaderTutorial");
                 firstTutorial = false;
             }

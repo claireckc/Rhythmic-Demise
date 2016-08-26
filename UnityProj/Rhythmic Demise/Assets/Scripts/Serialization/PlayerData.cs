@@ -46,7 +46,6 @@ public class PlayerData
 
     public void Init()
     {
-        Debug.Log("call init in playerdata script");
         leaderType = Enums.JobType.None;
         skillSelected = Enums.SkillName.None;
         pathogenType = Enums.CharacterType.None;
