@@ -75,7 +75,7 @@ public class PlayerData
 
             tp.expToLevel = 10f;
             tp.currentExp = 0f;
-            
+
 
             switch (i)
             {
@@ -159,7 +159,7 @@ public class PlayerData
                         }
                         break;
                 }
-                
+
                 tp.skills.Add(sk);
             }
 
@@ -185,7 +185,7 @@ public class PlayerData
 
             //initialize the number of substages, when everything is confirmed
             newMap.stages = new List<SubMap>();
-            if (i == 1 || i == 5 || i == 10)
+            if (i == 1 ||i == 3 || i == 5 || i == 10)
             {
                 //larnyx and liver only has two stages, small intestine also
                 newMap.isLocked = true;
@@ -198,7 +198,85 @@ public class PlayerData
                     stage.stars = 0f;
                     stage.comboRange = new List<int>();
                     for (int j = 0; j < 3; j++)
-                        stage.comboRange.Add(0);
+                    {
+                        if (i == 1)
+                        {
+                            //larnyx
+                            if (j == 0)
+                                stage.comboRange.Add(1);
+                            else if (j == 1)
+                                stage.comboRange.Add(3);
+                            else
+                                stage.comboRange.Add(6);
+                        }
+                        else if(i == 3)
+                        {
+                            //lung
+                            if(k == 0)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(4);
+                                else
+                                    stage.comboRange.Add(8);
+                            }
+                            else if(k == 1)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(5);
+                                else
+                                    stage.comboRange.Add(10);
+                            }
+                        }
+                        else if(i == 5)
+                        {
+                            //liver
+                            if(k == 0)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(8);
+                                else
+                                    stage.comboRange.Add(21);
+                            }
+                            else if(k == 1)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(3);
+                                else
+                                    stage.comboRange.Add(6);
+                            }
+                        }
+                        else if(i == 10)
+                        {
+                            //small intestine
+                            if(k == 0)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(6);
+                                else
+                                    stage.comboRange.Add(12);
+                            }
+                            else if(k == 1)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(11);
+                                else
+                                    stage.comboRange.Add(22);
+                            }
+                        }
+                    }
+                    stage.comboRange.Add(0);
                     newMap.stages.Add(stage);
                 }
             }
@@ -224,7 +302,220 @@ public class PlayerData
                     stage.stars = 0f;
                     stage.comboRange = new List<int>();
                     for (int j = 0; j < 3; j++)
-                        stage.comboRange.Add(0);
+                    {
+                        if (newMap.mapName == Enums.MainMap.Mouth)
+                            stage.comboRange.Add(0);
+                        else if (newMap.mapName == Enums.MainMap.Trachea)
+                        {
+                            if (k == 0)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(5);
+                                else
+                                    stage.comboRange.Add(10);
+                            }
+                            else if (k == 1)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(8);
+                                else
+                                    stage.comboRange.Add(21);
+                            }
+                            else if (k == 2)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(6);
+                                else
+                                    stage.comboRange.Add(12);
+                            }
+                        }
+                        else if (newMap.mapName == Enums.MainMap.Heart)
+                        {
+                            if (k == 0)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(7);
+                                else
+                                    stage.comboRange.Add(14);
+                            }
+                            else if (k == 1)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(5);
+                                else
+                                    stage.comboRange.Add(10);
+                            }
+                            else if (k == 2)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(6);
+                                else
+                                    stage.comboRange.Add(12);
+                            }
+                        }
+                        else if (newMap.mapName == Enums.MainMap.Spleen)
+                        {
+                            if (k == 0)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(6);
+                                else
+                                    stage.comboRange.Add(18);
+                            }
+                            else if (k == 1)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(10);
+                                else
+                                    stage.comboRange.Add(20);
+                            }
+                            else if (k == 2)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(5);
+                                else
+                                    stage.comboRange.Add(10);
+                            }
+                        }
+                        else if (newMap.mapName == Enums.MainMap.Pancreas)
+                        {
+                            if (k == 0)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(10);
+                                else
+                                    stage.comboRange.Add(20);
+                            }
+                            else if (k == 1)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(8);
+                                else
+                                    stage.comboRange.Add(21);
+                            }
+                            else if (k == 2)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(5);
+                                else
+                                    stage.comboRange.Add(10);
+                            }
+                        }
+                        else if (newMap.mapName == Enums.MainMap.Kidney)
+                        {
+                            if (k == 0)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(5);
+                                else
+                                    stage.comboRange.Add(10);
+                            }
+                            else if (k == 1)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(6);
+                                else
+                                    stage.comboRange.Add(12);
+                            }
+                            else if (k == 2)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(4);
+                                else
+                                    stage.comboRange.Add(8);
+                            }
+                        }
+                        else if (newMap.mapName == Enums.MainMap.LIntes)
+                        {
+                            if (k == 0)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(9);
+                                else
+                                    stage.comboRange.Add(18);
+                            }
+                            else if (k == 1)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(9);
+                                else
+                                    stage.comboRange.Add(18);
+                            }
+                            else if (k == 2)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(6);
+                                else
+                                    stage.comboRange.Add(12);
+                            }
+                        }
+                        else if (newMap.mapName == Enums.MainMap.Brain)
+                        {
+                            if (k == 0)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(9);
+                                else
+                                    stage.comboRange.Add(18);
+                            }
+                            else if (k == 1)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(13);
+                                else
+                                    stage.comboRange.Add(26);
+                            }
+                            else if (k == 2)
+                            {
+                                if (j == 0)
+                                    stage.comboRange.Add(1);
+                                else if (j == 1)
+                                    stage.comboRange.Add(8);
+                                else
+                                    stage.comboRange.Add(21);
+                            }
+                        }
+                    }
                     newMap.stages.Add(stage);
                 }
             }
