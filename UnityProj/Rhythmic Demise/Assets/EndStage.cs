@@ -24,9 +24,12 @@ public class EndStage : MonoBehaviour
         //check if it is the last substage
         if (PlayerScript.playerdata.clickedStageNumber == PlayerScript.playerdata.mapProgress[currentMapIndex].stages.Count)
         {
-            //last substagae, unlock the next map
+            //last substage, unlock the next map
             PlayerScript.playerdata.mapProgress[currentMapIndex + 1].isLocked = false;
             PlayerScript.playerdata.mapProgress[currentMapIndex + 1].stages[0].topComboCount = 0;
+
+            //increase player's max energy by 1
+            PlayerScript.playerdata.totalEnergy += 1;
         }
         else
         {

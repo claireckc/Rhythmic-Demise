@@ -41,7 +41,7 @@ public class ArmyController : MonoBehaviour {
     GameObject tutManager;
     GameObject textManager;
 
-    bool moved, callMovingPt2;
+    bool moved, callMovingPt2, ended;
 
     Tower tower1, tower2;
 
@@ -63,7 +63,7 @@ public class ArmyController : MonoBehaviour {
             }
         }
 
-        moved = callMovingPt2 = false;
+        moved = callMovingPt2 = ended = false;
         if (armyController == null)
         {
             armyController = this;
@@ -282,8 +282,15 @@ public class ArmyController : MonoBehaviour {
                 }
                 else if (currPos == movingPt2 || currPos == movingPt3 || currPos == movingPt4)
                 {
-                    textManager.SendMessage("ShowClosePanel");
-                    prevPoint = currPos;
+                    if (!ended)
+                    {
+                        ended = true;
+                        textManager.SendMessage("ShowClosePanel");
+                        prevPoint = currPos;
+                    }
+                    else {
+                        tutManager.SendMessage("HideAll");
+                    }
                 }
             }
         }

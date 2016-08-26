@@ -8,6 +8,8 @@ public class SkillsManager : MonoBehaviour {
     Canvas skillCanvas, chooseCanvas;
     GameObject knightPanel, archerPanel, priestPanel;
 
+    GameObject archerAOE, archerAttkBuff, archerHigh, knightCharge, knightDeffBuff, knightHigh, priestDisable, priestHeal, priestHealBuff;
+
     Image knightIcon1, knightIcon2, knightIcon3;
     Image archerIcon1, archerIcon2, archerIcon3;
     Image priestIcon1, priestIcon2, priestIcon3;
@@ -59,50 +61,61 @@ public class SkillsManager : MonoBehaviour {
         choose_ArcherLeaderButton = chooseCanvas.transform.Find("ArcherPanel/ArcherLeaderButton").GetComponent<UnityEngine.UI.Button>();
         choose_PriestLeaderButton = chooseCanvas.transform.Find("PriestPanel/PriestLeaderButton").GetComponent<UnityEngine.UI.Button>();
     }
+    
+    void SetSkillIcon()
+    {
+        if(PlayerScript.playerdata.pathogenType == Enums.CharacterType.Cancer)
+        {
+            archerAOE = Resources.Load("Prefabs/Icons/Cancer/ArcherAOE") as GameObject;
+            archerAttkBuff = Resources.Load("Prefabs/Icons/Cancer/ArcherAttkBuff") as GameObject;
+            archerHigh = Resources.Load("Prefabs/Icons/Cancer/ArcherHigh") as GameObject;
+            knightCharge = Resources.Load("Prefabs/Icons/Cancer/KnightCharge") as GameObject;
+            knightDeffBuff = Resources.Load("Prefabs/Icons/Cancer/KnightDeffBuff") as GameObject;
+            knightHigh = Resources.Load("Prefabs/Icons/Cancer/KnightHigh") as GameObject;
+            priestDisable = Resources.Load("Prefabs/Icons/Cancer/PriestDisable") as GameObject;
+            priestHeal = Resources.Load("Prefabs/Icons/Cancer/PriestHeal") as GameObject;
+            priestHealBuff = Resources.Load("Prefabs/Icons/Cancer/PriestHealBuff") as GameObject;
 
+        }
+        else
+        {
+            archerAOE = Resources.Load("Prefabs/Icons/Diabetic/ArcherAOE") as GameObject;
+            archerAttkBuff = Resources.Load("Prefabs/Icons/Diabetic/ArcherAttkBuff") as GameObject;
+            archerHigh = Resources.Load("Prefabs/Icons/Diabetic/ArcherHigh") as GameObject;
+            knightCharge = Resources.Load("Prefabs/Icons/Diabetic/KnightCharge") as GameObject;
+            knightDeffBuff = Resources.Load("Prefabs/Icons/Diabetic/KnightDeffBuff") as GameObject;
+            knightHigh = Resources.Load("Prefabs/Icons/Diabetic/KnightHigh") as GameObject;
+            priestDisable = Resources.Load("Prefabs/Icons/Diabetic/PriestDisable") as GameObject;
+            priestHeal = Resources.Load("Prefabs/Icons/Diabetic/PriestHeal") as GameObject;
+            priestHealBuff = Resources.Load("Prefabs/Icons/Diabetic/PriestHealBuff") as GameObject;
+        }
+
+        //knight skills
+        knightPanel.transform.Find("Content Grid/Skill 1/Skill Icon").GetComponent<Image>().sprite = knightHigh.GetComponent<SpriteRenderer>().sprite;
+        knightPanel.transform.Find("Content Grid/Skill 2/Skill Icon").GetComponent<Image>().sprite = knightCharge.GetComponent<SpriteRenderer>().sprite;
+        knightPanel.transform.Find("Content Grid/Skill 3/Skill Icon").GetComponent<Image>().sprite = knightDeffBuff.GetComponent<SpriteRenderer>().sprite;
+
+        //archer skills
+        archerPanel.transform.Find("Content Grid/Skill 1/Skill Icon").GetComponent<Image>().sprite = archerAOE.GetComponent<SpriteRenderer>().sprite;
+        archerPanel.transform.Find("Content Grid/Skill 2/Skill Icon").GetComponent<Image>().sprite = archerAttkBuff.GetComponent<SpriteRenderer>().sprite;
+        archerPanel.transform.Find("Content Grid/Skill 3/Skill Icon").GetComponent<Image>().sprite = archerHigh.GetComponent<SpriteRenderer>().sprite;
+
+        //priest skills
+        priestPanel.transform.Find("Content Grid/Skill 1/Skill Icon").GetComponent<Image>().sprite = priestHeal.GetComponent<SpriteRenderer>().sprite;
+        priestPanel.transform.Find("Content Grid/Skill 2/Skill Icon").GetComponent<Image>().sprite = priestDisable.GetComponent<SpriteRenderer>().sprite;
+        priestPanel.transform.Find("Content Grid/Skill 3/Skill Icon").GetComponent<Image>().sprite = priestHealBuff.GetComponent<SpriteRenderer>().sprite;
+
+    }
     void GetSkillCanvasComponents()
     {
         skillCanvas = GameObject.Find("LeaderSkillsCanvas").GetComponent<Canvas>();
         SkillBackButton = skillCanvas.transform.Find("BackButton").GetComponent<UnityEngine.UI.Button>();
 
         knightPanel = GameObject.Find("KnightSkillsPanel");
-        knightIcon1 = knightPanel.transform.Find("Content Grid/Skill 1/Skill Icon").GetComponent<Image>();
-        knightIcon2 = knightPanel.transform.Find("Content Grid/Skill 2/Skill Icon").GetComponent<Image>();
-        knightIcon3 = knightPanel.transform.Find("Content Grid/Skill 3/Skill Icon").GetComponent<Image>();
 
         archerPanel = GameObject.Find("ArcherSkillsPanel");
-        archerIcon1 = archerPanel.transform.Find("Content Grid/Skill 1/Skill Icon").GetComponent<Image>();
-        archerIcon2 = archerPanel.transform.Find("Content Grid/Skill 2/Skill Icon").GetComponent<Image>();
-        archerIcon3 = archerPanel.transform.Find("Content Grid/Skill 3/Skill Icon").GetComponent<Image>();
 
         priestPanel = GameObject.Find("PriestSkillsPanel");
-        priestIcon1 = priestPanel.transform.Find("Content Grid/Skill 1/Skill Icon").GetComponent<Image>();
-        priestIcon2 = priestPanel.transform.Find("Content Grid/Skill 2/Skill Icon").GetComponent<Image>();
-        priestIcon3 = priestPanel.transform.Find("Content Grid/Skill 3/Skill Icon").GetComponent<Image>();
-
-        knightSkillName1 = knightPanel.transform.Find("Content Grid/Skill 1/Skill Name").GetComponent<Text>();
-        knightSkillName2 = knightPanel.transform.Find("Content Grid/Skill 2/Skill Name").GetComponent<Text>();
-        knightSkillName3 = knightPanel.transform.Find("Content Grid/Skill 3/Skill Name").GetComponent<Text>();
-
-        knightSkillDesc1 = knightPanel.transform.Find("Content Grid/Skill 1/Skill Desc").GetComponent<Text>();
-        knightSkillDesc2 = knightPanel.transform.Find("Content Grid/Skill 2/Skill Desc").GetComponent<Text>();
-        knightSkillDesc3 = knightPanel.transform.Find("Content Grid/Skill 3/Skill Desc").GetComponent<Text>();
-
-        archerSkillName1 = archerPanel.transform.Find("Content Grid/Skill 1/Skill Name").GetComponent<Text>();
-        archerSkillName2 = archerPanel.transform.Find("Content Grid/Skill 2/Skill Name").GetComponent<Text>();
-        archerSkillName3 = archerPanel.transform.Find("Content Grid/Skill 3/Skill Name").GetComponent<Text>();
-
-        archerSkillDesc1 = archerPanel.transform.Find("Content Grid/Skill 1/Skill Desc").GetComponent<Text>();
-        archerSkillDesc2 = archerPanel.transform.Find("Content Grid/Skill 2/Skill Desc").GetComponent<Text>();
-        archerSkillDesc3 = archerPanel.transform.Find("Content Grid/Skill 3/Skill Desc").GetComponent<Text>();
-
-        priestSkillName1 = priestPanel.transform.Find("Content Grid/Skill 1/Skill Name").GetComponent<Text>();
-        priestSkillName2 = priestPanel.transform.Find("Content Grid/Skill 2/Skill Name").GetComponent<Text>();
-        priestSkillName3 = priestPanel.transform.Find("Content Grid/Skill 3/Skill Name").GetComponent<Text>();
-
-        priestSkillDesc1 = priestPanel.transform.Find("Content Grid/Skill 1/Skill Desc").GetComponent<Text>();
-        priestSkillDesc2 = priestPanel.transform.Find("Content Grid/Skill 2/Skill Desc").GetComponent<Text>();
-        priestSkillDesc3 = priestPanel.transform.Find("Content Grid/Skill 3/Skill Desc").GetComponent<Text>();
 
         knightSel1 = knightPanel.transform.Find("Content Grid/Skill 1/Select Button").GetComponent<UnityEngine.UI.Button>();
         knightSel2 = knightPanel.transform.Find("Content Grid/Skill 2/Select Button").GetComponent<UnityEngine.UI.Button>();
@@ -115,6 +128,8 @@ public class SkillsManager : MonoBehaviour {
         priestSel1 = priestPanel.transform.Find("Content Grid/Skill 1/Select Button").GetComponent<UnityEngine.UI.Button>();
         priestSel2 = priestPanel.transform.Find("Content Grid/Skill 2/Select Button").GetComponent<UnityEngine.UI.Button>();
         priestSel3 = priestPanel.transform.Find("Content Grid/Skill 3/Select Button").GetComponent<UnityEngine.UI.Button>();
+
+        SetSkillIcon();
 
     }
     void DisableSkillCanvasComponents()
@@ -164,7 +179,6 @@ public class SkillsManager : MonoBehaviour {
 
     public void Hide_BackPress()
     {
-        print("PRessed");
         DisableSkillCanvasComponents();
         EnabledChooseCanvasComponents();
         resourceManagement.SendMessage("UpdateLeaderButton", null);
@@ -217,7 +231,7 @@ public class SkillsManager : MonoBehaviour {
 
     public void PriestSel1_Press()
     {
-        PlayerScript.playerdata.skillSelected = Enums.SkillName.PriestHealBuff;
+        PlayerScript.playerdata.skillSelected = Enums.SkillName.PriestHeal;
         resourceManagement.SendMessage("PrintMessage", "Virus Water Selected");
     }
 
@@ -229,7 +243,7 @@ public class SkillsManager : MonoBehaviour {
 
     public void PriestSel3_Press()
     {
-        PlayerScript.playerdata.skillSelected = Enums.SkillName.PriestCurse;
+        PlayerScript.playerdata.skillSelected = Enums.SkillName.PriestHealBuff;
         resourceManagement.SendMessage("PrintMessage", "Insurance Selected");
     }
     
