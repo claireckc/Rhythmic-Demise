@@ -7,6 +7,9 @@ public class EndStage : MonoBehaviour
     MainMap currentMap;
     SubMap currentStage;
 
+    public int starsAttained;
+    public bool checker;
+
     public void UpdateData(int highestStreak)
     {
         currentMap = PlayerScript.playerdata.mapProgress[(int)PlayerScript.playerdata.clickedMap];
@@ -65,12 +68,13 @@ public class EndStage : MonoBehaviour
 
     public void UpdateStars()
     {
-        int starsAttained = 0;
         for (int i = 0; i < currentStage.comboRange.Count; i++)
         {
             if (currentStage.topComboCount > currentStage.comboRange[i])
                 starsAttained++;
         }
+
+        checker = true;
 
         if (starsAttained > currentStage.stars)
             currentStage.stars = starsAttained;

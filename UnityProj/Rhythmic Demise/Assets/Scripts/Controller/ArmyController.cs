@@ -46,6 +46,7 @@ public class ArmyController : MonoBehaviour {
     Tower tower1, tower2;
 
     int enumIndex;
+    bool doneInit;
 
 	// Use this for initialization
 
@@ -74,72 +75,77 @@ public class ArmyController : MonoBehaviour {
 
         init();
         GetMovingPoints();
+
+        doneInit = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        checkHealth();
-
-        findClosestEnemy();
-
-        enumIndex = (int)currentAction;
-
-        if(PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
-            TutorialCall();
-
-        switch (currentAction)
+        if (doneInit)
         {
-            case Enums.PlayerState.Idle:
-                foreach (Character c in army)
-                {
-                    c.anim.SetInteger("State", enumIndex);
-                }
-                break;
-            case Enums.PlayerState.MoveUp:
-                targetPos = currPos.up;
-                moveTo(targetPos);
+            checkHealth();
 
-                foreach (Character c in army)
-                {
-                    c.anim.SetInteger("State", enumIndex);
-                }
-                break;
-            case Enums.PlayerState.MoveDown:
-                targetPos = currPos.bottom;
-                moveTo(targetPos);
+            findClosestEnemy();
 
-                foreach (Character c in army)
-                {
-                    c.anim.SetInteger("State", enumIndex);
-                }
-                break;
-            case Enums.PlayerState.MoveLeft:
-                targetPos = currPos.left;
-                moveTo(targetPos);
+            enumIndex = (int)currentAction;
 
-                foreach (Character c in army)
-                {
-                    c.anim.SetInteger("State", enumIndex);
-                }
-                break;
-            case Enums.PlayerState.MoveRight:
-                targetPos = currPos.right;
-                moveTo(targetPos);
+            if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Mouth)
+                TutorialCall();
 
-                foreach (Character c in army)
-                {
-                    c.anim.SetInteger("State", enumIndex);
-                }
-                break;
-            case Enums.PlayerState.Attack:
-                attack();
-                break;
-            case Enums.PlayerState.Skill:
-                useSkill();
-                break;
-            case Enums.PlayerState.Defend:
-                defend();
-                break;
+            switch (currentAction)
+            {
+                case Enums.PlayerState.Idle:
+                    foreach (Character c in army)
+                    {
+                        c.anim.SetInteger("State", enumIndex);
+                    }
+                    break;
+                case Enums.PlayerState.MoveUp:
+                    targetPos = currPos.up;
+                    moveTo(targetPos);
+
+                    foreach (Character c in army)
+                    {
+                        c.anim.SetInteger("State", enumIndex);
+                    }
+                    break;
+                case Enums.PlayerState.MoveDown:
+                    targetPos = currPos.bottom;
+                    moveTo(targetPos);
+
+                    foreach (Character c in army)
+                    {
+                        c.anim.SetInteger("State", enumIndex);
+                    }
+                    break;
+                case Enums.PlayerState.MoveLeft:
+                    targetPos = currPos.left;
+                    moveTo(targetPos);
+
+                    foreach (Character c in army)
+                    {
+                        c.anim.SetInteger("State", enumIndex);
+                    }
+                    break;
+                case Enums.PlayerState.MoveRight:
+                    targetPos = currPos.right;
+                    moveTo(targetPos);
+
+                    foreach (Character c in army)
+                    {
+                        c.anim.SetInteger("State", enumIndex);
+                    }
+                    break;
+                case Enums.PlayerState.Attack:
+                    attack();
+                    break;
+                case Enums.PlayerState.Skill:
+                    useSkill();
+                    break;
+                case Enums.PlayerState.Defend:
+                    defend();
+                    break;
+            }
         }
 	}
 

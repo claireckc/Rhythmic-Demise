@@ -76,10 +76,10 @@ public class EndResultManager : MonoBehaviour {
     public void StopGame()
     {
         audio.Stop();
-        anim.SetTrigger("Finish");
         
         //update resources
         endStageClone.SendMessage("UpdateData", GameController.gameController.getHighestStreak());
+        anim.SetTrigger("Finish");
         done = true;
     }
 
