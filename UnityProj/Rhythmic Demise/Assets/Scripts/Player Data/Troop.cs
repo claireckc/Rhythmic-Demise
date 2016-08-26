@@ -24,6 +24,7 @@ public class Troop
     {
         currentExp += PlayerScript.playerdata.totalResource - expToLevel;
         PlayerScript.playerdata.totalResource -= (int)expToLevel;
+        level += 1;
         IncreaseExpNeeded();
         StatLevelUp();
         SkillLevelUp();
