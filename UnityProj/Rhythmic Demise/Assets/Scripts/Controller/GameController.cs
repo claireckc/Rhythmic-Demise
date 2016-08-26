@@ -38,6 +38,8 @@ public class GameController : MonoBehaviour
 
     GameObject tutorialManager, tower1, tower2;
 
+    Camera cam;
+
     // Use this for initialization
     void Start()
     {
@@ -66,12 +68,14 @@ public class GameController : MonoBehaviour
         beatCounter = 0;
         moveActionTurn = false;
         inputActionTurn = false;
-        comboTextPosition = new Vector3(80, Screen.height - 50, 20);
+        comboTextPosition = new Vector3(120, Screen.height - 50, 20);
 
         note1 = Resources.Load<NoteControl>("Prefabs/UI/Note1");
         note2 = Resources.Load<NoteControl>("Prefabs/UI/Note2");
         note3 = Resources.Load<NoteControl>("Prefabs/UI/Note3");
         note4 = Resources.Load<NoteControl>("Prefabs/UI/Note4");
+
+        cam = GameObject.Find("Main Camera").GetComponent<Camera>();
         
         moveSequence = "";
     }
@@ -191,7 +195,6 @@ public class GameController : MonoBehaviour
             {
                 if (currentStreak > 0)
                 {
-                    Camera cam = GameObject.Find("Main Camera").GetComponent<Camera>();
                     FloatingTextController.CreateComboPopUp(currentStreak.ToString() + " Combo!!", cam.ScreenToWorldPoint(comboTextPosition));
                 }
                 currentStreak++;
