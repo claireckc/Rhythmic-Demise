@@ -127,15 +127,6 @@ public class SkillsManager : MonoBehaviour {
 
     void UpdateContent()
     {
-        //update the content of the desc, skill and icons
-        knightSkillName1.text = archerSkillName1.text = priestSkillName1.text = "Skill Name 1";
-        knightSkillName2.text = archerSkillName2.text = priestSkillName2.text = "Skill Name 2";
-        knightSkillName3.text = archerSkillName3.text = priestSkillName3.text = "Skill Name 3";
-
-        knightSkillDesc1.text = archerSkillDesc1.text = priestSkillDesc1.text = "Skill Description 1";
-        knightSkillDesc2.text = archerSkillDesc2.text = priestSkillDesc2.text = "Skill Description 2";
-        knightSkillDesc3.text = archerSkillDesc3.text = priestSkillDesc3.text = "Skill Description 3";
-
         //check what is the selected leader type
         Enums.JobType leaderType = PlayerScript.playerdata.leaderType;
         switch (leaderType)
