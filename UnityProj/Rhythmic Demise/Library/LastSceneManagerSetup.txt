@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Game Scene/Trachea/TracheaMap1.unity
+- path: Assets/Scenes/Game Scene/SmallIntestine/SmallIntestineEventMap.unity
   isLoaded: 1
   isActive: 1
