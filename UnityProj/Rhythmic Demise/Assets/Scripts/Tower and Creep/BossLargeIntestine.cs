@@ -5,7 +5,7 @@ public class BossLargeIntestine : Boss {
 
     public GameObject projectile;
     public GameObject spellCircle;
-    public GameObject[] spellLocation;
+    public GameObject spellLocation;
     public GameObject spellPrefab;
 
     private float launchAttackTime;
@@ -46,7 +46,7 @@ public class BossLargeIntestine : Boss {
                     GameObject sc = Instantiate(spellPrefab, targetPos.transform.position, spellPrefab.transform.rotation) as GameObject;
                     Destroy(sc, 2);
 
-                    if (ArmyController.armyController.currPos == targetPos)
+                    if (ArmyController.armyController.currPos.gameObject == targetPos)
                     {
                         ArmyController.armyController.takeDamage(damage * 2);
                     }
@@ -57,9 +57,7 @@ public class BossLargeIntestine : Boss {
 
     protected override void specialAction()
     {
-        int index = Random.Range(0, spellLocation.Length);
-
-        targetPos = spellLocation[index];
+        targetPos = spellLocation;
 
         GameObject sc = Instantiate(spellCircle, targetPos.transform.position, spellCircle.transform.rotation) as GameObject;
         launchAttackTime = Time.time + 2;

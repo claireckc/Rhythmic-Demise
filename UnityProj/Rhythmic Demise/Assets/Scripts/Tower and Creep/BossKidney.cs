@@ -29,7 +29,7 @@ public class BossKidney : Boss {
                     nextActionTime = Time.time + cooldown;
 
                     int tempNum = Random.Range(1, 101);
-                    if (tempNum <= 85)
+                    if (tempNum <= 90)
                         Action();
                     else
                         specialAction();
@@ -50,12 +50,8 @@ public class BossKidney : Boss {
 
     void hitEnemy()
     {
-        Vector3 dir = closestPlayer.transform.position - this.transform.position;
-        float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
-
-        GameObject shoot = Instantiate(projectile, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-        shoot.SendMessage("Initialize", closestPlayer.transform.position);
-        shoot.SendMessage("initDamage", damage);
+        Character c = closestPlayer.GetComponent<Character>();
+        c.TakeDamage(damage);
     }
 
     void triggerSkill()

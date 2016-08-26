@@ -170,9 +170,10 @@ public class ArmyController : MonoBehaviour {
                 case 3: //boss stage
                     movingPt1 = GameObject.Find("MovingPoints/MovingPoint1").GetComponent<MovingPoint>();
                     //boss points
-                    movingPt2 = GameObject.Find("MovingPoints/MovingPoint2.3").GetComponent<MovingPoint>();
-                    movingPt3 = GameObject.Find("MovingPoints/MovingPoint3.3").GetComponent<MovingPoint>();
-                    movingPt4 = GameObject.Find("MovingPoints/MovingPoint4.3").GetComponent<MovingPoint>();
+                    //movingPt2 = GameObject.Find("MovingPoints/MovingPoint2.3").GetComponent<MovingPoint>();
+                    //movingPt3 = GameObject.Find("MovingPoints/MovingPoint3.3").GetComponent<MovingPoint>();
+                    //movingPt4 = GameObject.Find("MovingPoints/MovingPoint4.3").GetComponent<MovingPoint>();
+                    movingPt2 = GameObject.Find("MovingPoints/MovingPoint4").GetComponent<MovingPoint>();
                     break;
        
             }

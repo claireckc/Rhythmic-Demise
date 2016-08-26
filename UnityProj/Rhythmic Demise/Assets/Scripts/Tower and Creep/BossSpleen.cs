@@ -3,9 +3,8 @@ using System.Collections;
 
 public class BossSpleen : Boss {
 
-    public GameObject projectile;
     public GameObject troopPrefab; //rbc
-    public GameObject[] spawnPoint;
+    public GameObject spawnPoint;
 
     public float troopDamage;
     public float troopHealth;
@@ -31,12 +30,10 @@ public class BossSpleen : Boss {
                     
                     int tempNum = Random.Range(1, 101);
 
-                    if (tempNum <= 80)
-                        Action();
-                    else if (tempNum <= 90)
-                        specialAction();
-                    else
+                    if (tempNum <= 15)
                         regenerate();
+                    else
+                        specialAction();
                 }
             }
         }
@@ -54,30 +51,21 @@ public class BossSpleen : Boss {
 
     protected override void specialAction()
     {
-        for (int i = 0; i <= 2; i++)
-        {
-            Vector3 dir = closestPlayer.transform.position - this.transform.position;
-            float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
+       Vector3 dir = closestPlayer.transform.position - this.transform.position;
+       float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
 
-            GameObject spawn = Instantiate(troopPrefab, spawnPoint[i].transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
+       GameObject spawn = Instantiate(troopPrefab, spawnPoint.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
 
-            spawn.SendMessage("Initialize", closestPlayer);
+       spawn.SendMessage("Initialize", closestPlayer);
 
-            spawn.SendMessage("initHealth", troopHealth);
-            spawn.SendMessage("initDamage", troopDamage);
-            spawn.SendMessage("initCooldown", troopCoolDown);
-        }
+       spawn.SendMessage("initHealth", troopHealth);
+       spawn.SendMessage("initDamage", troopDamage);
+       spawn.SendMessage("initCooldown", troopCoolDown);
 
         anim.SetTrigger("Summon");
     }
 
     protected override void Action()
     {
-        Vector3 dir = closestPlayer.transform.position - this.transform.position;
-        float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
-
-        GameObject shoot = Instantiate(projectile, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-        shoot.SendMessage("Initialize", closestPlayer.transform.position);
-        shoot.SendMessage("initDamage", damage);
     }
 }

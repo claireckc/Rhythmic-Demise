@@ -5,14 +5,16 @@ using System.Collections.Generic;
 public class EventBrain : MonoBehaviour {
 
     public List<GameObject> synapses;
-    public MovingPoint top1;
-    public MovingPoint top2;
+    public List<GameObject> synapses2;
+    public MovingPoint first1;
+    public MovingPoint first2;
     public MovingPoint middle1;
     public MovingPoint middle2;
-    public MovingPoint bottom1;
-    public MovingPoint bottom2;
+    public GameObject fences1;
+    public GameObject fences2;
 
     private bool done;
+    private bool done2;
 
 	void Start () {
 	
@@ -27,13 +29,30 @@ public class EventBrain : MonoBehaviour {
             }
         }
 
+        for (int i = 0; i < synapses2.Count; i++)
+        {
+            if (synapses2[i] == null)
+            {
+                synapses2.Remove(synapses2[i]);
+            }
+        }
+
+        if (synapses2.Count <= 0 & !done2)
+        {
+            first1.right = first2;
+            Destroy(fences1.gameObject);
+
+            done2 = true;
+        }
+
         if (synapses.Count <= 0 && !done)
         {
-            top1.right = top2;
             middle1.right = middle2;
-            bottom1.right = bottom2;
+            Destroy(fences2.gameObject);
 
             done = true;
         }
+
+        
 	}
 }

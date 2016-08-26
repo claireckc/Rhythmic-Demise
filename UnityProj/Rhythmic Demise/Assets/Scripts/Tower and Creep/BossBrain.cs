@@ -2,9 +2,6 @@
 using System.Collections;
 
 public class BossBrain : Boss {
-
-    public GameObject projectile;
-
 	void Start () {
         base.Start();
 	}
@@ -18,7 +15,7 @@ public class BossBrain : Boss {
 
             if (currentHealth <= 300)
             {
-                cooldown = 3;
+                cooldown = 4;
             }
 
             if (closestPlayer != null)
@@ -49,11 +46,7 @@ public class BossBrain : Boss {
 
     void hitEnemy()
     {
-        Vector3 dir = closestPlayer.transform.position - this.transform.position;
-        float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
-
-        GameObject shoot = Instantiate(projectile, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-        shoot.SendMessage("Initialize", closestPlayer.transform.position);
-        shoot.SendMessage("initDamage", damage);
+        Character c = closestPlayer.GetComponent<Character>();
+        c.TakeDamage(damage);
     }
 }

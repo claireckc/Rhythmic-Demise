@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Uvula : Boss {
+public class BossLarnyx : Boss {
     public GameObject projectile;
 
     public void Start()
@@ -31,7 +31,6 @@ public class Uvula : Boss {
 
     protected override void Action()
     {
-
         anim.SetTrigger("Attack");
     }
 
