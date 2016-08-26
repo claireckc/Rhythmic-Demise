@@ -8,7 +8,7 @@ public class EventSmallIntestine : MonoBehaviour {
     private float cooldown;
 
 	void Start () {
-        damage = 10;
+        damage = 9;
         nextActionTime = cooldown = 5f;
 	}
 	
