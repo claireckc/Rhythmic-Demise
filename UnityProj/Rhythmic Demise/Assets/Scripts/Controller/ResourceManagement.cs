@@ -265,9 +265,33 @@ public class ResourceManagement : MonoBehaviour
         return false;
     }
 
+    bool CanProceed()
+    {
+        //check if skill is right correct for leader is correct
+        Enums.SkillName skillName = PlayerScript.playerdata.skillSelected;
+
+        switch (PlayerScript.playerdata.leaderType)
+        {
+            case Enums.JobType.Knight:
+                if (skillName == Enums.SkillName.KnightCharge || skillName == Enums.SkillName.KnightDefbuff || skillName == Enums.SkillName.KnightHigh)
+                    return true;
+                break;
+            case Enums.JobType.Archer:
+                if (skillName == Enums.SkillName.ArcherAOE || skillName == Enums.SkillName.ArcherAtkBuff || skillName == Enums.SkillName.ArcherHigh)
+                    return true;
+                break;
+            case Enums.JobType.Priest:
+                if (skillName == Enums.SkillName.PriestHeal || skillName == Enums.SkillName.PriestHealBuff || skillName == Enums.SkillName.PriestHex)
+                    return true;
+                break;
+        }
+
+        return false;
+    }
+
     public void Main_PlayPress()
     {
-        if (HasTeam() && HasLeader())
+        if (HasTeam() && HasLeader() && CanProceed())
         {
             PlaySelectAudio();
             switch (PlayerScript.playerdata.clickedMap)
@@ -1147,25 +1171,59 @@ public class ResourceManagement : MonoBehaviour
         {
             case Enums.JobType.Knight:
                 knightLeader.interactable = false;
-                archerLeader.interactable = true;
-                priestLeader.interactable = true;
+                if (PlayerScript.playerdata.troopData[1].level > 0)
+                    archerLeader.interactable = true;
+                else
+                    archerLeader.interactable = false;
+
+                if (PlayerScript.playerdata.troopData[2].level > 0)
+                    priestLeader.interactable = true;
+                else
+                    priestLeader.interactable = false;
                 break;
 
             case Enums.JobType.Archer:
-                knightLeader.interactable = true;
+                if (PlayerScript.playerdata.troopData[0].level > 0)
+                    knightLeader.interactable = true;
+                else
+                    knightLeader.interactable = false;
+
                 archerLeader.interactable = false;
-                priestLeader.interactable = true;
+
+                if (PlayerScript.playerdata.troopData[2].level > 0)
+                    priestLeader.interactable = true;
+                else
+                    priestLeader.interactable = false;
                 break;
 
             case Enums.JobType.Priest:
-                knightLeader.interactable = true;
-                archerLeader.interactable = true;
+                if (PlayerScript.playerdata.troopData[0].level > 0)
+                    knightLeader.interactable = true;
+                else
+                    knightLeader.interactable = false;
+
+                if (PlayerScript.playerdata.troopData[1].level > 0)
+                    archerLeader.interactable = true;
+                else
+                    archerLeader.interactable = false;
+
                 priestLeader.interactable = false;
                 break;
             default:
-                knightLeader.interactable = true;
-                archerLeader.interactable = true;
-                priestLeader.interactable = true;
+                if (PlayerScript.playerdata.troopData[0].level > 0)
+                    knightLeader.interactable = true;
+                else
+                    knightLeader.interactable = false;
+
+                if (PlayerScript.playerdata.troopData[1].level > 0)
+                    archerLeader.interactable = true;
+                else
+                    archerLeader.interactable = false;
+
+                if (PlayerScript.playerdata.troopData[2].level > 0)
+                    priestLeader.interactable = true;
+                else
+                    priestLeader.interactable = false;
                 break;
         }
     }
