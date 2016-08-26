@@ -23,8 +23,13 @@ public class EndResultManager : MonoBehaviour {
         audio = GameObject.Find("Audio Source").GetComponent<AudioSource>();
         endStageClone = Instantiate(Resources.Load<GameObject>("Prefabs/End Stage"));
 	}
-    void PlaygameOver()
+    
+    public void PlaygameOver()
     {
+        gameOver = true;
+        audio.Stop();
+        anim.SetTrigger("GameOver");
+        
         if (gameOver && !played)
         {
             GameObject.Find("Game Music").SendMessage("PlayGameOver");
@@ -35,9 +40,6 @@ public class EndResultManager : MonoBehaviour {
 	void Update () {
         if (ArmyController.armyController.army.Count <= 0)
         {
-            gameOver = true;
-            audio.Stop();
-            anim.SetTrigger("GameOver");
             PlaygameOver();
         }
         else if (ArmyController.armyController.currPos.name == "EndPoint")
@@ -68,13 +70,14 @@ public class EndResultManager : MonoBehaviour {
 
         if (isComplete && !done)
         {
-            GameObject.Find("Game Music").SendMessage("PlayVictory");
             StopGame();
         }
 	}
 
     public void StopGame()
     {
+        GameObject.Find("Game Music").SendMessage("PlayVictory");
+
         audio.Stop();
         
         //update resources
