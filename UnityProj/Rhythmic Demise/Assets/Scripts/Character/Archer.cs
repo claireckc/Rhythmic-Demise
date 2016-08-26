@@ -92,12 +92,15 @@ public class Archer : Character {
 
     void spawnArrow()
     {
-        Vector3 dir = ArmyController.armyController.closestEnemy.transform.position - this.transform.position;
-        float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
+        if (ArmyController.armyController.closestEnemy != null)
+        {
+            Vector3 dir = ArmyController.armyController.closestEnemy.transform.position - this.transform.position;
+            float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
 
-        GameObject shoot = Instantiate(arrow, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-        shoot.SendMessage("Initialize", ArmyController.armyController.closestEnemy.transform.position);
-        shoot.SendMessage("initDamage", damage);
+            GameObject shoot = Instantiate(arrow, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
+            shoot.SendMessage("Initialize", ArmyController.armyController.closestEnemy.transform.position);
+            shoot.SendMessage("initDamage", damage);
+        }
     }
 
     void skillAOE()

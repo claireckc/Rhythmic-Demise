@@ -66,7 +66,7 @@ public class GameController : MonoBehaviour
         beatCounter = 0;
         moveActionTurn = false;
         inputActionTurn = false;
-        comboTextPosition = new Vector3(0, 4, 0);
+        comboTextPosition = new Vector3(80, Screen.height - 50, 20);
 
         note1 = Resources.Load<NoteControl>("Prefabs/UI/Note1");
         note2 = Resources.Load<NoteControl>("Prefabs/UI/Note2");
@@ -190,8 +190,11 @@ public class GameController : MonoBehaviour
 
             if (moveBeatCounter == 1)
             {
-                FloatingTextController.CreateFloatingText(currentStreak.ToString() + " Combo!!", comboTextPosition);
-
+                if (currentStreak > 0)
+                {
+                    Camera cam = GameObject.Find("Main Camera").GetComponent<Camera>();
+                    FloatingTextController.CreateComboPopUp(currentStreak.ToString() + " Combo!!", cam.ScreenToWorldPoint(comboTextPosition));
+                }
                 currentStreak++;
 
                 //calculate combo multiplier

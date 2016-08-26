@@ -127,8 +127,11 @@ public class Knight : Character {
 
     void hitEnemy()
     {
-        Enemy enemy = ArmyController.armyController.closestEnemy.GetComponent<Enemy>();
-        enemy.TakeDamage(damage);
+        if (ArmyController.armyController.closestEnemy != null)
+        {
+            Enemy enemy = ArmyController.armyController.closestEnemy.GetComponent<Enemy>();
+            enemy.TakeDamage(damage);
+        }
     }
 
     void SkillAOE()
