@@ -73,7 +73,30 @@ public class GameController : MonoBehaviour
         note3 = Resources.Load<NoteControl>("Prefabs/UI/Note3");
         note4 = Resources.Load<NoteControl>("Prefabs/UI/Note4");
 
+        ApplyOpacity();
+
         moveSequence = "";
+    }
+
+    void ApplyOpacity()
+    {
+        float opacityValue =PlayerScript.playerdata.buttonAlpha;
+
+        Color newColor = note1.gameObject.GetComponent<SpriteRenderer>().color;
+        newColor.a = opacityValue;
+        note1.gameObject.GetComponent<SpriteRenderer>().color = newColor;
+
+        newColor = note2.gameObject.GetComponent<SpriteRenderer>().color;
+        newColor.a = opacityValue;
+        note2.gameObject.GetComponent<SpriteRenderer>().color = newColor;
+
+        newColor = note3.gameObject.GetComponent<SpriteRenderer>().color;
+        newColor.a = opacityValue;
+        note3.gameObject.GetComponent<SpriteRenderer>().color = newColor;
+
+        newColor = note4.gameObject.GetComponent<SpriteRenderer>().color;
+        newColor.a = opacityValue;
+        note4.gameObject.GetComponent<SpriteRenderer>().color = newColor;
     }
 
     // Update is called once per frame

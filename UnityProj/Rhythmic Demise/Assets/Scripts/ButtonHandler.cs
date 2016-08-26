@@ -4,13 +4,48 @@ using System.Collections;
 public class ButtonHandler : MonoBehaviour {
 
     RuntimePlatform platform;
-
     public AudioSource buttonClickSound;
+    GameObject redButton, blueButton, greenButton, yellowButton;
 
 	// Use this for initialization
 	void Start () {
         platform = Application.platform;
+        GetButtons();
+        ApplyOpacity();
 	}
+
+    void GetButtons()
+    {
+        redButton = GameObject.Find("CanvasUI/GamePlayUI/Button1");
+        blueButton = GameObject.Find("CanvasUI/GamePlayUI/Button2");
+        greenButton = GameObject.Find("CanvasUI/GamePlayUI/Button3");
+        yellowButton = GameObject.Find("CanvasUI/GamePlayUI/Button4");
+    }
+
+    void ApplyOpacity()
+    {
+        float opacityVal = PlayerScript.playerdata.buttonAlpha;
+
+        //for red button
+        Color newColor = redButton.GetComponent<UnityEngine.UI.Image>().color;
+        newColor.a = opacityVal;
+        redButton.GetComponent<UnityEngine.UI.Image>().color = newColor;
+
+        //blue button
+        newColor = blueButton.GetComponent<UnityEngine.UI.Image>().color;
+        newColor.a = opacityVal;
+        blueButton.GetComponent<UnityEngine.UI.Image>().color = newColor;
+
+        //green button
+        newColor = greenButton.GetComponent<UnityEngine.UI.Image>().color;
+        newColor.a = opacityVal;
+        greenButton.GetComponent<UnityEngine.UI.Image>().color = newColor;
+
+        //yellow button
+        newColor = yellowButton.GetComponent<UnityEngine.UI.Image>().color;
+        newColor.a = opacityVal;
+        yellowButton.GetComponent<UnityEngine.UI.Image>().color = newColor;
+    }
 	
 	// Update is called once per frame
 	void Update () {

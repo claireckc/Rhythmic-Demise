@@ -23,6 +23,9 @@ public class ResourceManagement : MonoBehaviour
 
     private Sprite originalSprite1, originalSprite2, originalSprite3;
 
+    //trachea event
+    GameObject tracheaPanel;
+
     /*Choose canvas component*/
     public Text knightLevel, knightAttack, knightDefense, archerLevel, archerAttack, archerDefense, priestLevel, priestAttack, priestDefense;
     public Text knightResource, archerResource, priestResource;
@@ -106,6 +109,9 @@ public class ResourceManagement : MonoBehaviour
 
         messageText = messageText.GetComponent<Text>();
         textAnim = textAnim.GetComponent<Animator>();
+
+        tracheaPanel = GameObject.Find("MainCanvas/TracheaTroopPanel");
+        tracheaPanel.SetActive(false);
     }
 
     void SetupAudio()
@@ -307,7 +313,10 @@ public class ResourceManagement : MonoBehaviour
                             Application.LoadLevel("TracheaMap2");
                             break;
                         case 3:
-                            //boss map not done
+                            if(HasKnight())
+                                Application.LoadLevel("TracheaEventMap");
+                            else
+                                ShowTracheaPanel();
                             break;
                     }
                     break;
@@ -392,17 +401,6 @@ public class ResourceManagement : MonoBehaviour
                             break;
                     }
                     break;
-                case Enums.MainMap.SIntes:
-                    switch (PlayerScript.playerdata.clickedStageNumber)
-                    {
-                        case 1:
-                            Application.LoadLevel("SmallIntestineMap1");
-                            break;
-                        case 2:
-                            Application.LoadLevel("SmallIntestineEventMap");
-                            break;
-                    }
-                    break;
                 case Enums.MainMap.LIntes:
                     switch (PlayerScript.playerdata.clickedStageNumber)
                     {
@@ -414,6 +412,17 @@ public class ResourceManagement : MonoBehaviour
                             break;
                         case 3:
                             Application.LoadLevel("LargeIntestineBossMap");
+                            break;
+                    }
+                    break;
+                case Enums.MainMap.SIntes:
+                    switch (PlayerScript.playerdata.clickedStageNumber)
+                    {
+                        case 1:
+                            Application.LoadLevel("SmallIntestineMap1");
+                            break;
+                        case 2:
+                            Application.LoadLevel("SmallIntestineEventMap");
                             break;
                     }
                     break;
@@ -445,6 +454,17 @@ public class ResourceManagement : MonoBehaviour
         {
             PrintMessage("Select your leader first.");
         }
+    }
+
+    bool HasKnight()
+    {
+        for(int i = 0; i < PlayerScript.playerdata.troopSelected.Count; i++)
+        {
+            if (PlayerScript.playerdata.troopSelected[i].troop.job == Enums.JobType.Knight)
+                return true;
+        }
+
+        return false;
     }
 
     public void PrintMessage(string msg)
@@ -752,6 +772,32 @@ public class ResourceManagement : MonoBehaviour
     {
         PlaySelectAudio();
         ReturnToSubMap();
+    }
+    
+    void ShowTracheaPanel()
+    {
+        DisableAllInteractions(mainCanvas);
+        EnablePanel();
+        tracheaPanel.SetActive(true);
+    }
+
+    void EnablePanel()
+    {
+        UnityEngine.UI.Button yesButton = GameObject.Find("MainCanvas/TracheaTroopPanel/proceedButton").GetComponent<UnityEngine.UI.Button>();
+        UnityEngine.UI.Button noButton = GameObject.Find("MainCanvas/TracheaTroopPanel/cancelButton").GetComponent<UnityEngine.UI.Button>();
+
+        yesButton.interactable = noButton.interactable = true;
+    }
+    
+    public void ConfirmTracheaPlay()
+    {
+        Application.LoadLevel("TracheaEventMap");
+    }
+
+    public void CancelTracheaPlay()
+    {
+        EnableAllInteractions(mainCanvas);
+        tracheaPanel.SetActive(false);
     }
 
     void ReturnToSubMap()

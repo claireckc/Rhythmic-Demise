@@ -71,12 +71,11 @@ public class PlayerData
             if (i == 0)
                 tp.level = i + 1;     //first unlock would be the knight
             else
-                tp.level = i + 1;//should be 0, set temp for debug mode;
+                tp.level = 0;
 
             tp.expToLevel = 10f;
             tp.currentExp = 0f;
-
-            //MICHAEL SET MAX HEALTH, ATTACK, DEFENSERATING HERE, THIS IS INITIALIZATION
+            
 
             switch (i)
             {
@@ -186,9 +185,9 @@ public class PlayerData
 
             //initialize the number of substages, when everything is confirmed
             newMap.stages = new List<SubMap>();
-            if (i == 1 || i == 5)
+            if (i == 1 || i == 5 || i == 10)
             {
-                //larnyx and liver only has two stages
+                //larnyx and liver only has two stages, small intestine also
                 newMap.isLocked = true;
                 for (int k = 0; k < 2; k++)
                 {
@@ -234,19 +233,4 @@ public class PlayerData
             mapProgress.Add(newMap);
         }
     }
-
-    /*public void Awake()
-    {
-        if (playerdata != null)
-            Destroy(gameObject);
-        else
-        {
-            DontDestroyOnLoad(gameObject);
-            playerdata = this;
-        }
-    }
-    public void Start()
-    {
-        Init();
-    }*/
 }

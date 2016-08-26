@@ -184,7 +184,7 @@ public class TutorialManager : MonoBehaviour
         SetIcon(arrow, 0f);
         InitRightNotes();
         TutManager.currentPlaying = Enums.TutMove.Right;
-        if (allInvisible && tut2End)
+        if (allInvisible)
             ShowAll();
         //currentPlaying = Enums.TutMove.Right;
     }
@@ -194,7 +194,7 @@ public class TutorialManager : MonoBehaviour
         SetIcon(arrow, 90f);
         InitUpNotes();
         TutManager.currentPlaying = Enums.TutMove.Up;
-        if (allInvisible && tut2End)
+        if (allInvisible)
             ShowAll();
     }
 
@@ -203,7 +203,7 @@ public class TutorialManager : MonoBehaviour
         SetIcon(arrow, -90f);
         InitDownNotes();
         TutManager.currentPlaying = Enums.TutMove.Down;
-        if (allInvisible && tut2End)
+        if (allInvisible)
             ShowAll();
     }
 
@@ -212,7 +212,7 @@ public class TutorialManager : MonoBehaviour
         SetIcon(attack, 0f);
         InitAttackNotes();
         TutManager.currentPlaying = Enums.TutMove.Attack;
-        if (allInvisible && tut2End)
+        if (allInvisible)
             ShowAll();
     }
 
@@ -221,7 +221,7 @@ public class TutorialManager : MonoBehaviour
         SetIcon(defend, 0f);
         InitDefendNotes();
         TutManager.currentPlaying = Enums.TutMove.Defend;
-        if (allInvisible && tut2End)
+        if (allInvisible)
             ShowAll();
     }
 
@@ -230,7 +230,7 @@ public class TutorialManager : MonoBehaviour
         //Instantiate(arrow, IconPos.transform.position, Quaternion.Euler(0f, 0, -90f));        //skill icon
         InitSkillNotes();
         TutManager.currentPlaying = Enums.TutMove.Skill;
-        if (allInvisible && tut2End)
+        if (allInvisible)
             ShowAll();
     }
 

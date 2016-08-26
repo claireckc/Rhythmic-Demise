@@ -258,7 +258,6 @@ public class ArmyController : MonoBehaviour {
                 }
                 else if (currPos == endPoint)
                 {
-                    print("End point");
                     PlayerScript.playerdata.firstTut2 = false;
                     SaveLoadManager.SaveAllInformation(PlayerScript.playerdata);
                 }
@@ -267,7 +266,6 @@ public class ArmyController : MonoBehaviour {
                 {
                     tutManager.SendMessage("HideAll");
                     TutorialManager.TutManager.tut2End = true;
-                    //textManager.SendMessage("DestroyAll");
                     prevPoint = currPos;
                 }
             }
