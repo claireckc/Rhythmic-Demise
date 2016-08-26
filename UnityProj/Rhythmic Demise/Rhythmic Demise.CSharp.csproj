@@ -106,6 +106,7 @@
     <Compile Include="Assets\Scripts\Events\EventSmallIntestine.cs" />
     <Compile Include="Assets\Scripts\Events\EventTrachea.cs" />
     <Compile Include="Assets\Scripts\Events\Timer.cs" />
+    <Compile Include="Assets\Scripts\Events\TracheaTimer.cs" />
     <Compile Include="Assets\Scripts\GamePlayManager.cs" />
     <Compile Include="Assets\Scripts\MovingPoint.cs" />
     <Compile Include="Assets\Scripts\PauseMenu.cs" />
