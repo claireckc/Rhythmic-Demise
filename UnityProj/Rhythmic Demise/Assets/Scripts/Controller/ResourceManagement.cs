@@ -550,7 +550,7 @@ public class ResourceManagement : MonoBehaviour
             return true;
         }
         else {
-            PrintMessage("Insufficient " + resourceLabel.text);
+            PrintMessage("Insufficient resource");
             return false;
         }
     }
