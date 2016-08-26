@@ -6,7 +6,7 @@ public class WindArt : MonoBehaviour {
     float movementSpeed;
 
 	void Start () {
-        movementSpeed = 4;
+        movementSpeed = 3;
 	}
 	
 	void Update () {

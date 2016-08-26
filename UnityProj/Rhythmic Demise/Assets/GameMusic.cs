@@ -71,7 +71,7 @@ public class GameMusic : MonoBehaviour {
         victoryMusic.Play();
     }
 
-    void PauseGameMusic()
+    public void PauseGameMusic()
     {
         if (stageMusic.isPlaying)
         {
@@ -85,7 +85,7 @@ public class GameMusic : MonoBehaviour {
         }
     }
 
-    void UnPauseGameMusic()
+    public void UnPauseGameMusic()
     {
         if (bossPause)
             bossMusic.UnPause();

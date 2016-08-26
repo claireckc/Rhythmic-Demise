@@ -5,10 +5,12 @@ public class PauseMenu : MonoBehaviour {
     public GameObject pauseMenuCanvas;
 
     AudioSource audio;
+    GameMusic gm;
 
     void Start()
     {
         audio = GameObject.Find("Audio Source").GetComponent<AudioSource>();
+        gm = GameObject.Find("Game Music").GetComponent<GameMusic>();
     }
 
 	void Update () {
@@ -23,12 +25,17 @@ public class PauseMenu : MonoBehaviour {
         {
             audio.Play();
         }
+
+        gm.UnPauseGameMusic();
     }
 
     public void Pause()
     {
         pauseMenuCanvas.SetActive(true);
         Time.timeScale = 0f;
+
         audio.Pause();
+
+        gm.PauseGameMusic();
     }
 }
