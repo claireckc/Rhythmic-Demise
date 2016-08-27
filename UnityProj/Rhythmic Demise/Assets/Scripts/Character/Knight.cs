@@ -140,7 +140,7 @@ public class Knight : Character {
         float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
 
         GameObject wave = Instantiate(swordWave, this.transform.position, Quaternion.Euler(0, 0, angle)) as GameObject;
-        wave.SendMessage("initDamage", damage * 2);
+        wave.SendMessage("initDamage", PlayerScript.playerdata.troopData[0].skills[0].skillValue);
     }
 
     public override void defend()
