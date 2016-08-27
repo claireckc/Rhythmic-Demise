@@ -68,7 +68,7 @@ public class GameController : MonoBehaviour
         beatCounter = 0;
         moveActionTurn = false;
         inputActionTurn = false;
-        comboTextPosition = new Vector3(120, Screen.height - 50, 20);
+        comboTextPosition = new Vector3(200, Screen.height - 150, 20);
 
         note1 = Resources.Load<NoteControl>("Prefabs/UI/Note1");
         note2 = Resources.Load<NoteControl>("Prefabs/UI/Note2");
@@ -195,7 +195,8 @@ public class GameController : MonoBehaviour
             {
                 if (currentStreak > 0)
                 {
-                    FloatingTextController.CreateComboPopUp(currentStreak.ToString() + " Combo!!", cam.ScreenToWorldPoint(comboTextPosition));
+                    //FloatingTextController.CreateComboPopUp(currentStreak.ToString() + " Combo!!", cam.ScreenToWorldPoint(comboTextPosition));
+                    ComboManager.comboManager.popCombo();
                 }
                 currentStreak++;
 

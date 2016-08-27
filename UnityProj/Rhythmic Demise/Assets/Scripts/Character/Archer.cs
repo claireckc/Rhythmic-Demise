@@ -42,7 +42,7 @@ public class Archer : Character {
             }
             else
             {
-                //Debug.Log("No enemy in range");
+                
             }
         }
     }
@@ -65,7 +65,7 @@ public class Archer : Character {
                     }
                     else
                     {
-                        Debug.Log("No enemy in range");
+                        
                     }
                 }
             }
@@ -83,7 +83,7 @@ public class Archer : Character {
                     }
                     else
                     {
-                        Debug.Log("No enemy in range");
+                        
                     }
                 }
             }

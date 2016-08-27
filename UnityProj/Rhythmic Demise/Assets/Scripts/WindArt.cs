@@ -25,8 +25,11 @@ public class WindArt : MonoBehaviour {
             }
             else
             {
-                ArmyController.armyController.setCurrentState(Enums.PlayerState.MoveLeft);
-                GameController.gameController.setActionTurn(true);
+                if(!(ArmyController.armyController.currPos.left == null)){
+                    ArmyController.armyController.reset();
+                    ArmyController.armyController.setCurrentState(Enums.PlayerState.MoveLeft);
+                    GameController.gameController.setActionTurn(true);
+                }
             }
         }
     }

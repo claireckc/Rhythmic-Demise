@@ -64,7 +64,6 @@ public class SubRatings : MonoBehaviour {
     int GetStars(int stage)
     {
         int starCount = 0;
-        print(currentMap.stages[stage - 1].topComboCount);
 
         if (currentMap.stages[stage - 1].topComboCount < 0)
             return -1;
@@ -137,7 +136,6 @@ public class SubRatings : MonoBehaviour {
 
     void InitStars()
     {
-        print(currentMap.stages.Count);
         for (int i = 0; i < currentMap.stages.Count; i++)
             SetStars(i + 1);
     }

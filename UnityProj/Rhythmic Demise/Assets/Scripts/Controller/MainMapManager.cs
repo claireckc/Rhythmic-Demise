@@ -16,6 +16,5 @@ public class MainMapManager : MonoBehaviour {
 
     public void MouthSelect()
     {
-        print("Mouth Click");
     }
 }

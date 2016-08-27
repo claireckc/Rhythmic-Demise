@@ -470,7 +470,6 @@ public class ResourceManagement : MonoBehaviour
         }
         else if (!HasTeam())
         {
-            //print out a messsage to tell them to select a unit first
             PrintMessage("Select units first.");
         }
         else if (!HasLeader())

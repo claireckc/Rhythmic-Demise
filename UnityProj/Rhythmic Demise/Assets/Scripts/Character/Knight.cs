@@ -118,7 +118,7 @@ public class Knight : Character {
                     }
                     else
                     {
-                        Debug.Log("No enemy in range");
+                        
                     }
                 }
             }

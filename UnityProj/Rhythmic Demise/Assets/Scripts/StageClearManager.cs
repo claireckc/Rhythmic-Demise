@@ -35,7 +35,7 @@ public class StageClearManager : MonoBehaviour {
         {
             coinText.text = "Carbon";
         }
-        else if (PlayerScript.playerdata.pathogenType == Enums.CharacterType.Cancer)
+        else if (PlayerScript.playerdata.pathogenType == Enums.CharacterType.Diabetic)
         {
             coinText.text = "Sugar";
         }

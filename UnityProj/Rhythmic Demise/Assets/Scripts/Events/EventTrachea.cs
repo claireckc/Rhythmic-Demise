@@ -11,7 +11,7 @@ public class EventTrachea : MonoBehaviour {
     private float cooldown;
 
 	void Start () {
-        nextActionTime = cooldown = 9f;
+        nextActionTime = cooldown = 12f;
 	}
 	
 	void Update () {

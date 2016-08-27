@@ -83,6 +83,8 @@ public class ArmyController : MonoBehaviour {
 	void Update () {
         if (doneInit)
         {
+            //Debug.Log(currPos);
+
             checkHealth();
 
             findClosestEnemy();

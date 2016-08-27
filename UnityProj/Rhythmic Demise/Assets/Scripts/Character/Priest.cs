@@ -45,7 +45,7 @@ public class Priest : Character {
             }
             else
             {
-                Debug.Log("No enemy in range");
+                
             }
         }
     }

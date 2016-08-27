@@ -137,7 +137,6 @@ public class StageRateHandler : MonoBehaviour {
                 }
             }
         }
-        print("Total map " + GetMainStars(mapName));
     }
 
     public float GetMainStars(Enums.MainMap mapName)
@@ -155,7 +154,6 @@ public class StageRateHandler : MonoBehaviour {
 
     public float GetSubStars(Enums.MainMap mapName, int index)
     {
-        Debug.Log("Submap: " + PlayerScript.playerdata.mapProgress[(int)mapName].stages[index].stars);
         return PlayerScript.playerdata.mapProgress[(int)mapName].stages[index].stars;
     }
 

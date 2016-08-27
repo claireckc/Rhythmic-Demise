@@ -15,7 +15,7 @@ public static class SaveLoadManager
         PlayerData data = new PlayerData();
         data = pd;
         FileStream stream = new FileStream(Application.persistentDataPath + "/player.sav", FileMode.Create);
-
+        Debug.Log(Application.persistentDataPath);
         bf.Serialize(stream, data);
         stream.Close();
     }
@@ -24,6 +24,7 @@ public static class SaveLoadManager
     {
         if (File.Exists(Application.persistentDataPath + "/player.sav"))
         {
+            Debug.Log(Application.persistentDataPath);
             FileStream stream = new FileStream(Application.persistentDataPath + "/player.sav", FileMode.Open);
 
             PlayerScript.playerdata = bf.Deserialize(stream) as PlayerData;
@@ -38,7 +39,6 @@ public static class SaveLoadManager
         if (File.Exists(Application.persistentDataPath + "/player.sav"))
         {
             File.Delete(Application.persistentDataPath + "/player.sav");
-            Debug.Log(File.Exists(Application.persistentDataPath + "/player.sav"));
         }
 
     }

@@ -19,6 +19,5 @@ public class PlayerScript : MonoBehaviour
             if (playerdata == null)
                 playerdata = new PlayerData();
         }
-        Debug.Log("DAMAGE: " + PlayerScript.playerdata.troopData[0].damage);
     }
 }

@@ -33,7 +33,7 @@ public class GamePlayManager : MonoBehaviour {
 
             scoreText.text = "Carbon";
         }
-        else if (PlayerScript.playerdata.pathogenType == Enums.CharacterType.Cancer)
+        else if (PlayerScript.playerdata.pathogenType == Enums.CharacterType.Diabetic)
         {
             archerImage.sprite = diabeticArcherSprite;
             knightImage.sprite = diabeticKnightSprite;
