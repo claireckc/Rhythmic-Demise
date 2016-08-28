@@ -137,22 +137,21 @@ public class SubRatings : MonoBehaviour {
 
     void InitStars()
     {
-        switch (PlayerScript.playerdata.clickedMap)
+        if (PlayerScript.playerdata.clickedMap == Enums.MainMap.Larnyx || PlayerScript.playerdata.clickedMap == Enums.MainMap.Liver ||
+            PlayerScript.playerdata.clickedMap == Enums.MainMap.SIntes)
         {
-            case Enums.MainMap.Larnyx:
-            case Enums.MainMap.Liver:
-            case Enums.MainMap.SIntes:
-                for(int i = 0; i < 2; i++)
-                {
-                    SetStars(i + 1);
-                }
-                break;
-            default:
-                for (int i = 0; i < 3; i++)
-                {
-                    SetStars(i + 1);
-                }
-                break;
+            for (int i = 0; i < 2; i++)
+            {
+                SetStars(i + 1);
+            }
+        }
+        else
+        {
+
+            for (int i = 0; i < 3; i++)
+            {
+                SetStars(i + 1);
+            }
         }
     }
 
