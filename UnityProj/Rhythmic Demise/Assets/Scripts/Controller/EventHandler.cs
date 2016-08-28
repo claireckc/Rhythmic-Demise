@@ -381,7 +381,7 @@ public class EventHandler : MonoBehaviour {
                     }
                     if (addon == "")
                     {
-                        labelText.text = "Small Intestine";
+                        labelText.text = "Large Intestine";
                         SetFontSize("Large Intestine");
                     }
                     else
