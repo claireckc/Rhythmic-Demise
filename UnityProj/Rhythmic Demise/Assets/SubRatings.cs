@@ -40,6 +40,7 @@ public class SubRatings : MonoBehaviour {
 
     void Init()
     {
+        print("get current map");
         InitPos();
         currentMap = PlayerScript.playerdata.mapProgress[(int)PlayerScript.playerdata.clickedMap];
         cloneStars = new List<GameObject>();
@@ -59,12 +60,13 @@ public class SubRatings : MonoBehaviour {
         emptyStar = Resources.Load("Prefabs/EmptyStar") as GameObject;
         fullStar = Resources.Load("Prefabs/FullStar") as GameObject;
         theLock = Resources.Load("Prefabs/Lock") as GameObject;
+        print(theLock);
     }
 
     int GetStars(int stage)
     {
         int starCount = 0;
-
+        
         if (currentMap.stages[stage - 1].topComboCount < 0)
             return -1;
 
@@ -84,9 +86,8 @@ public class SubRatings : MonoBehaviour {
             icon = firstIcon;
         else if (stage == 2)
             icon = secondIcon;
-        else
+        else 
             icon = thirdIcon;
-
         switch (GetStars(stage))
         {
             case 1:
@@ -136,8 +137,23 @@ public class SubRatings : MonoBehaviour {
 
     void InitStars()
     {
-        for (int i = 0; i < currentMap.stages.Count; i++)
-            SetStars(i + 1);
+        switch (PlayerScript.playerdata.clickedMap)
+        {
+            case Enums.MainMap.Larnyx:
+            case Enums.MainMap.Liver:
+            case Enums.MainMap.SIntes:
+                for(int i = 0; i < 2; i++)
+                {
+                    SetStars(i + 1);
+                }
+                break;
+            default:
+                for (int i = 0; i < 3; i++)
+                {
+                    SetStars(i + 1);
+                }
+                break;
+        }
     }
 
     Vector3 GetPos(Vector3 iconPos, Vector3 diffPos)

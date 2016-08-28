@@ -59,7 +59,7 @@ public class PlayerData
         defenseBonus = 0;
         expMultiplier = 1f;
 
-        firstTut1 = firstTut2 = firstTut3 = firstResource = firstMap = true;
+        firstTut1 = firstTut2 = firstTut3 = firstResource = firstMap = false;
 
         //for troop data, three troop types only
         for (int i = 0; i < 3; i++)
@@ -67,10 +67,7 @@ public class PlayerData
             tp = new Troop();
             tp.skills = new List<Skills>();
             tp.job = (Enums.JobType)i + 1;
-            if (i == 0)
-                tp.level = i + 1;     //first unlock would be the knight
-            else
-                tp.level = 0;
+            tp.level = 1;     //all jobs unlocked at level 1
 
             tp.expToLevel = 10f;
             tp.currentExp = 0f;
@@ -184,17 +181,17 @@ public class PlayerData
 
             //initialize the number of substages, when everything is confirmed
             newMap.stages = new List<SubMap>();
-            if (i == 1 ||i == 3 || i == 5 || i == 10)
+            if (i == 1 ||i == 3 || i == 5 || i == 10)   //larnyx, liver, small intestine
             {
                 //larnyx and liver only has two stages, small intestine also
-                newMap.isLocked = true;
+                newMap.isLocked = false;
                 for (int k = 0; k < 2; k++)
                 {
                     stage = new SubMap();
                     stage.parentMap = newMap.mapName;
                     stage.mapId = k;
-                    stage.topComboCount = stage.resourceAttained = -1;
-                    stage.stars = 0f;
+                    stage.topComboCount = stage.resourceAttained = 1;   //unlocked
+                    stage.stars = 1f;
                     stage.comboRange = new List<int>();
 
                     for (int j = 0; j < 3; j++)
@@ -281,24 +278,30 @@ public class PlayerData
             }
             else
             {
-                if (i == 0)
+                //rest of the maps
+            }
+            {
+                /*if (i == 0)
                     newMap.isLocked = false;
                 else
-                    newMap.isLocked = true;
+                    newMap.isLocked = true;*/
+                    //unlocked
+                newMap.isLocked = false;
 
                 for (int k = 0; k < 3; k++)
                 {
                     stage = new SubMap();
                     stage.parentMap = newMap.mapName;
                     stage.mapId = k;
-                    if (i == 0 && k == 0)
+                    //unlocked
+                    /*if (i == 0 && k == 0)
                     {
-                        stage.topComboCount = 0;
-                        stage.resourceAttained = -1;
+                        stage.topComboCount = 1;
+                        stage.resourceAttained = 1;
                     }
-                    else
-                        stage.topComboCount = stage.resourceAttained = -1;
-                    stage.stars = 0f;
+                    else*/
+                        stage.topComboCount = stage.resourceAttained = 1;
+                    stage.stars = 1f;
                     stage.comboRange = new List<int>();
                     for (int j = 0; j < 3; j++)
                     {
@@ -519,7 +522,7 @@ public class PlayerData
                 }
             }
 
-            newMap.avgStars = 0;
+            newMap.avgStars = 1;
             mapProgress.Add(newMap);
         }
     }

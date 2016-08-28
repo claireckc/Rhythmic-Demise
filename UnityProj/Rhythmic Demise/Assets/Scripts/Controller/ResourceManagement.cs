@@ -291,8 +291,12 @@ public class ResourceManagement : MonoBehaviour
 
     public void Main_PlayPress()
     {
+        print("has team: " + HasTeam());
+        print("has leader: " + HasLeader());
+        print("can proceed: " + CanProceed());
         if (HasTeam() && HasLeader() && CanProceed())
         {
+            print("instide play");
             PlaySelectAudio();
             switch (PlayerScript.playerdata.clickedMap)
             {
@@ -465,6 +469,7 @@ public class ResourceManagement : MonoBehaviour
                     }
                     break;
                 default:
+                    print("in default");
                     break;
             }
         }
@@ -475,6 +480,10 @@ public class ResourceManagement : MonoBehaviour
         else if (!HasLeader())
         {
             PrintMessage("Select your leader first.");
+        }
+        else if(!CanProceed())
+        {
+            PrintMessage("Select your skills first.");
         }
     }
 
