@@ -51,7 +51,7 @@ public class PlayerData
         pathogenType = Enums.CharacterType.None;
         globalVolume = effectsVolume = buttonAlpha = 1.0f;
         totalResource = 0;
-        totalEnergy = 10;
+        totalEnergy = 3;
         troopData = new List<Troop>();
         troopSelected = new List<TroopSelected>();
 
@@ -193,9 +193,10 @@ public class PlayerData
                     stage = new SubMap();
                     stage.parentMap = newMap.mapName;
                     stage.mapId = k;
-                    stage.topComboCount = stage.resourceAttained = 10;
+                    stage.topComboCount = stage.resourceAttained = -1;
                     stage.stars = 0f;
                     stage.comboRange = new List<int>();
+
                     for (int j = 0; j < 3; j++)
                     {
                         if (i == 1)
@@ -275,7 +276,6 @@ public class PlayerData
                             }
                         }
                     }
-                    stage.comboRange.Add(0);
                     newMap.stages.Add(stage);
                 }
             }
